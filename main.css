@@ -11,9 +11,10 @@ html, body, #map {
   margin: 0;
 }
 
-#helper_box{
+#helper_box {
+  opacity: 0.85;
   position: absolute;
-  top: 100px;
+  top: 150px;
   left: 20px;
   padding: 0;
   border-bottom: 1px solid #999;
@@ -27,6 +28,7 @@ html, body, #map {
 
 
 #layer_selector {
+  opacity: 0.85;
   position: absolute;
   top: 20px;
   right: 20px;
