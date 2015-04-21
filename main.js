@@ -23,7 +23,7 @@ function getSQL(sqlKey) {
 
     case 'past_work_fy_13':
       SQL += "WHERE spp2.date_ is not null ";
-      SQL += "AND (spp2.date_::date >= '2013-07-01' AND spp2.date_::date < '2014-06-30')";
+      SQL += "AND (spp2.date_::date >= '2014-07-01' AND spp2.date_::date < '2015-06-30')";
       break;
 
 
