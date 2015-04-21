@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>San Diego Infra</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.13/themes/css/cartodb.css" />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="helper_box" class="cartodb-infobox" style="display:none">
+      <div id="all_work" class="helper_section" style="display:none">
+        <h3> All Work </h3>
+        <p>
+          All Work
+        </p>
+      </div>
+
+      <div id="past_work" class="helper_section" style="display:none">
+        <h3> Past Work </h3>
+        <p>
+          Paving that has occurred since October 12, 2011.
+        </p>
+      </div>
+      <div id="past_work_fy_13" class="helper_section" style="display:none">
+        <h3> Past Work For FY 13</h3>
+        <p>
+          Paving that has occurred since July 1, 2013 to June 30, 2014
+        </p>
+      </div>
+      <div id="future_work" class="helper_section" style="display:none">
+        <h3> Future Work </h3>
+        <p>
+          Paving anticipated to occur through February 20, 2020.
+        </p>
+      </div>
+       <div id="oci_2011" class="helper_section" style="display:none">
+        <h3> OCI </h3>
+        <p>
+          Overall Condition Index is the condition of our streets measured in 2011. The City is updating this information in 2015. A street may have a low OCI, but not be scheduled for paving in order to accomodate other planned construction work on the street in the future.
+        </p>
+      </div>
+
+    </div>
+    <div id="layer_selector" class="cartodb-infobox">
+      <ul id="work-layers">
+        <li id="all_work" data-sublayer="1" data-sql="all_work">All Work</li>
+        <li id="past_work" data-sublayer="1" data-sql="past_work">Past Work</li>
+        <li id="past_work_fy_13" data-sublayer="1" data-sql="past_work_fy_13">Past Work FY 13</li>
+        <li id="future_work" data-sublayer="1" data-sql="future_work">Future Work</li>
+        <li id="oci_2011" data-sublayer="2">OCI as of 2011</li>
+      </ul>
+      <ul id="opt-layers">
+        <li>
+          <input type="checkbox" name="Show Districts" value="0">Show Council Districts</input>
+        </li>
+      </ul>
+
+    <!-- include cartodb.js library -->
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.13/cartodb.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
