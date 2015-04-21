@@ -1,3 +1,4 @@
+
 #map_container {
   height: 500px;
 }
@@ -5,10 +6,13 @@
   display:none;
 }
 
-html, body, #map {
+html, body, #container, #map {
   height: 100%;
   padding: 0;
   margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
 #helper_box {

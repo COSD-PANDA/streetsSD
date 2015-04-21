@@ -11,7 +11,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/simple-sidebar.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.13/themes/css/cartodb.css" />
         <link rel="stylesheet" href="css/main.css">
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
@@ -20,50 +23,105 @@
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+      <div id="wrapper">
 
-        <div class="header-container">
-            <header class="wrapper clearfix">
-                <h1 class="title">h1.title</h1>
-                <nav>
-                    <ul>
-                        <li><a href="#">nav ul li a</a></li>
-                        <li><a href="#">nav ul li a</a></li>
-                        <li><a href="#">nav ul li a</a></li>
-                    </ul>
-                </nav>
-            </header>
-        </div>
+          <!-- Sidebar -->
+          <div id="sidebar-wrapper" class="layer_selector">
+          
+              <ul class="sidebar-nav" id="work-layers">
+                  <li class="sidebar-brand">
+                      <a href="#">
+                          SD Infra Map
+                      </a>
+                  </li>
+                  <li id="all_work" data-sublayer="1" data-sql="all_work">
+                    <a href="#all-work">All Work</a>
+                  </li>
+                  <li id="past_work" data-sublayer="1" data-sql="past_work">
+                    <a href="#past-work">Past Work</a>
+                  </li>
+                  <li id="past_work-fy-13" data-sublayer="1" data-sql="past_work_fy_13">
+                    <a href="#past-work-fy-13">Past Work FY 13</a>
+                  </li>
+                  <li id="future_work" data-sublayer="1" data-sql="future_work">
+                    <a href="#future-work">Future Work</a>
+                  </li>
+                  <li id="oci_2011" data-sublayer="2">
+                    <a href="#oci-2011">OCI as of 2011</a>
+                  </li>
+              </ul>
+              <div id="helper_box" class="cartodb-infobox" style="display:none">
+                <div id="all_work" class="helper_section" style="display:none">
+                  <h3> All Work </h3>
+                  <p>
+                    All Work
+                  </p>
+                </div>
 
-        <div class="main-container">
-            <div class="main wrapper clearfix">
+                <div id="past_work" class="helper_section" style="display:none">
+                  <h3> Past Work </h3>
+                  <p>
+                    Paving that has occurred since October 12, 2011.
+                  </p>
+                </div>
+                <div id="past_work_fy_13" class="helper_section" style="display:none">
+                  <h3> Past Work For FY 13</h3>
+                  <p>
+                    Paving that has occurred since July 1, 2013 to June 30, 2014
+                  </p>
+                </div>
+                <div id="future_work" class="helper_section" style="display:none">
+                  <h3> Future Work </h3>
+                  <p>
+                    Paving anticipated to occur through February 20, 2020.
+                  </p>
+                </div>
+                 <div id="oci_2011" class="helper_section" style="display:none">
+                  <h3> OCI </h3>
+                  <p>
+                    Overall Condition Index is the condition of our streets measured in 2011. The City is updating this information in 2015. A street may have a low OCI, but not be scheduled for paving in order to accomodate other planned construction work on the street in the future.
+                  </p>
+                </div>
+            </div>
+          </div>
+          <!-- /#sidebar-wrapper -->
+              
+          <!-- Page Content -->
+          <div id="page-content-wrapper">
+            <div id="map" class="col-lg-12"></div>
+          </div>
+          <!-- /#page-content-wrapper -->
 
-                <!--<aside>
-                    <h3>aside</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas tempor. Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper consequat est, eu porta velit mollis nec. Curabitur posuere enim eget turpis feugiat tempor. Etiam ullamcorper lorem dapibus velit suscipit ultrices.</p>
-                </aside>-->
+      </div>
+      <!-- /#wrapper -->
+     
 
-            </div> <!-- #main -->
-        </div> <!-- #main-container -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
-        <div class="footer-container">
-            <footer class="wrapper">
-                <h3>footer</h3>
-            </footer>
-        </div>
+    <script src="js/vendor/bootstrap.min.js"></script>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+    <script src="js/main.js"></script>
 
-        <script src="js/main.js"></script>
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.13/cartodb.js"></script>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
-        </script>
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        e.src='//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+        ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+    </script>
+
     </body>
 </html>
