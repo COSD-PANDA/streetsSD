@@ -35,6 +35,8 @@ html, body, #map, #wrapper {
 }
 
 #helper_box {
+  position: absolute;
+  bottom:0;
   opacity: 1;
   padding: 0;
   border-bottom: 1px solid #999;
@@ -45,6 +47,13 @@ html, body, #map, #wrapper {
   cursor: auto;
   width:100%;
 }
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+}
+
+
 
 
 
