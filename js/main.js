@@ -17,21 +17,22 @@ function getSQL(sqlKey) {
     "FROM spp2 ";
 
   switch (sqlKey) {
-    case 'all_work':
-      SQL += "WHERE spp2.date_ is not null OR spp2.est_date is not null";
+    case 'all-work':
+      SQL += "WHERE (spp2.date_ is not null OR spp2.est_date is not null) ";
+      SQL += "AND (spp2.date_::date >= '2012-01-01')";
       break;
 
-    case 'past_work_fy_13':
+    case 'past-work-fy-13':
       SQL += "WHERE spp2.date_ is not null ";
       SQL += "AND (spp2.date_::date >= '2014-07-01' AND spp2.date_::date < '2015-06-30')";
       break;
 
 
-    case 'past_work':
+    case 'past-work':
       SQL += "WHERE spp2.date_ is not null";
       break;
 
-    case 'future_work':
+    case 'future-work':
       SQL += "WHERE spp2.est_date is not null";
       break;
   }
@@ -43,6 +44,21 @@ function clearState() {
   var num_sublayers = global.layers[1].getSubLayerCount();
   for (var i = 1; i < num_sublayers; i++)
     global.layers[1].getSubLayer(i).hide();
+
+}
+
+function applyTemplates() {
+  console.log(window.layerOptions);
+  var layerOptions = window.layerOptions;
+  var linkTemplate = _.template($( "script.sidebarLink" ).html());
+  var helperBoxTemplate = _.template($( "script.helperBox" ).html());
+  _.each(layerOptions, function(element, index) {
+    var templateVars = _.assign(element, { key: index });
+    var tLink = linkTemplate(templateVars);
+    var hLink = helperBoxTemplate(templateVars);
+    $(tLink).insertAfter(".sidebar-brand");
+    $('#helper_box').append(hLink);
+  });
 
 }
 
@@ -62,16 +78,16 @@ function initSubLayerWatch() {
   $workLayers.click(function(e) {
     // get the area of the selected layer
     var $li = $(e.target).parent('li');
-    console.log($li);
     var subLayerNum = $li.attr('data-sublayer');
     var subLayerSQL = $li.attr('data-sql') || null;
     var subLayerID = $li.attr('id');
     clearState();
     var subLayer = global.layers[1].getSubLayer(subLayerNum);
-    console.log(getSQL(subLayerSQL));
 
-    if (subLayerSQL)
+    if (subLayerSQL) {
       subLayer.setSQL(getSQL(subLayerSQL));
+      console.log(getSQL(subLayerSQL));
+    }
 
     subLayer.show();
     $('#helper_box').show();
@@ -93,6 +109,8 @@ function initSubLayerWatch() {
   .done(function(vis, layers) {
     global.vis = vis;
     global.layers = layers;
+    _.templateSettings.variable = "rc";
+    applyTemplates();
     initSubLayerWatch();
    })
   .error(function(err) {
@@ -100,6 +118,7 @@ function initSubLayerWatch() {
   });
 }
 
-window.onload = main;
-
+$(document).ready(function() {
+  main()
+});
 

@@ -34,9 +34,14 @@ html, body, #map, #wrapper {
 
 }
 
+#nav_box {
+  position: relative;
+  top: 0px;
+  margin-bottom:30px;
+}
+
 #helper_box {
-  position: absolute;
-  bottom:0;
+  position: relative;
   opacity: 1;
   padding: 0;
   border-bottom: 1px solid #999;
@@ -49,7 +54,7 @@ html, body, #map, #wrapper {
 }
 
 .sidebar-nav {
-  position: absolute;
+  position: relative;
   top: 0;
 }
 

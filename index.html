@@ -34,7 +34,7 @@
                           SD Infra Map
                       </a>
                   </li>
-                  <li id="all_work" data-sublayer="1" data-sql="all_work">
+                  <!--<li id="all_work" data-sublayer="1" data-sql="all_work">
                     <a href="#all-work">All Work</a>
                   </li>
                   <li id="past_work" data-sublayer="1" data-sql="past_work">
@@ -49,10 +49,11 @@
                   <li id="oci_2011" data-sublayer="2">
                     <a href="#oci-2011">OCI as of 2011</a>
                   </li>
+                  -->
                 </ul>
               </div>
               <div id="helper_box" class="cartodb-infobox" style="display:none">
-                <div id="all_work" class="helper_section" style="display:none">
+                <!--<div id="all_work" class="helper_section" style="display:none">
                   <h3> All Work </h3>
                   <p>
                     All Work
@@ -82,7 +83,7 @@
                   <p>
                     Overall Condition Index is the condition of our streets measured in 2011. The City is updating this information in 2015. A street may have a low OCI, but not be scheduled for paving in order to accomodate other planned construction work on the street in the future.
                   </p>
-                </div>
+                </div>-->
             </div>
           </div>
           <!-- /#sidebar-wrapper -->
@@ -96,12 +97,30 @@
       </div>
       <!-- /#wrapper -->
 
+    <!-- BEGIN: Lodash Template Definition. -->
+    <script type="text/template" class="helperBox">
+      <div id="<%- rc.key %>" class="helper_section" style="display:none">
+        <h3><%- rc.title %></h3>
+        <p><%- rc.description %></p>
+      </div>
+    </script>
+
+    <script type="text/template" class="sidebarLink">
+      <li id="<%- rc.key %> " data-sublayer="<%- rc.sublayer %>" data-sql="<%= rc.sql === '1' ?  rc.key : '' %>">
+        <a href="#">
+          <%- rc.title %>
+        </a>
+      </li>
+    </script>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
     <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/jprichardson/string.js/master/lib/string.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.7.0/lodash.min.js"></script>
 
+    <script src="js/opts.js"></script>
     <script src="js/main.js"></script>
 
     <script src="http://libs.cartocdn.com/cartodb.js/v3/3.13/cartodb.js"></script>
