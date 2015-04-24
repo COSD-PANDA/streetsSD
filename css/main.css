@@ -41,11 +41,15 @@ html, body, #map, #wrapper {
 }
 
 #helper_box {
+  background: whitesmoke;
   position: relative;
   opacity: 1;
   padding: 0;
+  padding-left: 20px;
+  padding-right:20px;
+  padding-bottom:0px;
+  padding-top:10px;
   border-bottom: 1px solid #999;
-  padding: 10px 20px;
   font-family: "Helvetica", Arial;
   font-size: 13px;
   color: #444;

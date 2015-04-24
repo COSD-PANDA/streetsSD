@@ -2,7 +2,107 @@ var global = {
   workLayers: {}
 };
 
-function getSQL(sqlKey) {
+function getLastQuarter(date) {
+  var date = date || new Date();
+  var sqlFormatDate = ('YYYY-MM-DD');
+  var quarterAdjustment= (moment(date).month() % 3) + 1;
+  var lastQuarterEndDate = moment(date).subtract({ months: quarterAdjustment }).endOf('month');
+  var lastQuarterStartDate = lastQuarterEndDate.clone().subtract({ months: 3 }).startOf('month');
+  return {
+    start: lastQuarterStartDate.format(sqlFormatDate),
+    end: lastQuarterEndDate.format(sqlFormatDate)
+  }
+}
+
+function getSQLConditions(sqlKey, previousSQL) {
+  var lastQuarter = getLastQuarter();
+  SQL = previousSQL || "";
+  switch (sqlKey) {
+    case 'all-work':
+      // Date columns are not NULL.
+      SQL += "WHERE (spp2.date_ is not null OR spp2.est_date is not null) ";
+      // Work Done Date / Work Est Date is after 2012-01-01
+      SQL += "AND (spp2.date_::date >= '2012-01-01' OR spp2.est_date::date >= '2012-01-01') ";
+      // Impose Quarter Limit on Work Done for Accuracy / Consistency.
+       SQL += "AND (spp2.date_::date <= '" + lastQuarter.end + "') ";
+      break;
+
+    case 'all-work-since-mayor':
+      // Work Done Date is not NULL.
+      SQL += "WHERE (spp2.date_ is not null) ";
+      // Work Done Date is after March 3, 2014.
+      SQL += "AND (spp2.date_::date >= '2014-03-03') ";
+      // Impose Quarter Limit on Work Done for Accuracy / Consistency.
+      SQL += "AND (spp2.date_::date <= '" + lastQuarter.end +"') ";
+      break;
+
+
+    case 'work-2012':
+      // Work Done Date is not NULL.
+      SQL += "WHERE (spp2.date_ is not null) ";
+
+      // Work Done Date is after Jan 1, 2012.
+      SQL += "AND (spp2.date_::date >= '2012-01-01') ";
+
+      // Work Done Date is before Dec 31, 2012.
+      SQL += "AND (spp2.date_::date <= '2012-12-31') ";
+      break;
+
+    case 'work-2013':
+      // Work Done Date is not NULL.
+      SQL += "WHERE (spp2.date_ is not null) ";
+
+      // Work Done Date is after Jan 1, 2013.
+      SQL += "AND (spp2.date_::date >= '2013-01-01') ";
+
+      // Work Done Date is before Dec 31, 2013.
+      SQL += "AND (spp2.date_::date <= '2013-12-31') ";
+      break;
+
+    case 'work-2014':
+      // Work Done Date is not NULL.
+      SQL += "WHERE (spp2.date_ is not null) ";
+
+      // Work Done Date is after Jan 1, 2014.
+      SQL += "AND (spp2.date_::date >= '2014-01-01') ";
+
+      // Work Done Date is before Dec 31, 2014.
+      SQL += "AND (spp2.date_::date <= '2014-12-31') ";
+      break;
+
+    case 'work-2015':
+      // Work Done Date is not NULL.
+      SQL += "WHERE (spp2.date_ is not null) ";
+
+      // Work Done Date is after Jan 1, 2015.
+      SQL += "AND (spp2.date_::date >= '2015-01-01') ";
+
+      // Work Done Date is before end of this quarter.
+      SQL += "AND (spp2.date_::date <= '" + lastQuarter.end + "') ";
+      break;
+
+    case 'future-work':
+      // Bring in work completed after the current quarter.
+      SQL += "WHERE (spp2.date_ >= '" + lastQuarter.end + "') ";
+
+      // Bring in all work with an estimated date.
+      SQL += "OR (spp2.est_date is not null) ";
+
+      break;
+  }
+  return SQL;
+}
+
+function getTotalDistanceSQL(sqlKey) {
+  var SQL = "SELECT spp2.district, " +
+    "SUM(ST_Length(ST_AsText(ST_Transform(spp2.the_geom,26915)))/1609.34) as totalMiles " +
+    "FROM spp2 ";
+    SQL = getSQLConditions(sqlKey, SQL);
+    SQL += "GROUP BY DISTRICT";
+    return SQL;
+}
+
+function getLayerSQL(sqlKey) {
   var SQL = "SELECT spp2.cartodb_id," +
     "spp2.the_geom_webmercator, " +
     "spp2.activity, " +
@@ -16,27 +116,7 @@ function getSQL(sqlKey) {
     "spp2.district "+
     "FROM spp2 ";
 
-  switch (sqlKey) {
-    case 'all-work':
-      SQL += "WHERE (spp2.date_ is not null OR spp2.est_date is not null) ";
-      SQL += "AND (spp2.date_::date >= '2012-01-01')";
-      break;
-
-    case 'past-work-fy-13':
-      SQL += "WHERE spp2.date_ is not null ";
-      SQL += "AND (spp2.date_::date >= '2014-07-01' AND spp2.date_::date < '2015-06-30')";
-      break;
-
-
-    case 'past-work':
-      SQL += "WHERE spp2.date_ is not null";
-      break;
-
-    case 'future-work':
-      SQL += "WHERE spp2.est_date is not null";
-      break;
-  }
-  return SQL;
+  return getSQLConditions(sqlKey, SQL);
 }
 
 function clearState() {
@@ -44,7 +124,6 @@ function clearState() {
   var num_sublayers = global.layers[1].getSubLayerCount();
   for (var i = 1; i < num_sublayers; i++)
     global.layers[1].getSubLayer(i).hide();
-
 }
 
 function applyTemplates() {
@@ -56,7 +135,7 @@ function applyTemplates() {
     var templateVars = _.assign(element, { key: index });
     var tLink = linkTemplate(templateVars);
     var hLink = helperBoxTemplate(templateVars);
-    $(tLink).insertAfter(".sidebar-brand");
+    $('ul#work-layers').append(tLink);
     $('#helper_box').append(hLink);
   });
 
@@ -80,20 +159,34 @@ function initSubLayerWatch() {
     var $li = $(e.target).parent('li');
     var subLayerNum = $li.attr('data-sublayer');
     var subLayerSQL = $li.attr('data-sql') || null;
+    var calcTDistance = $li.attr('data-calctdistance') || null;
     var subLayerID = $li.attr('id');
     clearState();
     var subLayer = global.layers[1].getSubLayer(subLayerNum);
 
     if (subLayerSQL) {
-      subLayer.setSQL(getSQL(subLayerSQL));
-      console.log(getSQL(subLayerSQL));
+      subLayer.setSQL(getLayerSQL(subLayerSQL));
+      console.log(getLayerSQL(subLayerSQL));
+    }
+
+    if(calcTDistance) {
+      var sql = new cartodb.SQL({ user: 'maksim2' });
+      var sqlString = getTotalDistanceSQL(subLayerSQL);
+      sql.execute(sqlString).done(function(data) {
+
+        var sum = _.sum(data.rows, function(row) {
+          return row.totalmiles;
+        });
+        $('.tDistance', '#helper_box #' + subLayerID).text(
+        _.sum(data.rows, function(row) { return row.totalmiles; }).toFixed(2));
+      });
     }
 
     subLayer.show();
     $('#helper_box').show();
     $('#helper_box #' + subLayerID).show();
 
-    // deselect all and select the clicked one
+    // Deselect all and select the clicked one
     $workLayers.removeClass('selected');
     $('a', $li).addClass('selected');
   });

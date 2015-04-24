@@ -34,57 +34,10 @@
                           SD Infra Map
                       </a>
                   </li>
-                  <!--<li id="all_work" data-sublayer="1" data-sql="all_work">
-                    <a href="#all-work">All Work</a>
-                  </li>
-                  <li id="past_work" data-sublayer="1" data-sql="past_work">
-                    <a href="#past-work">Past Work</a>
-                  </li>
-                  <li id="past_work-fy-13" data-sublayer="1" data-sql="past_work_fy_13">
-                    <a href="#past-work-fy-13">Past Work FY 13</a>
-                  </li>
-                  <li id="future_work" data-sublayer="1" data-sql="future_work">
-                    <a href="#future-work">Future Work</a>
-                  </li>
-                  <li id="oci_2011" data-sublayer="2">
-                    <a href="#oci-2011">OCI as of 2011</a>
-                  </li>
-                  -->
-                </ul>
+               </ul>
               </div>
-              <div id="helper_box" class="cartodb-infobox" style="display:none">
-                <!--<div id="all_work" class="helper_section" style="display:none">
-                  <h3> All Work </h3>
-                  <p>
-                    All Work
-                  </p>
-                </div>
-
-                <div id="past_work" class="helper_section" style="display:none">
-                  <h3> Past Work </h3>
-                  <p>
-                    Paving that has occurred since October 12, 2011.
-                  </p>
-                </div>
-                <div id="past_work_fy_13" class="helper_section" style="display:none">
-                  <h3> Past Work For FY 13</h3>
-                  <p>
-                    Paving that has occurred since July 1, 2013 to June 30, 2014
-                  </p>
-                </div>
-                <div id="future_work" class="helper_section" style="display:none">
-                  <h3> Future Work </h3>
-                  <p>
-                    Paving anticipated to occur through February 20, 2020.
-                  </p>
-                </div>
-                 <div id="oci_2011" class="helper_section" style="display:none">
-                  <h3> OCI </h3>
-                  <p>
-                    Overall Condition Index is the condition of our streets measured in 2011. The City is updating this information in 2015. A street may have a low OCI, but not be scheduled for paving in order to accomodate other planned construction work on the street in the future.
-                  </p>
-                </div>-->
-            </div>
+              <div id="helper_box" class="" style="display:none">
+           </div>
           </div>
           <!-- /#sidebar-wrapper -->
 
@@ -100,13 +53,16 @@
     <!-- BEGIN: Lodash Template Definition. -->
     <script type="text/template" class="helperBox">
       <div id="<%- rc.key %>" class="helper_section" style="display:none">
-        <h3><%- rc.title %></h3>
-        <p><%- rc.description %></p>
+        <!--<h3><%- rc.title %></h3>-->
+        <p><%= rc.description %></p>
       </div>
     </script>
 
     <script type="text/template" class="sidebarLink">
-      <li id="<%- rc.key %> " data-sublayer="<%- rc.sublayer %>" data-sql="<%= rc.sql === '1' ?  rc.key : '' %>">
+      <li id="<%- rc.key %> "
+          data-sublayer="<%- rc.sublayer %>"
+          data-sql="<%= rc.sql === '1' ?  rc.key : '' %>"
+          data-calctdistance="<%= rc.calcTDistance === '1' ? rc.calcTDistance : '' %>">
         <a href="#">
           <%- rc.title %>
         </a>
@@ -119,6 +75,7 @@
     <script src="js/vendor/bootstrap.min.js"></script>
     <script src="https://cdn.rawgit.com/jprichardson/string.js/master/lib/string.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.7.0/lodash.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
 
     <script src="js/opts.js"></script>
     <script src="js/main.js"></script>
