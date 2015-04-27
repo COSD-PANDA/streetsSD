@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="css/simple-sidebar.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.13/themes/css/cartodb.css" />
+        <link rel="stylesheet" href="css/introjs.min.css">
         <link rel="stylesheet" href="css/main.css">
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
@@ -30,7 +31,7 @@
             <div id="nav_box">
               <ul class="sidebar-nav" id="work-layers">
                   <li class="sidebar-brand">
-                      <a href="/">
+                      <a href="/" data-intro="Welcome to SD Infra Map">
                           SD Infra Map
                       </a>
                   </li>
@@ -52,8 +53,11 @@
 
     <!-- BEGIN: Lodash Template Definition. -->
     <script type="text/template" class="helperBox">
-      <div id="<%- rc.key %>" class="helper_section" style="display:none">
-        <!--<h3><%- rc.title %></h3>-->
+      <div id="<%- rc.key %>" class="helper_section" style="display:none"
+        <% if (typeof(rc.boxIntro) !== "undefined") { %>
+          data-intro="<%= rc.intro %>"
+        <% } %>
+       >
         <p><%= rc.description %></p>
       </div>
     </script>
@@ -62,7 +66,13 @@
       <li id="<%- rc.key %>" class="sidebar-link"
           data-sublayer="<%- rc.sublayer %>"
           data-sql="<%= rc.sql === '1' ?  rc.key : '' %>"
-          data-calctdistance="<%= rc.calcTDistance === '1' ? rc.calcTDistance : '' %>">
+          <% if (typeof(rc.calcTDistance) !== "undefined") { %>
+            data-calctdistance="<%= rc.calcTDistance  %>"
+          <% } %>
+          <% if (typeof(rc.intro) !== "undefined") { %>
+            data-intro="<%= rc.intro %>"
+          <% } %>
+      >
         <a href="#">
           <%- rc.title %>
         </a>
@@ -73,6 +83,7 @@
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
     <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/intro.min.js"></script>
     <script src="https://cdn.rawgit.com/jprichardson/string.js/master/lib/string.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.7.0/lodash.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>

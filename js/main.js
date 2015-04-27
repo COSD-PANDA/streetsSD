@@ -151,7 +151,6 @@ function applyTemplates() {
     $('ul#work-layers').append(tLink);
     $('#helper_box').append(hLink);
   });
-
 }
 
 
@@ -205,6 +204,10 @@ function initSubLayerWatch() {
   });
 }
 
+function initIntro() {
+  introJs().start();
+}
+
  function main() {
   cartodb.createVis('map', 'https://maksim2.cartodb.com/api/v2/viz/1387c31c-e546-11e4-a74b-0e853d047bba/viz.json', {
     tiles_loader: true,
@@ -218,6 +221,7 @@ function initSubLayerWatch() {
     _.templateSettings.variable = "rc";
     applyTemplates();
     initSubLayerWatch();
+    initIntro();
    })
   .error(function(err) {
     console.log(err);

@@ -5,7 +5,9 @@ var loadOpts = function() {
       "sublayer" : "1",
       "sql": "1",
       "title": "All Work",
-      "description": "All work that occured since Jan 1, 2012 to date, updated quarterly"
+      "description": "All work that occured since Jan 1, 2012 to date, updated quarterly",
+      "intro": "Click on a link to see the map data associated.",
+      "boxIntro": "You will see a description of the layer in the box below."
     },
     /*"all-work-since-mayor": {
       "sublayer" : "1",
