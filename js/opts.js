@@ -7,11 +7,23 @@ var loadOpts = function() {
       "title": "All Work",
       "description": "All work that occured since Jan 1, 2012 to date, updated quarterly"
     },
-    "all-work-since-mayor": {
+    /*"all-work-since-mayor": {
       "sublayer" : "1",
       "sql": "1",
       "title": "Work Done under M. Faulconer",
       "description": "All work that has been performed since Mayor Faulconer took office March 3, 2014 to date, updated quarterly"
+    },*/
+    "work-fy-2013": {
+      "sublayer" : "1",
+      "sql": "1",
+      "title": "Work Done in Fiscal Year 2013",
+      "description": "All work that occured since July 1, 2012 until June 31, 2013."
+    },
+    "work-fy-2014": {
+      "sublayer" : "1",
+      "sql": "1",
+      "title": "Work Done in Fiscal Year 2014",
+      "description": "All work that occured since July 1, 2013 until June 31, 2014."
     },
     "work-2012": {
       "sublayer" : "1",

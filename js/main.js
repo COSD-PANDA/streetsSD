@@ -37,16 +37,29 @@ function getSQLConditions(sqlKey, previousSQL) {
       break;
 
 
-    case 'work-2012':
+    case 'work-fy-2013':
       // Work Done Date is not NULL.
       SQL += "WHERE (spp2.date_ is not null) ";
 
-      // Work Done Date is after Jan 1, 2012.
-      SQL += "AND (spp2.date_::date >= '2012-01-01') ";
+      // Work Done Date is after Jul 1, 2012.
+      SQL += "AND (spp2.date_::date >= '2012-07-01') ";
 
-      // Work Done Date is before Dec 31, 2012.
-      SQL += "AND (spp2.date_::date <= '2012-12-31') ";
+      // Work Done Date is before June 30, 2013.
+      SQL += "AND (spp2.date_::date <= '2013-06-30') ";
       break;
+
+    case 'work-fy-2014':
+      // Work Done Date is not NULL.
+      SQL += "WHERE (spp2.date_ is not null) ";
+
+      // Work Done Date is after Jul 1, 2013.
+      SQL += "AND (spp2.date_::date >= '2013-07-01') ";
+
+      // Work Done Date is before June 30, 2014.
+      SQL += "AND (spp2.date_::date <= '2014-06-30') ";
+      break;
+
+
 
     case 'work-2013':
       // Work Done Date is not NULL.
