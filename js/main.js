@@ -153,7 +153,7 @@ function initSubLayerWatch() {
     subLayer.toggle();
   });
 
-  var $workLayers = $('ul#work-layers li a');
+  var $workLayers = $('ul#work-layers li.sidebar-link a');
   $workLayers.click(function(e) {
     // get the area of the selected layer
     var $li = $(e.target).parent('li');

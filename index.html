@@ -30,7 +30,7 @@
             <div id="nav_box">
               <ul class="sidebar-nav" id="work-layers">
                   <li class="sidebar-brand">
-                      <a href="#">
+                      <a href="/">
                           SD Infra Map
                       </a>
                   </li>
@@ -59,7 +59,7 @@
     </script>
 
     <script type="text/template" class="sidebarLink">
-      <li id="<%- rc.key %> "
+      <li id="<%- rc.key %>" class="sidebar-link"
           data-sublayer="<%- rc.sublayer %>"
           data-sql="<%= rc.sql === '1' ?  rc.key : '' %>"
           data-calctdistance="<%= rc.calcTDistance === '1' ? rc.calcTDistance : '' %>">
