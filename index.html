@@ -25,91 +25,96 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
       <div id="wrapper">
-
-          <!-- Sidebar -->
-          <div id="sidebar-wrapper" class="layer_selector">
-            <div id="nav_box">
-              <ul class="sidebar-nav" id="work-layers">
-                  <li class="sidebar-brand">
-                      <a href="/" data-intro="Welcome to SD Infra Map">
-                          SD Infra Map
-                      </a>
-                  </li>
-               </ul>
-              </div>
-              <div id="helper_box" class="" style="display:none">
-           </div>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper" class="layer_selector">
+          <div id="nav_box">
+            <ul class="sidebar-nav" id="work-layers">
+              <li class="sidebar-brand">
+                <a href="/" data-intro="Welcome to SD Infra Map">
+                    SD Infra Map
+                </a>
+              </li>
+            </ul>
           </div>
-          <!-- /#sidebar-wrapper -->
+          <div id="helper_box" class="" style="display:none"></div>
+        </div>
+        <!-- /#sidebar-wrapper -->
 
-          <!-- Page Content -->
-          <div id="page-content-wrapper">
-            <div id="map" class="col-lg-12"></div>
-          </div>
-          <!-- /#page-content-wrapper -->
+        
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+        <div id="map" class="col-lg-12"></div>  <!--
+          <div class="container-fluid">
+            <div class="row">
+               
+            </div>
+          </div>-->
+
+        </div>
+        <!-- /#page-content-wrapper -->
 
       </div>
       <!-- /#wrapper -->
 
-    <!-- BEGIN: Lodash Template Definition. -->
-    <script type="text/template" class="helperBox">
-      <div id="<%- rc.key %>" class="helper_section" style="display:none"
-        <% if (typeof(rc.boxIntro) !== "undefined") { %>
-          data-intro="<%= rc.intro %>"
-        <% } %>
-       >
-        <p><%= rc.description %></p>
-      </div>
-    </script>
-
-    <script type="text/template" class="sidebarLink">
-      <li id="<%- rc.key %>" class="sidebar-link"
-          data-sublayer="<%- rc.sublayer %>"
-          data-sql="<%= rc.sql === '1' ?  rc.key : '' %>"
-          <% if (typeof(rc.calcTDistance) !== "undefined") { %>
-            data-calctdistance="<%= rc.calcTDistance  %>"
-          <% } %>
-          <% if (typeof(rc.intro) !== "undefined") { %>
+      <!-- BEGIN: Lodash Template Definition. -->
+      <script type="text/template" class="helperBox">
+        <div id="<%- rc.key %>" class="helper_section" style="display:none"
+          <% if (typeof(rc.boxIntro) !== "undefined") { %>
             data-intro="<%= rc.intro %>"
           <% } %>
-      >
-        <a href="#">
-          <%- rc.title %>
-        </a>
-      </li>
-    </script>
+         >
+          <p><%= rc.description %></p>
+        </div>
+      </script>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+      <script type="text/template" class="sidebarLink">
+        <li id="<%- rc.key %>" class="sidebar-link"
+            data-sublayer="<%- rc.sublayer %>"
+            data-sql="<%= rc.sql === '1' ?  rc.key : '' %>"
+            <% if (typeof(rc.calcTDistance) !== "undefined") { %>
+              data-calctdistance="<%= rc.calcTDistance  %>"
+            <% } %>
+            <% if (typeof(rc.intro) !== "undefined") { %>
+              data-intro="<%= rc.intro %>"
+            <% } %>
+        >
+          <a href="#">
+            <%- rc.title %>
+          </a>
+        </li>
+      </script>
 
-    <script src="js/vendor/bootstrap.min.js"></script>
-    <script src="js/vendor/intro.min.js"></script>
-    <script src="https://cdn.rawgit.com/jprichardson/string.js/master/lib/string.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.7.0/lodash.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
-    <script src="js/opts.js"></script>
-    <script src="js/main.js"></script>
+      <script src="js/vendor/bootstrap.min.js"></script>
+      <script src="js/vendor/intro.min.js"></script>
+      <script src="https://cdn.rawgit.com/jprichardson/string.js/master/lib/string.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.7.0/lodash.min.js"></script>
+      <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
 
-    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.13/cartodb.js"></script>
+      <script src="js/opts.js"></script>
+      <script src="js/main.js"></script>
 
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
+      <script src="http://libs.cartocdn.com/cartodb.js/v3/3.13/cartodb.js"></script>
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script>
-        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-        e.src='//www.google-analytics.com/analytics.js';
-        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-        ga('create','UA-XXXXX-X','auto');ga('send','pageview');
-    </script>
+      <!-- Menu Toggle Script -->
+      <script>
+      $("#menu-toggle").click(function(e) {
+          e.preventDefault();
+          $("#wrapper").toggleClass("toggled");
+      });
+      </script>
+
+      <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+      <script>
+          (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+          function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+          e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+          e.src='//www.google-analytics.com/analytics.js';
+          r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+          ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+      </script>
 
     </body>
 </html>

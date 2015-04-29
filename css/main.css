@@ -3,7 +3,7 @@
    Author's custom styles
    ========================================================================== */
 
-#map {
+/*#map {
   height:100% !important;
   width: auto;
 }
@@ -13,26 +13,30 @@
 }
 .inner-header {
   display:none;
-}
+}*/
 
-html, body, #map, #wrapper {
+/*html, body, #map, #wrapper {
   height: 100%;
   padding: 0;
   margin: 0;
   height: 100%;
   width: 100%;
   overflow: hidden;
+}*/
+
+#map {
+  height:100% !important;
+  width: 100% !important;
+  background: blue;
+  padding:0px;
 }
 
 #page-content-wrapper {
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-
+  padding:0px;
+  height:100%;
+  position: fixed;
 }
+
 
 #nav_box {
   position: relative;
@@ -57,10 +61,10 @@ html, body, #map, #wrapper {
   width:100%;
 }
 
-.sidebar-nav {
+/*.sidebar-nav {
   position: relative;
   top: 0;
-}
+}*/
 
 
 

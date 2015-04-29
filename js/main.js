@@ -229,6 +229,6 @@ function initIntro() {
 }
 
 $(document).ready(function() {
-  main()
+  main();
 });
 
