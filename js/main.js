@@ -221,7 +221,7 @@ function initIntro() {
     _.templateSettings.variable = "rc";
     applyTemplates();
     initSubLayerWatch();
-    initIntro();
+    //initIntro();
    })
   .error(function(err) {
     console.log(err);

@@ -3,37 +3,18 @@
    Author's custom styles
    ========================================================================== */
 
-/*#map {
-  height:100% !important;
-  width: auto;
-}
-
-#map_container {
-  height: 500px;
-}
-.inner-header {
-  display:none;
-}*/
-
-/*html, body, #map, #wrapper {
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}*/
-
 #map {
   height:100% !important;
-  width: 100% !important;
+  width: 81% !important; /*THIS IS A BUG*/
   background: blue;
   padding:0px;
+
 }
 
 #page-content-wrapper {
   padding:0px;
   height:100%;
+  width:100%;
   position: fixed;
 }
 
@@ -61,10 +42,10 @@
   width:100%;
 }
 
-/*.sidebar-nav {
+.sidebar-nav {
   position: relative;
   top: 0;
-}*/
+}
 
 
 
@@ -75,10 +56,10 @@
   background-color: #EEE;
 }
 
-.cartodb-legend.category ul li {
+/*.cartodb-legend.category ul li {
   float:left;
   margin-right:10px !important;
-}
+}*/
 
 
 
