@@ -5,11 +5,12 @@
 
 #map {
   height:100% !important;
-  width: 81% !important; /*THIS IS A BUG*/
+  width: 100% !important; /*THIS IS A BUG*/
   background: blue;
   padding:0px;
-
 }
+
+
 
 #page-content-wrapper {
   padding:0px;
@@ -42,18 +43,35 @@
   width:100%;
 }
 
-.sidebar-nav {
-  position: relative;
-  top: 0;
+
+
+.no-side-padding {
+  padding-left:0px;
+  padding-right:0px;
+}
+.no-side-margin {
+  margin-left:0px;
+  margin-right:0px;
 }
 
+.no-padding {
+  padding:0px;
+}
 
-
-
+.navbar.side-navbar {
+  margin-bottom:0px;
+  background: black;
+  border-radius: 0px;
+  opacity: 0.8
+}
 
 
  li.selected {
   background-color: #EEE;
+}
+
+.navbar-toggle .icon-bar {
+  background: whitesmoke;
 }
 
 /*.cartodb-legend.category ul li {
@@ -63,6 +81,48 @@
 
 
 
+/* make sidebar nav vertical */ 
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+  }
+  .sidebar-nav .navbar ul:not {
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+@media (min-width: 768px) {
+  /* uncomment if you would like the menu to be fixed */
+   .navbar {
+      position: fixed;
+      width: 170px;
+      z-index: 2;
+      top:25%;
+      left:2%;
+   } 
+}
+@media (min-width: 992px) {
+  .navbar {
+    width: 212px;
+  }
+}
+@media (min-width: 1200px) {
+  .navbar {
+    width: 262px;
+  }
+}
+.sidebar-nav .navbar-header{ float: none; }
 
 
 

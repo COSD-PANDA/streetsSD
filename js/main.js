@@ -199,8 +199,8 @@ function initSubLayerWatch() {
     $('#helper_box #' + subLayerID).show();
 
     // Deselect all and select the clicked one
-    $workLayers.removeClass('selected');
-    $('a', $li).addClass('selected');
+    $workLayers.removeClass('active');
+    $('a', $li).addClass('active');
   });
 }
 
