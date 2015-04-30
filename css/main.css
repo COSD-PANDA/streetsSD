@@ -6,8 +6,12 @@
 #map {
   height:100% !important;
   width: 100% !important; /*THIS IS A BUG*/
-  background: blue;
+  background: black;
   padding:0px;
+}
+
+.loader{
+  color:white;
 }
 
 
