@@ -106,11 +106,26 @@ function getSQLConditions(sqlKey, previousSQL) {
   return SQL;
 }
 
-function getTotalDistanceSQL(sqlKey) {
+function getDistanceSQL(sqlKey, extraConditions, groupBy) {
+  var SQL = "SELECT " + groupBy + ", " +
+    "SUM(ST_Length(ST_AsText(ST_Transform(spp2.the_geom,26915)))/1609.34) as totalMiles " +
+    "FROM spp2 ";
+    SQL = getSQLConditions(sqlKey, SQL);
+    if (extraConditions)
+      SQL += extraConditions;
+
+    if (groupBy)
+      SQL += "GROUP BY " + groupBy;
+
+    return SQL;
+}
+
+function getTotalDistanceSQL(sqlKey, activityKey) {
   var SQL = "SELECT spp2.district, " +
     "SUM(ST_Length(ST_AsText(ST_Transform(spp2.the_geom,26915)))/1609.34) as totalMiles " +
     "FROM spp2 ";
     SQL = getSQLConditions(sqlKey, SQL);
+    console.log(SQL);
     SQL += "GROUP BY DISTRICT";
     return SQL;
 }
@@ -140,7 +155,6 @@ function clearState() {
 }
 
 function applyTemplates() {
-  console.log(window.layerOptions);
   var layerOptions = window.layerOptions;
   var linkTemplate = _.template($( "script.sidebarLink" ).html());
   var helperBoxTemplate = _.template($( "script.helperBox" ).html());
@@ -178,21 +192,32 @@ function initSubLayerWatch() {
 
     if (subLayerSQL) {
       subLayer.setSQL(getLayerSQL(subLayerSQL));
-      console.log(getLayerSQL(subLayerSQL));
+      //console.log(getLayerSQL(subLayerSQL));
     }
 
     if(calcTDistance) {
       var sql = new cartodb.SQL({ user: 'maksim2' });
-      var sqlString = getTotalDistanceSQL(subLayerSQL);
+      //var sqlString = getTotalDistanceSQL(subLayerSQL);
+      var sqlString = getDistanceSQL(subLayerSQL, null, "spp2.district");
+      console.log(sqlString);
       sql.execute(sqlString).done(function(data) {
-
-        var sum = _.sum(data.rows, function(row) {
-          return row.totalmiles;
-        });
         $('.tDistance', '#helper_box #' + subLayerID).text(
-        _.sum(data.rows, function(row) { return row.totalmiles; }).toFixed(2));
+          _.sum(data.rows, function(row) { return row.totalmiles; }).toFixed(2)
+        );
       });
     }
+
+    // Might be conditional.
+    var sql = new cartodb.SQL({ user: 'maksim2' });
+    var sqlString = getDistanceSQL(subLayerSQL, null, "spp2.activity");
+    console.log(sqlString);
+    sql.execute(sqlString).done(function(data) {
+      console.log(data);
+    });
+
+
+
+
 
     subLayer.show();
     $('#helper_box').show();
@@ -249,7 +274,7 @@ function setCookie(cname, cvalue, exdays) {
     // Default
     //initIntro();
     // Force intro
-    initIntro(true);
+    //initIntro(true);
    })
   .error(function(err) {
     console.log(err);

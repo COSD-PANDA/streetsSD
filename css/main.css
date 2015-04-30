@@ -67,6 +67,27 @@ div.cartodb-zoom {
   width:100%;
 }
 
+#chart_box {
+  margin-top:25px;
+  background: whitesmoke;
+  position: relative;
+  opacity: 1;
+  padding: 0;
+  padding-left: 20px;
+  padding-right:20px;
+  padding-bottom:0px;
+  padding-top:10px;
+  border-bottom: 1px solid #999;
+  font-family: "Helvetica", Arial;
+  font-size: 13px;
+  color: #444;
+  cursor: auto;
+  width:100%;
+  height:100px;
+}
+
+
+
 
 
 .no-side-padding {
