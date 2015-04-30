@@ -212,7 +212,18 @@ function initSubLayerWatch() {
     var sqlString = getDistanceSQL(subLayerSQL, null, "spp2.activity");
     console.log(sqlString);
     sql.execute(sqlString).done(function(data) {
-      console.log(data);
+      console.log(data.rows);
+      chartData = [];
+      _.each(data.rows, function(element, index) {
+          chartData.push([element.activity, element.totalmiles]);
+      });
+      var chart = c3.generate({
+          bindto: '#chart-container',
+          data: {
+            type: 'pie',
+            columns: chartData
+          }
+      });
     });
 
 
