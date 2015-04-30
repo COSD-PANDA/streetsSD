@@ -205,7 +205,7 @@ function initSubLayerWatch() {
 }
 
 function initIntro() {
-  introJs().start();
+  introJs().setOptions(window.introOptions).start();
 }
 
  function main() {
@@ -222,7 +222,7 @@ function initIntro() {
     _.templateSettings.variable = "rc";
     applyTemplates();
     initSubLayerWatch();
-    //initIntro();
+    initIntro();
    })
   .error(function(err) {
     console.log(err);

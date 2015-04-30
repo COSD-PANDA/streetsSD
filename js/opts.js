@@ -6,8 +6,6 @@ var loadOpts = function() {
       "sql": "1",
       "title": "All Work",
       "description": "All work that occured since Jan 1, 2012 to date, updated quarterly",
-      //"intro": "Click on a link to see the map data associated.",
-      "boxIntro": "You will see a description of the layer in the box below."
     },
     /*"all-work-since-mayor": {
       "sublayer" : "1",
@@ -71,10 +69,29 @@ var loadOpts = function() {
   window.layerOptions = options;
 }
 
+loadIntroOptions = function() {
+  var introOptions = {
+    tooltipClass: "intro-tooltip",
+    steps: [{
+      intro: "Welcome to Map"
+    },
+    {
+      element: '#work-layers',
+      intro: "Click on one of these to see the map",
+      position: 'right'
+    }
+
+    ]
+  }
+  window.introOptions = introOptions;
+}
+
 
 
 $(document).ready(function() {
   loadOpts();
+  loadIntroOptions();
+
 });
 
 

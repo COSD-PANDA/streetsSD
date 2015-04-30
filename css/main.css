@@ -3,6 +3,17 @@
    Author's custom styles
    ========================================================================== */
 
+/* CartoDB Specific */
+div.cartodb-share {
+  float:right;
+}
+
+div.cartodb-zoom {
+  float:right;
+  clear:right;
+  margin:20px 20px 0 0;
+}
+
 #map {
   height:100% !important;
   width: 100% !important; /*THIS IS A BUG*/
@@ -30,13 +41,8 @@
 }
 
 
-#nav_box {
-  position: relative;
-  top: 0px;
-  margin-bottom:30px;
-}
-
 #helper_box {
+  margin-top:25px;
   background: whitesmoke;
   position: relative;
   opacity: 1;
@@ -70,9 +76,19 @@
 
 .navbar.side-navbar {
   margin-bottom:0px;
-  background: black;
+  background:black;
   border-radius: 0px;
-  opacity: 0.8
+  opacity:0.8
+}
+
+.navbar .navbar-nav#work-layers {
+  background:black;
+}
+
+.navbar-brand {
+  text-shadow: none;
+  background:black;
+  color:white;
 }
 
 
@@ -84,10 +100,15 @@
   background: whitesmoke;
 }
 
-/*.cartodb-legend.category ul li {
-  float:left;
-  margin-right:10px !important;
-}*/
+.intro-tooltip {
+}
+
+/* Intro Js Overrides.*/
+.introjs-button:hover {
+  box-shadow: none;
+  text-shadow: none !important;
+  color:white;
+}
 
 
 
@@ -111,6 +132,12 @@
     padding-top: 12px;
     padding-bottom: 12px;
   }
+  .navbar.side-navbar {
+    background:transparent;
+  }
+  .navbar-brand {
+    width:100%;
+  }
 }
 @media (min-width: 768px) {
   /* uncomment if you would like the menu to be fixed */
@@ -118,8 +145,8 @@
       position: fixed;
       width: 170px;
       z-index: 2;
-      top:25%;
-      left:2%;
+      margin-top:100px;
+      margin-left:50px;
    }
 }
 @media (min-width: 992px) {

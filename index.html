@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.13/themes/css/cartodb.css" />
         <link rel="stylesheet" href="css/introjs.min.css">
+        <link rel="stylesheet" href="css/introjs-nassim.css">
         <link rel="stylesheet" href="css/main.css">
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
@@ -28,7 +29,7 @@
         <div class="row">
          <div class="col-sm-4 no-padding">
             <div class="sidebar-nav">
-              <div class="navbar side-navbar" role="navigation" data-intro="Click on a link to see map data associated.">
+              <div class="navbar side-navbar" role="navigation">
                 <div class="navbar-header">
                   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -36,18 +37,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <span class="visible-xs navbar-brand">SD Infra Map</span>
+                  <span class="navbar-brand">SD Infra Map</span>
                 </div><!--navbar-header-->
                 <div class="navbar-collapse collapse sidebar-navbar-collapse">
                   <ul class="nav navbar-nav" id="work-layers">
                   </ul>
+
+                  <div id="helper_box"></div>
                 </div><!--/.nav-collapse -->
               </div><!-- navbar-->
             </div><!--sidebar-nav-->
           </div><!--col-sm-4-->
           <div id="page-content-wrapper" class="col-sm-12 col-md-12 col-lg-12">
             <div id="map" class="col-sm-12 col-lg-12 col-md-12">
-              <div class="loader"><img src="img/sdlogo.png"/></div>
+              <div class="loader"><img src="img/loader.gif"/></div>
             </div>
           </div>
         </div><!-- row -->
