@@ -174,8 +174,8 @@ div.cartodb-zoom {
       position: fixed;
       width: 170px;
       z-index: 2;
-      margin-top:100px;
-      margin-left:50px;
+      margin-top:25px;
+      margin-left:25px;
    }
 }
 @media (min-width: 992px) {
