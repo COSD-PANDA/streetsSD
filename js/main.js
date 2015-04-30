@@ -204,8 +204,32 @@ function initSubLayerWatch() {
   });
 }
 
-function initIntro() {
-  introJs().setOptions(window.introOptions).start();
+function initIntro(force) {
+  var force = force || false;
+  var intro = introJs().setOptions(window.introOptions);
+	var cookie=getCookie("sdInfraIntro");
+  if (cookie==null || cookie=="" || force == true) {
+    setCookie("sdInfraIntro", "1",90);
+    intro.start();
+  }
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i=0; i<ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0)==' ') c = c.substring(1);
+    if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+  }
+  return "";
+}
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 
  function main() {
@@ -216,13 +240,16 @@ function initIntro() {
     zoom: 10
   })
   .done(function(vis, layers) {
-    $('body').addClass('map-loaded');
+    $('body').removeClass('.map-loading').addClass('map-loaded');
     global.vis = vis;
     global.layers = layers;
     _.templateSettings.variable = "rc";
     applyTemplates();
     initSubLayerWatch();
-    initIntro();
+    // Default
+    //initIntro();
+    // Force intro
+    initIntro(true);
    })
   .error(function(err) {
     console.log(err);

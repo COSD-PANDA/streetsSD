@@ -25,6 +25,14 @@ div.cartodb-zoom {
   display:none;
 }
 
+.map-loading .sidebar-nav {
+  display: none;
+}
+
+.map-loaded .sidebar-nav {
+  display:block
+}
+
 .loader {
   color:white;
   text-align:center;

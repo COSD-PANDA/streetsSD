@@ -79,8 +79,12 @@ loadIntroOptions = function() {
       element: '#work-layers',
       intro: "Click on one of these to see the map",
       position: 'right'
+    },
+    {
+      element: 'div.cartodb-zoom',
+      intro: "You can pan the map by clicking and dragging or zoom in or out using these buttons",
+      position: 'left'
     }
-
     ]
   }
   window.introOptions = introOptions;
