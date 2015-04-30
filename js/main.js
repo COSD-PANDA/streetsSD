@@ -273,7 +273,7 @@ function setCookie(cname, cvalue, exdays) {
     tiles_loader: true,
     center_lat: 32.7150,
     center_lon: -117.1625,
-    zoom: 10
+    zoom: 11
   })
   .done(function(vis, layers) {
     $('body').removeClass('.map-loading').addClass('map-loaded');
