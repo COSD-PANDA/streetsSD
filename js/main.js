@@ -216,7 +216,7 @@ function initIntro() {
     zoom: 10
   })
   .done(function(vis, layers) {
-    $('.loader').remove();
+    $('body').addClass('map-loaded');
     global.vis = vis;
     global.layers = layers;
     _.templateSettings.variable = "rc";
@@ -230,6 +230,6 @@ function initIntro() {
 }
 
 $(document).ready(function() {
-  //main();
+  main();
 });
 

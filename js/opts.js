@@ -6,7 +6,7 @@ var loadOpts = function() {
       "sql": "1",
       "title": "All Work",
       "description": "All work that occured since Jan 1, 2012 to date, updated quarterly",
-      "intro": "Click on a link to see the map data associated.",
+      //"intro": "Click on a link to see the map data associated.",
       "boxIntro": "You will see a description of the layer in the box below."
     },
     /*"all-work-since-mayor": {

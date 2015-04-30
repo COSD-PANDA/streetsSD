@@ -10,8 +10,14 @@
   padding:0px;
 }
 
-.loader{
+.map-loaded .loader {
+  display:none;
+}
+
+.loader {
   color:white;
+  text-align:center;
+  margin-top:10%;
 }
 
 
@@ -85,7 +91,7 @@
 
 
 
-/* make sidebar nav vertical */ 
+/* make sidebar nav vertical */
 @media (min-width: 768px) {
   .sidebar-nav .navbar .navbar-collapse {
     padding: 0;
@@ -114,7 +120,7 @@
       z-index: 2;
       top:25%;
       left:2%;
-   } 
+   }
 }
 @media (min-width: 992px) {
   .navbar {
