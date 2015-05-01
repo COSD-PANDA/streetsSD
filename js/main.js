@@ -295,7 +295,7 @@ function setCookie(cname, cvalue, exdays) {
     applyTemplates();
     initSubLayerWatch();
     // Default
-    //initIntro();
+    initIntro();
     // Force intro
     //initIntro(true);
    })
