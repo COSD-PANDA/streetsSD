@@ -212,10 +212,9 @@ function initSubLayerWatch() {
     var sqlString = getDistanceSQL(subLayerSQL, null, "spp2.activity");
     console.log(sqlString);
     sql.execute(sqlString).done(function(data) {
-      console.log(data.rows);
       chartData = [];
       _.each(data.rows, function(element, index) {
-          chartData.push([element.activity, element.totalmiles]);
+        chartData.push([element.activity, element.totalmiles]);
       });
       var chart = c3.generate({
           bindto: '#chart-container',
@@ -224,6 +223,8 @@ function initSubLayerWatch() {
             columns: chartData
           }
       });
+      // Force open the bottomBar
+      bottomBarToggle('open');
     });
 
 
@@ -238,6 +239,27 @@ function initSubLayerWatch() {
     $workLayers.removeClass('active');
     $('a', $li).addClass('active');
   });
+}
+
+function initBottomBar() {
+  $('#bottom-bar .tab').click(bottomBarToggle);
+}
+function bottomBarToggle(forceAction) {
+  var forceAction = typeof forceAction === 'string' ? forceAction : null;
+  if ((forceAction !== null && forceAction == 'close') ||
+      (forceAction === null && $('#bottom-bar .tab').hasClass('active'))) {
+    console.log('action: ' + forceAction);
+    console.log('close bar');
+
+    $('#bottom-bar').animate({'bottom': -($('#bottom-bar .tab-content').height())});
+    $('#bottom-bar .tab').removeClass('active').text('More Info');
+  }
+  else {
+    console.log('action: ' + forceAction);
+    console.log('open bar');
+    $('#bottom-bar').animate({'bottom': 0});
+    $('#bottom-bar .tab').addClass('active').text('Less Info');
+  }
 }
 
 function initIntro(force) {
@@ -282,6 +304,7 @@ function setCookie(cname, cvalue, exdays) {
     _.templateSettings.variable = "rc";
     applyTemplates();
     initSubLayerWatch();
+    initBottomBar();
     // Default
     //initIntro();
     // Force intro

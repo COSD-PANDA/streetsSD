@@ -14,6 +14,12 @@ div.cartodb-zoom {
   margin:20px 20px 0 0;
 }
 
+div.cartodb-legend-stack {
+  top:20px;
+  bottom:auto;
+  right: 67px;
+}
+
 #map {
   height:100% !important;
   width: 100% !important; /*THIS IS A BUG*/
@@ -89,13 +95,30 @@ div.cartodb-zoom {
 
 
 #bottom-bar {
-  background: whitesmoke;
+  background:transparent;
   opacity: 0.8;
-  height: 200px;
+  height: 230px;
   width: 100%;
   z-index: 999999;
   position: fixed;
-  bottom: 0px;
+  bottom: -200px;
+}
+
+#bottom-bar .tab-content {
+  height:200px;
+  background: whitesmoke;
+}
+
+#bottom-bar .tab {
+  cursor:pointer;
+  height:30px;
+  background:#356AA0;
+  text-align: center;
+  line-height: 30px;
+  border-top-left-radius: 20px;
+  border-top-right-radius:20px;
+  font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+  color: white;
 }
 
 
