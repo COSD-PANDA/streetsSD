@@ -24,10 +24,12 @@ function getSQLConditions(sqlKey, previousSQL) {
       // Work Done Date / Work Est Date is after 2012-01-01
       SQL += "AND (spp2.date_::date >= '2012-01-01' OR spp2.est_date::date >= '2012-01-01') ";
       // Impose Quarter Limit on Work Done for Accuracy / Consistency.
-       SQL += "AND (spp2.date_::date <= '" + lastQuarter.end + "') ";
+      SQL += "AND (spp2.date_::date <= '" + lastQuarter.end + "') ";
       break;
 
     case 'all-work-since-mayor':
+      // Activity Column is not NULL.
+      SQL += "AND (spp2.activity is not null) ";
       // Work Done Date is not NULL.
       SQL += "WHERE (spp2.date_ is not null) ";
       // Work Done Date is after March 3, 2014.
@@ -59,6 +61,16 @@ function getSQLConditions(sqlKey, previousSQL) {
       SQL += "AND (spp2.date_::date <= '2014-06-30') ";
       break;
 
+      case 'work-2012':
+      // Work Done Date is not NULL.
+      SQL += "WHERE (spp2.date_ is not null) ";
+
+      // Work Done Date is after Jan 1, 2012.
+      SQL += "AND (spp2.date_::date >= '2012-01-01') ";
+
+      // Work Done Date is before Dec 31, 2012.
+      SQL += "AND (spp2.date_::date <= '2012-12-31') ";
+      break;
 
 
     case 'work-2013':
@@ -103,6 +115,8 @@ function getSQLConditions(sqlKey, previousSQL) {
 
       break;
   }
+  // Filter out activity = null.
+  SQL += "AND (spp2.activity is not null) ";
   return SQL;
 }
 
@@ -192,12 +206,10 @@ function initSubLayerWatch() {
 
     if (subLayerSQL) {
       subLayer.setSQL(getLayerSQL(subLayerSQL));
-      //console.log(getLayerSQL(subLayerSQL));
     }
 
     if(calcTDistance) {
       var sql = new cartodb.SQL({ user: 'maksim2' });
-      //var sqlString = getTotalDistanceSQL(subLayerSQL);
       var sqlString = getDistanceSQL(subLayerSQL, null, "spp2.district");
       console.log(sqlString);
       sql.execute(sqlString).done(function(data) {
@@ -306,7 +318,7 @@ function setCookie(cname, cvalue, exdays) {
     initSubLayerWatch();
     initBottomBar();
     // Default
-    //initIntro();
+    initIntro();
     // Force intro
     //initIntro(true);
    })
