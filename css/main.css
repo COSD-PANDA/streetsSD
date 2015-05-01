@@ -50,7 +50,7 @@ div.cartodb-zoom {
 
 
 #helper_box {
-  margin-top:25px;
+  margin-top:0px;
   background: whitesmoke;
   position: relative;
   opacity: 1;
@@ -59,16 +59,15 @@ div.cartodb-zoom {
   padding-right:20px;
   padding-bottom:0px;
   padding-top:10px;
-  border-bottom: 1px solid #999;
   font-family: "Helvetica", Arial;
   font-size: 13px;
   color: #444;
   cursor: auto;
-  width:100%;
+  height:200px;
 }
 
 #chart_box {
-  margin-top:25px;
+  margin-top:0px;
   background: whitesmoke;
   position: relative;
   opacity: 1;
@@ -77,17 +76,27 @@ div.cartodb-zoom {
   padding-right:0px;
   padding-bottom:0px;
   padding-top:0px;
-  border-bottom: 1px solid #999;
   font-family: "Helvetica", Arial;
   font-size: 13px;
   color: #444;
   cursor: auto;
-  width:100%;
-  height:300px;
+  height:200px;
+}
+
+#chart-container {
+  height:200px;
 }
 
 
-
+#bottom-bar {
+  background: whitesmoke;
+  opacity: 0.8;
+  height: 200px;
+  width: 100%;
+  z-index: 999999;
+  position: fixed;
+  bottom: 0px;
+}
 
 
 .no-side-padding {
