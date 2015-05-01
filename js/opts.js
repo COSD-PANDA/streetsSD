@@ -73,7 +73,7 @@ loadIntroOptions = function() {
   var introOptions = {
     tooltipClass: "intro-tooltip",
     steps: [{
-      intro: "Welcome to Map"
+      intro: "Welcome to SD Infrastructure Map."
     },
     {
       element: '#work-layers',
