@@ -84,6 +84,7 @@ div.cartodb-zoom {
   cursor: auto;
   width:100%;
   height:300px;
+  display:none;
 }
 
 

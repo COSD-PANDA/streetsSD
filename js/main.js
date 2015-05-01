@@ -19,15 +19,19 @@ function getSQLConditions(sqlKey, previousSQL) {
   SQL = previousSQL || "";
   switch (sqlKey) {
     case 'all-work':
+      // Activity Column is not NULL.
+      SQL += "AND (spp2.activity is not null) ";
       // Date columns are not NULL.
       SQL += "WHERE (spp2.date_ is not null OR spp2.est_date is not null) ";
       // Work Done Date / Work Est Date is after 2012-01-01
       SQL += "AND (spp2.date_::date >= '2012-01-01' OR spp2.est_date::date >= '2012-01-01') ";
       // Impose Quarter Limit on Work Done for Accuracy / Consistency.
-       SQL += "AND (spp2.date_::date <= '" + lastQuarter.end + "') ";
+      SQL += "AND (spp2.date_::date <= '" + lastQuarter.end + "') ";
       break;
 
     case 'all-work-since-mayor':
+      // Activity Column is not NULL.
+      SQL += "AND (spp2.activity is not null) ";
       // Work Done Date is not NULL.
       SQL += "WHERE (spp2.date_ is not null) ";
       // Work Done Date is after March 3, 2014.
