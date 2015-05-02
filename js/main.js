@@ -207,9 +207,9 @@ function initSubLayerWatch() {
     if (subLayerSQL) {
       subLayer.setSQL(getLayerSQL(subLayerSQL));
     }
+    var sql = new cartodb.SQL({ user: 'maksim2' });
 
     if(calcTDistance) {
-      var sql = new cartodb.SQL({ user: 'maksim2' });
       var sqlString = getDistanceSQL(subLayerSQL, null, "spp2.district");
       console.log(sqlString);
       sql.execute(sqlString).done(function(data) {
@@ -220,7 +220,6 @@ function initSubLayerWatch() {
     }
 
     // Might be conditional.
-    var sql = new cartodb.SQL({ user: 'maksim2' });
     var sqlString = getDistanceSQL(subLayerSQL, null, "spp2.activity");
     console.log(sqlString);
     sql.execute(sqlString).done(function(data) {
@@ -229,7 +228,7 @@ function initSubLayerWatch() {
         chartData.push([element.activity, element.totalmiles]);
       });
       var chart = c3.generate({
-          bindto: '#chart-container',
+          bindto: '#chart-container-1',
           data: {
             type: 'pie',
             columns: chartData

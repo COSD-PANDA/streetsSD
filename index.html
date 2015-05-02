@@ -57,8 +57,11 @@
               <div id="bottom-bar-content" class="col-md-12 tab-content">
                 <div class="row">
                   <div id="helper_box" class="col-md-4"></div>
-                  <div id="chart_box" class="col-md-8">
-                    <div id="chart-container"><div>
+                  <div id="chart_box_1" class="col-md-4">
+                    <div id="chart-container-1" class="chart-container"><div>
+                  </div>
+                  <div id="chart_box_2" class="col-md-4">
+                    <div id="chart-container-2" class="chart-container"><div>
                   </div>
                 </div> <!--row-->
               </div><!--bottom-bar-content-->
@@ -71,9 +74,6 @@
       <!-- BEGIN: Lodash Template Definition. -->
       <script type="text/template" class="helperBox">
         <div id="<%- rc.key %>" class="helper_section" style="display:none"
-          <% if (typeof(rc.boxIntro) !== "undefined") { %>
-            data-intro="<%= rc.intro %>"
-          <% } %>
          >
           <p><%= rc.description %></p>
         </div>
@@ -85,9 +85,6 @@
             data-sql="<%= rc.sql === '1' ?  rc.key : '' %>"
             <% if (typeof(rc.calcTDistance) !== "undefined") { %>
               data-calctdistance="<%= rc.calcTDistance  %>"
-            <% } %>
-            <% if (typeof(rc.intro) !== "undefined") { %>
-              data-intro="<%= rc.intro %>"
             <% } %>
         >
           <a href="#">
