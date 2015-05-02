@@ -166,6 +166,10 @@ function clearState() {
   var num_sublayers = global.layers[1].getSubLayerCount();
   for (var i = 1; i < num_sublayers; i++)
     global.layers[1].getSubLayer(i).hide();
+  if (window.chart1)
+    window.chart1 = window.chart1.destroy();
+  if (window.chart2)
+    window.chart2 = window.chart2.destroy();
 }
 
 function applyTemplates() {
@@ -201,46 +205,76 @@ function initSubLayerWatch() {
     var subLayerSQL = $li.attr('data-sql') || null;
     var calcTDistance = $li.attr('data-calctdistance') || null;
     var subLayerID = $li.attr('id');
+    var ops = $li.data('ops')
     clearState();
     var subLayer = global.layers[1].getSubLayer(subLayerNum);
 
     if (subLayerSQL) {
       subLayer.setSQL(getLayerSQL(subLayerSQL));
     }
-    var sql = new cartodb.SQL({ user: 'maksim2' });
+    if (ops && ops != '' && ops != null) {
 
-    if(calcTDistance) {
-      var sqlString = getDistanceSQL(subLayerSQL, null, "spp2.district");
-      console.log(sqlString);
-      sql.execute(sqlString).done(function(data) {
-        $('.tDistance', '#helper_box #' + subLayerID).text(
-          _.sum(data.rows, function(row) { return row.totalmiles; }).toFixed(2)
-        );
-      });
+      var sql = new cartodb.SQL({ user: 'maksim2' });
+      ops = ops.split(',');
+
+      if(_.indexOf(ops, 'calcTDistance') !== -1) {
+        var sqlString = getDistanceSQL(subLayerSQL, null, "spp2.district");
+        console.log(sqlString);
+        sql.execute(sqlString).done(function(data) {
+          $('.tDistance', '#helper_box #' + subLayerID).text(
+            _.sum(data.rows, function(row) { return row.totalmiles; }).toFixed(2)
+          );
+        });
+      }
+      if (_.indexOf(ops, 'typeBreakdown') !== -1) {
+        var sqlString = getDistanceSQL(subLayerSQL, null, "spp2.activity");
+        sql.execute(sqlString).done(function(data) {
+          chartData = [];
+          _.each(data.rows, function(element, index) {
+            chartData.push([element.activity, element.totalmiles]);
+          });
+          console.log(chartData);
+          window.chart1 = c3.generate({
+            bindto: '#chart-container-1',
+            data: {
+              type: 'pie',
+              columns: chartData
+            }
+          });
+          // Force open the bottomBar
+          bottomBarToggle('open');
+        });
+      }
+
+      if (_.indexOf(ops, 'progress') !== -1) {
+        var sqlString = getDistanceSQL(subLayerSQL, null, "spp2.district");
+        sql.execute(sqlString).done(function(data) {
+
+          var tDistance = _.sum(data.rows, function(row) { return row.totalmiles; }).toFixed(2)
+          console.log(tDistance);
+          var chartData = [];
+          chartData.push(["Total Distance Planned", tDistance]);
+          window.chart2 = c3.generate({
+            bindto: '#chart-container-2',
+            size: { height: 170 },
+            data: {
+              type: 'gauge',
+              columns: chartData
+            },
+            gauge: {
+              max: 5000,
+              width: 20,
+              units: ' miles',
+              label: {
+                format: function(value, ratio) { return value; },
+                show: true // to turn off the min/max labels.
+              }
+            }
+          });
+          bottomBarToggle('open');
+        });
+      }
     }
-
-    // Might be conditional.
-    var sqlString = getDistanceSQL(subLayerSQL, null, "spp2.activity");
-    console.log(sqlString);
-    sql.execute(sqlString).done(function(data) {
-      chartData = [];
-      _.each(data.rows, function(element, index) {
-        chartData.push([element.activity, element.totalmiles]);
-      });
-      var chart = c3.generate({
-          bindto: '#chart-container-1',
-          data: {
-            type: 'pie',
-            columns: chartData
-          }
-      });
-      // Force open the bottomBar
-      bottomBarToggle('open');
-    });
-
-
-
-
 
     subLayer.show();
     $('#helper_box').show();
