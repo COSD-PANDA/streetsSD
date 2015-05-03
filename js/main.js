@@ -226,6 +226,38 @@ function initSubLayerWatch() {
           );
         });
       }
+
+      if(_.indexOf(ops, 'workByMonth') !== -1) {
+        var month = "COALESCE(to_char(spp2.est_date, 'MM'), to_char(spp2.date_, 'MM'))"
+        var sqlString = getDistanceSQL(subLayerSQL, null, month);
+        sqlString += " ORDER BY " + month;
+        console.log(sqlString);
+        sql.execute(sqlString).done(function(data) {
+          console.log(data)
+          chartData = [];
+          _.each(data.rows, function(element, index) {
+            //moment("03", "MM").format("MMMM")
+            chartData.push([
+              element.coalesce,
+              d3.round(element.totalmiles, 2)
+            ]);
+          });
+          console.log(chartData);
+          window.chart1 = c3.generate({
+            bindto: '#chart-container-2',
+            data: {
+              type: 'bar',
+              columns: chartData
+            },
+            bar: {
+              width: { ratio: 1 }
+            },
+            legend: { hide: true },
+            tooltip: {grouped: false, format: {title: function() { return ""}}}
+          });
+        })
+
+      }
       if (_.indexOf(ops, 'typeBreakdown') !== -1) {
         var sqlString = getDistanceSQL(subLayerSQL, null, "spp2.activity");
         sql.execute(sqlString).done(function(data) {
@@ -239,6 +271,19 @@ function initSubLayerWatch() {
             data: {
               type: 'pie',
               columns: chartData
+            },
+            pie: {
+              /*label: {
+                format: function (value, ratio, id) {
+                   return d3.round(value, 2) + " Miles";
+                }
+              }*/
+            },
+            tooltip: {
+              format: {
+                name: function (name, ratio, id, index) { return name; },
+                value: function (value, ratio, id, index) { return d3.round(value, 2) + " Miles"; }
+              }
             }
           });
           // Force open the bottomBar
@@ -251,7 +296,6 @@ function initSubLayerWatch() {
         sql.execute(sqlString).done(function(data) {
 
           var tDistance = _.sum(data.rows, function(row) { return row.totalmiles; }).toFixed(2)
-          console.log(tDistance);
           var chartData = [];
           chartData.push(["Total Distance Planned", tDistance]);
           window.chart2 = c3.generate({
@@ -262,7 +306,7 @@ function initSubLayerWatch() {
               columns: chartData
             },
             gauge: {
-              max: 5000,
+              max: 1000,
               width: 20,
               units: ' miles',
               label: {
