@@ -90,22 +90,30 @@ div.cartodb-legend-stack {
 }
 
 .chart-container {
-  height:200px;
+  height:215px;
+}
+
+.chart-title {
+  text-align:center
+}
+.chart-title h4 {
+  padding-bottom: 0px;
+  margin-bottom:0px;
 }
 
 
 #bottom-bar {
   background:transparent;
   opacity: 0.8;
-  height: 230px;
+  height: 280px;
   width: 100%;
   z-index: 999999;
   position: fixed;
-  bottom: -200px;
+  bottom: -250px;
 }
 
 #bottom-bar .tab-content {
-  height:200px;
+  height:250px;
   background: whitesmoke;
 }
 

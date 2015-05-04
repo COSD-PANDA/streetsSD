@@ -5,6 +5,7 @@ var loadOpts = function() {
       "sublayer" : "1",
       "sql": "1",
       "title": "All Work",
+      "ops": ['typeBreakdown', 'workByMonth'],
       "description": "All work that occured since Jan 1, 2012 to date, updated quarterly",
     },
     /*"all-work-since-mayor": {
@@ -17,24 +18,28 @@ var loadOpts = function() {
       "sublayer" : "1",
       "sql": "1",
       "title": "Work Done in Fiscal Year 2013",
+      "ops": ['typeBreakdown', 'workByMonth'],
       "description": "All work that occured since July 1, 2012 until June 31, 2013."
     },
     "work-fy-2014": {
       "sublayer" : "1",
       "sql": "1",
       "title": "Work Done in Fiscal Year 2014",
+      "ops": ['typeBreakdown', 'workByMonth'],
       "description": "All work that occured since July 1, 2013 until June 31, 2014."
     },
     "work-2012": {
       "sublayer" : "1",
       "sql": "1",
       "title": "Work Done in 2012",
+      "ops": ['typeBreakdown', 'workByMonth'],
       "description": "All work that occured since Jan 1, 2012 until Dec 31, 2012."
     },
     "work-2013": {
       "sublayer" : "1",
       "sql": "1",
       "title": "Work Done in 2013",
+      "ops": ['typeBreakdown', 'workByMonth'],
       "description": "All work that occured since Jan 1, 2013 until Dec 31, 2013."
     },
     "work-2014": {
@@ -48,6 +53,7 @@ var loadOpts = function() {
       "sublayer" : "1",
       "sql": "1",
       "title": "Work Done To Date in 2015",
+      "ops": ['typeBreakdown', 'workByMonth'],
       "description": "All work that occured since Jan 1, 2015 until March 31, 2015.  Updated Quarterly."
     },
 

@@ -166,10 +166,13 @@ function clearState() {
   var num_sublayers = global.layers[1].getSubLayerCount();
   for (var i = 1; i < num_sublayers; i++)
     global.layers[1].getSubLayer(i).hide();
-  if (window.chart1)
-    window.chart1 = window.chart1.destroy();
-  if (window.chart2)
-    window.chart2 = window.chart2.destroy();
+  $('.chart-title h4').text("");
+  if (window.typeBreakdown)
+    window.typeBreakdown = window.typeBreakdown.destroy();
+  if (window.progress)
+    window.progress = window.progress.destroy();
+  if (window.workByMonth)
+    window.workByMonth = window.workByMonth.destroy();
 }
 
 function applyTemplates() {
@@ -234,26 +237,39 @@ function initSubLayerWatch() {
         console.log(sqlString);
         sql.execute(sqlString).done(function(data) {
           console.log(data)
-          chartData = [];
+          chartData = ['miles'];
+          chartX = ['x']
           _.each(data.rows, function(element, index) {
-            //moment("03", "MM").format("MMMM")
-            chartData.push([
-              element.coalesce,
-              d3.round(element.totalmiles, 2)
-            ]);
+            chartX.push( moment(element.coalesce, "M").format("MMM") )
+            chartData.push(d3.round(element.totalmiles, 2));
           });
-          console.log(chartData);
-          window.chart1 = c3.generate({
+          $("#chart-title-2 h4").text("Work Done By Month");
+          window.workByMonth = c3.generate({
             bindto: '#chart-container-2',
             data: {
+              x: 'x',
               type: 'bar',
-              columns: chartData
+              columns: [chartX, chartData]
             },
             bar: {
-              width: { ratio: 1 }
+              width: { ratio: 0.5 }
             },
             legend: { hide: true },
-            tooltip: {grouped: false, format: {title: function() { return ""}}}
+            tooltip: {
+              grouped: false,
+              format: {
+                //title: function(x) { return moment(x+1, "M").format("MMM "YY") },
+                title: function(x) { return moment(x+1, "M").format("MMM 'YY") },
+                name: function (name, ratio, id, index) {
+                  return name.charAt(0).toUpperCase() + name.slice(1) + " paved";
+                }
+              }
+            },
+            axis: {
+              x: {
+                type: 'category' // this needed to load string x value
+              }
+            }
           });
         })
 
@@ -266,7 +282,8 @@ function initSubLayerWatch() {
             chartData.push([element.activity, element.totalmiles]);
           });
           console.log(chartData);
-          window.chart1 = c3.generate({
+          $("#chart-title-1 h4").text("Work Type Breakdown");
+          window.typeBreakdown = c3.generate({
             bindto: '#chart-container-1',
             data: {
               type: 'pie',
@@ -298,7 +315,7 @@ function initSubLayerWatch() {
           var tDistance = _.sum(data.rows, function(row) { return row.totalmiles; }).toFixed(2)
           var chartData = [];
           chartData.push(["Total Distance Planned", tDistance]);
-          window.chart2 = c3.generate({
+          window.progress = c3.generate({
             bindto: '#chart-container-2',
             size: { height: 170 },
             data: {
