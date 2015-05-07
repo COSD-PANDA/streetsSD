@@ -251,7 +251,7 @@ function initSubLayerWatch() {
           chartData = ['miles'];
           chartX = ['x']
           _.each(data.rows, function(element, index) {
-            chartX.push(moment(element.coalesce, "M-YY").format("MMM 'YY") )
+            chartX.push(moment(element.coalesce, "M-YY").format("MM-YY") )
             chartData.push(d3.round(element.totalmiles, 2));
           });
           console.log(chartX);
@@ -272,7 +272,9 @@ function initSubLayerWatch() {
               format: {
                 //title: function(x) { return moment(x+1, "M").format("MMM "YY") },
                 title: function(x) {
-                  return moment(chartX[x + 1], "M-YY").format("MMM 'YY");
+                  var date = chartX[x+1];
+                  console.log(date);
+                  return moment(date, "M-YY").format("MMM 'YY");
                   //return moment(x+1, "M-YY").format("MMM 'YY")
                 },
                 name: function (name, ratio, id, index) {
