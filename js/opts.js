@@ -14,6 +14,13 @@ var loadOpts = function() {
       "title": "Work Done under M. Faulconer",
       "description": "All work that has been performed since Mayor Faulconer took office March 3, 2014 to date, updated quarterly"
     },*/
+    "work-1k-pledge": {
+      "sublayer" : "1",
+      "sql": "1",
+      "title": "Work Done For 1k Pledge",
+      "ops": ['typeBreakdown', 'workByMonth'],
+      "description": "All work that occured since Jan 1, 2015 until the end of last quarter"
+    },
     "work-fy-2013": {
       "sublayer" : "1",
       "sql": "1",

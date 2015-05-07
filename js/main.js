@@ -28,8 +28,6 @@ function getSQLConditions(sqlKey, previousSQL) {
       break;
 
     case 'all-work-since-mayor':
-      // Activity Column is not NULL.
-      SQL += "AND (spp2.activity is not null) ";
       // Work Done Date is not NULL.
       SQL += "WHERE (spp2.date_ is not null) ";
       // Work Done Date is after March 3, 2014.
@@ -37,6 +35,19 @@ function getSQLConditions(sqlKey, previousSQL) {
       // Impose Quarter Limit on Work Done for Accuracy / Consistency.
       SQL += "AND (spp2.date_::date <= '" + lastQuarter.end +"') ";
       break;
+
+    case 'work-1k-pledge':
+      // Work Done Date is not NULL.
+      SQL += "WHERE (spp2.date_ is not null) ";
+      // Activity Column is not NULL.
+      SQL += "AND (spp2.activity is not null) ";
+      // Work Done Date is after March 3, 2014.
+      SQL += "AND (spp2.date_::date >= '2015-01-01') ";
+      // Impose Quarter Limit on Work Done for Accuracy / Consistency.
+      SQL += "AND (spp2.date_::date <= '" + lastQuarter.end +"') ";
+      break;
+
+
 
 
     case 'work-fy-2013':
@@ -231,7 +242,7 @@ function initSubLayerWatch() {
       }
 
       if(_.indexOf(ops, 'workByMonth') !== -1) {
-        var month = "COALESCE(to_char(spp2.est_date, 'MM'), to_char(spp2.date_, 'MM'))"
+        var month = "COALESCE(to_char(spp2.est_date, 'MM-YY'), to_char(spp2.date_, 'MM-YY'))"
         var sqlString = getDistanceSQL(subLayerSQL, null, month);
         sqlString += " ORDER BY " + month;
         console.log(sqlString);
@@ -240,9 +251,10 @@ function initSubLayerWatch() {
           chartData = ['miles'];
           chartX = ['x']
           _.each(data.rows, function(element, index) {
-            chartX.push( moment(element.coalesce, "M").format("MMM") )
+            chartX.push(moment(element.coalesce, "M-YY").format("MMM 'YY") )
             chartData.push(d3.round(element.totalmiles, 2));
           });
+          console.log(chartX);
           $("#chart-title-2 h4").text("Work Done By Month");
           window.workByMonth = c3.generate({
             bindto: '#chart-container-2',
@@ -259,7 +271,10 @@ function initSubLayerWatch() {
               grouped: false,
               format: {
                 //title: function(x) { return moment(x+1, "M").format("MMM "YY") },
-                title: function(x) { return moment(x+1, "M").format("MMM 'YY") },
+                title: function(x) {
+                  return moment(chartX[x + 1], "M-YY").format("MMM 'YY");
+                  //return moment(x+1, "M-YY").format("MMM 'YY")
+                },
                 name: function (name, ratio, id, index) {
                   return name.charAt(0).toUpperCase() + name.slice(1) + " paved";
                 }
@@ -267,7 +282,15 @@ function initSubLayerWatch() {
             },
             axis: {
               x: {
-                type: 'category' // this needed to load string x value
+                label: "Date",
+                type: 'category', // this needed to load string x value
+                tick: {
+                  culling: true,
+                  format: function(x) { return "" }
+                }
+              },
+              y: {
+                label: "Miles Paved"
               }
             }
           });
