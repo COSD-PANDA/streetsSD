@@ -160,8 +160,7 @@ div.cartodb-legend-stack {
   color:white;
 }
 
-
- li.selected {
+li.selected {
   background-color: #EEE;
 }
 
@@ -187,6 +186,23 @@ div.cartodb-legend-stack {
     padding: 0;
     max-height: none;
   }
+
+  .navbar-collapse.collapse {
+    display: none !important;
+  }
+
+  .navbar-collapse.collapse.in {
+    display: block !important;
+  }
+
+  .navbar-toggle {
+    display: block
+  }
+
+  .navbar-header {
+    background:black
+  }
+
   .sidebar-nav .navbar ul {
     float: none;
   }
@@ -205,7 +221,8 @@ div.cartodb-legend-stack {
     background:transparent;
   }
   .navbar-brand {
-    width:100%;
+    width:75%;
+    background: transparent;
   }
 }
 @media (min-width: 768px) {

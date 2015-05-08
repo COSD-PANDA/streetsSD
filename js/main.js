@@ -384,12 +384,14 @@ function bottomBarToggle(forceAction) {
 
     $('#bottom-bar').animate({'bottom': -($('#bottom-bar .tab-content').height())});
     $('#bottom-bar .tab').removeClass('active').text('More Info');
+    $('.sidebar-navbar-collapse').addClass('in');
   }
   else {
     console.log('action: ' + forceAction);
     console.log('open bar');
     $('#bottom-bar').animate({'bottom': 0});
     $('#bottom-bar .tab').addClass('active').text('Less Info');
+    $('.sidebar-navbar-collapse').removeClass('in');
   }
 }
 
