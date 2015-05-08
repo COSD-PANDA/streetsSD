@@ -339,10 +339,10 @@ function initSubLayerWatch() {
 
           var tDistance = _.sum(data.rows, function(row) { return row.totalmiles; }).toFixed(2)
           var chartData = [];
-          chartData.push(["Total Distance Planned", tDistance]);
+          chartData.push(["Total Distance", tDistance]);
           window.progress = c3.generate({
             bindto: '#chart-container-2',
-            size: { height: 170 },
+            size: { height: 215 },
             data: {
               type: 'gauge',
               columns: chartData

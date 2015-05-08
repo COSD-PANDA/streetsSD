@@ -18,7 +18,7 @@ var loadOpts = function() {
       "sublayer" : "1",
       "sql": "1",
       "title": "Work Done For 1k Pledge",
-      "ops": ['typeBreakdown', 'workByMonth'],
+      "ops": ['typeBreakdown', 'progress'],
       "description": "All work that occured since Jan 1, 2015 until the end of last quarter"
     },
     "work-fy-2013": {
@@ -68,7 +68,7 @@ var loadOpts = function() {
       "sublayer" : "1",
       "sql": "1",
       "calcTDistance": "1",
-      "ops": [ 'calcTDistance', 'typeBreakdown', 'progress'],
+      "ops": [ 'calcTDistance', 'typeBreakdown', 'workByMonth'],
       "title": "Planned Future Work",
       "description": "Mayor Faulconer has pledged to pave 1,000 miles of streets over the next 5 years. Future work includes <span class='tDistance'></span> miles of currently planned streets and is updated quarterly. More streets will be added as additional streets are identified to meet the 1,000 mile pledge."
     },
