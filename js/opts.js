@@ -59,7 +59,7 @@ var loadOpts = function() {
     "work-2015": {
       "sublayer" : "1",
       "sql": "1",
-      "title": "Work Done To Date in 2015",
+      "title": "Work in 2015",
       "ops": ['typeBreakdown', 'workByMonth'],
       "description": "All work that occured since Jan 1, 2015 until March 31, 2015.  Updated Quarterly."
     },
