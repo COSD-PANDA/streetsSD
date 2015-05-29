@@ -255,7 +255,7 @@ function initSubLayerWatch() {
             chartData.push(d3.round(element.totalmiles, 2));
           });
           console.log(chartX);
-          $("#chart-title-2 h4").text("Work Done By Month");
+          $("#chart-title-2 h4").text("Work By Month");
           window.workByMonth = c3.generate({
             bindto: '#chart-container-2',
             data: {
