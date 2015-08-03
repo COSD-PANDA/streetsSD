@@ -201,7 +201,7 @@ function applyTemplates() {
     var tLink = linkTemplate(templateVars);
     var hLink = helperBoxTemplate(templateVars);
     $('ul#work-layers').append(tLink);
-    $('#helper_box').append(hLink);
+    $('#helper_box #helper_box_top').append(hLink);
   });
 }
 
