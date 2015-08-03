@@ -24,18 +24,18 @@ var loadOpts = function() {
     "work-fy-2013": {
       "sublayer" : "1",
       "sql": "1",
-      "title": "Work Done in Fiscal Year 2013",
+      "title": "Work Done in FY-2013",
       "ops": ['typeBreakdown', 'workByMonth'],
       "description": "All work that occured since July 1, 2012 until June 31, 2013."
     },
     "work-fy-2014": {
       "sublayer" : "1",
       "sql": "1",
-      "title": "Work Done in Fiscal Year 2014",
+      "title": "Work Done in FY-2014",
       "ops": ['typeBreakdown', 'workByMonth'],
       "description": "All work that occured since July 1, 2013 until June 31, 2014."
     },
-    "work-2012": {
+    /*"work-2012": {
       "sublayer" : "1",
       "sql": "1",
       "title": "Work Done in 2012",
@@ -62,7 +62,7 @@ var loadOpts = function() {
       "title": "Work in 2015",
       "ops": ['typeBreakdown', 'workByMonth'],
       "description": "All work that occured since Jan 1, 2015 until March 31, 2015.  Updated Quarterly."
-    },
+    },*/
 
     "future-work": {
       "sublayer" : "1",
