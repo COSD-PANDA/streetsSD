@@ -19,7 +19,7 @@ var loadOpts = function() {
       "sql": "1",
       "title": "Work Done For 1k Pledge",
       "ops": ['typeBreakdown', 'progress'],
-      "description": "All work that occured since Jan 1, 2015."
+      "description": "All work that occured since Jul 1, 2015."
     },
     "work-fy-2013": {
       "sublayer" : "1",
