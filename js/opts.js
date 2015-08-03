@@ -19,7 +19,7 @@ var loadOpts = function() {
       "sql": "1",
       "title": "Work Done For 1k Pledge",
       "ops": ['typeBreakdown', 'progress'],
-      "description": "All work that occured since Jan 1, 2015 until the end of last quarter"
+      "description": "All work that occured since Jan 1, 2015."
     },
     "work-fy-2013": {
       "sublayer" : "1",
@@ -35,35 +35,13 @@ var loadOpts = function() {
       "ops": ['typeBreakdown', 'workByMonth'],
       "description": "All work that occured since July 1, 2013 until June 31, 2014."
     },
-    /*"work-2012": {
+    "work-fy-2015": {
       "sublayer" : "1",
       "sql": "1",
-      "title": "Work Done in 2012",
+      "title": "Work Done in FY-2015",
       "ops": ['typeBreakdown', 'workByMonth'],
-      "description": "All work that occured since Jan 1, 2012 until Dec 31, 2012."
+      "description": "All work that occured since July 1, 2014 until June 30, 2015."
     },
-    "work-2013": {
-      "sublayer" : "1",
-      "sql": "1",
-      "title": "Work Done in 2013",
-      "ops": ['typeBreakdown', 'workByMonth'],
-      "description": "All work that occured since Jan 1, 2013 until Dec 31, 2013."
-    },
-    "work-2014": {
-      "sublayer" : "1",
-      "sql": "1",
-      "title": "Work Done in 2014",
-      "ops": ['typeBreakdown', 'workByMonth'],
-      "description": "All work that occured since Jan 1, 2014 until Dec 31, 2014."
-    },
-    "work-2015": {
-      "sublayer" : "1",
-      "sql": "1",
-      "title": "Work in 2015",
-      "ops": ['typeBreakdown', 'workByMonth'],
-      "description": "All work that occured since Jan 1, 2015 until March 31, 2015.  Updated Quarterly."
-    },*/
-
     "future-work": {
       "sublayer" : "1",
       "sql": "1",
@@ -78,8 +56,6 @@ var loadOpts = function() {
       "title": "OCI as of 2011",
       "description":"Overall Condition Index is the condition of our streets measured in 2011. The City is updating this information in 2015. A street may have a low OCI, but not be scheduled for paving in order to accomodate other planned construction work on the street in the future."
     }
-
-
   }
   window.layerOptions = options;
 }
