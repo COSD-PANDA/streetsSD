@@ -248,7 +248,7 @@ function initSubLayerWatch() {
       }
 
       if(_.indexOf(ops, 'workByMonth') !== -1) {
-        var month = "COALESCE(to_char(spp2.est_date, 'MM-YY'), to_char(spp2.date_, 'MM-YY'))"
+        var month = "COALESCE(to_char(spp2.est_date, 'MM'), to_char(spp2.date_, 'MM'))"
         var sqlString = getDistanceSQL(subLayerSQL, null, month);
         sqlString += " ORDER BY " + month;
         console.log(sqlString);
@@ -257,10 +257,9 @@ function initSubLayerWatch() {
           chartData = ['miles'];
           chartX = ['x']
           _.each(data.rows, function(element, index) {
-            chartX.push(moment(element.coalesce, "M-YY").format("MM-YY") )
+            chartX.push(element.coalesce)
             chartData.push(d3.round(element.totalmiles, 2));
           });
-          console.log(chartX);
           $("#chart-title-2 h4").text("Work By Month");
           window.workByMonth = c3.generate({
             bindto: '#chart-container-2',
@@ -276,11 +275,10 @@ function initSubLayerWatch() {
             tooltip: {
               grouped: false,
               format: {
-                //title: function(x) { return moment(x+1, "M").format("MMM "YY") },
                 title: function(x) {
+                  console.log(x)
                   var date = chartX[x+1];
-                  console.log(date);
-                  return moment(date, "M-YY").format("MMM 'YY");
+                  return moment(date, "M").format("MMM") + " Total";
                   //return moment(x+1, "M-YY").format("MMM 'YY")
                 },
                 name: function (name, ratio, id, index) {
@@ -290,15 +288,17 @@ function initSubLayerWatch() {
             },
             axis: {
               x: {
-                label: "Date",
                 type: 'category', // this needed to load string x value
                 tick: {
-                  culling: true,
-                  format: function(x) { return "" }
+                  culling: false,
+                  format: function(x) { return moment(x+1, "M").format("MMM"); }
                 }
               },
               y: {
-                label: "Miles Paved"
+                label: {
+                  text: "Miles Paved",
+                  position: "inner-top"
+                }
               }
             }
           });
