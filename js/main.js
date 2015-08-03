@@ -167,7 +167,7 @@ function getLayerSQL(sqlKey) {
     "spp2.activity, " +
     "spp2.est_date, " +
     "spp2.date_, " +
-    "COALESCE(to_char(spp2.est_date, 'Month DD, YYYY'), to_char(spp2.date_, 'Month DD, YYYY')) AS date_text," +
+    "COALESCE(to_char(spp2.est_date, 'Month YYYY'), to_char(spp2.date_, 'Month YYYY')) AS date_text," +
     "spp2.shape_len, " +
     "spp2.rd20full, " +
     "spp2.xstrt1, " +
