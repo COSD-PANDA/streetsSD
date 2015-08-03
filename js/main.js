@@ -178,6 +178,23 @@ function getLayerSQL(sqlKey) {
   return getSQLConditions(sqlKey, SQL);
 }
 
+function getOCIBreakdownSQL() {
+  var SQL = "SELECT " +
+    "SUM(ST_Length(ST_AsText(ST_Transform(spp2.the_geom,26915)))/1609.34) as totalMiles, " +
+    "CASE WHEN spp2.oci <= 33.333 THEN 'OCI: 0 to 33' " +
+         "WHEN spp2.oci <= 66.666 THEN 'OCI: 33 to 66' " +
+         "ELSE 'OCI: 66 to 100' " +
+         "END " +
+         "AS color " +
+    "FROM spp2 " +
+    "WHERE spp2.oci_date is not null " +
+    "AND spp2.oci > 0 " +
+    "AND spp2.oci_date::date <= '2012-01-01' " +
+    "GROUP BY color ";
+
+    return SQL;
+}
+
 function clearState() {
   $('#helper_box, .helper_section').hide();
   var num_sublayers = global.layers[1].getSubLayerCount();
@@ -230,6 +247,7 @@ function initSubLayerWatch() {
     var subLayer = global.layers[1].getSubLayer(subLayerNum);
 
     if (subLayerSQL) {
+      console.log(getLayerSQL(subLayerSQL));
       subLayer.setSQL(getLayerSQL(subLayerSQL));
     }
     if (ops && ops != '' && ops != null) {
@@ -307,6 +325,7 @@ function initSubLayerWatch() {
       }
       if (_.indexOf(ops, 'typeBreakdown') !== -1) {
         var sqlString = getDistanceSQL(subLayerSQL, null, "spp2.activity");
+        console.log(sqlString);
         sql.execute(sqlString).done(function(data) {
           chartData = [];
           _.each(data.rows, function(element, index) {
@@ -367,6 +386,41 @@ function initSubLayerWatch() {
         });
       }
     }
+
+    if (_.indexOf(ops, 'ociBreakdown') !== -1) {
+        var sqlString = getOCIBreakdownSQL();
+        console.log(sqlString);
+        sql.execute(sqlString).done(function(data) {
+          chartData = [];
+          _.each(data.rows, function(element, index) {
+            chartData.push([element.color, element.totalmiles]);
+          });
+          console.log(chartData);
+          $("#chart-title-1 h4").text("OCI Breakdown");
+          window.typeBreakdown = c3.generate({
+            bindto: '#chart-container-1',
+            data: {
+              type: 'pie',
+              columns: chartData,
+              colors: {
+                 "r": "#B81609",
+                 "y": "#FFCC00",
+                 "g": "#229A00"
+              }
+            },
+            tooltip: {
+              format: {
+                name: function (name, ratio, id, index) {return name},
+                value: function (value, ratio, id, index) { return d3.round(value, 2) + " Miles"; }
+              }
+            }
+          });
+          // Force open the bottomBar
+          bottomBarToggle('open');
+        });
+      }
+
+
 
     subLayer.show();
     $('#helper_box').show();
