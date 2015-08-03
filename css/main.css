@@ -154,19 +154,20 @@ div.cartodb-legend-stack {
   background:black;
 }
 
-.navbar-brand {
+.side-navbar .navbar-brand {
   text-shadow: none;
   background:black;
   color:white;
 }
 
-li.selected {
+.side-navbar li.selected {
   background-color: #EEE;
 }
 
-.navbar-toggle .icon-bar {
+.side-navbar .navbar-toggle .icon-bar {
   background: whitesmoke;
 }
+
 
 .intro-tooltip {
 }
@@ -178,6 +179,12 @@ li.selected {
   color:white;
 }
 
+.top-navbar {
+  background: black;
+  margin-bottom:0px;
+  border-radius:0px;
+}
+
 
 
 /* make sidebar nav vertical */
@@ -187,19 +194,19 @@ li.selected {
     max-height: none;
   }
 
-  .navbar-collapse.collapse {
+  .side-navbar .navbar-collapse.collapse {
     display: none !important;
   }
 
-  .navbar-collapse.collapse.in {
+  .side-navbar .navbar-collapse.collapse.in {
     display: block !important;
   }
 
-  .navbar-toggle {
+  .side-navbar .navbar-toggle {
     display: block
   }
 
-  .navbar-header {
+  .side-navbar .navbar-header {
     background:black
   }
 
@@ -227,7 +234,7 @@ li.selected {
 }
 @media (min-width: 768px) {
   /* uncomment if you would like the menu to be fixed */
-   .navbar {
+   .navbar.side-navbar {
       position: fixed;
       width: 170px;
       z-index: 2;
@@ -236,12 +243,12 @@ li.selected {
    }
 }
 @media (min-width: 992px) {
-  .navbar {
+  .navbar.side-navbar {
     width: 212px;
   }
 }
 @media (min-width: 1200px) {
-  .navbar {
+  .navbar.side-navbar {
     width: 262px;
   }
 }
