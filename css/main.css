@@ -105,15 +105,15 @@ div.cartodb-legend-stack {
 #bottom-bar {
   background:transparent;
   opacity: 0.8;
-  height: 280px;
+  height: 310px;
   width: 100%;
   z-index: 999999;
   position: fixed;
-  bottom: -220px;
+  bottom: -250px;
 }
 
 #bottom-bar .tab-content {
-  height:220px;
+  height:250px;
   background: whitesmoke;
 }
 
@@ -192,11 +192,18 @@ div.cartodb-legend-stack {
 }
 
 #footer-bar {
-  background: blue;
+  background: black;
   height:30px;
   position: fixed;
   bottom:0px;
   z-index: 9999999;
+  opacity: 0.8;
+  border-radius: 0px !imporant;
+  text-align: center;
+  line-height: 30px;
+  padding-left:10px;
+  padding-right:10px;
+  width: 100%;
 }
 
 
