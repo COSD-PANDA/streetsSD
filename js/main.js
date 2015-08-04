@@ -420,6 +420,14 @@ function initIntro(force) {
   }
 }
 
+function initMarkdown() {
+  $('.modal-body').each(function(index, element) {
+    var md = $(element).text();
+    console.log(md);
+    $(element).html(marked(md));
+  })
+}
+
 function getCookie(cname) {
   var name = cname + "=";
   var ca = document.cookie.split(';');
@@ -452,6 +460,7 @@ function setCookie(cname, cvalue, exdays) {
     _.templateSettings.variable = "rc";
     applyTemplates();
     initSubLayerWatch();
+    initMarkdown();
     initBottomBar();
     // Default
     initIntro();
