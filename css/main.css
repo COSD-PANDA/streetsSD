@@ -109,11 +109,11 @@ div.cartodb-legend-stack {
   width: 100%;
   z-index: 999999;
   position: fixed;
-  bottom: -250px;
+  bottom: -220px;
 }
 
 #bottom-bar .tab-content {
-  height:250px;
+  height:220px;
   background: whitesmoke;
 }
 
@@ -168,6 +168,12 @@ div.cartodb-legend-stack {
   background: whitesmoke;
 }
 
+/*.side-navbar .navbar-links {
+  max-height: 300px !important;
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+}*/
+
 
 .intro-tooltip {
 }
@@ -179,11 +185,21 @@ div.cartodb-legend-stack {
   color:white;
 }
 
-.top-navbar {
+.top-navbar, .bottom-navbar {
   background: black;
   margin-bottom:0px;
   border-radius:0px;
 }
+
+#footer-bar {
+  background: blue;
+  height:30px;
+  position: fixed;
+  bottom:0px;
+  z-index: 9999999;
+}
+
+
 
 
 
