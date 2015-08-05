@@ -5957,7 +5957,7 @@ img {
   position: fixed;
   bottom: 0px;
   z-index: 9999999;
-  opacity: 0.8;
+  opacity: 0.99;
   border-radius: 0px;
   text-align: center;
   line-height: 30px;
@@ -5988,6 +5988,10 @@ img {
     border-top-right-radius: 20px;
     font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
     color: white; }
+  #bottom-bar #blank-intro {
+    text-align: center; }
+    #bottom-bar #blank-intro h3 {
+      text-align: center; }
 
 #helper_box {
   margin-top: 0px;
@@ -6003,10 +6007,13 @@ img {
   font-size: 13px;
   color: #444;
   cursor: auto;
-  height: 200px; }
+  height: 250px; }
 
 .chart-container {
-  height: 215px; }
+  height: 218px !important;
+  max-height: 218px !important;
+  position: relative;
+  bottom: 0px; }
 
 .chart-title {
   text-align: center; }
@@ -6015,7 +6022,7 @@ img {
   padding-bottom: 0px;
   margin-bottom: 0px; }
 
-.chart_box {
+.chart-box {
   margin-top: 0px;
   background: whitesmoke;
   position: relative;
@@ -6029,7 +6036,9 @@ img {
   font-size: 13px;
   color: #444;
   cursor: auto;
-  height: 200px; }
+  height: 250px; }
+  .chart-box h4 {
+    margin-top: 7px; }
 
 /* CartoDB Specific */
 div.cartodb-share {

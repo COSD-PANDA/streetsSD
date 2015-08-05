@@ -103,6 +103,8 @@ var viewController = {
       _.each(ops, function(element, index) {
           opsControl[element]($(target).attr('id'))
       });
+      // Remove blank intro if there
+      $('#bottom-bar-content #blank-intro').hide();
       this.bottomBarToggle('open');
     }
   },
