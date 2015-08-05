@@ -4,7 +4,7 @@ var global = {
 
 var viewController = {
   clearState: function() {
-    $('#helper_box, .helper_section').hide();
+    $('#helper_box .helper-box-section').text("");
     var num_sublayers = global.layers[1].getSubLayerCount();
     for (var i = 1; i < num_sublayers; i++)
       global.layers[1].getSubLayer(i).hide();
@@ -25,17 +25,38 @@ var viewController = {
     this.clearState();
     var subLayer = global.layers[1].getSubLayer(subLayerNum);
     subLayer.setSQL(sqlBuilder.getLayerSQL(subLayerID));
+    subLayer.show();
   },
-
-  executeOps: function(ops) {
+  executeOps: function(target) {
     // Check for Ops, Execute as Needed:
     var ops = (target.data('ops')).split(',') || null;
     if (ops) {
+      console.log(ops);
+      _.each(ops, function(element, index) {
+          opsControl[element]($(target).attr('id'))
+      });
+      this.bottomBarToggle('open');
+    }
+  },
+  bottomBarToggle: function(forceAction) {
+    var forceAction = typeof forceAction === 'string' ? forceAction : null;
+    if ((forceAction !== null && forceAction == 'close') ||
+        (forceAction === null && $('#bottom-bar .tab').hasClass('active'))) {
+      console.log('action: ' + forceAction);
+      console.log('close bar');
 
+      $('#bottom-bar').animate({'bottom': -($('#bottom-bar .tab-content').height())});
+      $('#bottom-bar .tab').removeClass('active').text('More Info');
+      $('.sidebar-navbar-collapse').addClass('in');
+    }
+    else {
+      console.log('action: ' + forceAction);
+      console.log('open bar');
+      $('#bottom-bar').animate({'bottom': 0});
+      $('#bottom-bar .tab').addClass('active').text('Less Info');
+      $('.sidebar-navbar-collapse').removeClass('in');
     }
   }
-
-
 }
 
 
@@ -63,213 +84,27 @@ function initSubLayerWatch() {
     // Load Map Info
     var target = $(e.target);
     viewController.loadMapInfo(target);
-    viewController.executeOps();
+    viewController.executeOps(target);
     
+
+    $('.sidebar-toggle').click();
     
-    if (ops && ops != '' && ops != null) {
+  
 
-      var sql = new cartodb.SQL({ user: 'maksim2' });
-      ops = ops.split(',');
-
-      if(_.indexOf(ops, 'calcTDistance') !== -1) {
-        var sqlString = getDistanceSQL(subLayerSQL, null, "spp2.district");
-        console.log(sqlString);
-        sql.execute(sqlString).done(function(data) {
-          $('.tDistance', '#helper_box #' + subLayerID).text(
-            _.sum(data.rows, function(row) { return row.totalmiles; }).toFixed(2)
-          );
-        });
-      }
-
-      if(_.indexOf(ops, 'workByMonth') !== -1) {
-        var month = "COALESCE(to_char(spp2.est_date, 'MM'), to_char(spp2.date_, 'MM'))"
-        var sqlString = getDistanceSQL(subLayerSQL, null, month);
-        sqlString += " ORDER BY " + month;
-        console.log(sqlString);
-        sql.execute(sqlString).done(function(data) {
-          console.log(data)
-          chartData = ['miles'];
-          chartX = ['x']
-          _.each(data.rows, function(element, index) {
-            chartX.push(element.coalesce)
-            chartData.push(d3.round(element.totalmiles, 2));
-          });
-          $("#chart-title-2 h4").text("Work By Month");
-          window.workByMonth = c3.generate({
-            bindto: '#chart-container-2',
-            data: {
-              x: 'x',
-              type: 'bar',
-              columns: [chartX, chartData]
-            },
-            bar: {
-              width: { ratio: 0.5 }
-            },
-            legend: { hide: true },
-            tooltip: {
-              grouped: false,
-              format: {
-                title: function(x) {
-                  console.log(x)
-                  var date = chartX[x+1];
-                  return moment(date, "M").format("MMM") + " Total";
-                  //return moment(x+1, "M-YY").format("MMM 'YY")
-                },
-                name: function (name, ratio, id, index) {
-                  return name.charAt(0).toUpperCase() + name.slice(1) + " paved";
-                }
-              }
-            },
-            axis: {
-              x: {
-                type: 'category', // this needed to load string x value
-                tick: {
-                  culling: false,
-                  format: function(x) { return moment(x+1, "M").format("MMM"); }
-                }
-              },
-              y: {
-                label: {
-                  text: "Miles Paved",
-                  position: "inner-top"
-                }
-              }
-            }
-          });
-        })
-
-      }
-      if (_.indexOf(ops, 'typeBreakdown') !== -1) {
-        var sqlString = getDistanceSQL(subLayerSQL, null, "spp2.activity");
-        console.log(sqlString);
-        sql.execute(sqlString).done(function(data) {
-          chartData = [];
-          _.each(data.rows, function(element, index) {
-            chartData.push([element.activity, element.totalmiles]);
-          });
-          console.log(chartData);
-          $("#chart-title-1 h4").text("Work Type Breakdown");
-          window.typeBreakdown = c3.generate({
-            bindto: '#chart-container-1',
-            data: {
-              type: 'pie',
-              columns: chartData
-            },
-            pie: {
-              /*label: {
-                format: function (value, ratio, id) {
-                   return d3.round(value, 2) + " Miles";
-                }
-              }*/
-            },
-            tooltip: {
-              format: {
-                name: function (name, ratio, id, index) { return name; },
-                value: function (value, ratio, id, index) { return d3.round(value, 2) + " Miles"; }
-              }
-            }
-          });
-          // Force open the bottomBar
-          bottomBarToggle('open');
-        });
-      }
-
-      if (_.indexOf(ops, 'progress') !== -1) {
-        var sqlString = getDistanceSQL(subLayerSQL, null, "spp2.district");
-        sql.execute(sqlString).done(function(data) {
-
-          var tDistance = _.sum(data.rows, function(row) { return row.totalmiles; }).toFixed(2)
-          var chartData = [];
-          chartData.push(["Total Distance", tDistance]);
-          window.progress = c3.generate({
-            bindto: '#chart-container-2',
-            size: { height: 215 },
-            data: {
-              type: 'gauge',
-              columns: chartData
-            },
-            gauge: {
-              max: 1000,
-              width: 20,
-              units: ' miles',
-              label: {
-                format: function(value, ratio) { return value; },
-                show: true // to turn off the min/max labels.
-              }
-            }
-          });
-          bottomBarToggle('open');
-        });
-      }
-    }
-
-    if (_.indexOf(ops, 'ociBreakdown') !== -1) {
-        var sqlString = getOCIBreakdownSQL();
-        console.log(sqlString);
-        sql.execute(sqlString).done(function(data) {
-          chartData = [];
-          _.each(data.rows, function(element, index) {
-            chartData.push([element.color, element.totalmiles]);
-          });
-          console.log(chartData);
-          $("#chart-title-1 h4").text("OCI Breakdown");
-          window.typeBreakdown = c3.generate({
-            bindto: '#chart-container-1',
-            data: {
-              type: 'pie',
-              columns: chartData,
-              colors: {
-                 "r": "#B81609",
-                 "y": "#FFCC00",
-                 "g": "#229A00"
-              }
-            },
-            tooltip: {
-              format: {
-                name: function (name, ratio, id, index) {return name},
-                value: function (value, ratio, id, index) { return d3.round(value, 2) + " Miles"; }
-              }
-            }
-          });
-          // Force open the bottomBar
-          bottomBarToggle('open');
-        });
-      }
-
-
-
-    subLayer.show();
-    $('#helper_box').show();
-    $('#helper_box #' + subLayerID).show();
+    
+    //$('#helper_box').show();
+    //$('#helper_box #' + subLayerID).show();
 
     // Deselect all and select the clicked one
     $workLayers.removeClass('active');
-    $('a', $li).addClass('active');
+    $('a', target).addClass('active');
   });
 }
 
 function initBottomBar() {
-  $('#bottom-bar .tab').click(bottomBarToggle);
+  $('#bottom-bar .tab').click(viewController.bottomBarToggle);
 }
-function bottomBarToggle(forceAction) {
-  var forceAction = typeof forceAction === 'string' ? forceAction : null;
-  if ((forceAction !== null && forceAction == 'close') ||
-      (forceAction === null && $('#bottom-bar .tab').hasClass('active'))) {
-    console.log('action: ' + forceAction);
-    console.log('close bar');
 
-    $('#bottom-bar').animate({'bottom': -($('#bottom-bar .tab-content').height())});
-    $('#bottom-bar .tab').removeClass('active').text('More Info');
-    $('.sidebar-navbar-collapse').addClass('in');
-  }
-  else {
-    console.log('action: ' + forceAction);
-    console.log('open bar');
-    $('#bottom-bar').animate({'bottom': 0});
-    $('#bottom-bar .tab').addClass('active').text('Less Info');
-    $('.sidebar-navbar-collapse').removeClass('in');
-  }
-}
 
 function initIntro(force) {
   var force = force || false;

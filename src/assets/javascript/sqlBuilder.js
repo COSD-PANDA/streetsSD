@@ -108,7 +108,7 @@ var sqlBuilder = {
 		var SQL = "SELECT " + groupBy + ", " +
 		"SUM(ST_Length(ST_AsText(ST_Transform(spp2.the_geom,26915)))/1609.34) as totalMiles " +
 		"FROM spp2 ";
-		SQL = getSQLConditions(sqlKey, SQL);
+		SQL = this.getSQLConditions(sqlKey, SQL);
 		if (extraConditions)
 		  SQL += extraConditions;
 
