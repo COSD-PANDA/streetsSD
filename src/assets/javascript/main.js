@@ -21,10 +21,18 @@ var viewController = {
       vc.initIntro();
       // Force intro
       //initIntro(true);
+      vc.initModalLinks();
      })
     .error(function(err) {
       console.log(err);
     });
+  },
+  initModalLinks: function() {
+      $('a.modal-link').click(function(e) {
+        var modalTarget = "#" + $(this).data('modal-target');
+        console.log(modalTarget);
+        $(modalTarget).modal({ backdrop: false });
+      })
   },
   initSubLayerWatch: function() {
       viewController.clearState();
@@ -37,6 +45,7 @@ var viewController = {
         viewController.loadMapInfo(target);
         viewController.executeOps(target);
       
+        console.log('click trig');
         $('.sidebar-toggle').click();
         
         $workLayers.removeClass('active');
