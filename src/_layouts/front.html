@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  {% include head.html %}
+
+  <body class="map-loading">
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    {% include sidebar.html %}
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <div class="title-section col-md-10">
+            <h3 class="masthead-title">
+              <a href="/" title="Home">{{ site.title }}</a>
+              <small>{{ site.tagline }}</small>
+            </h3>
+          </div>
+          <div class="other-section col-md-2">
+            <h3 class="masthead-title">
+              <a href="/" title="Help"><i class="fa fa-question-circle question-help"></i></a>
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid map-container content">
+        {{ content }}
+        {% include bottom_bar.html %}
+        {% include footer_bar.html %}
+      </div>
+
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    
+    {% include foot.html %}
+
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>{{ site.description }}</p>
+  </div>
+
+  <nav class="sidebar-nav" id="layer-selector">
+    {% for view in site.data.views %}
+      <a class="sidebar-nav-item layer-opt" 
+         href="#"
+         data-sublayer="{{ view.sublayer }}"
+         data-ops="{{ view.ops | join: ',' }}"
+         id="{{ view.id }}">{{ view.title }}</a>
+    {% endfor %}
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; {{ site.time | date: '%Y' }}. All rights reserved.
+    </p>
+  </div>
+</div>
