@@ -473,6 +473,6 @@ function setCookie(cname, cvalue, exdays) {
 }
 
 $(document).ready(function() {
-  main();
+  //main();
 });
 
