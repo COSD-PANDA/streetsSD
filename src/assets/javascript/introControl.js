@@ -11,6 +11,16 @@ function startIntro() {
       position: "right"
     },
     {
+      element: "div.cartodb-zoom",
+      intro: "Use the zoom control to zoom or out of the map.  You can also drag the map to pan.",
+      position: "left"
+    },
+    {
+      element: "#bottom-bar-tab",
+      intro: "When you're looking at a view, extra metrics will come up here.  If you don't want to see them, click on the blue bar and they will dissapear.",
+      position: "top"
+    },
+    {
       element: "i.question-help",
       intro: "Click on the ? to learn more!",
       position: "left"
