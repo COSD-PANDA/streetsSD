@@ -10,6 +10,13 @@ The main SCSS file for everything, yep
 
 /** Assists **/
 
+@mixin merriweather {
+  font-family: "Merriweather",Helvetica, Arial, sans-serif;
+}
+
+@mixin opensans{
+  font-family: "Open Sans",Helvetica, Arial, sans-serif;
+}
 
 @mixin no-side-padding {
   padding-left:0px;
@@ -24,12 +31,33 @@ The main SCSS file for everything, yep
   padding:0px;
 }
 
+/* Classic Pallete */
+/*http://take.ms/7Sv5Z*/
+
+
+/*$p_blue: #0098db;
+$p_green: #00c7b2;
+$p_orange: #ffa02f;
+$p_yellow: #fcd900;
+$p_white: #000000;*/
+
+$p_dark_gray: #37424a;
+$s_light_gray: #d1d4d3;
+$s_gray: #5d676f;
+$s_blue: #005bbb;
+$black: black;
+
 /** End Assists **/
 
 body {
   width: 100%;
   height:100%;
   position: fixed;
+  @include opensans;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @include opensans;
 }
 
 .wrap {
@@ -39,6 +67,12 @@ body {
 
 .masthead {
 	margin-bottom:0px;
+  padding-top: 0.5rem;
+  padding-bottom:0.5rem;
+}
+
+.sidebar-toggle {
+  top: 0.5rem;
 }
 
 .map-container {
