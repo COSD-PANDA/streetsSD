@@ -42,7 +42,7 @@ var loadOpts = function() {
       "calcTDistance": "1",
       "ops": [ "calcTDistance", "typeBreakdown", "workByMonth"],
       "title": "Planned Future Work",
-      "description": "Mayor Faulconer has pledged to pave 1,000 miles of streets over the next 5 years. Future work includes <span class="tDistance"></span> miles of currently planned streets and is updated quarterly. More streets will be added as additional streets are identified to meet the 1,000 mile pledge."
+      "description": "Mayor Faulconer has pledged to pave 1,000 miles of streets over the next 5 years. Future work includes <span class='tDistance'></span> miles of currently planned streets and is updated quarterly. More streets will be added as additional streets are identified to meet the 1,000 mile pledge."
     },
     "oci-2011": {
       "sublayer" : "2",

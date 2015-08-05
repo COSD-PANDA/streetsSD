@@ -8,11 +8,14 @@
     <p>{{ site.description }}</p>
   </div>
 
-  <nav class="sidebar-nav">
+  <nav class="sidebar-nav" id="layer-selector">
     {% for view in site.data.views %}
-      <a class="sidebar-nav-item" href="#">{{ view.title }}</a>
+      <a class="sidebar-nav-item layer-opt" 
+         href="#"
+         data-sublayer="{{ view.sublayer }}"
+         data-ops="{{ view.ops | join: ',' }}"
+         id="{{ view.id }}">{{ view.title }}</a>
     {% endfor %}
-
   </nav>
 
   <div class="sidebar-item">

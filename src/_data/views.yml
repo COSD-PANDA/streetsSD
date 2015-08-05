@@ -1,4 +1,5 @@
 - all-work: 
+  id: "all-work"
   sublayer: "1"
   sql: "1"
   title: "All Work"
@@ -7,7 +8,8 @@
     - "workByMonth"
   description: "All work that occured since Jan 1, 2012 to date, updated quarterly"
 
-- work-1k-pledge: 
+- work-1k-pledge:
+  id: "work-1k-pledge" 
   sublayer: "1"
   sql: "1"
   title: "Work Done For 1k Pledge"
@@ -16,7 +18,8 @@
     - "progress"
   description: "All work that occured since Jul 1, 2015."
 
-- work-fy-2013: 
+- work-fy-2013:
+  id: "work-fy-2013" 
   sublayer: "1"
   sql: "1"
   title: "Work Done in FY-2013"
@@ -25,7 +28,8 @@
     - "workByMonth"
   description: "All work that occured since July 1, 2012 until June 31, 2013."
 
-- work-fy-2014: 
+- work-fy-2014:
+  id: "work-fy-2014" 
   sublayer: "1"
   sql: "1"
   title: "Work Done in FY-2014"
@@ -34,7 +38,8 @@
     - "workByMonth"
   description: "All work that occured since July 1, 2013 until June 31, 2014."
 
-- work-fy-2015: 
+- work-fy-2015:
+  id: "work-fy-2015" 
   sublayer: "1"
   sql: "1"
   title: "Work Done in FY-2015"
@@ -43,7 +48,8 @@
     - "workByMonth"
   description: "All work that occured since July 1, 2014 until June 30, 2015."
 
-- future-work: 
+- future-work:
+  id: "future-work" 
   sublayer: "1"
   sql: "1"
   calcTDistance: "1"
@@ -54,7 +60,8 @@
   title: "Planned Future Work"
   description: "Mayor Faulconer has pledged to pave 1,000 miles of streets over the next 5 years. Future work includes <span class='tDistance'></span> miles of currently planned streets and is updated quarterly. More streets will be added as additional streets are identified to meet the 1,000 mile pledge."
 
-- oci-2011: 
+- oci-2011:
+  id: "oci-2011" 
   sublayer: "2"
   sql: "0"
   ops: 

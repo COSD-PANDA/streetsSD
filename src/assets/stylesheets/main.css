@@ -130,18 +130,6 @@ div.cartodb-legend-stack {
 }
 
 
-.no-side-padding {
-  padding-left:0px;
-  padding-right:0px;
-}
-.no-side-margin {
-  margin-left:0px;
-  margin-right:0px;
-}
-
-.no-padding {
-  padding:0px;
-}
 
 .navbar.side-navbar {
   margin-bottom:0px;
