@@ -6053,3 +6053,10 @@ div.cartodb-legend-stack {
   top: 20px;
   bottom: auto;
   right: 67px; }
+
+/* Modal */
+.modal.fade.in {
+  /*background-color: $s_light_gray;*/ }
+
+.modal {
+  modal-content-border-radius: 0px; }

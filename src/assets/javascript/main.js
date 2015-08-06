@@ -46,7 +46,7 @@ var viewController = {
         viewController.executeOps(target);
       
         console.log('click trig');
-        $('.sidebar-toggle').click();
+        $('#sidebar-checkbox').prop("checked", false);
         
         $workLayers.removeClass('active');
         $('a', target).addClass('active');
@@ -75,7 +75,7 @@ var viewController = {
   },
   setCookie: function(cname, cvalue, exdays) {
       var d = new Date();
-      d.setTime(d.getTime() + (exdays*24*60*60*1000));
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
       var expires = "expires="+d.toUTCString();
       document.cookie = cname + "=" + cvalue + "; " + expires;
   },
@@ -94,6 +94,7 @@ var viewController = {
   },
 
   loadMapInfo: function(target) {
+    // TODO -- there's a bug here for showing OCI.
     var subLayerNum = target.attr('data-sublayer');
     //var subLayerSQL = $target.attr('data-sql') || null;
     //var calcTDistance = $li.attr('data-calctdistance') || null;
