@@ -96,12 +96,12 @@ var viewController = {
   loadMapInfo: function(target) {
     // TODO -- there's a bug here for showing OCI.
     var subLayerNum = target.attr('data-sublayer');
-    //var subLayerSQL = $target.attr('data-sql') || null;
-    //var calcTDistance = $li.attr('data-calctdistance') || null;
+    var setSQL = target.attr('data-sql');
     var subLayerID = target.attr('id');
     this.clearState();
     var subLayer = global.layers[1].getSubLayer(subLayerNum);
-    subLayer.setSQL(sqlBuilder.getLayerSQL(subLayerID));
+    if (setSQL === 1)
+      subLayer.setSQL(sqlBuilder.getLayerSQL(subLayerID));
     subLayer.show();
     $('#helper_box #' +  subLayerID + ".helper_section").show();
   },

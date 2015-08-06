@@ -91,7 +91,7 @@ var sqlBuilder = {
 			  SQL += "AND (spp2.date_::date <= '2015-06-30') ";
 			  break;
 
-			  case 'future-work':
+			case 'future-work':
 			  // Bring in work completed after the current quarter.
 			  SQL += "WHERE (spp2.date_ >= '" + lastQuarter.end + "') ";
 
@@ -99,6 +99,9 @@ var sqlBuilder = {
 			  SQL += "OR (spp2.est_date >= '" + lastQuarter.end + "') ";
 
 			  break;
+
+			default:
+				throw new Error("Invalid Query Key");
         }
   		// Filter out activity = null.
   		SQL += "AND (spp2.activity is not null) ";
