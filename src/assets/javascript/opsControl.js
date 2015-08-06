@@ -17,8 +17,9 @@ var opsControl = {
         var oc = this;
         console.log(sqlString);
         this.sql().execute(sqlString).done(function(data) {
-            console.log(data);
-            oc.display.workByMonth(subLayerID, data)
+            oc.display.workByMonth(subLayerID, data);
+            oc.display.totalMiles(subLayerID, data);
+            oc.display.avgMilesPerMonth(subLayerID, data);
         });
     },
     typeBreakdown: function(subLayerID) {
@@ -53,7 +54,6 @@ var opsControl = {
             );
         },
         workByMonth: function(subLayerID, data) {
-            console.log(data)
             chartData = ['miles'];
             chartX = ['x']
             _.each(data.rows, function(element, index) {
@@ -155,8 +155,25 @@ var opsControl = {
                 }
             });
         },
-        totalmiles: function(subLayerID, data) {
-            
+        totalMiles: function(subLayerID, data) {
+            totalMiles = _.sum(data.rows, function(row) {
+                console.log(row);
+                return row.totalmiles;
+            });
+            totalMiles = d3.round(totalMiles, 2);
+            targetBox = $('#helper_box #bignum-left');
+            $('.data-value', targetBox).text(totalMiles);
+            $('.data-desc', targetBox).text("Total Miles");
+        },
+        avgMilesPerMonth: function(subLayerID, data) {
+            totalMiles = _.sum(data.rows, function(row) {
+                console.log(row);
+                return row.totalmiles;
+            });
+            avgMilesPerMonth = d3.round((totalMiles/ data.rows.length), 2);
+            targetBox = $('#helper_box #bignum-right');
+            $('.data-value', targetBox).text(avgMilesPerMonth);
+            $('.data-desc', targetBox).text("Avg Miles Per Month");
         }
     }
 }
