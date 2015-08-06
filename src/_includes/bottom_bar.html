@@ -5,13 +5,34 @@
             <div id="blank-intro" class="col-md-12">
                 <h3> Nothing To See Here Yet!  Pick A Layer On the Left First! </h3>
             </div>
-            <div id="helper_box" class="col-md-4">
-                <div class="row">
-                    <div id="helper_box_top" class="col-md-12 helper-box-section"></div>
+            <div id="helper_box" class="col-md-4 helper-box">
+                <div class="row helper-box-section-row">
+                    
+
+                    
+                        <div class="col-md-6 helper-box-subsection left">
+                            <div class="subsection-inner">
+                            
+                                <h5 class="data-value">MyNumber</h5>
+                                <div class="data-desc">Data</div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-6 helper-box-subsection right">
+                            <div class="subsection-inner">
+                                <h5 class="data-value">TestR</h5>
+                                <div class="data-desc">DataR</div>
+                            </div>
+                        </div>
+                    
+
+
                 </div>
-                <div class="row">
-                    <div id="helper_box_bottom" class="col-md-12">
-                        {% include helper_boxes/all.html %}
+                <div class="row helper-box-section-row">
+                    <div id="helper_box_bottom" class="col-md-12 helper-box-subsection">
+                        <div class="subsection-inner">
+                            {% include helper_boxes/all.html %}
+                        </div>
                     </div>
                 </div>
             </div>

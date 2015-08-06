@@ -154,6 +154,9 @@ var opsControl = {
                   }
                 }
             });
+        },
+        totalmiles: function(subLayerID, data) {
+            
         }
     }
 }

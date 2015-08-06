@@ -5887,6 +5887,7 @@ a.pagination-item:hover {
   color: #8f5536; }
 
 /** Assists **/
+/* Mixin */
 /* Classic Pallete */
 /*http://take.ms/7Sv5Z*/
 /*$p_blue: #0098db;
@@ -5967,7 +5968,7 @@ img {
 
 #bottom-bar {
   background: transparent;
-  opacity: 0.8;
+  opacity: 0.9;
   height: 310px;
   width: 100%;
   z-index: 999999;
@@ -5986,28 +5987,58 @@ img {
     line-height: 30px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+    font-family: "Open Sans",Helvetica, Arial, sans-serif;
     color: white; }
   #bottom-bar #blank-intro {
     text-align: center; }
     #bottom-bar #blank-intro h3 {
       text-align: center; }
 
-#helper_box {
+.helper-box, .chart-box {
   margin-top: 0px;
   background: whitesmoke;
   position: relative;
   opacity: 1;
   padding: 0;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 0px;
+  padding-right: 0px;
   padding-bottom: 0px;
-  padding-top: 10px;
-  font-family: "Helvetica", Arial;
+  padding-top: 0px;
   font-size: 13px;
   color: #444;
   cursor: auto;
-  height: 250px; }
+  height: 250px;
+  font-family: "Open Sans",Helvetica, Arial, sans-serif; }
+
+.helper-box-section-row {
+  height: initial; }
+
+.helper-box-subsection {
+  text-align: center;
+  color: white;
+  height: 100%; }
+  .helper-box-subsection h5 {
+    margin: 0px;
+    padding: 0px;
+    color: white; }
+  .helper-box-subsection .data-value, .helper-box-subsection .data-desc {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    top: 38%; }
+  .helper-box-subsection .subsection-inner {
+    background: #00549f;
+    height: 80%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-left: 3%;
+    padding-right: 3%;
+    margin-top: 5%;
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-bottom: 5%; }
 
 .chart-container {
   height: 218px !important;
@@ -6022,23 +6053,8 @@ img {
   padding-bottom: 0px;
   margin-bottom: 0px; }
 
-.chart-box {
-  margin-top: 0px;
-  background: whitesmoke;
-  position: relative;
-  opacity: 1;
-  padding: 0;
-  padding-left: 0px;
-  padding-right: 0px;
-  padding-bottom: 0px;
-  padding-top: 0px;
-  font-family: "Helvetica", Arial;
-  font-size: 13px;
-  color: #444;
-  cursor: auto;
-  height: 250px; }
-  .chart-box h4 {
-    margin-top: 7px; }
+.chart-box h4 {
+  margin-top: 7px; }
 
 /* CartoDB Specific */
 div.cartodb-share {
@@ -6047,12 +6063,14 @@ div.cartodb-share {
 div.cartodb-zoom {
   float: right;
   clear: right;
-  margin: 20px 20px 0 0; }
+  margin: 20px 20px 0 0;
+  opacity: 0.9; }
 
 div.cartodb-legend-stack {
   top: 20px;
   bottom: auto;
-  right: 67px; }
+  right: 67px;
+  opacity: 0.9; }
 
 /* Modal */
 .modal.fade.in {
@@ -6060,3 +6078,9 @@ div.cartodb-legend-stack {
 
 .modal {
   modal-content-border-radius: 0px; }
+
+/* make sidebar nav vertical */
+@media (min-width: 992px) {
+  .helper-box-section-row {
+    height: 50%; } }
+
