@@ -286,6 +286,7 @@ div.cartodb-legend-stack {
 div.cartodb-popup-content-wrapper {
   background: $s_cool_gray !important;
   opacity: 0.9;
+  @include opensans;
   h4 {
     @include opensans;
     color: $p_blue;

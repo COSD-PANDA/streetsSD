@@ -6081,7 +6081,8 @@ div.cartodb-legend-stack {
 
 div.cartodb-popup-content-wrapper {
   background: #e0e1dd !important;
-  opacity: 0.9; }
+  opacity: 0.9;
+  font-family: "Open Sans",Helvetica, Arial, sans-serif; }
   div.cartodb-popup-content-wrapper h4 {
     font-family: "Open Sans",Helvetica, Arial, sans-serif;
     color: #0098db; }
