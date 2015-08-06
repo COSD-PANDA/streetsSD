@@ -2,7 +2,7 @@
 # Can be used in your theme by calling 'site.title' and so on
 title: SDStreets
 description: 
-tagline: "City of San Diego Street Work Explorer."
+tagline: "alpha"
 url: localhost:4000
 
 # Used so Jekyll outputs the site correctly so Gulp can do what it wants

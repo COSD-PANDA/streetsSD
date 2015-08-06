@@ -80,7 +80,7 @@ var opsControl = {
                   //return moment(x+1, "M-YY").format("MMM 'YY")
                 },
                 name: function (name, ratio, id, index) {
-                  return name.charAt(0).toUpperCase() + name.slice(1) + " paved";
+                  return name.charAt(0).toUpperCase() + name.slice(1);
                 }
               }
             },
@@ -93,7 +93,7 @@ var opsControl = {
                 }
               },
               y: {
-                label: { text: "Miles Paved", position: "inner-top" }
+                label: { text: "Miles", position: "inner-top" }
               }
             }
           });
