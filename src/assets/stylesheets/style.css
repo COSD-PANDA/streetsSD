@@ -5890,11 +5890,6 @@ a.pagination-item:hover {
 /* Mixin */
 /* Classic Pallete */
 /*http://take.ms/7Sv5Z*/
-/*$p_blue: #0098db;
-$p_green: #00c7b2;
-$p_orange: #ffa02f;
-$p_yellow: #fcd900;
-$p_white: #000000;*/
 /** End Assists **/
 body {
   width: 100%;
@@ -5912,7 +5907,15 @@ h1, h2, h3, h4, h5, h6 {
 .masthead {
   margin-bottom: 0px;
   padding-top: 0.5rem;
-  padding-bottom: 0.5rem; }
+  padding-bottom: 0.5rem;
+  opacity: 0.9;
+  background: #d1d4d3; }
+
+.masthead-title small {
+  color: #1b242a; }
+
+.masthead-title a {
+  color: #5d676f; }
 
 .sidebar-toggle {
   top: 0.5rem; }
@@ -5978,11 +5981,11 @@ img {
   padding-right: 0px; }
   #bottom-bar .tab-content {
     height: 250px;
-    background: whitesmoke; }
+    background: #d1d4d3; }
   #bottom-bar .tab {
     cursor: pointer;
     height: 30px;
-    background: #356AA0;
+    background: #0098db;
     text-align: center;
     line-height: 30px;
     border-top-left-radius: 20px;
@@ -6029,7 +6032,7 @@ img {
     transform: translateY(-50%);
     top: 38%; }
   .helper-box-subsection .subsection-inner {
-    background: #00549f;
+    background: #0098db;
     height: 80%;
     padding-top: 3%;
     padding-bottom: 3%;
@@ -6070,7 +6073,8 @@ div.cartodb-legend-stack {
   top: 20px;
   bottom: auto;
   right: 67px;
-  opacity: 0.9; }
+  opacity: 0.9;
+  background: #d1d4d3; }
 
 /* Modal */
 .modal.fade.in {

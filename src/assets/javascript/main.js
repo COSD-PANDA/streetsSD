@@ -82,6 +82,7 @@ var viewController = {
   clearState: function() {
     $('#helper_box').hide();
     $('#helper_box .helper_section').hide();
+    $('#helper_box .bignums').hide();
     var num_sublayers = global.layers[1].getSubLayerCount();
     for (var i = 1; i < num_sublayers; i++)
       global.layers[1].getSubLayer(i).hide();
@@ -101,7 +102,6 @@ var viewController = {
     var subLayerID = target.attr('id');
     this.clearState();
     var subLayer = global.layers[1].getSubLayer(subLayerNum);
-    console.log(sqlBuilder.getLayerSQL(subLayerID))
     if (setSQL === 1)
       subLayer.setSQL(sqlBuilder.getLayerSQL(subLayerID));
     subLayer.show();

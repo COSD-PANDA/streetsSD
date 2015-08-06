@@ -68,6 +68,7 @@ var opsControl = {
               type: 'bar',
               columns: [chartX, chartData]
             },
+            color: { pattern: ['#0098db'] },
             bar: { width: { ratio: 0.5 } },
             legend: { hide: true },
             tooltip: {
@@ -102,10 +103,15 @@ var opsControl = {
             _.each(data.rows, function(element, index) {
                 chartData.push([element.activity, element.totalmiles]);
             });
+            console.log(chartData);
             $("#chart-title-1 h4").text("Work Type Breakdown");
             window.typeBreakdown = c3.generate({
                 bindto: '#chart-container-1',
-                data: { type: 'pie', columns: chartData },
+                data: { 
+                    type: 'pie', 
+                    columns: chartData,
+                    colors: { "Slurry Seal": "#0098db", "Asphalt Resurfacing": "#ffa02f", "Concrete Street": "#fcd900" }
+                },
                 tooltip: {
                   format: {
                     name: function (name, ratio, id, index) { return name; },
@@ -157,23 +163,23 @@ var opsControl = {
         },
         totalMiles: function(subLayerID, data) {
             totalMiles = _.sum(data.rows, function(row) {
-                console.log(row);
                 return row.totalmiles;
             });
             totalMiles = d3.round(totalMiles, 2);
             targetBox = $('#helper_box #bignum-left');
             $('.data-value', targetBox).text(totalMiles);
             $('.data-desc', targetBox).text("Total Miles");
+            $('#helper_box .bignums').show();
         },
         avgMilesPerMonth: function(subLayerID, data) {
             totalMiles = _.sum(data.rows, function(row) {
-                console.log(row);
                 return row.totalmiles;
             });
             avgMilesPerMonth = d3.round((totalMiles/ data.rows.length), 2);
             targetBox = $('#helper_box #bignum-right');
             $('.data-value', targetBox).text(avgMilesPerMonth);
             $('.data-desc', targetBox).text("Avg Miles Per Month");
+            $('#helper_box .bignums').show();
         }
     }
 }

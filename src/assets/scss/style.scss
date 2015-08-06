@@ -44,11 +44,11 @@ The main SCSS file for everything, yep
 /*http://take.ms/7Sv5Z*/
 
 
-/*$p_blue: #0098db;
+$p_blue: #0098db;
 $p_green: #00c7b2;
 $p_orange: #ffa02f;
 $p_yellow: #fcd900;
-$p_white: #000000;*/
+$p_white: #000000;
 
 $p_dark_gray: #37424a;
 $s_light_gray: #d1d4d3;
@@ -56,6 +56,9 @@ $s_gray: #5d676f;
 $s_blue: #005bbb;
 $s_dark_blue: #00549f;
 $black: black;
+$s_black: #1b242a;
+$s_silver: #5d676f;
+$s_cool_gray: #eoe1dd;
 
 /** End Assists **/
 
@@ -79,10 +82,21 @@ h1, h2, h3, h4, h5, h6 {
 	margin-bottom:0px;
   padding-top: 0.5rem;
   padding-bottom:0.5rem;
+  opacity: 0.9;
+  background: $s_light_gray;
+}
+
+.masthead-title small {
+  color: $s_black;
+}
+
+.masthead-title a {
+  color: $s_silver;
 }
 
 .sidebar-toggle {
   top: 0.5rem;
+  background: $s_cool_gray;
 }
 
 .map-container {
@@ -155,12 +169,12 @@ img {
   @include no-side-padding;
   .tab-content {
     height:250px;
-    background: whitesmoke;
+    background: $s_light_gray;
   }
   .tab {
     cursor:pointer;
     height:30px;
-    background:#356AA0;
+    background:$p_blue;
     text-align: center;
     line-height: 30px;
     border-top-left-radius: 20px;
@@ -211,7 +225,7 @@ img {
     top:38%;
   }
   .subsection-inner {
-    background: $s_dark_blue;
+    background: $p_blue;
     height: 80%;
     padding-top: 3%;
     padding-bottom:3%;
@@ -263,6 +277,7 @@ div.cartodb-legend-stack {
   bottom:auto;
   right: 67px;
   opacity: 0.9;
+  background: $s_light_gray;
 }
 
 /* Modal */
