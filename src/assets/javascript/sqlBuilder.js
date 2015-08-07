@@ -1,20 +1,38 @@
 var sqlBuilder = {
 
 	getLayerSQL: function(sqlKey) {
-	  var SQL = "SELECT spp2.cartodb_id," +
-	    "spp2.the_geom_webmercator, " +
-	    "spp2.activity, " +
-	    "spp2.est_date, " +
-	    "spp2.date_, " +
-	    "COALESCE(to_char(spp2.est_date, 'Month YYYY'), to_char(spp2.date_, 'Month YYYY')) AS date_text," +
-	    "spp2.shape_len, " +
-	    "spp2.rd20full, " +
-	    "spp2.xstrt1, " +
-	    "spp2.xstrt2, "+
-	    "spp2.district "+
-	    "FROM spp2 ";
-
-	  return this.getSQLConditions(sqlKey, SQL);
+		var SQL = "";
+		if (sqlKey == 'oci-2011') {
+			SQL += "SELECT oci_2011.cartodb_id, " +
+			"oci_2011.the_geom, " +
+			"oci_2011.the_geom_webmercator, " +
+			"to_char(oci_2011.inspection, 'Month YYYY') AS inspection_date, " +
+			"oci_2011.oci, " +
+			"oci_2011.rd20full, " +
+			"oci_2011.xstrt1, " +
+			"oci_2011.xstrt2, " +
+			"ST_Length(ST_AsText(ST_Transform(oci_2011.the_geom,26915)))/1609.34 as totalMiles, " +
+			"CASE WHEN oci_2011.oci <= 33.333 THEN 'Poor' " +
+			"WHEN oci_2011.oci <= 66.666 THEN 'Fair' " +
+			"ELSE 'Good' " +
+			"END AS oci_condition " +
+			"FROM oci_2011 ";
+	  	}
+	    else {
+		    SQL += "SELECT spp2.cartodb_id," +
+		    "spp2.the_geom_webmercator, " +
+		    "spp2.activity, " +
+		    "spp2.est_date, " +
+		    "spp2.date_, " +
+		    "COALESCE(to_char(spp2.est_date, 'Month YYYY'), to_char(spp2.date_, 'Month YYYY')) AS date_text," +
+		    "spp2.shape_len, " +
+		    "spp2.rd20full, " +
+		    "spp2.xstrt1, " +
+		    "spp2.xstrt2, "+
+		    "spp2.district "+
+		    "FROM spp2 ";
+		}
+	    return this.getSQLConditions(sqlKey, SQL);
 	},
 	getLastQuarter: function(date) {
 		var date = date || new Date();
@@ -38,6 +56,8 @@ var sqlBuilder = {
 			  SQL += "AND (spp2.date_::date >= '2012-01-01' OR spp2.est_date::date >= '2012-01-01') ";
 			  // Impose Quarter Limit on Work Done for Accuracy / Consistency.
 			  SQL += "AND (spp2.date_::date <= '" + lastQuarter.end + "') ";
+ 			  // Filter for Null Activities.
+			  SQL += "AND (spp2.activity is not null) ";
 			  break;
 
 			case 'all-work-since-mayor':
@@ -47,6 +67,8 @@ var sqlBuilder = {
 			  SQL += "AND (spp2.date_::date >= '2014-03-03') ";
 			  // Impose Quarter Limit on Work Done for Accuracy / Consistency.
 			  SQL += "AND (spp2.date_::date <= '" + lastQuarter.end +"') ";
+			  // Filter for Null Activities.
+			  SQL += "AND (spp2.activity is not null) ";
 			  break;
 
 			case 'work-1k-pledge':
@@ -55,7 +77,9 @@ var sqlBuilder = {
 			  // Activity Column is not NULL.
 			  SQL += "AND (spp2.activity is not null) ";
 			  // Work Done Date is after Jul 1, 2015.
-			  SQL += "AND (spp2.date_::date >= '2015-07-01') ";
+			  SQL += "AND (spp2.date_::date >= '2015-01-01') ";
+			  // Filter for Null Activities.
+			  SQL += "AND (spp2.activity is not null) ";
 			  break;
 
 			case 'work-fy-2013':
@@ -67,6 +91,9 @@ var sqlBuilder = {
 
 			  // Work Done Date is before June 30, 2013.
 			  SQL += "AND (spp2.date_::date <= '2013-06-30') ";
+
+			  // Filter for Null Activities.
+			  SQL += "AND (spp2.activity is not null) ";
 			  break;
 
 			case 'work-fy-2014':
@@ -78,6 +105,9 @@ var sqlBuilder = {
 
 			  // Work Done Date is before June 30, 2014.
 			  SQL += "AND (spp2.date_::date <= '2014-06-30') ";
+
+			  // Filter for Null Activities.
+			  SQL += "AND (spp2.activity is not null) ";
 			  break;
 
 			case 'work-fy-2015':
@@ -89,6 +119,9 @@ var sqlBuilder = {
 
 			  // Work Done Date is before June 30, 2015.
 			  SQL += "AND (spp2.date_::date <= '2015-06-30') ";
+
+			  // Filter for Null Activities.
+			  SQL += "AND (spp2.activity is not null) ";
 			  break;
 
 			case 'future-work':
@@ -98,13 +131,21 @@ var sqlBuilder = {
 			  // Bring in all work with an estimated date.
 			  SQL += "OR (spp2.est_date >= '" + lastQuarter.end + "') ";
 
+			  // Filter for Null Activities.
+			  SQL += "AND (spp2.activity is not null) ";
+
 			  break;
+
+			case 'oci-2011':
+				SQL += "WHERE oci_2011.inspection is not null ";
+				SQL += "AND oci_2011.oci > 0 ";
+				SQL += "AND oci_2011.inspection::date <= '2012-01-01'";
+
+				break;
 
 			default:
 				throw new Error("Invalid Query Key");
         }
-  		// Filter out activity = null.
-  		SQL += "AND (spp2.activity is not null) ";
   		return SQL;
 	},
 	getDistanceSQL: function(sqlKey, extraConditions, groupBy) {
@@ -132,9 +173,9 @@ var sqlBuilder = {
 	getOCIBreakdownSQL: function() {
 		var SQL = "SELECT " +
 		"SUM(ST_Length(ST_AsText(ST_Transform(spp2.the_geom,26915)))/1609.34) as totalMiles, " +
-		"CASE WHEN spp2.oci <= 33.333 THEN 'OCI: 0 to 33' " +
-		     "WHEN spp2.oci <= 66.666 THEN 'OCI: 33 to 66' " +
-		     "ELSE 'OCI: 66 to 100' " +
+		"CASE WHEN spp2.oci <= 33.333 THEN 'Poor' " +
+		     "WHEN spp2.oci <= 66.666 THEN 'Fair' " +
+		     "ELSE 'Good' " +
 		     "END " +
 		     "AS color " +
 		"FROM spp2 " +

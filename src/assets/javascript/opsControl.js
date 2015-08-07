@@ -18,8 +18,7 @@ var opsControl = {
         console.log(sqlString);
         this.sql().execute(sqlString).done(function(data) {
             oc.display.workByMonth(subLayerID, data);
-            oc.display.totalMiles(subLayerID, data);
-            oc.display.avgMilesPerMonth(subLayerID, data);
+            oc.bigNumbers(subLayerID, data);
         });
     },
     typeBreakdown: function(subLayerID) {
@@ -45,6 +44,23 @@ var opsControl = {
         this.sql().execute(sqlString).done(function(data) {
             oc.display.ociBreakdown(subLayerID, data);
         })
+    },
+    bigNumbers: function(subLayerID, data) {
+        if (data) {
+            this.display.totalMiles(subLayerID, data);
+            this.display.avgMilesPerMonth(subLayerID, data);
+        }
+        else {
+            var month = "COALESCE(to_char(spp2.est_date, 'MM'), to_char(spp2.date_, 'MM'))"
+            var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, month);
+            sqlString += " ORDER BY " + month;
+            var oc = this;
+            console.log(sqlString);
+            this.sql().execute(sqlString).done(function(data) {
+                oc.bigNumbers(subLayerID, data);
+            });
+        }
+        
     },
 
     display: {
@@ -151,7 +167,7 @@ var opsControl = {
                 data: {
                   type: 'pie',
                   columns: chartData,
-                  colors: { "r": "#B81609", "y": "#FFCC00", "g": "#229A00" }
+                  colors: { "Poor": "#9c6114", "Fair": "#00c7b2", "Good": "#ffa02f" }
                 },
                 tooltip: {
                   format: {

@@ -12,6 +12,8 @@ var viewController = {
       zoom: 11
     })
     .done(function(vis, layers) {
+      console.log(vis);
+      console.log(layers);
       $('body').removeClass('.map-loading').addClass('map-loaded');
       global.vis = vis;
       global.layers = layers;
@@ -102,6 +104,7 @@ var viewController = {
     var subLayerID = target.attr('id');
     this.clearState();
     var subLayer = global.layers[1].getSubLayer(subLayerNum);
+    console.log(subLayer);
     if (setSQL == 1) {
       var query = sqlBuilder.getLayerSQL(subLayerID);
       console.log(query);
