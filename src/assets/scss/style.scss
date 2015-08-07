@@ -1,4 +1,4 @@
-/* 
+/*
 The main SCSS file for everything, yep
 */
 @import "bootstrap";
@@ -60,6 +60,9 @@ $s_black: #1b242a;
 $s_silver: #5d676f;
 $s_cool_gray: #e0e1dd;
 
+
+$gray: $s_cool_gray;
+
 /** End Assists **/
 
 body {
@@ -83,7 +86,7 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 0.5rem;
   padding-bottom:0.5rem;
   opacity: 0.9;
-  background: $s_light_gray;
+  background: $gray;
 }
 
 .masthead-title small {
@@ -120,7 +123,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #map {
   height:100%;
-  width: 100%; 
+  width: 100%;
   background: black;
   padding:0px;
   position: fixed;
@@ -177,7 +180,7 @@ img {
   @include no-side-padding;
   .tab-content {
     height:250px;
-    background: $s_light_gray;
+    background: $gray;
   }
   .tab {
     cursor:pointer;
@@ -201,7 +204,7 @@ img {
 
 .helper-box, .chart-box {
   margin-top: 0px;
-  background: $s_light_gray;
+  background: $gray;
   position: relative;
   opacity: 1;
   padding: 0;
@@ -322,7 +325,7 @@ div.cartodb-popup-content-wrapper {
   }
 }
 @media (min-width: 1200px) {
-  
+
 }
 
 

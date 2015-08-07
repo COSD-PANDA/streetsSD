@@ -1,4 +1,4 @@
-/* 
+/*
 The main SCSS file for everything, yep
 */
 /*!
@@ -5909,7 +5909,7 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   opacity: 0.9;
-  background: #d1d4d3; }
+  background: #e0e1dd; }
 
 .masthead-title small {
   color: #1b242a; }
@@ -5988,7 +5988,7 @@ img {
   padding-right: 0px; }
   #bottom-bar .tab-content {
     height: 250px;
-    background: #d1d4d3; }
+    background: #e0e1dd; }
   #bottom-bar .tab {
     cursor: pointer;
     height: 30px;
@@ -6006,7 +6006,7 @@ img {
 
 .helper-box, .chart-box {
   margin-top: 0px;
-  background: #d1d4d3;
+  background: #e0e1dd;
   position: relative;
   opacity: 1;
   padding: 0;

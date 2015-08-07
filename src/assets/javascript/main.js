@@ -44,10 +44,10 @@ var viewController = {
         var target = $(e.target);
         viewController.loadMapInfo(target);
         viewController.executeOps(target);
-      
+
         console.log('click trig');
         $('#sidebar-checkbox').prop("checked", false);
-        
+
         $workLayers.removeClass('active');
         $('a', target).addClass('active');
       });
@@ -102,8 +102,11 @@ var viewController = {
     var subLayerID = target.attr('id');
     this.clearState();
     var subLayer = global.layers[1].getSubLayer(subLayerNum);
-    if (setSQL === 1)
-      subLayer.setSQL(sqlBuilder.getLayerSQL(subLayerID));
+    if (setSQL == 1) {
+      var query = sqlBuilder.getLayerSQL(subLayerID);
+      console.log(query);
+      subLayer.setSQL(query);
+    }
     subLayer.show();
     $('#helper_box #' +  subLayerID + ".helper_section").show();
     $('#helper_box').show();
