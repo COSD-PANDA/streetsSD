@@ -5924,6 +5924,9 @@ h1, h2, h3, h4, h5, h6 {
 #sidebar.sidebar {
   background: #1b242a; }
 
+#sidebar .social-links {
+  text-align: center; }
+
 .map-container {
   margin-left: 0px;
   margin-right: 0px;

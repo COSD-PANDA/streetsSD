@@ -5,7 +5,7 @@
 <!-- Toggleable sidebar -->
 <div class="sidebar" id="sidebar">
   <div class="sidebar-item">
-    <p>{{ site.description }}</p>
+    <img src="/assets/images/sdlogo.png" width="100%"/>
   </div>
 
   <nav class="sidebar-nav" id="layer-selector">
@@ -17,11 +17,13 @@
          data-sql="{{ view.sql }}"
          id="{{ view.id }}">{{ view.title }}</a>
     {% endfor %}
-  </nav>
+  </nav>  
 
   <div class="sidebar-item">
-    <p>
-      &copy; {{ site.time | date: '%Y' }}. All rights reserved.
-    </p>
+      SDStreets is currently in Alpha phase. That means it's unstable and could crash as you use it.  However, we would like your help!  If you encounter a bug, an issue, or even want to see something additional, <a class="typeform-share link" href="https://maksimpecherskiy.typeform.com/to/y398Mh" data-mode="1" target="_blank">let us know!</a>.  We would also love it if you helped out on the <a href="https://github.com/MrMaksimize/sdinframap" target="_blank"> Github Repo! </a>
+  </div>
+  <div class="sidebar-item social-links">
+      <a href="https://github.com/mrmaksimize/sdinframap" target="_blank" title="Github"><i class="fa fa-2x fa-github"></i></a>
+      <a class="typeform-share link" href="https://maksimpecherskiy.typeform.com/to/y398Mh" data-mode="1" target="_blank"><i class="fa fa-2x fa-envelope-o" title="E-Mail"></i></a>
   </div>
 </div>
