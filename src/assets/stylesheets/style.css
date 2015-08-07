@@ -5909,7 +5909,7 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   opacity: 0.9;
-  background: #e0e1dd; }
+  background: white; }
 
 .masthead-title small {
   color: #1b242a; }
@@ -5988,7 +5988,7 @@ img {
   padding-right: 0px; }
   #bottom-bar .tab-content {
     height: 250px;
-    background: #e0e1dd; }
+    background: white; }
   #bottom-bar .tab {
     cursor: pointer;
     height: 30px;
@@ -6006,7 +6006,7 @@ img {
 
 .helper-box, .chart-box {
   margin-top: 0px;
-  background: #e0e1dd;
+  background: white;
   position: relative;
   opacity: 1;
   padding: 0;
@@ -6083,8 +6083,6 @@ div.cartodb-legend-stack {
   opacity: 0.9; }
 
 div.cartodb-popup-content-wrapper {
-  background: #e0e1dd !important;
-  opacity: 0.9;
   font-family: "Open Sans",Helvetica, Arial, sans-serif; }
   div.cartodb-popup-content-wrapper h4 {
     font-family: "Open Sans",Helvetica, Arial, sans-serif;

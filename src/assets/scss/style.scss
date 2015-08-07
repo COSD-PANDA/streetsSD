@@ -61,7 +61,7 @@ $s_silver: #5d676f;
 $s_cool_gray: #e0e1dd;
 
 
-$gray: $s_cool_gray;
+$gray: white;
 
 /** End Assists **/
 
@@ -291,8 +291,6 @@ div.cartodb-legend-stack {
 }
 
 div.cartodb-popup-content-wrapper {
-  background: $s_cool_gray !important;
-  opacity: 0.9;
   @include opensans;
   h4 {
     @include opensans;
