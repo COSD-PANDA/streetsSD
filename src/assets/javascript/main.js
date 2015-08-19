@@ -86,7 +86,7 @@ var viewController = {
     $('#helper_box .helper_section').hide();
     $('#helper_box .bignums').hide();
     var num_sublayers = global.layers[1].getSubLayerCount();
-    for (var i = 1; i < num_sublayers; i++)
+    for (var i = 0; i < num_sublayers; i++)
       global.layers[1].getSubLayer(i).hide();
     $('.chart-title h4').text("");
     if (window.typeBreakdown)
