@@ -40,6 +40,7 @@ var opsControl = {
     },
     ociBreakdown: function(subLayerID) {
         var sqlString = sqlBuilder.getOCIBreakdownSQL();
+        console.log(sqlString);
         var oc = this;
         this.sql().execute(sqlString).done(function(data) {
             oc.display.ociBreakdown(subLayerID, data);
@@ -60,7 +61,7 @@ var opsControl = {
                 oc.bigNumbers(subLayerID, data);
             });
         }
-        
+
     },
 
     display: {
@@ -123,8 +124,8 @@ var opsControl = {
             $("#chart-title-1 h4").text("Work Type Breakdown");
             window.typeBreakdown = c3.generate({
                 bindto: '#chart-container-1',
-                data: { 
-                    type: 'pie', 
+                data: {
+                    type: 'pie',
                     columns: chartData,
                     colors: { "Slurry Seal": "#0098db", "Asphalt Resurfacing": "#ffa02f", "Concrete Street": "#fcd900" }
                 },

@@ -6003,6 +6003,9 @@ img {
     text-align: center; }
     #bottom-bar #blank-intro h3 {
       text-align: center; }
+    #bottom-bar #blank-intro img {
+      margin-left: auto;
+      margin-right: auto; }
 
 .helper-box, .chart-box {
   margin-top: 0px;
