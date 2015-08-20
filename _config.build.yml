@@ -14,3 +14,6 @@ limit_posts: 0
 
 source: 'src'
 destination: 'serve'
+
+
+googleTagManager: GTM-M3J864

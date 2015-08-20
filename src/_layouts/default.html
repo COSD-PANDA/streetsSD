@@ -4,15 +4,7 @@
   {% include head.html %}
 
   <body class="map-loading">
-    <!-- Google Tag Manager -->
-    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-M3J864"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-M3J864');</script>
-    <!-- End Google Tag Manager -->
+    {% include gtm.html %}
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -35,8 +27,8 @@
               <a href="#" class="modal-link" title="Help" data-modal-target="helpModal">
                 <i class="fa fa-question-circle question-help"></i>
               </a>
-              <a class="typeform-share link" 
-                 href="https://maksimpecherskiy.typeform.com/to/y398Mh" 
+              <a class="typeform-share link"
+                 href="https://maksimpecherskiy.typeform.com/to/y398Mh"
                  data-mode="1" target="_blank">
                   <i class="fa fa-envelope contact-link"></i>
               </a>
@@ -55,7 +47,7 @@
 
     <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
-    
+
     {% include foot.html %}
 
     {% include all_modals.html %}

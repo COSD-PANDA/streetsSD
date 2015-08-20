@@ -1,7 +1,7 @@
 # Title, decription, tagline and URL for your site
 # Can be used in your theme by calling 'site.title' and so on
 title: SDStreets
-description: 
+description:
 tagline: "alpha"
 url: localhost:4000
 
@@ -13,12 +13,12 @@ destination: serve
 # called by using 'site.author.name' and so on
 author:
   name: Maksim
-  email: 
-  bio: 
-  twitter: 
+  email:
+  bio:
+  twitter:
 
 # general setting for Jekyll
-googleAnalytics: UA-XXXXX-X
+googleTagManager: ""
 
 # _config.build.yml overwrites these options when you run `gulp build`
 # Enables future posts (posts with dates in the future) and drafts
