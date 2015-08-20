@@ -112,7 +112,7 @@ gulp.task("html", ["styles"], function () {
 
 
 // Task to upload your site to your personal GH Pages repo
-gulp.task("deploy", ["publish"], function () {
+gulp.task("deploy", function () {
   // Deploys your optimized site, you can change the settings in the html task if you want to
   return gulp.src("./site/**/*")
     .pipe($.ghPages({
