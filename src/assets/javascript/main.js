@@ -24,9 +24,16 @@ var viewController = {
       // Force intro
       //initIntro(true);
       vc.initModalLinks();
+      vc.initLocationLinks()
      })
     .error(function(err) {
       console.log(err);
+    });
+  },
+  initLocationLinks: function() {
+    var vc = this;
+    $('a#find-me-link').click(function(e) {
+      vc.detectUserLocation();
     });
   },
   initModalLinks: function() {
@@ -96,7 +103,13 @@ var viewController = {
     if (window.workByMonth)
       window.workByMonth = window.workByMonth.destroy();
   },
-
+  mapToPosition: function(position) {
+    lon = position.coords.longitude;
+    lat = position.coords.latitude;
+    var map = global.vis.getNativeMap();
+    map.setView(new L.LatLng(lat,lon), 7);
+    new L.CircleMarker([lat,lon],{radius: 4}).addTo(map);
+  },
   loadMapInfo: function(target) {
     // TODO -- there's a bug here for showing OCI.
     var subLayerNum = target.attr('data-sublayer');
@@ -145,6 +158,28 @@ var viewController = {
       $('#bottom-bar .tab').addClass('active').text('Less Info');
       $('.sidebar-navbar-collapse').removeClass('in');
     }
+  },
+  detectUserLocation: function() {
+    var vc = this;
+    if (navigator.geolocation) {
+      var timeoutVal = 10 * 1000 * 1000;
+      navigator.geolocation.watchPosition(
+        vc.mapToPosition, 
+        vc.alertError,
+        { enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 }
+      );
+    }
+    else {
+      alert("Geolocation is not supported by this browser");
+    }
+  },
+  alertError: function(error) {
+    var errors = { 
+      1: 'Permission denied',
+      2: 'Position unavailable',
+      3: 'Request timeout'
+    };
+    alert("Error: " + errors[error.code]);
   }
 }
 

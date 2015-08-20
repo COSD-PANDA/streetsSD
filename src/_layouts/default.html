@@ -4,7 +4,9 @@
   {% include head.html %}
 
   <body class="map-loading">
-    {% include gtm.html %}
+    {% if  site.googleTagmanager %} 
+      {% include gtm.html %}
+    {% endif %}
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -24,6 +26,9 @@
           </div>
           <div class="other-section col-md-2">
             <h3 class="masthead-title">
+              <a id="find-me-link" href="#">
+                <i class="fa fa-bullseye"></i>
+              </a>
               <a href="#" class="modal-link" title="Help" data-modal-target="helpModal">
                 <i class="fa fa-question-circle question-help"></i>
               </a>
