@@ -59,6 +59,8 @@ $black: black;
 $s_black: #1b242a;
 $s_silver: #5d676f;
 $s_cool_gray: #e0e1dd;
+$s_baby_blue: #5eb6e4;
+$s_baby_yellow:#f3ec7a;
 
 
 $gray: white;
@@ -331,6 +333,15 @@ div.cartodb-popup-content-wrapper {
   modal-content: {
     border-radius: 0px;
   };
+}
+
+.modal-body {
+  max-height: 300px;
+  overflow: scroll;
+}
+
+.modal-highlighted-section {
+  background-color: $s_baby_yellow;
 }
 
 /* make sidebar nav vertical */

@@ -6110,6 +6110,13 @@ div.cartodb-popup-content-wrapper {
 .modal {
   modal-content-border-radius: 0px; }
 
+.modal-body {
+  max-height: 300px;
+  overflow: scroll; }
+
+.modal-highlighted-section {
+  background-color: #f3ec7a; }
+
 /* make sidebar nav vertical */
 @media (min-width: 992px) {
   .helper-box-section-row.bignums {

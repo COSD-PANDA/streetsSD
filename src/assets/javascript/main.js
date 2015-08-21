@@ -44,11 +44,29 @@ var viewController = {
     })
   },
   initModalLinks: function() {
-      $('a.modal-link').click(function(e) {
-        var modalTarget = "#" + $(this).data('modal-target');
-        console.log(modalTarget);
-        $(modalTarget).modal({ backdrop: false });
+    var vc = this;
+    $('a.modal-link').click(function(e) {
+      var modalTarget = $(this).attr('href');
+      var trigger = $(this);
+      $(modalTarget).modal({ backdrop: false });
+      $(modalTarget).one('shown.bs.modal', function() {
+        vc.showModalAndHighlight(trigger);
       })
+    });
+  },
+  showModalAndHighlight: function(trigger) {
+    var modalShow = $(trigger).data('modal-show');
+    var modalTarget = $(trigger).attr('href');
+    $('.modal-body span').removeClass('modal-highlighted-section');
+    if (modalShow) {
+      console.log(modalShow);
+      modalShow = "#" + modalShow;
+      console.log($(modalShow).offset().top);
+      /*$('.modal-body', modalTarget).animate({
+        scrollTop: $(modalShow).offset().top
+      }, 1000);*/
+      $(modalShow, modalTarget).addClass('modal-highlighted-section');
+    }
   },
   initSubLayerWatch: function() {
       viewController.clearState();
