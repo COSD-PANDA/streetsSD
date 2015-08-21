@@ -5911,6 +5911,18 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0.9;
   background: white; }
 
+.address-search {
+  width: 200px; }
+  .address-search .form-control {
+    height: 30px; }
+  .address-search .input-group-btn .btn {
+    height: 30px; }
+
+.other-section a, .other-section .address-search {
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px; }
+
 .masthead-title small {
   color: #1b242a; }
 

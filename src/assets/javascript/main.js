@@ -17,6 +17,7 @@ var viewController = {
       $('body').removeClass('.map-loading').addClass('map-loaded');
       global.vis = vis;
       global.layers = layers;
+      global.map = vis.getNativeMap();
       vc.initSubLayerWatch();
       vc.initBottomBar();
       // Default
@@ -34,7 +35,13 @@ var viewController = {
     var vc = this;
     $('a#find-me-link').click(function(e) {
       vc.detectUserLocation();
+      return false;
     });
+    $('form#address-search').submit(function(e) {
+      address = $('input', this).val();
+      vc.getAddressLocation(address); 
+      return false;
+    })
   },
   initModalLinks: function() {
       $('a.modal-link').click(function(e) {
@@ -104,11 +111,11 @@ var viewController = {
       window.workByMonth = window.workByMonth.destroy();
   },
   mapToPosition: function(position) {
+    console.log('mpc')
+    console.log(position)
     lon = position.coords.longitude;
     lat = position.coords.latitude;
-    var map = global.vis.getNativeMap();
-    map.setView(new L.LatLng(lat,lon), 7);
-    new L.CircleMarker([lat,lon],{radius: 4}).addTo(map);
+    global.map.setView(new L.LatLng(lat,lon), 14);
   },
   loadMapInfo: function(target) {
     // TODO -- there's a bug here for showing OCI.
@@ -159,11 +166,32 @@ var viewController = {
       $('.sidebar-navbar-collapse').removeClass('in');
     }
   },
+  getAddressLocation: function(address) {
+    var vc = this;
+    $.get("https://pickpoint.io/api/v1/forward?key=XYjMsMG9CXK6mq57Z_vG", {
+      "q": address,
+      "countrycodes": "us",
+      "addressdetails": "1",
+      "limit": "1",
+      "bounded": "1",
+      "viewbox": ["-67.956039", "10.27012", "-67.941757", "10.25608"]
+    }
+    ).success(function(data) {
+      console.log(data);
+      loc = _.first(data);
+      vc.mapToPosition({ 
+        coords: {
+          longitude: loc.lon,
+          latitude: loc.lat
+        }
+      })
+    })
+  },
   detectUserLocation: function() {
     var vc = this;
     if (navigator.geolocation) {
       var timeoutVal = 10 * 1000 * 1000;
-      navigator.geolocation.watchPosition(
+      navigator.geolocation.getCurrentPosition(
         vc.mapToPosition, 
         vc.alertError,
         { enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 }

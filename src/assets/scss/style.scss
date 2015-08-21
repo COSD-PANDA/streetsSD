@@ -89,6 +89,24 @@ h1, h2, h3, h4, h5, h6 {
   background: $gray;
 }
 
+.address-search {
+  width: 200px;
+  .form-control {
+    height:30px;
+  }
+  .input-group-btn .btn {
+    height:30px;
+  }
+}
+
+
+
+.other-section a, .other-section .address-search {
+  float: left;
+  margin-left:10px;
+  margin-right:10px;
+}
+
 .masthead-title small {
   color: $s_black;
 }
