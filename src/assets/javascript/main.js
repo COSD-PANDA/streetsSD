@@ -39,7 +39,7 @@ var viewController = {
     });
     $('form#address-search').submit(function(e) {
       address = $('input', this).val();
-      vc.getAddressLocation(address); 
+      vc.getAddressLocation(address);
       return false;
     })
   },
@@ -129,8 +129,6 @@ var viewController = {
       window.workByMonth = window.workByMonth.destroy();
   },
   mapToPosition: function(position) {
-    console.log('mpc')
-    console.log(position)
     lon = position.coords.longitude;
     lat = position.coords.latitude;
     global.map.setView(new L.LatLng(lat,lon), 14);
@@ -197,7 +195,7 @@ var viewController = {
     ).success(function(data) {
       console.log(data);
       loc = _.first(data);
-      vc.mapToPosition({ 
+      vc.mapToPosition({
         coords: {
           longitude: loc.lon,
           latitude: loc.lat
@@ -210,7 +208,7 @@ var viewController = {
     if (navigator.geolocation) {
       var timeoutVal = 10 * 1000 * 1000;
       navigator.geolocation.getCurrentPosition(
-        vc.mapToPosition, 
+        vc.mapToPosition,
         vc.alertError,
         { enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 }
       );
@@ -220,7 +218,7 @@ var viewController = {
     }
   },
   alertError: function(error) {
-    var errors = { 
+    var errors = {
       1: 'Permission denied',
       2: 'Position unavailable',
       3: 'Request timeout'

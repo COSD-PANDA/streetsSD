@@ -24,7 +24,6 @@ var opsControl = {
     typeBreakdown: function(subLayerID) {
         var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, "spp2.activity");
         var oc = this;
-        console.log(sqlString);
         this.sql().execute(sqlString).done(function(data) {
             oc.display.typeBreakdown(subLayerID, data);
         });
