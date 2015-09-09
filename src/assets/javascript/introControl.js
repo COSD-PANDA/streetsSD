@@ -7,7 +7,7 @@ function startIntro() {
     },
     {
       element: "label.sidebar-toggle",
-      intro: "Click on this icon to see the available views.",
+      intro: "Click this icon to see the available views.",
       position: "right"
     },
     {
