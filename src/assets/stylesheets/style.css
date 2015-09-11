@@ -6117,6 +6117,9 @@ div.cartodb-popup-content-wrapper {
 .modal-highlighted-section {
   background-color: #f3ec7a; }
 
+.modal-dialog {
+  z-index: 9999; }
+
 /* make sidebar nav vertical */
 @media (min-width: 992px) {
   .helper-box-section-row.bignums {
