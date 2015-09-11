@@ -56,7 +56,7 @@ var viewController = {
     });
   },
   initFirstLayer: function() {
-    $('#layer-selector a#future-work').click();
+    $('#layer-selector a#all-work').click();
   },
   showModalAndHighlight: function(trigger) {
     var modalShow = $(trigger).data('modal-show');

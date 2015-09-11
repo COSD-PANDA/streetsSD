@@ -314,6 +314,9 @@ div.cartodb-legend-stack {
   bottom:auto;
   right: 67px;
   opacity: 0.9;
+  a.modal-link {
+    color: $s_gray;
+  }
 }
 
 div.cartodb-popup-content-wrapper {

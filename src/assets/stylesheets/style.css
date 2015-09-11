@@ -6093,6 +6093,8 @@ div.cartodb-legend-stack {
   bottom: auto;
   right: 67px;
   opacity: 0.9; }
+  div.cartodb-legend-stack a.modal-link {
+    color: #5d676f; }
 
 div.cartodb-popup-content-wrapper {
   font-family: "Open Sans",Helvetica, Arial, sans-serif; }
