@@ -12,8 +12,6 @@ var viewController = {
       zoom: 11
     })
     .done(function(vis, layers) {
-      console.log(vis);
-      console.log(layers);
       $('body').removeClass('.map-loading').addClass('map-loaded');
       global.vis = vis;
       global.layers = layers;
@@ -22,6 +20,7 @@ var viewController = {
       vc.initBottomBar();
       vc.initModalLinks();
       vc.initLocationLinks()
+      vc.initFirstLayer();
       // Default
       //vc.initIntro();
       // Force intro
@@ -55,6 +54,9 @@ var viewController = {
 
       return false;
     });
+  },
+  initFirstLayer: function() {
+    $('#layer-selector a#all-work').click();
   },
   showModalAndHighlight: function(trigger) {
     var modalShow = $(trigger).data('modal-show');
