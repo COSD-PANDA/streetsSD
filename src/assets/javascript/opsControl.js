@@ -43,8 +43,18 @@ var opsControl = {
         var oc = this;
         this.sql().execute(sqlString).done(function(data) {
             oc.display.ociBreakdown(subLayerID, data);
+            oc.display.totalMiles(subLayerID, data);
         })
     },
+    ociAvg: function(subLayerID) {
+        var sqlString = sqlBuilder.getOCIAvgSQL();
+        console.log(sqlString);
+        var oc = this;
+        this.sql().execute(sqlString).done(function(data) {
+            oc.display.ociAvg(subLayerID, data);
+        });
+    },
+
     bigNumbers: function(subLayerID, data) {
         if (data) {
             this.display.totalMiles(subLayerID, data);
@@ -185,6 +195,13 @@ var opsControl = {
             targetBox = $('#helper_box #bignum-left');
             $('.data-value', targetBox).text(totalMiles);
             $('.data-desc', targetBox).text("Total Miles");
+            $('#helper_box .bignums').show();
+        },
+        ociAvg: function(subLayerID, data) {
+            ociAvg = d3.round(_.first(data.rows).avg, 2);
+            targetBox = $('#helper_box #bignum-right');
+            $('.data-value', targetBox).text(ociAvg);
+            $('.data-desc', targetBox).text("Average OCI");
             $('#helper_box .bignums').show();
         },
         avgMilesPerMonth: function(subLayerID, data) {

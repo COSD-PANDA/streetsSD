@@ -170,20 +170,27 @@ var sqlBuilder = {
 	    SQL += "GROUP BY DISTRICT";
 	    return SQL;
 	},
+
 	getOCIBreakdownSQL: function() {
 		var SQL = "SELECT " +
-		"SUM(ST_Length(ST_AsText(ST_Transform(spp2.the_geom,26915)))/1609.34) as totalMiles, " +
-		"CASE WHEN spp2.oci <= 33.333 THEN 'Poor' " +
-		     "WHEN spp2.oci <= 66.666 THEN 'Fair' " +
+		"SUM(ST_Length(ST_AsText(ST_Transform(oci_2011.the_geom,26915)))/1609.34) as totalMiles, " +
+		"CASE WHEN oci_2011.oci <= 33.333 THEN 'Poor' " +
+		     "WHEN oci_2011.oci <= 66.666 THEN 'Fair' " +
 		     "ELSE 'Good' " +
 		     "END " +
 		     "AS color " +
-		"FROM spp2 " +
-		"WHERE spp2.oci_date is not null " +
-		"AND spp2.oci > 0 " +
-		"AND spp2.oci_date::date <= '2012-01-01' " +
+		"FROM oci_2011 " +
+		"WHERE oci_2011.oci > 0 " +
 		"GROUP BY color ";
 
 		return SQL;
+	},
+  getOCIAvgSQL: function() {
+  	var SQL = "SELECT " +
+      "AVG(oci_2011.oci) " +
+      "FROM oci_2011 " +
+      "WHERE oci_2011.oci > 0"
+
+    return SQL;
 	}
 }

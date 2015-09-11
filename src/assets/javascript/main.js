@@ -22,9 +22,9 @@ var viewController = {
       vc.initLocationLinks()
       vc.initFirstLayer();
       // Default
-      //vc.initIntro();
+      vc.initIntro();
       // Force intro
-      vc.initIntro(true);
+      //vc.initIntro(true);
      })
     .error(function(err) {
       console.log(err);
@@ -56,7 +56,7 @@ var viewController = {
     });
   },
   initFirstLayer: function() {
-    $('#layer-selector a#all-work').click();
+    $('#layer-selector a#oci-2011').click();
   },
   showModalAndHighlight: function(trigger) {
     var modalShow = $(trigger).data('modal-show');
