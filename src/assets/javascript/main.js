@@ -20,12 +20,12 @@ var viewController = {
       global.map = vis.getNativeMap();
       vc.initSubLayerWatch();
       vc.initBottomBar();
-      // Default
-      vc.initIntro();
-      // Force intro
-      //initIntro(true);
       vc.initModalLinks();
       vc.initLocationLinks()
+      // Default
+      //vc.initIntro();
+      // Force intro
+      vc.initIntro(true);
      })
     .error(function(err) {
       console.log(err);
@@ -48,10 +48,12 @@ var viewController = {
     $('a.modal-link').click(function(e) {
       var modalTarget = $(this).attr('href');
       var trigger = $(this);
-      $(modalTarget).modal({ backdrop: false });
+      $(modalTarget).modal({ backdrop: true });
       $(modalTarget).one('shown.bs.modal', function() {
         vc.showModalAndHighlight(trigger);
       })
+
+      return false;
     });
   },
   showModalAndHighlight: function(trigger) {
@@ -93,8 +95,9 @@ var viewController = {
       var force = force || false;
       var cookie = this.getCookie("sdInfraIntro");
       if (cookie == null || cookie == "" || force == true) {
-        this.setCookie("sdInfraIntro", "1",90);
-        startIntro();
+        console.log('force');
+        this.setCookie("sdInfraIntro", "1", 90);
+        $('a#help-link').click();
       }
   },
   getCookie: function(cname) {
@@ -142,7 +145,7 @@ var viewController = {
       fillOpacity: 0.8
     });
     this.geoLocMarker.addTo(global.map);
-    global.map.setView(new L.LatLng(lat,lon), 14);
+    global.map.setView(new L.LatLng(lat,lon), 15);
 
   },
   loadMapInfo: function(target) {

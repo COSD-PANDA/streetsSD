@@ -344,6 +344,10 @@ div.cartodb-popup-content-wrapper {
   background-color: $s_baby_yellow;
 }
 
+.modal-dialog {
+  z-index: 9999;
+}
+
 /* make sidebar nav vertical */
 @media (min-width: 768px) {
 }
