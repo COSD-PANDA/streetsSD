@@ -5,7 +5,7 @@ var global = {
 var viewController = {
   init: function() {
     var vc = this;
-    cartodb.createVis('map', 'https://maksim2.cartodb.com/api/v2/viz/1387c31c-e546-11e4-a74b-0e853d047bba/viz.json', {
+    cartodb.createVis('map', 'https://cityofsandiego.cartodb.com/api/v2/viz/0eb76b2a-50ea-11e5-b297-0e018d66dc29/viz.json', {
       tiles_loader: true,
       center_lat: 32.7150,
       center_lon: -117.1625,
@@ -56,7 +56,7 @@ var viewController = {
     });
   },
   initFirstLayer: function() {
-    $('#layer-selector a#oci-2011').click();
+    $('#layer-selector a#future-work').click();
   },
   showModalAndHighlight: function(trigger) {
     var modalShow = $(trigger).data('modal-show');

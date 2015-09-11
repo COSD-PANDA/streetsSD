@@ -1,6 +1,6 @@
 var opsControl = {
     sql: function() {
-        return new cartodb.SQL({ user: 'maksim2' });
+        return new cartodb.SQL({ user: 'cityofsandiego' });
     },
     calcTDistance: function(subLayerID) {
         var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, "spp2.district");
@@ -54,16 +54,29 @@ var opsControl = {
             oc.display.ociAvg(subLayerID, data);
         });
     },
+    totalMiles: function(subLayerID) {
+        var sqlString = sqlBuilder.getDistanceByMonthSQL(subLayerID);
+        var oc = this;
+        console.log(sqlString);
+        this.sql().execute(sqlString).done(function(data) {
+            oc.display.totalMiles(subLayerID, data);
+        });
+    },
+    nextMonthMiles: function(subLayerID) {
+        var sqlString = sqlBuilder.getDistanceByMonthSQL(subLayerID);
+        var oc = this;
+        this.sql().execute(sqlString).done(function(data) {
+            oc.display.nextMonthMiles(subLayerID, data);
+        });
 
+    },
     bigNumbers: function(subLayerID, data) {
         if (data) {
             this.display.totalMiles(subLayerID, data);
             this.display.avgMilesPerMonth(subLayerID, data);
         }
         else {
-            var month = "COALESCE(to_char(spp2.est_date, 'MM'), to_char(spp2.date_, 'MM'))"
-            var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, month);
-            sqlString += " ORDER BY " + month;
+            var sqlString = sqlBuilder.getDistanceByMonthSQL(subLayerID);
             var oc = this;
             console.log(sqlString);
             this.sql().execute(sqlString).done(function(data) {
@@ -202,6 +215,22 @@ var opsControl = {
             targetBox = $('#helper_box #bignum-right');
             $('.data-value', targetBox).text(ociAvg);
             $('.data-desc', targetBox).text("Average OCI");
+            $('#helper_box .bignums').show();
+        },
+        nextMonthMiles: function(subLayerID, data) {
+            var cDate = moment();
+            mSearch = cDate.format('MM');
+            milesNext = _.find(data.rows, function(row) {
+                return row.coalesce == mSearch;
+            });
+
+            milesNext = d3.round(milesNext.totalmiles, 2);
+
+
+            console.log(data);
+            targetBox = $('#helper_box #bignum-right');
+            $('.data-value', targetBox).text(milesNext);
+            $('.data-desc', targetBox).text("Miles Scheduled In " + cDate.add(1, 'months').format("MMM"));
             $('#helper_box .bignums').show();
         },
         avgMilesPerMonth: function(subLayerID, data) {

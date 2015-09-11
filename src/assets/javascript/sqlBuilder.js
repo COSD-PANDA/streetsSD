@@ -149,6 +149,7 @@ var sqlBuilder = {
   		return SQL;
 	},
 	getDistanceSQL: function(sqlKey, extraConditions, groupBy) {
+    console.log(sqlKey);
 		var SQL = "SELECT " + groupBy + ", " +
 		"SUM(ST_Length(ST_AsText(ST_Transform(spp2.the_geom,26915)))/1609.34) as totalMiles " +
 		"FROM spp2 ";
@@ -161,6 +162,13 @@ var sqlBuilder = {
 
 		return SQL;
 	},
+  getDistanceByMonthSQL: function(sqlKey) {
+      var month = "COALESCE(to_char(spp2.est_date, 'MM'), to_char(spp2.date_, 'MM'))";
+      var sqlString = this.getDistanceSQL(sqlKey, null, month);
+      sqlString += " ORDER BY " + month;
+
+      return sqlString;
+  },
 	getTotalDistanceSQL: function(sqlKey, activityKey) {
 	    var SQL = "SELECT spp2.district, " +
 	    "SUM(ST_Length(ST_AsText(ST_Transform(spp2.the_geom,26915)))/1609.34) as totalMiles " +
