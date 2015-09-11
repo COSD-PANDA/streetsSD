@@ -80,14 +80,15 @@ var viewController = {
       $workLayers.click(function(e) {
         // Load Map Info
         var target = $(e.target);
-        viewController.loadMapInfo(target);
-        viewController.executeOps(target);
-
-        console.log('click trig');
         $('#sidebar-checkbox').prop("checked", false);
 
         $workLayers.removeClass('active');
-        $('a', target).addClass('active');
+        $(target).addClass('active');
+
+        viewController.loadMapInfo(target);
+        viewController.executeOps(target);
+
+
       });
   },
   initBottomBar: function () {
@@ -151,7 +152,6 @@ var viewController = {
 
   },
   loadMapInfo: function(target) {
-    // TODO -- there's a bug here for showing OCI.
     var subLayerNum = target.attr('data-sublayer');
     var setSQL = target.attr('data-sql');
     var subLayerID = target.attr('id');
@@ -177,10 +177,14 @@ var viewController = {
       });
       // Remove blank intro if there
       $('#bottom-bar-content #blank-intro').remove();
+      var layerTitle = $('#layer-selector a.active').html();
       this.bottomBarToggle('open');
     }
   },
   bottomBarToggle: function(forceAction) {
+    var layerTitle = $('#layer-selector a.active').html();
+    var cUp = unescape(' <i class="fa fa-chevron-up"></i> ');
+    var cDn = unescape(' <i class="fa fa-chevron-down"></i> ');
     var forceAction = typeof forceAction === 'string' ? forceAction : null;
     if ((forceAction !== null && forceAction == 'close') ||
         (forceAction === null && $('#bottom-bar .tab').hasClass('active'))) {
@@ -188,14 +192,14 @@ var viewController = {
       console.log('close bar');
 
       $('#bottom-bar').animate({'bottom': -($('#bottom-bar .tab-content').height())});
-      $('#bottom-bar .tab').removeClass('active').text('More Info');
+      $('#bottom-bar .tab').removeClass('active').html(cUp + layerTitle + cUp);
       $('.sidebar-navbar-collapse').addClass('in');
     }
     else {
       console.log('action: ' + forceAction);
       console.log('open bar');
       $('#bottom-bar').animate({'bottom': 0});
-      $('#bottom-bar .tab').addClass('active').text('Less Info');
+      $('#bottom-bar .tab').addClass('active').html(cDn + layerTitle + cDn);
       $('.sidebar-navbar-collapse').removeClass('in');
     }
   },
