@@ -131,7 +131,19 @@ var viewController = {
   mapToPosition: function(position) {
     lon = position.coords.longitude;
     lat = position.coords.latitude;
+    if (this.geoLocMarker)
+      global.map.removeLayer(this.geoLocMarker);
+
+    this.geoLocMarker = new L.CircleMarker([lat,lon],{
+      radius: 7,
+      color: '#00549f',
+      opacity: 1,
+      fill: true,
+      fillOpacity: 0.8
+    });
+    this.geoLocMarker.addTo(global.map);
     global.map.setView(new L.LatLng(lat,lon), 14);
+
   },
   loadMapInfo: function(target) {
     // TODO -- there's a bug here for showing OCI.
