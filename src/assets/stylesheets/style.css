@@ -6046,12 +6046,9 @@ img {
     margin: 0px;
     padding: 0px;
     color: white; }
+  .helper-box-subsection .data-value {
+    font-size: 1.5rem; }
   .helper-box-subsection .data-value, .helper-box-subsection .data-desc {
-    position: relative;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
     top: 38%; }
   .helper-box-subsection .subsection-inner {
     background: #0098db;

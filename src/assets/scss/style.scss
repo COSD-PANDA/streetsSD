@@ -255,8 +255,10 @@ img {
     padding:0px;
     color: white;
   }
+  .data-value {
+    font-size: 1.5rem
+  }
   .data-value, .data-desc {
-    @include vertical-align;
     top:38%;
   }
   .subsection-inner {
