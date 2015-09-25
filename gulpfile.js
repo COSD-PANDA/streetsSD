@@ -144,7 +144,9 @@ gulp.task("serve:dev", ["styles", "jekyll:dev"], function () {
     // tunnel: "",
     server: {
       baseDir: "serve"
-    }
+    },
+    host: process.env.IP || 'localhost',
+    port: process.env.PORT || '3000'
   });
 });
 
