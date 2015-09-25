@@ -1,0 +1,10 @@
+machine:
+  timezone:
+    America/Los_Angeles
+  ruby:
+    version: ruby 2.2.2p95
+deployment:
+  staging:
+    branch: master
+    commands:
+      - ./surge_deploy.sh
