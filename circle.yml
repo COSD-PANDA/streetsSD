@@ -2,7 +2,5 @@ deployment:
   staging:
     branch: master
     commands:
-      - bundle install
-      - npm install
       - gulp publish
       - ./surge_deploy.sh
