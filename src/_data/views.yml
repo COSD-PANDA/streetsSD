@@ -19,16 +19,6 @@
     - "bigNumbers"
   description: "All work that occured since Jul 1, 2015."
 
-- work-fy-2013:
-  id: "work-fy-2013"
-  sublayer: "0"
-  sql: "1"
-  title: "Work Done in FY-2013"
-  ops:
-    - "typeBreakdown"
-    - "workByMonth"
-  description: "All work that occured since July 1, 2012 until June 31, 2013."
-
 - work-fy-2014:
   id: "work-fy-2014"
   sublayer: "0"

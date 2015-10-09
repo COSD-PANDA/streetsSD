@@ -82,20 +82,6 @@ var sqlBuilder = {
 			  SQL += "AND (spp2.activity is not null) ";
 			  break;
 
-			case 'work-fy-2013':
-			  // Work Done Date is not NULL.
-			  SQL += "WHERE (spp2.date_ is not null) ";
-
-			  // Work Done Date is after Jul 1, 2012.
-			  SQL += "AND (spp2.date_::date >= '2012-07-01') ";
-
-			  // Work Done Date is before June 30, 2013.
-			  SQL += "AND (spp2.date_::date <= '2013-06-30') ";
-
-			  // Filter for Null Activities.
-			  SQL += "AND (spp2.activity is not null) ";
-			  break;
-
 			case 'work-fy-2014':
 			  // Work Done Date is not NULL.
 			  SQL += "WHERE (spp2.date_ is not null) ";
