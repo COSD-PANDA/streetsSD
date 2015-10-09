@@ -82,10 +82,10 @@ var sqlBuilder = {
 			  SQL += "WHERE (completed is not null) ";
 
 			  // Work Done Date is after Jul 1, 2013.
-			  SQL += "AND (completed::date >= '2013-07-01') ";
+			  SQL += "AND (date_combined::date >= '2013-07-01') ";
 
 			  // Work Done Date is before June 30, 2014.
-			  SQL += "AND (completed::date <= '2014-06-30') ";
+			  SQL += "AND (date_combined::date <= '2014-06-30') ";
 
 			  // Filter for Null Activities.
 			  SQL += "AND (activity is not null) ";
@@ -96,10 +96,10 @@ var sqlBuilder = {
 			  SQL += "WHERE (completed is not null) ";
 
 			  // Work Done Date is after Jul 1, 2014.
-			  SQL += "AND (completed::date >= '2014-07-01') ";
+			  SQL += "AND (date_combined::date >= '2014-07-01') ";
 
 			  // Work Done Date is before June 30, 2015.
-			  SQL += "AND (completed::date <= '2015-06-30') ";
+			  SQL += "AND (date_combined::date <= '2015-06-30') ";
 
 			  // Filter for Null Activities.
 			  SQL += "AND (activity is not null) ";
@@ -123,13 +123,14 @@ var sqlBuilder = {
 
 			case 'future-work':
 			  // Bring in work completed after the current quarter.
-			  SQL += "WHERE (completed >= '" + lastQuarter.end + "') ";
+			  //SQL += "WHERE (completed >= '" + lastQuarter.end + "') ";
+			  SQL += "WHERE (date_combined::date >= '" + lastQuarter.end + "') ";
 
 			  // Bring in all work with an estimated date.
-			  SQL += "OR (est_start >= '" + lastQuarter.end + "') ";
+			  //SQL += "OR (est_start >= '" + lastQuarter.end + "') ";
 
 			  // Filter for Null Activities.
-			  SQL += "AND (activity is not null) ";
+			  //SQL += "AND (activity is not null) ";
 
 			  break;
 

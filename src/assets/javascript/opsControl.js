@@ -111,7 +111,6 @@ var opsControl = {
                 title: function(x) {
                   var date = chartX[x + 1];
                   return moment(date, "M").format("MMM") + " Total";
-                  //return moment(x+1, "M-YY").format("MMM 'YY")
                 },
                 name: function (name, ratio, id, index) {
                   return name.charAt(0).toUpperCase() + name.slice(1);
