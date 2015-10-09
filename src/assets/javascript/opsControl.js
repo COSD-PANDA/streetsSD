@@ -3,7 +3,7 @@ var opsControl = {
         return new cartodb.SQL({ user: 'cityofsandiego' });
     },
     calcTDistance: function(subLayerID) {
-        var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, "spp2.district");
+        var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, "streetwork_master.district");
         var oc = this;
         this.sql().execute(sqlString).done(function(data) {
             console.log(data);
@@ -11,7 +11,7 @@ var opsControl = {
         });
     },
     workByMonth: function(subLayerID) {
-        var month = "COALESCE(to_char(spp2.est_date, 'MM'), to_char(spp2.date_, 'MM'))"
+        var month = "COALESCE(to_char(streetwork_master.est_start, 'MM'), to_char(streetwork_master.completed, 'MM'))"
         var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, month);
         sqlString += " ORDER BY " + month;
         var oc = this;
@@ -22,7 +22,7 @@ var opsControl = {
         });
     },
     typeBreakdown: function(subLayerID) {
-        var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, "spp2.activity");
+        var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, "streetwork_master.activity");
         var oc = this;
         this.sql().execute(sqlString).done(function(data) {
             oc.display.typeBreakdown(subLayerID, data);
@@ -30,7 +30,7 @@ var opsControl = {
     },
 
     progress: function(subLayerID) {
-        var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, "spp2.district");
+        var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, "streetwork_master.district");
         var oc = this;
         console.log(sqlString);
         this.sql().execute(sqlString).done(function(data) {
@@ -97,7 +97,7 @@ var opsControl = {
             chartX = ['x']
             _.each(data.rows, function(element, index) {
                 chartX.push(element.coalesce)
-                chartData.push(d3.round(element.totalmiles, 2));
+                chartData.push(d3.round(element.totalmiles, 0));
             });
             $("#chart-title-2 h4").text("Work By Month");
             window.workByMonth = c3.generate({
@@ -154,7 +154,7 @@ var opsControl = {
                 tooltip: {
                   format: {
                     name: function (name, ratio, id, index) { return name; },
-                    value: function (value, ratio, id, index) { return d3.round(value, 2) + " Miles"; }
+                    value: function (value, ratio, id, index) { return d3.round(value, 0) + " Miles"; }
                   }
                 }
             });
@@ -195,7 +195,7 @@ var opsControl = {
                 tooltip: {
                   format: {
                     name: function (name, ratio, id, index) {return name},
-                    value: function (value, ratio, id, index) { return d3.round(value, 2) + " Miles"; }
+                    value: function (value, ratio, id, index) { return d3.round(value, 0) + " Miles"; }
                   }
                 }
             });
@@ -204,14 +204,14 @@ var opsControl = {
             totalMiles = _.sum(data.rows, function(row) {
                 return row.totalmiles;
             });
-            totalMiles = d3.round(totalMiles, 2);
+            totalMiles = d3.round(totalMiles, 0);
             targetBox = $('#helper_box #bignum-left');
             $('.data-value', targetBox).text(totalMiles);
             $('.data-desc', targetBox).text("Total Miles");
             $('#helper_box .bignums').show();
         },
         ociAvg: function(subLayerID, data) {
-            ociAvg = d3.round(_.first(data.rows).avg, 2);
+            ociAvg = d3.round(_.first(data.rows).avg, 0);
             targetBox = $('#helper_box #bignum-right');
             $('.data-value', targetBox).text(ociAvg);
             $('.data-desc', targetBox).text("Average OCI");
@@ -224,7 +224,7 @@ var opsControl = {
                 return row.coalesce == mSearch;
             });
 
-            milesNext = d3.round(milesNext.totalmiles, 2);
+            milesNext = d3.round(milesNext.totalmiles, 0);
 
 
             console.log(data);
@@ -237,7 +237,7 @@ var opsControl = {
             totalMiles = _.sum(data.rows, function(row) {
                 return row.totalmiles;
             });
-            avgMilesPerMonth = d3.round((totalMiles/ data.rows.length), 2);
+            avgMilesPerMonth = d3.round((totalMiles/ data.rows.length), 0);
             targetBox = $('#helper_box #bignum-right');
             $('.data-value', targetBox).text(avgMilesPerMonth);
             $('.data-desc', targetBox).text("Avg Miles Per Month");

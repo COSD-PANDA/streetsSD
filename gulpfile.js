@@ -24,7 +24,7 @@ gulp.task("clean:prod", del.bind(null, ["site"]));
 
 // Runs the build command for Jekyll to compile the site locally
 // This will build the site with the production settings
-gulp.task("jekyll:dev", $.shell.task("jekyll build"));
+gulp.task("jekyll:dev", $.shell.task("bundle exec jekyll build"));
 gulp.task("jekyll-rebuild", ["jekyll:dev"], function () {
   reload;
 });
@@ -133,7 +133,7 @@ gulp.task("jslint", function () {
 
 // Runs "jekyll doctor" on your site to check for errors with your configuration
 // and will check for URL errors a well
-gulp.task("doctor", $.shell.task("jekyll doctor"));
+gulp.task("doctor", $.shell.task("bundle exec jekyll doctor"));
 
 // BrowserSync will serve our site on a local server for us and other devices to use
 // It will also autoreload across all devices as well as keep the viewport synchronized

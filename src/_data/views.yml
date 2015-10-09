@@ -19,16 +19,6 @@
     - "bigNumbers"
   description: "All work that occured since Jul 1, 2015."
 
-- work-fy-2013:
-  id: "work-fy-2013"
-  sublayer: "0"
-  sql: "1"
-  title: "Work Done in FY-2013"
-  ops:
-    - "typeBreakdown"
-    - "workByMonth"
-  description: "All work that occured since July 1, 2012 until June 31, 2013."
-
 - work-fy-2014:
   id: "work-fy-2014"
   sublayer: "0"
@@ -57,8 +47,6 @@
   ops:
     - "calcTDistance"
     - "typeBreakdown"
-    - "totalMiles"
-    - "nextMonthMiles"
   title: "Planned Future Work"
   description: "Mayor Faulconer has pledged to pave 1,000 miles of streets over the next 5 years. Future work includes <span class='tDistance'></span> miles of currently planned streets and is updated quarterly. More streets will be added as additional streets are identified to meet the 1,000 mile pledge. The amount of mileage paved will depend on annual budgets and funds."
 

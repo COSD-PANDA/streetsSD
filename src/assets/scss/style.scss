@@ -341,7 +341,7 @@ div.cartodb-popup-content-wrapper {
 }
 
 .modal-body {
-  max-height: 300px;
+  max-height: 575px;
   overflow: scroll;
 }
 
@@ -355,6 +355,9 @@ div.cartodb-popup-content-wrapper {
 
 /* make sidebar nav vertical */
 @media (min-width: 768px) {
+  .modal-dialog {
+    width: 80%;
+  }
 }
 @media (min-width: 992px) {
   .helper-box-section-row.bignums {
