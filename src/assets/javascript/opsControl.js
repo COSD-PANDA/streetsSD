@@ -10,11 +10,13 @@ var opsControl = {
         });
     },
     workByMonth: function(subLayerID) {
-        var month = "COALESCE(to_char(streetwork_master.est_start, 'MM'), to_char(streetwork_master.completed, 'MM'))"
+        //var month = "COALESCE(to_char(streetwork_master.est_start, 'MM'), to_char(streetwork_master.completed, 'MM'))"
+        var month = "to_char(date_combined, 'MM')";
         var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, month);
         sqlString += " ORDER BY " + month;
         var oc = this;
         this.sql().execute(sqlString).done(function(data) {
+            console.log(data);
             oc.display.workByMonth(subLayerID, data);
             oc.bigNumbers(subLayerID, data);
         });
@@ -52,6 +54,8 @@ var opsControl = {
     totalMiles: function(subLayerID) {
         var sqlString = sqlBuilder.getDistanceByMonthSQL(subLayerID);
         var oc = this;
+        console.log("TOTAL Miles for " + subLayerID)
+        console.log(sqlString);
         this.sql().execute(sqlString).done(function(data) {
             oc.display.totalMiles(subLayerID, data);
         });
@@ -65,17 +69,14 @@ var opsControl = {
 
     },
     bigNumbers: function(subLayerID, data) {
-        if (data) {
-            this.display.totalMiles(subLayerID, data);
-            this.display.avgMilesPerMonth(subLayerID, data);
-        }
-        else {
-            var sqlString = sqlBuilder.getDistanceByMonthSQL(subLayerID);
-            var oc = this;
-            this.sql().execute(sqlString).done(function(data) {
-                oc.bigNumbers(subLayerID, data);
-            });
-        }
+        console.log("bignumbers")
+        var sqlString = sqlBuilder.getDistanceByMonthYearSQL(subLayerID);
+        var oc = this;
+        this.sql().execute(sqlString).done(function(data) {
+            oc.display.totalMiles(subLayerID, data);
+            oc.display.avgMilesPerMonth(subLayerID, data);
+        });
+        
 
     },
 
@@ -89,9 +90,10 @@ var opsControl = {
             chartData = ['miles'];
             chartX = ['x']
             _.each(data.rows, function(element, index) {
-                chartX.push(element.coalesce)
+                chartX.push(element.to_char)
                 chartData.push(d3.round(element.totalmiles, 0));
             });
+            console.log(chartX);
             $("#chart-title-2 h4").text("Work By Month");
             window.workByMonth = c3.generate({
             bindto: '#chart-container-2',
@@ -107,7 +109,7 @@ var opsControl = {
               grouped: false,
               format: {
                 title: function(x) {
-                  var date = chartX[x+1];
+                  var date = chartX[x + 1];
                   return moment(date, "M").format("MMM") + " Total";
                   //return moment(x+1, "M-YY").format("MMM 'YY")
                 },
@@ -121,7 +123,7 @@ var opsControl = {
                 type: 'category', // this needed to load string x value
                 tick: {
                   culling: false,
-                  format: function(x) { return moment(x+1, "M").format("MMM"); }
+                  format: function(x) { return moment(chartX[x + 1], "M").format("MMM"); }
                 }
               },
               y: {
@@ -141,7 +143,7 @@ var opsControl = {
                 data: {
                     type: 'pie',
                     columns: chartData,
-                    colors: { "Slurry Seal": "#0098db", "Asphalt Resurfacing": "#ffa02f", "Concrete Street": "#fcd900" }
+                    colors: { "Slurry Seal": "#0098db", "AC Resurfacing": "#ffa02f", "Concrete Street": "#fcd900" }
                 },
                 tooltip: {
                   format: {
