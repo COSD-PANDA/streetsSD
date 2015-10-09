@@ -6,7 +6,6 @@ var opsControl = {
         var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, "streetwork_master.district");
         var oc = this;
         this.sql().execute(sqlString).done(function(data) {
-            console.log(data);
             oc.display.calcTDistance(subLayerID, data);
         });
     },
@@ -15,7 +14,6 @@ var opsControl = {
         var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, month);
         sqlString += " ORDER BY " + month;
         var oc = this;
-        console.log(sqlString);
         this.sql().execute(sqlString).done(function(data) {
             oc.display.workByMonth(subLayerID, data);
             oc.bigNumbers(subLayerID, data);
@@ -32,14 +30,12 @@ var opsControl = {
     progress: function(subLayerID) {
         var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, "streetwork_master.district");
         var oc = this;
-        console.log(sqlString);
         this.sql().execute(sqlString).done(function(data) {
             oc.display.progress(subLayerID, data);
         });
     },
     ociBreakdown: function(subLayerID) {
         var sqlString = sqlBuilder.getOCIBreakdownSQL();
-        console.log(sqlString);
         var oc = this;
         this.sql().execute(sqlString).done(function(data) {
             oc.display.ociBreakdown(subLayerID, data);
@@ -48,7 +44,6 @@ var opsControl = {
     },
     ociAvg: function(subLayerID) {
         var sqlString = sqlBuilder.getOCIAvgSQL();
-        console.log(sqlString);
         var oc = this;
         this.sql().execute(sqlString).done(function(data) {
             oc.display.ociAvg(subLayerID, data);
@@ -57,7 +52,6 @@ var opsControl = {
     totalMiles: function(subLayerID) {
         var sqlString = sqlBuilder.getDistanceByMonthSQL(subLayerID);
         var oc = this;
-        console.log(sqlString);
         this.sql().execute(sqlString).done(function(data) {
             oc.display.totalMiles(subLayerID, data);
         });
@@ -78,7 +72,6 @@ var opsControl = {
         else {
             var sqlString = sqlBuilder.getDistanceByMonthSQL(subLayerID);
             var oc = this;
-            console.log(sqlString);
             this.sql().execute(sqlString).done(function(data) {
                 oc.bigNumbers(subLayerID, data);
             });
@@ -142,7 +135,6 @@ var opsControl = {
             _.each(data.rows, function(element, index) {
                 chartData.push([element.activity, element.totalmiles]);
             });
-            console.log(chartData);
             $("#chart-title-1 h4").text("Work Type Breakdown");
             window.typeBreakdown = c3.generate({
                 bindto: '#chart-container-1',
@@ -183,7 +175,6 @@ var opsControl = {
             _.each(data.rows, function(element, index) {
                 chartData.push([element.color, element.totalmiles]);
             });
-            console.log(chartData);
             $("#chart-title-1 h4").text("OCI Breakdown");
             window.typeBreakdown = c3.generate({
                 bindto: '#chart-container-1',
@@ -227,7 +218,6 @@ var opsControl = {
             milesNext = d3.round(milesNext.totalmiles, 0);
 
 
-            console.log(data);
             targetBox = $('#helper_box #bignum-right');
             $('.data-value', targetBox).text(milesNext);
             $('.data-desc', targetBox).text("Miles Scheduled In " + cDate.add(1, 'months').format("MMM"));

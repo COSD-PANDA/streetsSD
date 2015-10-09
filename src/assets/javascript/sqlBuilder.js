@@ -1,4 +1,7 @@
 var sqlBuilder = {
+  // Various SQL Subs
+  lengthMeasureGeo: "ST_Length(ST_AsText(ST_Transform(the_geom,26915)))/1609.34",
+
 
 	getLayerSQL: function(sqlKey) {
 		var SQL = "";
@@ -11,7 +14,7 @@ var sqlBuilder = {
 			"street, " +
 			"from_street, " +
 			"to_street, " +
-			"ST_Length(ST_AsText(ST_Transform(the_geom,26915)))/1609.34 as totalMiles, " +
+			this.lengthMeasureGeo + " as totalMiles, " +
 			"CASE WHEN oci <= 33.333 THEN 'Poor' " +
 			"WHEN oci <= 66.666 THEN 'Fair' " +
 			"ELSE 'Good' " +
@@ -135,7 +138,6 @@ var sqlBuilder = {
   		return SQL;
 	},
 	getDistanceSQL: function(sqlKey, extraConditions, groupBy) {
-    console.log(sqlKey);
 		var SQL = "SELECT " + groupBy + ", " +
 		"SUM(ST_Length(ST_AsText(ST_Transform(the_geom,26915)))/1609.34) as totalMiles " +
 		"FROM streetwork_master ";
@@ -160,7 +162,6 @@ var sqlBuilder = {
 	    "SUM(ST_Length(ST_AsText(ST_Transform(the_geom,26915)))/1609.34) as totalMiles " +
 	    "FROM streetwork_master ";
 	    SQL = getSQLConditions(sqlKey, SQL);
-	    console.log(SQL);
 	    SQL += "GROUP BY DISTRICT";
 	    return SQL;
 	},
