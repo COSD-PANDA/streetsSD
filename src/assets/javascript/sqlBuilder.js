@@ -1,8 +1,11 @@
 var sqlBuilder = {
+  // Various SQL Subs
+  lengthMeasure: "ST_Length(ST_AsText(ST_Transform(the_geom,26915)))/1609.34",
+
 
 	getLayerSQL: function(sqlKey) {
 		var SQL = "";
-		if (sqlKey == 'oci-2011') {
+		if (sqlKey == 'oci-2011') {	
 			SQL += "SELECT cartodb_id, " +
 			"the_geom, " +
 			"the_geom_webmercator, " +
@@ -11,7 +14,7 @@ var sqlBuilder = {
 			"street, " +
 			"from_street, " +
 			"to_street, " +
-			"ST_Length(ST_AsText(ST_Transform(the_geom,26915)))/1609.34 as totalMiles, " +
+			this.lengthMeasure + " as totalMiles, " +
 			"CASE WHEN oci <= 33.333 THEN 'Poor' " +
 			"WHEN oci <= 66.666 THEN 'Fair' " +
 			"ELSE 'Good' " +
@@ -25,6 +28,7 @@ var sqlBuilder = {
 		    "est_start, " +
 		    "completed, " +
 		    "COALESCE(to_char(est_start, 'Month YYYY'), to_char(completed, 'Month YYYY')) AS date_text," +
+		    "COALESCE(est_start, completed) AS DATE_COMBINED," +
 		    "length, " +
 		    "street, " +
 		    "from_street, " +
@@ -51,23 +55,14 @@ var sqlBuilder = {
 		switch (sqlKey) {
 			case 'all-work':
 			  // Date columns are not NULL.
-			  SQL += "WHERE (completed is not null OR est_start is not null) ";
+			  //SQL += "WHERE (completed is not null OR est_start is not null) ";
+			  SQL += "WHERE (date_combined is not null) ";
 			  // Work Done Date / Work Est Date is after 2012-01-01
-			  SQL += "AND (completed::date >= '2012-01-01' OR est_start::date >= '2012-01-01') ";
+			  SQL += "AND (date_combined::date >= '2012-01-01') ";
+			  //SQL += "AND (completed::date >= '2012-01-01' OR est_start::date >= '2012-01-01') ";
 			  // Impose Quarter Limit on Work Done for Accuracy / Consistency.
-			  SQL += "AND (completed::date <= '" + lastQuarter.end + "') ";
+			  SQL += "AND (date_combined::date <= '" + lastQuarter.end + "') ";
  			  // Filter for Null Activities.
-			  SQL += "AND (activity is not null) ";
-			  break;
-
-			case 'all-work-since-mayor':
-			  // Work Done Date is not NULL.
-			  SQL += "WHERE (completed is not null) ";
-			  // Work Done Date is after March 3, 2014.
-			  SQL += "AND (completed::date >= '2014-03-03') ";
-			  // Impose Quarter Limit on Work Done for Accuracy / Consistency.
-			  SQL += "AND (completed::date <= '" + lastQuarter.end +"') ";
-			  // Filter for Null Activities.
 			  SQL += "AND (activity is not null) ";
 			  break;
 
@@ -87,10 +82,10 @@ var sqlBuilder = {
 			  SQL += "WHERE (completed is not null) ";
 
 			  // Work Done Date is after Jul 1, 2013.
-			  SQL += "AND (completed::date >= '2013-07-01') ";
+			  SQL += "AND (date_combined::date >= '2013-07-01') ";
 
 			  // Work Done Date is before June 30, 2014.
-			  SQL += "AND (completed::date <= '2014-06-30') ";
+			  SQL += "AND (date_combined::date <= '2014-06-30') ";
 
 			  // Filter for Null Activities.
 			  SQL += "AND (activity is not null) ";
@@ -101,24 +96,41 @@ var sqlBuilder = {
 			  SQL += "WHERE (completed is not null) ";
 
 			  // Work Done Date is after Jul 1, 2014.
-			  SQL += "AND (completed::date >= '2014-07-01') ";
+			  SQL += "AND (date_combined::date >= '2014-07-01') ";
 
 			  // Work Done Date is before June 30, 2015.
-			  SQL += "AND (completed::date <= '2015-06-30') ";
+			  SQL += "AND (date_combined::date <= '2015-06-30') ";
 
 			  // Filter for Null Activities.
 			  SQL += "AND (activity is not null) ";
 			  break;
 
-			case 'future-work':
-			  // Bring in work completed after the current quarter.
-			  SQL += "WHERE (completed >= '" + lastQuarter.end + "') ";
+      		case 'work-fy-2016':
+			  // Work Done Date is not NULL.
+			  SQL += "WHERE (completed is not null) ";
 
-			  // Bring in all work with an estimated date.
-			  SQL += "OR (est_start >= '" + lastQuarter.end + "') ";
+			  // Work Done Date is after Jul 1, 2014.
+			  SQL += "AND (date_combined::date >= '2015-07-01') ";
+
+			  // Work Done Date is before June 30, 2015.
+			  SQL += "AND (date_combined::date <= '2016-06-30') ";
 
 			  // Filter for Null Activities.
 			  SQL += "AND (activity is not null) ";
+			  break;
+
+
+
+			case 'future-work':
+			  // Bring in work completed after the current quarter.
+			  //SQL += "WHERE (completed >= '" + lastQuarter.end + "') ";
+			  SQL += "WHERE (date_combined::date >= '" + lastQuarter.end + "') ";
+
+			  // Bring in all work with an estimated date.
+			  //SQL += "OR (est_start >= '" + lastQuarter.end + "') ";
+
+			  // Filter for Null Activities.
+			  //SQL += "AND (activity is not null) ";
 
 			  break;
 
@@ -135,9 +147,8 @@ var sqlBuilder = {
   		return SQL;
 	},
 	getDistanceSQL: function(sqlKey, extraConditions, groupBy) {
-    console.log(sqlKey);
 		var SQL = "SELECT " + groupBy + ", " +
-		"SUM(ST_Length(ST_AsText(ST_Transform(the_geom,26915)))/1609.34) as totalMiles " +
+		"SUM(" + this.lengthMeasure + ") as totalMiles " +
 		"FROM streetwork_master ";
 		SQL = this.getSQLConditions(sqlKey, SQL);
 		if (extraConditions)
@@ -148,19 +159,25 @@ var sqlBuilder = {
 
 		return SQL;
 	},
-  getDistanceByMonthSQL: function(sqlKey) {
-      var month = "COALESCE(to_char(est_start, 'MM'), to_char(completed, 'MM'))";
-      var sqlString = this.getDistanceSQL(sqlKey, null, month);
-      sqlString += " ORDER BY " + month;
+	getDistanceByMonthSQL: function(sqlKey) {
+	  var month = "COALESCE(to_char(est_start, 'MM'), to_char(completed, 'MM'))";
+	  var sqlString = this.getDistanceSQL(sqlKey, null, month);
+	  sqlString += " ORDER BY " + month;
 
-      return sqlString;
-  },
+	  return sqlString;
+	},
+	getDistanceByMonthYearSQL: function(sqlKey) {
+	  var month = "COALESCE(to_char(est_start, 'MM-YY'), to_char(completed, 'MM-YY'))";
+	  var sqlString = this.getDistanceSQL(sqlKey, null, month);
+	  sqlString += " ORDER BY " + month;
+
+	  return sqlString;
+	},
 	getTotalDistanceSQL: function(sqlKey, activityKey) {
 	    var SQL = "SELECT district, " +
 	    "SUM(ST_Length(ST_AsText(ST_Transform(the_geom,26915)))/1609.34) as totalMiles " +
 	    "FROM streetwork_master ";
 	    SQL = getSQLConditions(sqlKey, SQL);
-	    console.log(SQL);
 	    SQL += "GROUP BY DISTRICT";
 	    return SQL;
 	},

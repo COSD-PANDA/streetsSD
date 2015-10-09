@@ -6,7 +6,7 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
-  description: "All work that occured since Jan 1, 2012 to date, updated quarterly"
+  description: "All work that was completed since Jan 1, 2012 to date, updated quarterly"
 
 - work-1k-pledge:
   id: "work-1k-pledge"
@@ -38,6 +38,17 @@
     - "typeBreakdown"
     - "workByMonth"
   description: "All work that occured since July 1, 2014 until June 30, 2015."
+
+
+- work-fy-2016:
+  id: "work-fy-2016"
+  sublayer: "0"
+  sql: "1"
+  title: "Work Done in FY-2016"
+  ops:
+    - "typeBreakdown"
+    - "workByMonth"
+  description: "All work that occured since July 1, 2015 until June 30, 2016."
 
 - future-work:
   id: "future-work"

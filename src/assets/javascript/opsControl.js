@@ -6,17 +6,17 @@ var opsControl = {
         var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, "streetwork_master.district");
         var oc = this;
         this.sql().execute(sqlString).done(function(data) {
-            console.log(data);
             oc.display.calcTDistance(subLayerID, data);
         });
     },
     workByMonth: function(subLayerID) {
-        var month = "COALESCE(to_char(streetwork_master.est_start, 'MM'), to_char(streetwork_master.completed, 'MM'))"
+        //var month = "COALESCE(to_char(streetwork_master.est_start, 'MM'), to_char(streetwork_master.completed, 'MM'))"
+        var month = "to_char(date_combined, 'MM')";
         var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, month);
         sqlString += " ORDER BY " + month;
         var oc = this;
-        console.log(sqlString);
         this.sql().execute(sqlString).done(function(data) {
+            console.log(data);
             oc.display.workByMonth(subLayerID, data);
             oc.bigNumbers(subLayerID, data);
         });
@@ -32,14 +32,12 @@ var opsControl = {
     progress: function(subLayerID) {
         var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, "streetwork_master.district");
         var oc = this;
-        console.log(sqlString);
         this.sql().execute(sqlString).done(function(data) {
             oc.display.progress(subLayerID, data);
         });
     },
     ociBreakdown: function(subLayerID) {
         var sqlString = sqlBuilder.getOCIBreakdownSQL();
-        console.log(sqlString);
         var oc = this;
         this.sql().execute(sqlString).done(function(data) {
             oc.display.ociBreakdown(subLayerID, data);
@@ -48,7 +46,6 @@ var opsControl = {
     },
     ociAvg: function(subLayerID) {
         var sqlString = sqlBuilder.getOCIAvgSQL();
-        console.log(sqlString);
         var oc = this;
         this.sql().execute(sqlString).done(function(data) {
             oc.display.ociAvg(subLayerID, data);
@@ -57,6 +54,7 @@ var opsControl = {
     totalMiles: function(subLayerID) {
         var sqlString = sqlBuilder.getDistanceByMonthSQL(subLayerID);
         var oc = this;
+        console.log("TOTAL Miles for " + subLayerID)
         console.log(sqlString);
         this.sql().execute(sqlString).done(function(data) {
             oc.display.totalMiles(subLayerID, data);
@@ -71,18 +69,14 @@ var opsControl = {
 
     },
     bigNumbers: function(subLayerID, data) {
-        if (data) {
-            this.display.totalMiles(subLayerID, data);
-            this.display.avgMilesPerMonth(subLayerID, data);
-        }
-        else {
-            var sqlString = sqlBuilder.getDistanceByMonthSQL(subLayerID);
-            var oc = this;
-            console.log(sqlString);
-            this.sql().execute(sqlString).done(function(data) {
-                oc.bigNumbers(subLayerID, data);
-            });
-        }
+        console.log("bignumbers")
+        var sqlString = sqlBuilder.getDistanceByMonthYearSQL(subLayerID);
+        var oc = this;
+        this.sql().execute(sqlString).done(function(data) {
+            oc.display.totalMiles(subLayerID, data);
+            oc.display.avgMilesPerMonth(subLayerID, data);
+        });
+        
 
     },
 
@@ -96,9 +90,10 @@ var opsControl = {
             chartData = ['miles'];
             chartX = ['x']
             _.each(data.rows, function(element, index) {
-                chartX.push(element.coalesce)
+                chartX.push(element.to_char)
                 chartData.push(d3.round(element.totalmiles, 0));
             });
+            console.log(chartX);
             $("#chart-title-2 h4").text("Work By Month");
             window.workByMonth = c3.generate({
             bindto: '#chart-container-2',
@@ -114,9 +109,8 @@ var opsControl = {
               grouped: false,
               format: {
                 title: function(x) {
-                  var date = chartX[x+1];
+                  var date = chartX[x + 1];
                   return moment(date, "M").format("MMM") + " Total";
-                  //return moment(x+1, "M-YY").format("MMM 'YY")
                 },
                 name: function (name, ratio, id, index) {
                   return name.charAt(0).toUpperCase() + name.slice(1);
@@ -128,7 +122,7 @@ var opsControl = {
                 type: 'category', // this needed to load string x value
                 tick: {
                   culling: false,
-                  format: function(x) { return moment(x+1, "M").format("MMM"); }
+                  format: function(x) { return moment(chartX[x + 1], "M").format("MMM"); }
                 }
               },
               y: {
@@ -142,14 +136,13 @@ var opsControl = {
             _.each(data.rows, function(element, index) {
                 chartData.push([element.activity, element.totalmiles]);
             });
-            console.log(chartData);
             $("#chart-title-1 h4").text("Work Type Breakdown");
             window.typeBreakdown = c3.generate({
                 bindto: '#chart-container-1',
                 data: {
                     type: 'pie',
                     columns: chartData,
-                    colors: { "Slurry Seal": "#0098db", "Asphalt Resurfacing": "#ffa02f", "Concrete Street": "#fcd900" }
+                    colors: { "Slurry Seal": "#0098db", "AC Resurfacing": "#ffa02f", "Concrete Street": "#fcd900" }
                 },
                 tooltip: {
                   format: {
@@ -183,7 +176,6 @@ var opsControl = {
             _.each(data.rows, function(element, index) {
                 chartData.push([element.color, element.totalmiles]);
             });
-            console.log(chartData);
             $("#chart-title-1 h4").text("OCI Breakdown");
             window.typeBreakdown = c3.generate({
                 bindto: '#chart-container-1',
@@ -227,7 +219,6 @@ var opsControl = {
             milesNext = d3.round(milesNext.totalmiles, 0);
 
 
-            console.log(data);
             targetBox = $('#helper_box #bignum-right');
             $('.data-value', targetBox).text(milesNext);
             $('.data-desc', targetBox).text("Miles Scheduled In " + cDate.add(1, 'months').format("MMM"));

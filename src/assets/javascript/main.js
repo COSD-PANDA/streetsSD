@@ -63,12 +63,7 @@ var viewController = {
     var modalTarget = $(trigger).attr('href');
     $('.modal-body span').removeClass('modal-highlighted-section');
     if (modalShow) {
-      console.log(modalShow);
       modalShow = "#" + modalShow;
-      console.log($(modalShow).offset().top);
-      /*$('.modal-body', modalTarget).animate({
-        scrollTop: $(modalShow).offset().top
-      }, 1000);*/
       $(modalShow, modalTarget).addClass('modal-highlighted-section');
     }
   },
@@ -98,7 +93,6 @@ var viewController = {
       var force = force || false;
       var cookie = this.getCookie("sdInfraIntro");
       if (cookie == null || cookie == "" || force == true) {
-        console.log('force');
         this.setCookie("sdInfraIntro", "1", 90);
         $('a#help-link').click();
       }
@@ -157,7 +151,6 @@ var viewController = {
     var subLayerID = target.attr('id');
     this.clearState();
     var subLayer = global.layers[1].getSubLayer(subLayerNum);
-    console.log(subLayer);
     if (setSQL == 1) {
       var query = sqlBuilder.getLayerSQL(subLayerID);
       console.log(query);
@@ -171,7 +164,6 @@ var viewController = {
     // Check for Ops, Execute as Needed:
     var ops = (target.data('ops')).split(',') || null;
     if (ops) {
-      console.log(ops);
       _.each(ops, function(element, index) {
           opsControl[element]($(target).attr('id'))
       });
@@ -188,16 +180,12 @@ var viewController = {
     var forceAction = typeof forceAction === 'string' ? forceAction : null;
     if ((forceAction !== null && forceAction == 'close') ||
         (forceAction === null && $('#bottom-bar .tab').hasClass('active'))) {
-      console.log('action: ' + forceAction);
-      console.log('close bar');
 
       $('#bottom-bar').animate({'bottom': -($('#bottom-bar .tab-content').height())});
       $('#bottom-bar .tab').removeClass('active').html(cUp + layerTitle + cUp);
       $('.sidebar-navbar-collapse').addClass('in');
     }
     else {
-      console.log('action: ' + forceAction);
-      console.log('open bar');
       $('#bottom-bar').animate({'bottom': 0});
       $('#bottom-bar .tab').addClass('active').html(cDn + layerTitle + cDn);
       $('.sidebar-navbar-collapse').removeClass('in');
@@ -214,7 +202,6 @@ var viewController = {
       "viewbox": ["-67.956039", "10.27012", "-67.941757", "10.25608"]
     }
     ).success(function(data) {
-      console.log(data);
       loc = _.first(data);
       vc.mapToPosition({
         coords: {
