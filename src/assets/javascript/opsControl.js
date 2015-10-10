@@ -76,7 +76,7 @@ var opsControl = {
             oc.display.totalMiles(subLayerID, data);
             oc.display.avgMilesPerMonth(subLayerID, data);
         });
-        
+
 
     },
 
@@ -199,7 +199,7 @@ var opsControl = {
             totalMiles = d3.round(totalMiles, 0);
             targetBox = $('#helper_box #bignum-left');
             $('.data-value', targetBox).text(totalMiles);
-            $('.data-desc', targetBox).text("Total Miles");
+            $('.data-desc', targetBox).text("Total Miles Paved");
             $('#helper_box .bignums').show();
         },
         ociAvg: function(subLayerID, data) {
