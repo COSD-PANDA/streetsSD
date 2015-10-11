@@ -71,18 +71,25 @@ var sqlBuilder = {
 
 			case 'work-1k-pledge':
 			  // Work Done Date is not NULL.
-			  SQL += "WHERE (completed is not null) ";
+			  //SQL += "WHERE (completed is not null) ";
 			  // Activity Column is not NULL.
-			  SQL += "AND (activity is not null) ";
+			  //SQL += "AND (activity is not null) ";
+			  // Date columns are not NULL.
+			  SQL += "WHERE (date_combined is not null) ";
 			  // Work Done Date is after Jul 1, 2015.
-			  SQL += "AND (completed::date >= '2015-01-01') ";
+			  SQL += "AND (date_combined::date >= '2015-07-01') ";
+			  // Impose Quarter Limit on Work Done for Accuracy / Consistency.
+			  SQL += "AND (date_combined::date <= '" + lastQuarter.end + "') ";
 			  // Filter for Null Activities.
 			  SQL += "AND (activity is not null) ";
 			  break;
 
 			case 'work-fy-2014':
 			  // Work Done Date is not NULL.
-			  SQL += "WHERE (completed is not null) ";
+			  //SQL += "WHERE (completed is not null) ";
+
+			  // Date columns are not NULL.
+			  SQL += "WHERE (date_combined is not null) ";
 
 			  // Work Done Date is after Jul 1, 2013.
 			  SQL += "AND (date_combined::date >= '2013-07-01') ";
@@ -96,7 +103,10 @@ var sqlBuilder = {
 
 			case 'work-fy-2015':
 			  // Work Done Date is not NULL.
-			  SQL += "WHERE (completed is not null) ";
+			  //SQL += "WHERE (completed is not null) ";
+
+			  // Date columns are not NULL.
+			  SQL += "WHERE (date_combined is not null) ";
 
 			  // Work Done Date is after Jul 1, 2014.
 			  SQL += "AND (date_combined::date >= '2014-07-01') ";
@@ -110,7 +120,10 @@ var sqlBuilder = {
 
       		case 'work-fy-2016':
 			  // Work Done Date is not NULL.
-			  SQL += "WHERE (completed is not null) ";
+			  //SQL += "WHERE (completed is not null) ";
+
+			  // Date columns are not NULL.
+			  SQL += "WHERE (date_combined is not null) ";
 
 			  // Work Done Date is after Jul 1, 2014.
 			  SQL += "AND (date_combined::date >= '2015-07-01') ";

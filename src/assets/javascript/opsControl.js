@@ -199,7 +199,7 @@ var opsControl = {
             totalMiles = d3.round(totalMiles, 0);
             targetBox = $('#helper_box #bignum-left');
             $('.data-value', targetBox).text(totalMiles);
-            $('.data-desc', targetBox).text("Total Miles Paved");
+            $('.data-desc', targetBox).text("Miles");
             $('#helper_box .bignums').show();
         },
         ociAvg: function(subLayerID, data) {
