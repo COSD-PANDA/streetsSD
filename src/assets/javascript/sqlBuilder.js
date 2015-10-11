@@ -215,10 +215,10 @@ var sqlBuilder = {
 	},
   getOCIAvgSQL: function() {
   	var SQL = "SELECT " +
-      "AVG(oci) " +
+      "SUM(OCI * LENGTH) / SUM(LENGTH) AS avg " +
       "FROM oci_2011_master " +
       "WHERE oci > 0"
 
-    return SQL;
+       return SQL;
 	}
 }
