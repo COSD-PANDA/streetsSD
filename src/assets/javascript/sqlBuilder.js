@@ -29,7 +29,7 @@ var sqlBuilder = {
 		    "activity, " +
 		    "est_start, " +
 		    "completed, " +
-		    "COALESCE(to_char(est_start, 'Month YYYY'), to_char(completed, 'Month YYYY')) AS date_text," +
+		    "COALESCE(to_char(est_start, 'Month YYYY'), to_char(completed, 'Month YYYY')) AS DATE," +
 		    "COALESCE(est_start, completed) AS DATE_COMBINED," +
 		    "length, " +
 		    "street, " +

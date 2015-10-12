@@ -83,7 +83,7 @@ var opsControl = {
     display: {
         calcTDistance: function(subLayerID, data) {
             $('.tDistance', '#helper_box #' + subLayerID).text(
-                _.sum(data.rows, function(row) { return row.totalmiles; }).toFixed(2)
+                _.sum(data.rows, function(row) { return row.totalmiles; }).toFixed(0)
             );
         },
         workByMonth: function(subLayerID, data) {
@@ -165,7 +165,7 @@ var opsControl = {
                   width: 20,
                   units: ' miles',
                   label: {
-                    format: function(value, ratio) { return value; },
+                    format: function(value, ratio) { return d3.round(value, 0); },
                     show: true // to turn off the min/max labels.
                   }
                 }

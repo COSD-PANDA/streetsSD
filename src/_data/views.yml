@@ -59,7 +59,7 @@
     - "calcTDistance"
     - "typeBreakdown"
   title: "Planned Future Work"
-  description: "Mayor Faulconer has pledged to pave 1,000 miles of streets over the next 5 years. Future work includes <span class='tDistance'></span> miles of currently planned streets and is updated quarterly. More streets will be added as additional streets are identified to meet the 1,000 mile pledge. The amount of mileage paved will depend on annual budgets and funds."
+  description: "Mayor Faulconer has pledged to repair 1,000 miles of streets over the next 5 years. Future work includes <span class='tDistance'></span> miles of currently planned streets and is updated quarterly. More streets will be added as additional streets are identified to meet the 1,000 mile pledge. The amount of mileage repaired will depend on annual budgets and funds."
 
 - oci-2011:
   id: "oci-2011"
@@ -69,6 +69,6 @@
     - "ociBreakdown"
     - "ociAvg"
   title: "OCI as of 2011"
-  description: "Overall Condition Index is the condition of our streets measured in 2011. The City is updating this information in 2015. A street may have a low OCI, but not be scheduled for paving in order to accomodate other planned construction work on the street in the future."
+  description: "Overall Condition Index is the condition of our streets measured in 2011. The City is updating this information in 2015. A street may have a low OCI, but not be scheduled for repair in order to accomodate other planned construction work on the street in the future."
 
 
