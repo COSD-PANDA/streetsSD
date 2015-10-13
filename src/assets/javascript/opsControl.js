@@ -1,4 +1,16 @@
 var opsControl = {
+    colors: {
+        oci: {
+            good: "#0098db",
+            fair: "#ffa02f",
+            poor: "#fcd900",
+        },
+        activity: {
+            ac_resurface: "#0098db",
+            slurry_seal: "#ffa02f",
+            concrete_street: "#fcd900",
+        }
+    },
     sql: function() {
         return new cartodb.SQL({ user: 'cityofsandiego' });
     },
@@ -133,6 +145,8 @@ var opsControl = {
         },
         typeBreakdown: function(subLayerID, data) {
             chartData = [];
+            var oc = opsControl;
+            console.log(oc.colors.activity)
             _.each(data.rows, function(element, index) {
                 chartData.push([element.activity, element.totalmiles]);
             });
@@ -142,7 +156,11 @@ var opsControl = {
                 data: {
                     type: 'pie',
                     columns: chartData,
-                    colors: { "Slurry Seal": "#0098db", "AC Resurfacing": "#ffa02f", "Concrete Street": "#fcd900" }
+                    colors: { 
+                        "Slurry Seal": oc.colors.activity.slurry_seal, 
+                        "AC Resurfacing": oc.colors.activity.ac_resurface,
+                        "Concrete Street": oc.colors.activity.concrete_street 
+                    }
                 },
                 tooltip: {
                   format: {
@@ -173,6 +191,7 @@ var opsControl = {
         },
         ociBreakdown: function(subLayerID, data) {
             chartData = [];
+            var oc = opsControl;
             _.each(data.rows, function(element, index) {
                 chartData.push([element.color, element.totalmiles]);
             });
@@ -182,7 +201,11 @@ var opsControl = {
                 data: {
                   type: 'pie',
                   columns: chartData,
-                  colors: { "Poor": "#9c6114", "Fair": "#00c7b2", "Good": "#ffa02f" }
+                  colors: { 
+                    "Poor": oc.colors.oci.poor, 
+                    "Fair": oc.colors.oci.fair,
+                    "Good": oc.colors.oci.good,
+                  }
                 },
                 tooltip: {
                   format: {
