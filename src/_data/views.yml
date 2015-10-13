@@ -6,7 +6,7 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
-  description: "All work that occured since Jan 1, 2012 to date, updated quarterly"
+  description: "All work that has occurred since January 1, 2012 to the most recent date of this map tool. This information is updated quarterly."
 
 - work-1k-pledge:
   id: "work-1k-pledge"
@@ -17,7 +17,7 @@
     - "typeBreakdown"
     - "progress"
     - "bigNumbers"
-  description: "All work that occured since Jul 1, 2015."
+  description: "All work that has occurred since July 1, 2015."
 
 - work-fy-2013:
   id: "work-fy-2013"
@@ -27,7 +27,7 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
-  description: "All work that occured since July 1, 2012 until June 31, 2013."
+  description: "All work that occurred from July 1, 2012 through June 31, 2013."
 
 - work-fy-2014:
   id: "work-fy-2014"
@@ -37,7 +37,7 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
-  description: "All work that occured since July 1, 2013 until June 31, 2014."
+  description: "All work that occurred from July 1, 2013 through June 31, 2014."
 
 - work-fy-2015:
   id: "work-fy-2015"
@@ -47,7 +47,7 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
-  description: "All work that occured since July 1, 2014 until June 30, 2015."
+  description: "All work that has occurred since July 1, 2014. This information is updated quarterly."
 
 - future-work:
   id: "future-work"
@@ -59,7 +59,7 @@
     - "typeBreakdown"
     - "workByMonth"
   title: "Planned Future Work"
-  description: "Mayor Faulconer has pledged to pave 1,000 miles of streets over the next 5 years. Future work includes <span class='tDistance'></span> miles of currently planned streets and is updated quarterly. More streets will be added as additional streets are identified to meet the 1,000 mile pledge. The amount of mileage paved will depend on annual budgets and funds."
+  description: "Mayor Faulconer has pledged to pave 1,000 miles of streets over the next 5 years. Future work includes 333.82 miles of street currently planned for repairs. Exact totals completed will be updated quarterly. Additional miles of repairs will be added as more streets are identified to meet the 1,000 mile pledge. The exact amount of mileage repaired in future years will depend on annual budgets and funds."
 
 - oci-2011:
   id: "oci-2011"
@@ -68,6 +68,6 @@
   ops:
     - "ociBreakdown"
   title: "OCI as of 2011"
-  description: "Overall Condition Index is the condition of our streets measured in 2011. The City is updating this information in 2015. A street may have a low OCI, but not be scheduled for paving in order to accomodate other planned construction work on the street in the future."
+  description: "The Overall Condition Index (OCI) is a numeric assessment of the condition of City roadways prepared in 2011. The City is updating this information in 2015. Please be aware that the City uses the OCI as just one part of a comprehensive paving management system. Though a street may have a low OCI it is possible that the paving management system will not schedule that street for immediate repairs pending the completion of other planned construction work or utility repair work scheduled for the street in future months."
 
 
