@@ -61,7 +61,7 @@ var sqlBuilder = {
 			  //SQL += "WHERE (completed is not null OR est_start is not null) ";
 			  SQL += "WHERE (date_combined is not null) ";
 			  // Work Done Date / Work Est Date is after 2012-01-01
-			  SQL += "AND (date_combined::date >= '2012-01-01') ";
+			  SQL += "AND (date_combined::date >= '2013-07-01') ";
 			  //SQL += "AND (completed::date >= '2012-01-01' OR est_start::date >= '2012-01-01') ";
 			  // Impose Quarter Limit on Work Done for Accuracy / Consistency.
 			  SQL += "AND (date_combined::date <= '" + lastQuarter.end + "') ";
