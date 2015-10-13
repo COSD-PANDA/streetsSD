@@ -63,6 +63,8 @@ $s_baby_blue: #5eb6e4;
 $s_baby_yellow:#f3ec7a;
 
 
+
+
 $gray: white;
 
 /** End Assists **/
@@ -105,8 +107,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .other-section a, .other-section .address-search {
   float: left;
-  margin-left:10px;
-  margin-right:10px;
+  margin-left:1%;
+  margin-right:1%;
 }
 
 .masthead-title small {
@@ -255,8 +257,10 @@ img {
     padding:0px;
     color: white;
   }
+  .data-value {
+    font-size: 1.5rem
+  }
   .data-value, .data-desc {
-    @include vertical-align;
     top:38%;
   }
   .subsection-inner {
@@ -312,6 +316,9 @@ div.cartodb-legend-stack {
   bottom:auto;
   right: 67px;
   opacity: 0.9;
+  a.modal-link {
+    color: $s_gray;
+  }
 }
 
 div.cartodb-popup-content-wrapper {
@@ -336,7 +343,7 @@ div.cartodb-popup-content-wrapper {
 }
 
 .modal-body {
-  max-height: 300px;
+  max-height: 575px;
   overflow: scroll;
 }
 
@@ -344,8 +351,15 @@ div.cartodb-popup-content-wrapper {
   background-color: $s_baby_yellow;
 }
 
+.modal-dialog {
+  z-index: 9999;
+}
+
 /* make sidebar nav vertical */
 @media (min-width: 768px) {
+  .modal-dialog {
+    width: 80%;
+  }
 }
 @media (min-width: 992px) {
   .helper-box-section-row.bignums {

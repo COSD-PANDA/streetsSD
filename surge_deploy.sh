@@ -1,2 +1,3 @@
-#! binbash
-surge --project ~/Code/sdstage/inframap/site --domain sdif.surge.sh
+#!/bin/bash
+
+surge --project ./site --domain sdif.surge.sh

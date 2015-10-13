@@ -5,27 +5,29 @@ var global = {
 var viewController = {
   init: function() {
     var vc = this;
-    cartodb.createVis('map', 'https://maksim2.cartodb.com/api/v2/viz/1387c31c-e546-11e4-a74b-0e853d047bba/viz.json', {
+    cartodb.createVis('map', 'https://cityofsandiego.cartodb.com/api/v2/viz/0eb76b2a-50ea-11e5-b297-0e018d66dc29/viz.json', {
       tiles_loader: true,
       center_lat: 32.7150,
       center_lon: -117.1625,
       zoom: 11
     })
     .done(function(vis, layers) {
-      console.log(vis);
-      console.log(layers);
       $('body').removeClass('.map-loading').addClass('map-loaded');
+      //layers[1].getSubLayer(0).setCartoCSS(css);
+      //layers[1].getSubLayer(1).setCartoCSS(css);
       global.vis = vis;
       global.layers = layers;
       global.map = vis.getNativeMap();
       vc.initSubLayerWatch();
       vc.initBottomBar();
+      vc.initModalLinks();
+      vc.initLocationLinks()
+      vc.initFirstLayer();
       // Default
       vc.initIntro();
       // Force intro
-      //initIntro(true);
-      vc.initModalLinks();
-      vc.initLocationLinks()
+      //vc.initIntro(true);
+      // Set CSS on Layers:
      })
     .error(function(err) {
       console.log(err);
@@ -48,23 +50,23 @@ var viewController = {
     $('a.modal-link').click(function(e) {
       var modalTarget = $(this).attr('href');
       var trigger = $(this);
-      $(modalTarget).modal({ backdrop: false });
+      $(modalTarget).modal({ backdrop: true });
       $(modalTarget).one('shown.bs.modal', function() {
         vc.showModalAndHighlight(trigger);
       })
+
+      return false;
     });
+  },
+  initFirstLayer: function() {
+    $('#layer-selector a#all-work').click();
   },
   showModalAndHighlight: function(trigger) {
     var modalShow = $(trigger).data('modal-show');
     var modalTarget = $(trigger).attr('href');
     $('.modal-body span').removeClass('modal-highlighted-section');
     if (modalShow) {
-      console.log(modalShow);
       modalShow = "#" + modalShow;
-      console.log($(modalShow).offset().top);
-      /*$('.modal-body', modalTarget).animate({
-        scrollTop: $(modalShow).offset().top
-      }, 1000);*/
       $(modalShow, modalTarget).addClass('modal-highlighted-section');
     }
   },
@@ -76,14 +78,15 @@ var viewController = {
       $workLayers.click(function(e) {
         // Load Map Info
         var target = $(e.target);
-        viewController.loadMapInfo(target);
-        viewController.executeOps(target);
-
-        console.log('click trig');
         $('#sidebar-checkbox').prop("checked", false);
 
         $workLayers.removeClass('active');
-        $('a', target).addClass('active');
+        $(target).addClass('active');
+
+        viewController.loadMapInfo(target);
+        viewController.executeOps(target);
+
+
       });
   },
   initBottomBar: function () {
@@ -93,8 +96,8 @@ var viewController = {
       var force = force || false;
       var cookie = this.getCookie("sdInfraIntro");
       if (cookie == null || cookie == "" || force == true) {
-        this.setCookie("sdInfraIntro", "1",90);
-        startIntro();
+        this.setCookie("sdInfraIntro", "1", 90);
+        $('a#help-link').click();
       }
   },
   getCookie: function(cname) {
@@ -131,18 +134,29 @@ var viewController = {
   mapToPosition: function(position) {
     lon = position.coords.longitude;
     lat = position.coords.latitude;
-    global.map.setView(new L.LatLng(lat,lon), 14);
+    if (this.geoLocMarker)
+      global.map.removeLayer(this.geoLocMarker);
+
+    this.geoLocMarker = new L.CircleMarker([lat,lon],{
+      radius: 7,
+      color: '#00549f',
+      opacity: 1,
+      fill: true,
+      fillOpacity: 0.8
+    });
+    this.geoLocMarker.addTo(global.map);
+    global.map.setView(new L.LatLng(lat,lon), 15);
+
   },
   loadMapInfo: function(target) {
-    // TODO -- there's a bug here for showing OCI.
     var subLayerNum = target.attr('data-sublayer');
     var setSQL = target.attr('data-sql');
     var subLayerID = target.attr('id');
     this.clearState();
     var subLayer = global.layers[1].getSubLayer(subLayerNum);
-    console.log(subLayer);
     if (setSQL == 1) {
       var query = sqlBuilder.getLayerSQL(subLayerID);
+      console.log("Set Map Query For Layer: " + subLayerID + " with Number " + subLayerNum)
       console.log(query);
       subLayer.setSQL(query);
     }
@@ -154,31 +168,30 @@ var viewController = {
     // Check for Ops, Execute as Needed:
     var ops = (target.data('ops')).split(',') || null;
     if (ops) {
-      console.log(ops);
       _.each(ops, function(element, index) {
           opsControl[element]($(target).attr('id'))
       });
       // Remove blank intro if there
       $('#bottom-bar-content #blank-intro').remove();
+      var layerTitle = $('#layer-selector a.active').html();
       this.bottomBarToggle('open');
     }
   },
   bottomBarToggle: function(forceAction) {
+    var layerTitle = $('#layer-selector a.active').html();
+    var cUp = unescape(' <i class="fa fa-chevron-up"></i> ');
+    var cDn = unescape(' <i class="fa fa-chevron-down"></i> ');
     var forceAction = typeof forceAction === 'string' ? forceAction : null;
     if ((forceAction !== null && forceAction == 'close') ||
         (forceAction === null && $('#bottom-bar .tab').hasClass('active'))) {
-      console.log('action: ' + forceAction);
-      console.log('close bar');
 
       $('#bottom-bar').animate({'bottom': -($('#bottom-bar .tab-content').height())});
-      $('#bottom-bar .tab').removeClass('active').text('More Info');
+      $('#bottom-bar .tab').removeClass('active').html(cUp + layerTitle + cUp);
       $('.sidebar-navbar-collapse').addClass('in');
     }
     else {
-      console.log('action: ' + forceAction);
-      console.log('open bar');
       $('#bottom-bar').animate({'bottom': 0});
-      $('#bottom-bar .tab').addClass('active').text('Less Info');
+      $('#bottom-bar .tab').addClass('active').html(cDn + layerTitle + cDn);
       $('.sidebar-navbar-collapse').removeClass('in');
     }
   },
@@ -193,7 +206,6 @@ var viewController = {
       "viewbox": ["-67.956039", "10.27012", "-67.941757", "10.25608"]
     }
     ).success(function(data) {
-      console.log(data);
       loc = _.first(data);
       vc.mapToPosition({
         coords: {
@@ -234,6 +246,18 @@ var viewController = {
 
 
 $(document).ready(function() {
+  $.reject({
+      reject: {
+        //all: true
+        msie: 10
+      },
+      imagePath: './assets/images/browsers/',
+      display: ['chrome', 'firefox'],
+      header: 'You Internet Browser is not compatible with SDStreets!',  
+      paragraph1: 'Because of this, various things may not work. '+  
+                'Please see the list of compatible browsers below. ',
+      paragraph2: 'Just click on the icons to get to the download page!',  
+  }); 
   viewController.init();
 });
 

@@ -5920,8 +5920,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .other-section a, .other-section .address-search {
   float: left;
-  margin-left: 10px;
-  margin-right: 10px; }
+  margin-left: 1%;
+  margin-right: 1%; }
 
 .masthead-title small {
   color: #1b242a; }
@@ -6046,12 +6046,9 @@ img {
     margin: 0px;
     padding: 0px;
     color: white; }
+  .helper-box-subsection .data-value {
+    font-size: 1.5rem; }
   .helper-box-subsection .data-value, .helper-box-subsection .data-desc {
-    position: relative;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
     top: 38%; }
   .helper-box-subsection .subsection-inner {
     background: #0098db;
@@ -6096,6 +6093,8 @@ div.cartodb-legend-stack {
   bottom: auto;
   right: 67px;
   opacity: 0.9; }
+  div.cartodb-legend-stack a.modal-link {
+    color: #5d676f; }
 
 div.cartodb-popup-content-wrapper {
   font-family: "Open Sans",Helvetica, Arial, sans-serif; }
@@ -6111,13 +6110,20 @@ div.cartodb-popup-content-wrapper {
   modal-content-border-radius: 0px; }
 
 .modal-body {
-  max-height: 300px;
+  max-height: 575px;
   overflow: scroll; }
 
 .modal-highlighted-section {
   background-color: #f3ec7a; }
 
+.modal-dialog {
+  z-index: 9999; }
+
 /* make sidebar nav vertical */
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 80%; } }
+
 @media (min-width: 992px) {
   .helper-box-section-row.bignums {
     height: 35%; }
