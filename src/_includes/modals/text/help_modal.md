@@ -1,12 +1,10 @@
 ##About this map
-This map highlights city streets that have been repaired since 2013. Depending on which layer is showing, streets are colored by type of repair or by their ranking in the 2011 Overall Condition Index (OCI) survey conducted by the City.
+This map highlights city streets that have been repaired since September 2012. Depending on which layer is showing, streets are colored by type of repair or by their ranking in the 2011 Overall Condition Index (OCI) survey conducted by the City.
 You can use the menu in the upper left to filter street repairs by year, to display each city street’s OCI, show upcoming work, and to track the progress of Mayor Kevin Faulconer’s pledge to complete 1,000 miles of street repairs in five years.
 The data used to develop this map is the latest available from the City’s Transportation & Storm Water Department. Numbers shown here may have been updated from previous reports on street repairs. Streets that do not have an OCI listed are not City-maintained streets and are typically located on a private property or a military base.
 
-
 ## Overview of City Street Network
-As of 2015, the City of San Diego’s street network consists of about 2,800 miles of streets as measured along their center-lines. This includes 2,659 miles of asphalt streets, 115 miles of concrete streets, and 203 miles of paved alleys. The City uses center-line miles to describe the distance of our street network. “Lane-miles” are used to describe repair work and account for both the length and width of our streets.
-
+As of 2015, the City of San Diego’s street network consists of about 2,800 miles of streets as measured along their center-lines. This includes 2,659 miles of asphalt streets, 115 miles of concrete streets, and 203 miles of paved alleys. The City uses center-line miles to describe the distance of our street network. “Lane-miles” are used to describe repair work and account for both the length and width of our streets. Totals for miles paved are in lane miles.
 
 <span id="condition">
 ## Condition of City streets

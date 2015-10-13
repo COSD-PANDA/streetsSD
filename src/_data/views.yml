@@ -12,7 +12,7 @@
   id: "work-1k-pledge"
   sublayer: "0"
   sql: "1"
-  title: "Work done for Mayor Faulconer’s 1,000 mile pledge"
+  title: "Work Done for 1k Pledge"
   ops:
     - "typeBreakdown"
     - "progress"
