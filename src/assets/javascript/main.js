@@ -13,6 +13,8 @@ var viewController = {
     })
     .done(function(vis, layers) {
       $('body').removeClass('.map-loading').addClass('map-loaded');
+      //layers[1].getSubLayer(0).setCartoCSS(css);
+      //layers[1].getSubLayer(1).setCartoCSS(css);
       global.vis = vis;
       global.layers = layers;
       global.map = vis.getNativeMap();
@@ -25,6 +27,7 @@ var viewController = {
       vc.initIntro();
       // Force intro
       //vc.initIntro(true);
+      // Set CSS on Layers:
      })
     .error(function(err) {
       console.log(err);

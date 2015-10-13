@@ -6,18 +6,18 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
-  description: "All work that was completed since Jan 1, 2012 to date, updated quarterly"
+  description: "All work that has occurred since July 1, 2013 to the most recent date available to the tool. This information is updated quarterly."
 
 - work-1k-pledge:
   id: "work-1k-pledge"
   sublayer: "0"
   sql: "1"
-  title: "Work Done For 1k Pledge"
+  title: "Work done for Mayor Faulconer’s 1,000 mile pledge"
   ops:
     - "typeBreakdown"
     - "progress"
     - "bigNumbers"
-  description: "All work that occured since Jul 1, 2015."
+  description: "All work that has occurred and is planned since July 1, 2015"
 
 - work-fy-2014:
   id: "work-fy-2014"
