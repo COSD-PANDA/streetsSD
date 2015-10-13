@@ -71,4 +71,3 @@ rsync-credentials.json
 
 # caches
 .publish
-vendor/
