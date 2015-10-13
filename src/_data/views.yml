@@ -27,7 +27,7 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
-  description: "All work that occured since July 1, 2013 until June 31, 2014."
+  description: "All work that occurred from July 1, 2013 through June 31, 2014."
 
 - work-fy-2015:
   id: "work-fy-2015"
@@ -37,7 +37,7 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
-  description: "All work that occured since July 1, 2014 until June 30, 2015."
+  description: "All work that has occurred since July 1, 2014. This information is updated quarterly."
 
 
 - work-fy-2016:
@@ -58,8 +58,8 @@
   ops:
     - "calcTDistance"
     - "typeBreakdown"
-  title: "Planned Future Work"
-  description: "Mayor Faulconer has pledged to repair 1,000 miles of streets over the next 5 years. Future work includes <span class='tDistance'></span> miles of currently planned streets and is updated quarterly. More streets will be added as additional streets are identified to meet the 1,000 mile pledge. The amount of mileage repaired will depend on annual budgets and funds."
+  title: "Planned Future Work" 
+  description: "Mayor Faulconer has pledged to pave 1,000 miles of streets over the next 5 years. Future work includes <span class='tDistance'></span> miles of street currently planned for repairs. Exact totals completed will be updated quarterly. Additional miles of repairs will be added as more streets are identified to meet the 1,000 mile pledge. The exact amount of mileage repaired in future years will depend on annual budgets and funds."
 
 - oci-2011:
   id: "oci-2011"
@@ -69,6 +69,6 @@
     - "ociBreakdown"
     - "ociAvg"
   title: "OCI as of 2011"
-  description: "Overall Condition Index is the condition of our streets measured in 2011. The City is updating this information in 2015. A street may have a low OCI, but not be scheduled for repair in order to accomodate other planned construction work on the street in the future."
+  description: "The Overall Condition Index (OCI) is a numeric assessment of the condition of City roadways prepared in 2011. The City is updating this information in 2015. A street may have a low OCI, but not be scheduled for repair in order to accomodate other planned construction work on the street in the future."
 
 
