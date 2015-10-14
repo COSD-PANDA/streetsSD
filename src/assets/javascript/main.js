@@ -171,8 +171,14 @@ var viewController = {
       });
       // Remove blank intro if there
       $('#bottom-bar-content #blank-intro').remove();
+
+      // Inject Dates.
       var lq = sqlBuilder.getLastQuarter();
       $('.lqEnd').text(moment(lq.end).format("MMMM D, YYYY"));
+      //var startDate = target.data("start");
+      //var endDate = target.data("end");
+      //$('.dateStart').text(moment(startDate).format("MMMM D, YYYY"))
+
       var layerTitle = $('#layer-selector a.active').html();
       this.bottomBarToggle('open');
     }
