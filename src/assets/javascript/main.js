@@ -259,11 +259,11 @@ $(document).ready(function() {
       },
       imagePath: './assets/images/browsers/',
       display: ['chrome', 'firefox'],
-      header: 'You Internet Browser is not compatible with SDStreets!',  
-      paragraph1: 'Because of this, various things may not work. '+  
+      header: 'You Internet Browser is not compatible with SDStreets!',
+      paragraph1: 'Because of this, various things may not work. '+
                 'Please see the list of compatible browsers below. ',
-      paragraph2: 'Just click on the icons to get to the download page!',  
-  }); 
+      paragraph2: 'Just click on the icons to get to the download page!',
+  });
   viewController.init();
 });
 
