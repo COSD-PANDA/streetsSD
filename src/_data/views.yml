@@ -21,7 +21,7 @@
     - "typeBreakdown"
     - "progress"
     - "bigNumbers"
-  description: "All work from July 1, 2015 to <span class='lqEnd'></span>.  This information is updated quarterly."
+  description: "Mayor Faulconer has pledged to pave 1,000 miles of streets over the next 5 years. This shows all work from July 1, 2015 to <span class='lqEnd'></span>.  This information is updated quarterly."
 
 - work-fy-2014:
   id: "work-fy-2014"
@@ -33,7 +33,7 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
-  description: "All work from July 1, 2013 through June 31, 2014."
+  description: "All work from July 1, 2013 to June 31, 2014."
 
 - work-fy-2015:
   id: "work-fy-2015"
@@ -45,7 +45,7 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
-  description: "All work from July 1, 2014 until June 31, 2015."
+  description: "All work from July 1, 2014 to June 31, 2015."
 
 
 - work-fy-2016:
@@ -70,7 +70,7 @@
     - "calcTDistance"
     - "typeBreakdown"
   title: "Planned Future Work" 
-  description: "Mayor Faulconer has pledged to pave 1,000 miles of streets over the next 5 years. Future work includes <span class='tDistance'></span> miles of street planned for repairs after <span class='lqEnd'></span>. Additional miles of repairs will be added as more streets are identified. The exact amount of mileage repaired in future years will depend on annual budgets and funds."
+  description: "Future work includes <span class='tDistance'></span> miles of street planned for repairs after <span class='lqEnd'></span>. Additional miles of repairs will be added as more streets are identified. The exact amount of mileage repaired in future years will depend on annual budgets and funds."
 
 - oci-2011:
   id: "oci-2011"
