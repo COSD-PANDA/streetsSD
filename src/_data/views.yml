@@ -3,63 +3,74 @@
   sublayer: "0"
   sql: "1"
   title: "All Work"
+  start: "2013-07-01"
+  end: "lqEnd"
   ops:
     - "typeBreakdown"
     - "workByMonth"
-  description: "All work that has occurred since July 1, 2013 to the most recent date available to the tool. This information is updated quarterly."
+  description: "All work from July 1, 2013 to <span class='lqEnd'></span>. This information is updated quarterly."
 
 - work-1k-pledge:
   id: "work-1k-pledge"
   sublayer: "0"
   sql: "1"
-  title: "Work Done for 1k Pledge"
+  title: "Work for 1k Pledge"
+  start: "2015-07-01"
+  end: "lqEnd"
   ops:
     - "typeBreakdown"
     - "progress"
     - "bigNumbers"
-  description: "All work that has occurred and is planned since July 1, 2015 to the most recent date available in the tool.  This information is updated quarterly."
+  description: "All work from July 1, 2015 to <span class='lqEnd'></span>.  This information is updated quarterly."
 
 - work-fy-2014:
   id: "work-fy-2014"
   sublayer: "0"
   sql: "1"
-  title: "Work Done in Fiscal Yr 2014"
+  title: "Work in Fiscal Year 2014"
+  start: "2013-07-01"
+  end: "2014-06-31"
   ops:
     - "typeBreakdown"
     - "workByMonth"
-  description: "All work that occurred from July 1, 2013 through June 31, 2014."
+  description: "All work from July 1, 2013 through June 31, 2014."
 
 - work-fy-2015:
   id: "work-fy-2015"
   sublayer: "0"
   sql: "1"
-  title: "Work Done in Fiscal Yr 2015"
+  title: "Work in Fiscal Year 2015"
+  start: "2014-07-01"
+  end: "2015-06-31"
   ops:
     - "typeBreakdown"
     - "workByMonth"
-  description: "All work that has occurred since July 1, 2014 until June 31, 2015."
+  description: "All work from July 1, 2014 until June 31, 2015."
 
 
 - work-fy-2016:
   id: "work-fy-2016"
   sublayer: "0"
   sql: "1"
-  title: "Work Done in Fiscal Yr 2016"
+  title: "Work in Fiscal Year 2016"
+  start: "2015-07-01"
+  end: "lqEnd"
   ops:
     - "typeBreakdown"
     - "workByMonth"
-  description: "All work that occured since July 1, 2015 until June 30, 2016."
+  description: "All work from July 1, 2015 to <span class='lqEnd'></span>.  This information is updated quarterly."
 
 - future-work:
   id: "future-work"
   sublayer: "0"
   sql: "1"
   calcTDistance: "1"
+  start: "lqEnd"
   ops:
     - "calcTDistance"
     - "typeBreakdown"
   title: "Planned Future Work" 
-  description: "Mayor Faulconer has pledged to pave 1,000 miles of streets over the next 5 years. Future work includes <span class='tDistance'></span> miles of street currently planned for repairs. Exact totals completed will be updated quarterly. Additional miles of repairs will be added as more streets are identified to meet the 1,000 mile pledge. The exact amount of mileage repaired in future years will depend on annual budgets and funds."
+  description: "Mayor Faulconer has pledged to pave 1,000 miles of streets over the next 5 years. Future work includes <span class='tDistance'></span> miles of street planned for repairs after <span class='lqEnd'></span>. Additional miles of repairs will be added as more streets are identified. The exact amount of mileage repaired in future years will depend on annual budgets and funds."
 
 - oci-2011:
   id: "oci-2011"

@@ -129,7 +129,7 @@ var sqlBuilder = {
 			  SQL += "AND (date_combined::date >= '2015-07-01') ";
 
 			  // Work Done Date is before June 30, 2015.
-			  SQL += "AND (date_combined::date <= '2016-06-30') ";
+			  SQL += "AND (date_combined::date <= '" + lastQuarter.end + "') ";
 
 			  // Filter for Null Activities.
 			  SQL += "AND (activity is not null) ";

@@ -13,8 +13,6 @@ var viewController = {
     })
     .done(function(vis, layers) {
       $('body').removeClass('.map-loading').addClass('map-loaded');
-      //layers[1].getSubLayer(0).setCartoCSS(css);
-      //layers[1].getSubLayer(1).setCartoCSS(css);
       global.vis = vis;
       global.layers = layers;
       global.map = vis.getNativeMap();
@@ -173,6 +171,8 @@ var viewController = {
       });
       // Remove blank intro if there
       $('#bottom-bar-content #blank-intro').remove();
+      var lq = sqlBuilder.getLastQuarter();
+      $('.lqEnd').text(moment(lq.end).format("MMMM D, YYYY"));
       var layerTitle = $('#layer-selector a.active').html();
       this.bottomBarToggle('open');
     }
