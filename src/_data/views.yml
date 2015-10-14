@@ -17,7 +17,7 @@
     - "typeBreakdown"
     - "progress"
     - "bigNumbers"
-  description: "All work that has occurred and is planned since July 1, 2015"
+  description: "All work that has occurred and is planned since July 1, 2015 to the most recent date available in the tool.  This information is updated quarterly."
 
 - work-fy-2014:
   id: "work-fy-2014"
@@ -37,7 +37,7 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
-  description: "All work that has occurred since July 1, 2014. This information is updated quarterly."
+  description: "All work that has occurred since July 1, 2014 until June 31, 2015."
 
 
 - work-fy-2016:
