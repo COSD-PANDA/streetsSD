@@ -10,10 +10,10 @@ As of 2015, the City of San Diego’s street network consists of about 2,800 mil
 ## Condition of City streets
 </span>
 
-The 100 point OCI ranking system developed by the City classifies streets into one of three categories:
+A 100-point OCI ranking system the City uses classifies streets into one of three categories:
 
 <span id="condition-good">
-**Good** - A street in this category has little or no cracking, potholes, or other distresses; has excellent drivability; and does not need maintenance. A street in good condition has an OCI rating between 70 and 100.
+**Good** - A street in this category has little or no cracking, minor potholes, or other distresses; has excellent drivability; and does not need maintenance. A street in good condition has an OCI rating between 70 and 100.
 </span>
 
 <span id="condition-fair">**Fair** - A street in this category has moderate cracking and/or some minor potholes; has adequate drivability; and is typically in need of remedial repairs and a slurry seal or a minor asphalt overlay, which may include remedial repairs. A street in fair condition has an OCI rating between 40 and 69.</span>
@@ -27,10 +27,10 @@ The 100 point OCI ranking system developed by the City classifies streets into o
 </span>
 
 <span id="street-rep-asphalt">
-**Asphalt Resurfacing** - Placement of a new layer of asphalt at a thickness of 1 to 3 inches over an old worn-out street surface.
+**Asphalt Resurfacing** - Placement of a new layer of asphalt at a thickness of 1 to 3 inches over an old worn-out street surface or by first removing 2 to 3 inches of existing asphalt before a new layer is placed.
 </span>
 
 <span id="street-rep-concrete">**Concrete Street** - Repairs to concrete streets range from patching with asphalt to removal and replacement of isolated concrete panels and complete reconstruction of the entire roadway when warranted.</span>
 
-<span id="street-rep-slurry">**Slurry Seal** - Slurry sealing repair uses a mixture of sand and an emulsion of petroleum products to coat a street surface up to 3/8 of an inch thick, sometimes even thiner. A slurry seal coating is not a complete resurfacing treatment and is used to just preserve the state of asphalt pavements in ‘fair’ to ‘good’ condition. As part of this process, crack sealing and occasional small surface repairs may be conducted prior to the sealing effort.</span>
+<span id="street-rep-slurry">**Slurry Seal** - Slurry sealing repair uses a mixture of sand and an emulsion of petroleum products to coat a street surface up to 3/8 of an inch think. A slurry seal coating is not a complete resurfacing treatment and is used to preserve and prolong the state of asphalt pavements in ‘fair’ to ‘good’ condition. As part of this process, crack sealing and small surface repairs may be conducted before the sealing effort.</span>
 
