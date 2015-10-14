@@ -23,7 +23,7 @@
   id: "work-fy-2014"
   sublayer: "0"
   sql: "1"
-  title: "Work Done in FY-2014"
+  title: "Work Done in Fiscal Yr 2014"
   ops:
     - "typeBreakdown"
     - "workByMonth"
@@ -33,7 +33,7 @@
   id: "work-fy-2015"
   sublayer: "0"
   sql: "1"
-  title: "Work Done in FY-2015"
+  title: "Work Done in Fiscal Yr 2015"
   ops:
     - "typeBreakdown"
     - "workByMonth"
@@ -44,7 +44,7 @@
   id: "work-fy-2016"
   sublayer: "0"
   sql: "1"
-  title: "Work Done in FY-2016"
+  title: "Work Done in Fiscal Yr 2016"
   ops:
     - "typeBreakdown"
     - "workByMonth"
