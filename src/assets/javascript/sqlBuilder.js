@@ -5,7 +5,7 @@ var sqlBuilder = {
   adjLengthMeasure: "adj_length",
 
 
-	getLayerSQL: function(sqlKey) {
+	/*getLayerSQL: function(sqlKey) {
 		var SQL = "";
 		if (sqlKey == 'oci-2011') {	
 			SQL += "SELECT cartodb_id, " +
@@ -40,7 +40,50 @@ var sqlBuilder = {
 		    "FROM streetwork_master ";
 		}
 	    return this.getSQLConditions(sqlKey, SQL);
+	},*/
+	getLayerSQL: function(sqlKey) {
+		var SQL = squel.select()
+			.field("cartodb_id")
+			.field("the_geom")
+			.field("the_geom_webmercator");
+		if (sqlKey == 'oci-2011') {
+			SQL = SQL.field("to_char(oci_date, 'Month YYYY')", "oci_date")
+				.field("oci")
+				.field("street")
+				.field("from_street")
+				.field("to_street")
+				.field("length as totalMiles")
+				.field("CASE " +
+					"WHEN oci <= 33.333 THEN 'Poor' " +
+				    "WHEN oci <= 66.666 THEN 'Fair' " +
+				    "ELSE 'Good' " +
+				    "END", "oci_condition")
+				.from("oci_2011_master");
+		}
+
+		return this.getSQLConditions(sqlKey, SQL);
+
+		console.log(SQL.toString());
+		
+	    /*else {
+		    SQL += "SELECT cartodb_id," +
+		    "the_geom_webmercator, " +
+		    "activity, " +
+		    "est_start, " +
+		    "completed, " +
+		    "COALESCE(to_char(est_start, 'Month YYYY'), to_char(completed, 'Month YYYY')) AS DATE," +
+		    "COALESCE(est_start, completed) AS DATE_COMBINED," +
+		    "length, " +
+		    "street, " +
+		    "from_street, " +
+		    "to_street, "+
+		    "district, "+
+		    this.adjLengthMeasure + " " +
+		    "FROM streetwork_master ";
+		}
+	    return this.getSQLConditions(sqlKey, SQL);*/
 	},
+
 	getLastQuarter: function(date) {
 		var date = date || new Date();
 		var sqlFormatDate = ('YYYY-MM-DD');
@@ -52,9 +95,9 @@ var sqlBuilder = {
 			end: lastQuarterEndDate.format(sqlFormatDate)
 		}
 	},
-	getSQLConditions: function(sqlKey, previousSQL) {
+	getSQLConditions: function(sqlKey, SQL) {
 		var lastQuarter = this.getLastQuarter();
-		SQL = previousSQL || "";
+		console.log(SQL);
 		switch (sqlKey) {
 			case 'all-work':
 			  // Date columns are not NULL.
@@ -151,16 +194,15 @@ var sqlBuilder = {
 			  break;
 
 			case 'oci-2011':
-				SQL += "WHERE oci_date is not null ";
-				SQL += "AND oci > 0 ";
-				SQL += "AND oci_date::date <= '2012-01-01'";
-
+				SQL = SQL.where("oci_date is not null")
+					 .where("oci > 0")
+					 .where("oci_date::date <= '2012-01-01'");
 				break;
 
 			default:
 				throw new Error("Invalid Query Key");
         }
-  		return SQL;
+  		return SQL.toString();
 	},
 	getDistanceSQL: function(sqlKey, extraConditions, groupBy) {
 		var SQL = "SELECT " + groupBy + ", " +
