@@ -67,28 +67,23 @@ var sqlBuilder = {
 				.field(self.ociConditionString, "oci_condition")
 				.from("oci_2011_master");
 		}
-
-		return this.getSQLConditions(sqlKey, SQL);
-
-		console.log(SQL.toString());
-		
-	    /*else {
-		    SQL += "SELECT cartodb_id," +
-		    "the_geom_webmercator, " +
-		    "activity, " +
-		    "est_start, " +
-		    "completed, " +
-		    "COALESCE(to_char(est_start, 'Month YYYY'), to_char(completed, 'Month YYYY')) AS DATE," +
-		    "COALESCE(est_start, completed) AS DATE_COMBINED," +
-		    "length, " +
-		    "street, " +
-		    "from_street, " +
-		    "to_street, "+
-		    "district, "+
-		    this.adjLengthMeasure + " " +
-		    "FROM streetwork_master ";
+		else {
+			SQL = SQL.field("activity")
+				.field("est_start")
+				.field("completed")
+				.field("COALESCE(to_char(est_start, 'Month YYYY'), to_char(completed, 'Month YYYY'))", "DATE")
+		    	.field("COALESCE(est_start, completed)", "DATE_COMBINED")
+		    	.field("length")
+		    	.field("street")
+		    	.field("from_street")
+		    	.field("to_street")
+		    	.field("district")
+		    	.field(this.adjLengthMeasure)
+		    	.from("streetwork_master")
 		}
-	    return this.getSQLConditions(sqlKey, SQL);*/
+
+		//return this.getSQLConditions(sqlKey, SQL);
+		return SQL.toString()
 	},
 
 	getLastQuarter: function(date) {
@@ -201,9 +196,11 @@ var sqlBuilder = {
 			  break;
 
 			case 'oci-2011':
+
 				SQL = SQL.where("oci_date is not null")
 					 .where("oci > 0")
 					 .where("oci_date::date <= '2012-01-01'");
+
 				break;
 
 			default:

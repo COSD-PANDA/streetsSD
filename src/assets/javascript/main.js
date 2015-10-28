@@ -57,7 +57,7 @@ var viewController = {
     });
   },
   initFirstLayer: function() {
-    $('#layer-selector a#oci-2011').click();
+    $('#layer-selector a#all-work').click();
   },
   showModalAndHighlight: function(trigger) {
     var modalShow = $(trigger).data('modal-show');
