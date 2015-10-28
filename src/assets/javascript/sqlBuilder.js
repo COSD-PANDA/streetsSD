@@ -3,6 +3,16 @@ var sqlBuilder = {
   //lengthMeasure: "ST_Length(ST_AsText(ST_Transform(the_geom,26915)))/1609.34",
   lengthMeasure: "length",
   adjLengthMeasure: "adj_length",
+  ociConditionString: "CASE " +
+					  "WHEN oci <= 33.333 THEN 'Poor' " +
+				      "WHEN oci <= 66.666 THEN 'Fair' " +
+				      "ELSE 'Good' " +
+				      "END",
+  select: function() {
+    return squel.select({
+    	fieldAliasQuoteCharacter: ""
+    })
+  },
 
 
 	/*getLayerSQL: function(sqlKey) {
@@ -42,7 +52,8 @@ var sqlBuilder = {
 	    return this.getSQLConditions(sqlKey, SQL);
 	},*/
 	getLayerSQL: function(sqlKey) {
-		var SQL = squel.select()
+		var self = this;
+		var SQL = self.select()
 			.field("cartodb_id")
 			.field("the_geom")
 			.field("the_geom_webmercator");
@@ -53,11 +64,7 @@ var sqlBuilder = {
 				.field("from_street")
 				.field("to_street")
 				.field("length as totalMiles")
-				.field("CASE " +
-					"WHEN oci <= 33.333 THEN 'Poor' " +
-				    "WHEN oci <= 66.666 THEN 'Fair' " +
-				    "ELSE 'Good' " +
-				    "END", "oci_condition")
+				.field(self.ociConditionString, "oci_condition")
 				.from("oci_2011_master");
 		}
 
@@ -232,35 +239,27 @@ var sqlBuilder = {
 
 	  return sqlString;
 	},
-	/*getTotalDistanceSQL: function(sqlKey, activityKey) {
-	    var SQL = "SELECT district, " +
-	    "SUM(ST_Length(ST_AsText(ST_Transform(the_geom,26915)))/1609.34) as totalMiles " +
-	    "FROM streetwork_master ";
-	    SQL = getSQLConditions(sqlKey, SQL);
-	    SQL += "GROUP BY DISTRICT";
-	    return SQL;
-	},*/
 
 	getOCIBreakdownSQL: function() {
-		var SQL = "SELECT " +
-		"SUM(" + this.lengthMeasure + ") as totalMiles, " +
-		"CASE WHEN oci <= 33.333 THEN 'Poor' " +
-		     "WHEN oci <= 66.666 THEN 'Fair' " +
-		     "ELSE 'Good' " +
-		     "END " +
-		     "AS color " +
-		"FROM oci_2011_master " +
-		"WHERE oci > 0 " +
-		"GROUP BY color ";
+		var self = this;
+		var SQL = self.select()
+			.field("SUM(" + self.lengthMeasure + ")", "totalMiles")
+			.field(self.ociConditionString, "color")
+			.from("oci_2011_master")
+			.where("oci > 0")
+			.group("color");
 
-		return SQL;
+		console.log(SQL.toString())
+
+		return SQL.toString();
 	},
-  getOCIAvgSQL: function() {
-  	var SQL = "SELECT " +
-      "SUM(OCI * LENGTH) / SUM(LENGTH) AS avg " +
-      "FROM oci_2011_master " +
-      "WHERE oci > 0"
+    getOCIAvgSQL: function() {
+    	var self = this;
+    	var SQL = self.select()
+    		.field("SUM(OCI * LENGTH) / SUM(LENGTH)", "avg")
+    		.from("oci_2011_master")
+    		.where("oci > 0");
 
-       return SQL;
+         return SQL.toString();
 	}
 }
