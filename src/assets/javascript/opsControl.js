@@ -6,35 +6,32 @@ var opsControl = {
             poor: "#fcd900",
         },
         activity: {
-            ac_resurface: "#0098db",
-            slurry_seal: "#ffa02f",
-            concrete_street: "#fcd900",
+            overlay: "#0098db",
+            slurry: "#ffa02f",
+            concrete: "#fcd900",
         }
     },
     sql: function() {
         return new cartodb.SQL({ user: 'cityofsandiego' });
     },
     calcTDistance: function(subLayerID) {
-        var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, "streetwork_master.district");
+        var sqlString = sqlBuilder.getDistanceSQL(subLayerID, "ic.asset_type").toString();
         var oc = this;
         this.sql().execute(sqlString).done(function(data) {
             oc.display.calcTDistance(subLayerID, data);
         });
     },
     workByMonth: function(subLayerID) {
-        //var month = "COALESCE(to_char(streetwork_master.est_start, 'MM'), to_char(streetwork_master.completed, 'MM'))"
-        var month = "to_char(date_combined, 'MM')";
-        var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, month);
-        sqlString += " ORDER BY " + month;
+        var sqlString = sqlBuilder.getDistanceByMonthSQL(subLayerID).toString();
         var oc = this;
         this.sql().execute(sqlString).done(function(data) {
-            console.log(data);
             oc.display.workByMonth(subLayerID, data);
             oc.bigNumbers(subLayerID, data);
         });
     },
-    typeBreakdown: function(subLayerID) {
-        var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, "streetwork_master.activity");
+    typeBreakdown: function(subLayerID, table_alias, field_alias) {
+        var sqlString = sqlBuilder.getDistanceSQL(subLayerID, "activity", "ic").toString();
+        console.log(sqlString);
         var oc = this;
         this.sql().execute(sqlString).done(function(data) {
             oc.display.typeBreakdown(subLayerID, data);
@@ -42,7 +39,7 @@ var opsControl = {
     },
 
     progress: function(subLayerID) {
-        var sqlString = sqlBuilder.getDistanceSQL(subLayerID, null, "streetwork_master.district");
+        var sqlString = sqlBuilder.getDistanceSQL(subLayerID, "streetwork_master.district");
         var oc = this;
         this.sql().execute(sqlString).done(function(data) {
             oc.display.progress(subLayerID, data);
@@ -72,17 +69,9 @@ var opsControl = {
             oc.display.totalMiles(subLayerID, data);
         });
     },
-    nextMonthMiles: function(subLayerID) {
-        var sqlString = sqlBuilder.getDistanceByMonthSQL(subLayerID);
-        var oc = this;
-        this.sql().execute(sqlString).done(function(data) {
-            oc.display.nextMonthMiles(subLayerID, data);
-        });
-
-    },
     bigNumbers: function(subLayerID, data) {
         console.log("bignumbers")
-        var sqlString = sqlBuilder.getDistanceByMonthYearSQL(subLayerID);
+        var sqlString = sqlBuilder.getDistanceByMonthYearSQL(subLayerID).toString();
         var oc = this;
         this.sql().execute(sqlString).done(function(data) {
             oc.display.totalMiles(subLayerID, data);
@@ -146,7 +135,7 @@ var opsControl = {
         typeBreakdown: function(subLayerID, data) {
             chartData = [];
             var oc = opsControl;
-            console.log(oc.colors.activity)
+            console.log(data);
             _.each(data.rows, function(element, index) {
                 chartData.push([element.activity, element.totalmiles]);
             });
@@ -157,9 +146,9 @@ var opsControl = {
                     type: 'pie',
                     columns: chartData,
                     colors: { 
-                        "Slurry Seal": oc.colors.activity.slurry_seal, 
-                        "AC Resurfacing": oc.colors.activity.ac_resurface,
-                        "Concrete Street": oc.colors.activity.concrete_street 
+                        "Slurry": oc.colors.activity.slurry, 
+                        "Overlay": oc.colors.activity.overlay,
+                        "Concrete": oc.colors.activity.concrete 
                     }
                 },
                 tooltip: {

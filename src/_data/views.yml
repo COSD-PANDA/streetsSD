@@ -69,7 +69,7 @@
   ops:
     - "calcTDistance"
     - "typeBreakdown"
-  title: "Planned Future Work" 
+  title: "Future / Ongoing Work" 
   description: "Future work includes <span class='tDistance'></span> miles of street planned for repairs after <span class='lqEnd'></span>. Additional miles of repairs will be added as more streets are identified. The exact amount of mileage repaired in future years will depend on annual budgets and funds."
 
 - oci-2011:

@@ -1,56 +1,47 @@
 var sqlBuilder = {
-  // Various SQL Subs
-  //lengthMeasure: "ST_Length(ST_AsText(ST_Transform(the_geom,26915)))/1609.34",
-  lengthMeasure: "length",
-  adjLengthMeasure: "adj_length",
-  ociConditionString: "CASE " +
-					  "WHEN oci <= 33.333 THEN 'Poor' " +
-				      "WHEN oci <= 66.666 THEN 'Fair' " +
-				      "ELSE 'Good' " +
-				      "END",
-  select: function() {
+    // Various SQL Subs
+    //lengthMeasure: "ST_Length(ST_AsText(ST_Transform(the_geom,26915)))/1609.34",
+    lengthMeasure: "length",
+    adjLengthMeasure: "length",
+    ociConditionString: "CASE " +
+    				  "WHEN oci <= 33.333 THEN 'Poor' " +
+    			      "WHEN oci <= 66.666 THEN 'Fair' " +
+    			      "ELSE 'Good' " +
+    			      "END",
+    select: function() {
     return squel.select({
-    	fieldAliasQuoteCharacter: ""
+    	fieldAliasQuoteCharacter: "",
+        tableAliasQuoteCharacter: ""
     })
-  },
+    },
 
+    fields: {
+        "ic": { 
+            "activity": "ic.asset_type", 
+            "street": "ic.rd20full",
+            "from_street": "ic.xstrt1",
+            "to_street": "ic.xstrt2",
+            "status": "ic.project_st",
+            "length": "ic.shape_len / 5280",
+            "moratorium": "ic.moratorium",
+            "work_end": "ic.moratorium"
+        }
+    },
 
-	/*getLayerSQL: function(sqlKey) {
-		var SQL = "";
-		if (sqlKey == 'oci-2011') {	
-			SQL += "SELECT cartodb_id, " +
-			"the_geom, " +
-			"the_geom_webmercator, " +
-			"to_char(oci_date, 'Month YYYY') AS oci_date, " +
-			"oci, " +
-			"street, " +
-			"from_street, " +
-			"to_street, " +
-			this.lengthMeasure + " as totalMiles, " +
-			"CASE WHEN oci <= 33.333 THEN 'Poor' " +
-			"WHEN oci <= 66.666 THEN 'Fair' " +
-			"ELSE 'Good' " +
-			"END AS oci_condition " +
-			"FROM oci_2011_master ";
-	  	}
-	    else {
-		    SQL += "SELECT cartodb_id," +
-		    "the_geom_webmercator, " +
-		    "activity, " +
-		    "est_start, " +
-		    "completed, " +
-		    "COALESCE(to_char(est_start, 'Month YYYY'), to_char(completed, 'Month YYYY')) AS DATE," +
-		    "COALESCE(est_start, completed) AS DATE_COMBINED," +
-		    "length, " +
-		    "street, " +
-		    "from_street, " +
-		    "to_street, "+
-		    "district, "+
-		    this.adjLengthMeasure + " " +
-		    "FROM streetwork_master ";
-		}
-	    return this.getSQLConditions(sqlKey, SQL);
-	},*/
+    tables: {
+        ic: "imcat_street"
+    },
+
+    mapField: function(table_alias, alias) {
+        var self = this;
+        return self.fields[table_alias][alias];
+    },
+
+    mapTable: function(table_alias) {
+        var self = this;
+        return self.tables[table_alias];
+    },
+
 	getLayerSQL: function(sqlKey) {
 		var self = this;
 		var SQL = self.select()
@@ -68,22 +59,15 @@ var sqlBuilder = {
 				.from("oci_2011_master");
 		}
 		else {
-			SQL = SQL.field("activity")
-				.field("est_start")
-				.field("completed")
-				.field("COALESCE(to_char(est_start, 'Month YYYY'), to_char(completed, 'Month YYYY'))", "DATE")
-		    	.field("COALESCE(est_start, completed)", "DATE_COMBINED")
-		    	.field("length")
-		    	.field("street")
-		    	.field("from_street")
-		    	.field("to_street")
-		    	.field("district")
-		    	.field(this.adjLengthMeasure)
-		    	.from("streetwork_master")
+            _.each(self.fields.ic, function(element, index) {
+                SQL.field(self.mapField("ic", index), index)
+            })
+            SQL.from(self.tables.ic, "ic");
 		}
 
+		SQL = this.getSQLConditions(sqlKey, SQL);
 		//return this.getSQLConditions(sqlKey, SQL);
-		return SQL.toString()
+		return SQL;
 	},
 
 	getLastQuarter: function(date) {
@@ -99,19 +83,24 @@ var sqlBuilder = {
 	},
 	getSQLConditions: function(sqlKey, SQL) {
 		var lastQuarter = this.getLastQuarter();
-		console.log(SQL);
+        var self = this;
 		switch (sqlKey) {
 			case 'all-work':
 			  // Date columns are not NULL.
 			  //SQL += "WHERE (completed is not null OR est_start is not null) ";
-			  SQL += "WHERE (date_combined is not null) ";
+			  //SQL += "WHERE (date_combined is not null) ";
 			  // Work Done Date / Work Est Date is after 2012-01-01
-			  SQL += "AND (date_combined::date >= '2013-07-01') ";
+			  //SQL += "AND (date_combined::date >= '2013-07-01') ";
 			  //SQL += "AND (completed::date >= '2012-01-01' OR est_start::date >= '2012-01-01') ";
 			  // Impose Quarter Limit on Work Done for Accuracy / Consistency.
-			  SQL += "AND (date_combined::date <= '" + lastQuarter.end + "') ";
+			  //SQL += "AND (date_combined::date <= '" + lastQuarter.end + "') ";
  			  // Filter for Null Activities.
-			  SQL += "AND (activity is not null) ";
+			  //SQL += "AND (activity is not null) ";
+
+			  SQL.where(self.mapField("ic", "moratorium") + " is not null")
+			     .where(self.mapField("ic", "status") + " = 'Moratorium'")
+			     .where(self.mapField("ic", "work_end") + "::date >= '2013-07-01'")
+                 .where(self.mapField("ic", "work_end") + "::date <= '" + lastQuarter.end + "'")
 			  break;
 
 			case 'work-1k-pledge':
@@ -206,35 +195,42 @@ var sqlBuilder = {
 			default:
 				throw new Error("Invalid Query Key");
         }
-  		return SQL.toString();
+  		return SQL;
 	},
-	getDistanceSQL: function(sqlKey, extraConditions, groupBy) {
-		var SQL = "SELECT " + groupBy + ", " +
-		"SUM(" + this.adjLengthMeasure + ") as totalMiles " +
-		"FROM streetwork_master ";
-		SQL = this.getSQLConditions(sqlKey, SQL);
-		if (extraConditions)
-		  SQL += extraConditions;
+	getDistanceSQL: function(sqlKey, groupBy, table_alias, map) {
+        var self = this;
+
+        var map = map === false ? false : true;
+        
+        var SQL = self.select();
+        if (map === true)
+            SQL.field(self.mapField(table_alias, groupBy), groupBy)
+        else 
+            SQL.field(groupBy)
+
+        SQL.field("SUM(" + self.mapField(table_alias, self.adjLengthMeasure) + ")", "totalMiles")
+          .from(self.mapTable(table_alias), table_alias);
 
 		if (groupBy)
-		  SQL += "GROUP BY " + groupBy;
+		  SQL.group(groupBy);
 
-		console.log(SQL)
+        SQL = self.getSQLConditions(sqlKey, SQL);
+
 		return SQL;
 	},
 	getDistanceByMonthSQL: function(sqlKey) {
-	  var month = "COALESCE(to_char(est_start, 'MM'), to_char(completed, 'MM'))";
-	  var sqlString = this.getDistanceSQL(sqlKey, null, month);
-	  sqlString += " ORDER BY " + month;
+	  var month = "to_char(" + this.mapField("ic", "moratorium") + ", 'MM')";
+	  var SQL = this.getDistanceSQL(sqlKey, month, "ic", false)
+          .order(month);
 
-	  return sqlString;
+	  return SQL;
 	},
 	getDistanceByMonthYearSQL: function(sqlKey) {
-	  var month = "COALESCE(to_char(est_start, 'MM-YY'), to_char(completed, 'MM-YY'))";
-	  var sqlString = this.getDistanceSQL(sqlKey, null, month);
-	  sqlString += " ORDER BY " + month;
+	  var month = "to_char(" + this.mapField("ic", "moratorium") + ", 'MM-YY')";
+	  var SQL = this.getDistanceSQL(sqlKey, month, "ic", false)
+          .order(month)
 
-	  return sqlString;
+	  return SQL;
 	},
 
 	getOCIBreakdownSQL: function() {
@@ -246,9 +242,7 @@ var sqlBuilder = {
 			.where("oci > 0")
 			.group("color");
 
-		console.log(SQL.toString())
-
-		return SQL.toString();
+		return SQL;
 	},
     getOCIAvgSQL: function() {
     	var self = this;
@@ -257,6 +251,6 @@ var sqlBuilder = {
     		.from("oci_2011_master")
     		.where("oci > 0");
 
-         return SQL.toString();
+         return SQL;
 	}
 }
