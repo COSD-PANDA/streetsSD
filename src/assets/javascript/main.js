@@ -153,7 +153,7 @@ var viewController = {
     this.clearState();
     var subLayer = global.layers[1].getSubLayer(subLayerNum);
     if (setSQL == 1) {
-      var query = sqlBuilder.getLayerSQL(subLayerID).toString();
+      var query = sqlBuilder.getSQL(subLayerID);
       console.log("Set Map Query For Layer: " + subLayerID + " with Number " + subLayerNum)
       console.log(query);
       subLayer.setSQL(query);
