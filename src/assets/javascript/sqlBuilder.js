@@ -1,15 +1,17 @@
 var sqlBuilder = (function() {
     // Private.
 
-
     var fields = {
         "ic": { 
+            "cartodb_id": "ic.cartodb_id",
+            "the_geom": "ic.the_geom",
+            "the_geom_webmercator": "ic.the_geom_webmercator",
             "activity": "ic.asset_type", 
             "street": "ic.rd20full",
             "from_street": "ic.xstrt1",
             "to_street": "ic.xstrt2",
             "status": "ic.project_st",
-            "length": "ic.shape_len / 5280",
+            "length": "(ic.shape_len / 5280)",
             "adj_length": "getSQLString",
             "moratorium": "ic.moratorium",
             "work_end": "ic.moratorium"
@@ -25,6 +27,18 @@ var sqlBuilder = (function() {
         oci2011: "oci_2011_master",
     };
 
+    getLastQuarter = function() {
+        var date = date || new Date();
+        var sqlFormatDate = ('YYYY-MM-DD');
+        var quarterAdjustment= (moment(date).month() % 3) + 1;
+        var lastQuarterEndDate = moment(date).subtract({ months: quarterAdjustment }).endOf('month');
+        var lastQuarterStartDate = lastQuarterEndDate.clone().subtract({ months: 3 }).startOf('month');
+        return {
+            start: lastQuarterStartDate.format(sqlFormatDate),
+            end: lastQuarterEndDate.format(sqlFormatDate)
+        }
+    }
+
     select = function() {
         return squel.select({
             fieldAliasQuoteCharacter: "",
@@ -38,9 +52,9 @@ var sqlBuilder = (function() {
                 var widthField = mapAlias("tswb", "width");
                 var lengthField = mapAlias("ic", "length");
                 return "CASE " +
-                    "WHEN " + lengthField + " >= 48 THEN " +
-                    "((" + lengthField + "* 2) / 5280) " +
-                    "ELSE (" + lengthField + "/ 5280) " +
+                    "WHEN " + widthField + " >= 48 THEN " +
+                    "(" + lengthField + " * 2) " +
+                    "ELSE " + lengthField + " " +
                     "END";
             case "ociCondition":
                 return "CASE " +
@@ -74,13 +88,13 @@ var sqlBuilder = (function() {
         return fields[table_alias][field_alias];
     };
 
-    getLayerSQL = function(sqlKey) {
+    getTableSQL = function(sqlKey) {
         var SQL = select()
-            .field("cartodb_id")
-            .field("the_geom")
-            .field("the_geom_webmercator");
         if (sqlKey == 'oci-2011') {
-            SQL = SQL.field("to_char(oci_date, 'Month YYYY')", "oci_date")
+            SQL.field("to_char(oci_date, 'Month YYYY')", "oci_date")
+                .field(mapAlias("ic", "cartodb_id"))
+                .field(mapAlias("ic", "the_geom"))
+                .field(mapAlias("ic", "the_geom_webmercator"))
                 .field("oci")
                 .field("street")
                 .field("from_street")
@@ -97,28 +111,80 @@ var sqlBuilder = (function() {
                 SQL.field(mapAlias("tswb", index), index)
             });
             SQL.from(tables.ic, "ic")
-               .join(tables.tswb, "tswb")
+               .join(tables.tswb, "tswb", "ic.sapid = tswb.sapid")
+
+
         }
 
         return SQL;
     };
 
+    getConditionSQL = function(sqlKey, SQL) {
+        var lastQuarter = getLastQuarter();
+        switch (sqlKey) {
+            case 'all-work':
+                SQL.where(mapAlias("ic", "moratorium") + " is not null")
+                 .where(mapAlias("ic", "status") + " = 'Moratorium'")
+                 .where(mapAlias("ic", "work_end") + "::date >= '2013-07-01'")
+                 .where(mapAlias("ic", "work_end") + "::date <= '" + lastQuarter.end + "'")
+              break;
+        }
+
+        return SQL;
+    };
+
+    getDistanceSQL = function(sqlKey, config) {
+        var SQL = select();
+        var groupField = "";
+        var joinTable = "";
+
+        if (config.groupFieldSQL)
+            groupField = config.groupFieldSQL;
+
+        // Determine Grouping Field.
+        // Throw error if no table found will happen in map alias.
+        if (config.groupFieldAlias) 
+            groupField = mapAlias(config.tableAlias, config.groupFieldAlias);
+
+        SQL.field(groupField, config.groupFieldAlias)
+           .field("SUM(" + mapAlias(config.tableAlias, config.lengthFieldAlias) + ")", "totalMiles")
+           .group(groupField);
+
+        if (sqlKey == 'oci-2011') 
+            SQL.from(mapAlias("oci2011"))
+
+        // All others
+        else {
+            SQL.from(mapAlias("ic"), "ic")
+               .join(mapAlias("tswb"), "tswb", "ic.sapid = tswb.sapid")
+        }
+
+        //SQL.order(groupField);
+
+        return SQL;
+
+    }
+
     // Public API
     return {
         getSQL: function(sqlKey) {
-            console.log("hi " + sqlKey)
-            return getLayerSQL().toString();
+            var SQL = getTableSQL(sqlKey);
+            // Apply conditions as Needed.
+            return getConditionSQL(sqlKey, SQL).toString();
         },
         getLastQuarter: function(date) {
-            var date = date || new Date();
-            var sqlFormatDate = ('YYYY-MM-DD');
-            var quarterAdjustment= (moment(date).month() % 3) + 1;
-            var lastQuarterEndDate = moment(date).subtract({ months: quarterAdjustment }).endOf('month');
-            var lastQuarterStartDate = lastQuarterEndDate.clone().subtract({ months: 3 }).startOf('month');
-            return {
-                start: lastQuarterStartDate.format(sqlFormatDate),
-                end: lastQuarterEndDate.format(sqlFormatDate)
-            }
+            return getLastQuarter(date);
+        },
+
+        getDistanceSQL: function(sqlKey, config) {
+            var SQL = getDistanceSQL(sqlKey, config);
+            // Apply conditions as Needed.
+            return getConditionSQL(sqlKey, SQL).toString();
+        },
+
+        mapAlias: function(table_alias, field_alias) {
+            return mapAlias(table_alias, field_alias);
         }
+
     };
 })();

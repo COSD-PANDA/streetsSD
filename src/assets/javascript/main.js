@@ -122,12 +122,12 @@ var viewController = {
     for (var i = 0; i < num_sublayers; i++)
       global.layers[1].getSubLayer(i).hide();
     $('.chart-title h4').text("");
-    if (window.typeBreakdown)
+    /*if (window.typeBreakdown)
       window.typeBreakdown = window.typeBreakdown.destroy();
     if (window.progress)
       window.progress = window.progress.destroy();
     if (window.workByMonth)
-      window.workByMonth = window.workByMonth.destroy();
+      window.workByMonth = window.workByMonth.destroy();*/
   },
   mapToPosition: function(position) {
     lon = position.coords.longitude;
