@@ -3,20 +3,32 @@ var opsControl = (function() {
 
     sql = new cartodb.SQL({ user: 'cityofsandiego' });
 
+    tDistanceStringConfig = {
+        tableAlias: "ic",
+        groupFieldAlias: "activity",
+        lengthFieldAlias: "adj_length"
+    };
+
+    getTDistance = function(subLayerID, displayOp) {
+        var sqlString = sqlBuilder.getDistanceSQL(subLayerID, tDistanceStringConfig);
+        sql.execute(sqlString).done(function(data){
+            opsDisplay[displayOp](subLayerID, data);
+        });
+    };
+
     // Public API
     return {
-        typeBreakdown: function(subLayerID) {
-            var sqlString = sqlBuilder.getDistanceSQL(subLayerID, {
-                tableAlias: "ic",
-                groupFieldAlias: "activity",
-                lengthFieldAlias: "adj_length"
-            });
-
-            sql.execute(sqlString).done(function(data) {
-                opsDisplay.typeBreakdown(subLayerID, data);
-            })
-
+        progress: function(subLayerID) {
+            return getTDistance(subLayerID, "progress");
         },
+        calcTDistance: function(subLayerID) {
+            return getTDistance(subLayerID, "calcTDistance");
+        },
+
+        typeBreakdown: function(subLayerID) {
+            return getTDistance(subLayerID, "typeBreakdown");
+        },
+
         workByMonth: function(subLayerID) {
             var sqlString = sqlBuilder.getDistanceSQL(subLayerID, {
                 tableAlias: "ic",
@@ -38,8 +50,7 @@ var opsControl = (function() {
                 lengthFieldAlias: "adj_length",
                 order: "ASC"
             }).toString();
-
-
+            
             sql.execute(sqlString).done(function(data) {
                 opsDisplay.totalMiles(subLayerID, data);
                 opsDisplay.avgMilesPerMonth(subLayerID, data);
