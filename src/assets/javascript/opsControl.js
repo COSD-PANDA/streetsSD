@@ -29,13 +29,38 @@ var opsControl = (function() {
             return getTDistance(subLayerID, "typeBreakdown");
         },
 
+        totalMiles: function(subLayerID) {
+            return getTDistance(subLayerID, "totalMiles");
+        },
+
+        ociBreakdown: function(subLayerID) {
+            var sqlString = sqlBuilder.getDistanceSQL(subLayerID, {
+                tableAlias: "oci2011",
+                groupFieldAlias: "color",
+                lengthFieldAlias: "length",
+                order: "ASC"
+            });
+
+            sql.execute(sqlString).done(function(data) {
+                opsDisplay.ociBreakdown(subLayerID, data);
+                opsDisplay.totalMiles(subLayerID, data);
+            });
+        },
+
+        ociAvg: function(subLayerID) {
+            var sqlString = sqlBuilder.getOCICalcSQL(subLayerID, "avg");
+            sql.execute(sqlString).done(function(data) {
+                opsDisplay.ociAvg(subLayerID, data);
+            });
+        },
+
         workByMonth: function(subLayerID) {
             var sqlString = sqlBuilder.getDistanceSQL(subLayerID, {
                 tableAlias: "ic",
                 groupFieldSQL: "to_char(" + sqlBuilder.mapAlias("ic", "work_end") + ", 'MM')",
                 lengthFieldAlias: "adj_length",
                 order: "ASC"
-            }).toString();
+            });
 
 
             sql.execute(sqlString).done(function(data) {
@@ -49,8 +74,8 @@ var opsControl = (function() {
                 groupFieldSQL: "to_char(" + sqlBuilder.mapAlias("ic", "work_end") + ", 'MM-YY')",
                 lengthFieldAlias: "adj_length",
                 order: "ASC"
-            }).toString();
-            
+            });
+
             sql.execute(sqlString).done(function(data) {
                 opsDisplay.totalMiles(subLayerID, data);
                 opsDisplay.avgMilesPerMonth(subLayerID, data);

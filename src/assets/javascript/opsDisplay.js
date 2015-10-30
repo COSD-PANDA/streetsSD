@@ -101,7 +101,7 @@ var opsDisplay = (function() {
             var tDistance = _.sum(data.rows, function(row) { return row.totalmiles; }).toFixed(2)
             var chartData = [];
             chartData.push(["Total Distance", tDistance]);
-            window.progress = c3.generate({
+            window.progressChart = c3.generate({
                 bindto: '#chart-container-2',
                 size: { height: 215 },
                 data: { type: 'gauge', columns: chartData },
@@ -117,6 +117,32 @@ var opsDisplay = (function() {
             });
         },
 
+        ociBreakdown: function(subLayerID, data) {
+            chartData = [];
+            _.each(data.rows, function(element, index) {
+                chartData.push([element.color, element.totalmiles]);
+            });
+            $("#chart-title-1 h4").text("OCI Breakdown");
+            window.typeBreakdown = c3.generate({
+                bindto: '#chart-container-1',
+                data: {
+                  type: 'pie',
+                  columns: chartData,
+                  colors: { 
+                    "Poor": colors.oci.poor, 
+                    "Fair": colors.oci.fair,
+                    "Good": colors.oci.good,
+                  }
+                },
+                tooltip: {
+                  format: {
+                    name: function (name, ratio, id, index) {return name},
+                    value: function (value, ratio, id, index) { return d3.round(value, 0) + " Miles"; }
+                  }
+                }
+            });
+        },
+
         totalMiles: function(subLayerID, data) {
             totalMiles = _.sum(data.rows, function(row) {
                 return row.totalmiles;
@@ -125,6 +151,14 @@ var opsDisplay = (function() {
             targetBox = $('#helper_box #bignum-left');
             $('.data-value', targetBox).text(totalMiles);
             $('.data-desc', targetBox).text("Miles");
+            $('#helper_box .bignum-left').show();
+        },
+
+        ociAvg: function(subLayerID, data) {
+            ociAvg = d3.round(_.first(data.rows).avg, 0);
+            targetBox = $('#helper_box #bignum-right');
+            $('.data-value', targetBox).text(ociAvg);
+            $('.data-desc', targetBox).text("Average OCI");
             $('#helper_box .bignums').show();
         },
 

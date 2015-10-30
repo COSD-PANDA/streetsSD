@@ -34,6 +34,7 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
+    - "bigNumbers"
   description: "All work from July 1, 2013 to June 31, 2014."
 
 - work-fy-2015:
@@ -46,6 +47,7 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
+    - "bigNumbers"
   description: "All work from July 1, 2014 to June 31, 2015."
 
 
@@ -59,6 +61,7 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
+    - "bigNumbers"
   description: "All work from July 1, 2015 to <span class='lqEnd'></span>.  This information is updated quarterly."
 
 - future-work:

@@ -18,6 +18,19 @@ var sqlBuilder = (function() {
         },
         "tswb": {
             "width": "tswb.width"
+        },
+        "oci2011": {
+            "cartodb_id": "oci2011.cartodb_id",
+            "the_geom": "oci2011.the_geom",
+            "the_geom_webmercator": "oci2011.the_geom_webmercator",
+            "oci_date": "oci2011.oci_date",
+            "street": "oci2011.street",
+            "from_street": "oci2011.from_street",
+            "to_street": "oci2011.to_street",
+            "oci_condition": "getSQLString",
+            "color": "getSQLString",
+            "length": "oci2011.length",
+            "oci": "oci2011.oci"
         }
     };
 
@@ -56,7 +69,8 @@ var sqlBuilder = (function() {
                     "(" + lengthField + " * 2) " +
                     "ELSE " + lengthField + " " +
                     "END";
-            case "ociCondition":
+            case "oci_condition":
+            case "color":
                 return "CASE " +
                     "WHEN oci <= 33.333 THEN 'Poor' " +
                     "WHEN oci <= 66.666 THEN 'Fair' " +
@@ -91,17 +105,10 @@ var sqlBuilder = (function() {
     getTableSQL = function(sqlKey) {
         var SQL = select()
         if (sqlKey == 'oci-2011') {
-            SQL.field("to_char(oci_date, 'Month YYYY')", "oci_date")
-                .field(mapAlias("ic", "cartodb_id"))
-                .field(mapAlias("ic", "the_geom"))
-                .field(mapAlias("ic", "the_geom_webmercator"))
-                .field("oci")
-                .field("street")
-                .field("from_street")
-                .field("to_street")
-                .field("length as totalMiles")
-                .field(getSQLString("ociCondition"), "oci_condition")
-                .from("oci_2011_master");
+            _.each(fields.oci2011, function(element, index) {
+                SQL.field(mapAlias("oci2011", index), index)
+            });
+            SQL.from(mapAlias("oci2011"), "oci2011")
         }
         else {
             _.each(fields.ic, function(element, index) {
@@ -124,10 +131,16 @@ var sqlBuilder = (function() {
         switch (sqlKey) {
             case 'all-work':
                 SQL.where(mapAlias("ic", "moratorium") + " is not null")
-                 .where(mapAlias("ic", "status") + " = 'Moratorium'")
-                 .where(mapAlias("ic", "work_end") + "::date >= '2013-07-01'")
-                 .where(mapAlias("ic", "work_end") + "::date <= '" + lastQuarter.end + "'")
-              break;
+                   .where(mapAlias("ic", "status") + " = 'Moratorium'")
+                   .where(mapAlias("ic", "work_end") + "::date >= '2013-07-01'")
+                   .where(mapAlias("ic", "work_end") + "::date <= '" + lastQuarter.end + "'")
+                break;
+
+            case "oci-2011": 
+                SQL.where("oci_date is not null")
+                   .where("oci > 0")
+                   .where("oci_date::date <= '2012-01-01'");
+                break;
         }
 
         return SQL;
@@ -151,7 +164,7 @@ var sqlBuilder = (function() {
            .group(groupField);
 
         if (sqlKey == 'oci-2011') 
-            SQL.from(mapAlias("oci2011"))
+            SQL.from(mapAlias("oci2011"), "oci2011")
 
         // All others
         else {
@@ -164,7 +177,19 @@ var sqlBuilder = (function() {
 
         return SQL;
 
+    };
+
+    getOCICalcSQL = function(sqlKey, calc) {
+        var SQL = select();
+        if (calc == 'avg') 
+            SQL.field("oci", "avg")
+        
+
+        SQL.from(mapAlias("oci2011"), "oci2011");
+
+        return SQL;
     }
+
 
     // Public API
     return {
@@ -180,11 +205,20 @@ var sqlBuilder = (function() {
         getDistanceSQL: function(sqlKey, config) {
             var SQL = getDistanceSQL(sqlKey, config);
             // Apply conditions as Needed.
-            return getConditionSQL(sqlKey, SQL).toString();
+            SQL = getConditionSQL(sqlKey, SQL).toString();
+
+            return SQL;
         },
 
         mapAlias: function(table_alias, field_alias) {
             return mapAlias(table_alias, field_alias);
+        },
+
+        getOCICalcSQL: function(sqlKey, calc) {
+            var SQL = getOCICalcSQL(sqlKey, calc);
+            SQL = getConditionSQL(sqlKey, SQL).toString();
+
+            return SQL;
         }
 
     };

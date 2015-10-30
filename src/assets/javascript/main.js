@@ -57,7 +57,7 @@ var viewController = {
     });
   },
   initFirstLayer: function() {
-    $('#layer-selector a#work-1k-pledge').click();
+    $('#layer-selector a#oci-2011').click();
   },
   showModalAndHighlight: function(trigger) {
     var modalShow = $(trigger).data('modal-show');
@@ -175,9 +175,6 @@ var viewController = {
       // Inject Dates.
       var lq = sqlBuilder.getLastQuarter();
       $('.lqEnd').text(moment(lq.end).format("MMMM D, YYYY"));
-      //var startDate = target.data("start");
-      //var endDate = target.data("end");
-      //$('.dateStart').text(moment(startDate).format("MMMM D, YYYY"))
 
       var layerTitle = $('#layer-selector a.active').html();
       this.bottomBarToggle('open');
