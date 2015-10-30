@@ -159,7 +159,8 @@ var sqlBuilder = (function() {
                .join(mapAlias("tswb"), "tswb", "ic.sapid = tswb.sapid")
         }
 
-        //SQL.order(groupField);
+        if (config.order)
+            SQL.order(groupField, config.order == "ASC");
 
         return SQL;
 

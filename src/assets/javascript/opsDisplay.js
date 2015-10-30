@@ -22,7 +22,7 @@ var opsDisplay = (function() {
             chartData.push([element.activity, element.totalmiles]);
         });
         $("#chart-title-1 h4").text("Work Type Breakdown");
-        window.typeBreakdown = c3.generate({
+        window.typeBreakdownChart = c3.generate({
             bindto: '#chart-container-1',
             data: {
                 type: 'pie',
@@ -51,7 +51,7 @@ var opsDisplay = (function() {
         });
         console.log(chartX);
         $("#chart-title-2 h4").text("Work By Month");
-        window.workByMonth = c3.generate({
+        window.workByMonthChart = c3.generate({
         bindto: '#chart-container-2',
         data: {
           x: 'x',
@@ -88,6 +88,28 @@ var opsDisplay = (function() {
       });
     };
 
+    totalMiles = function(subLayerID, data) {
+            totalMiles = _.sum(data.rows, function(row) {
+                return row.totalmiles;
+            });
+            totalMiles = d3.round(totalMiles, 0);
+            targetBox = $('#helper_box #bignum-left');
+            $('.data-value', targetBox).text(totalMiles);
+            $('.data-desc', targetBox).text("Miles");
+            $('#helper_box .bignums').show();
+    };
+
+    avgMilesPerMonth = function(subLayerID, data) {
+            totalMiles = _.sum(data.rows, function(row) {
+                return row.totalmiles;
+            });
+            avgMilesPerMonth = d3.round((totalMiles/ data.rows.length), 0);
+            targetBox = $('#helper_box #bignum-right');
+            $('.data-value', targetBox).text(avgMilesPerMonth);
+            $('.data-desc', targetBox).text("Avg Miles Per Month");
+            $('#helper_box .bignums').show();
+    };
+
     // Public API
     return {
         typeBreakdown: function(subLayerID, data) {
@@ -95,6 +117,12 @@ var opsDisplay = (function() {
         },
         workByMonth: function(subLayerID, data) {
             return workByMonth(subLayerID, data);
+        },
+        totalMiles: function(subLayerID, data) {
+            return totalMiles(subLayerID, data);
+        },
+        avgMilesPerMonth: function(subLayerID, data) {
+            return avgMilesPerMonth(subLayerID, data)
         }
     };
 })();

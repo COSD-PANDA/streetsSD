@@ -8,6 +8,7 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
+    - "bigNumbers"
   description: "All work from July 1, 2013 to <span class='lqEnd'></span>. This information is updated quarterly."
 
 - work-1k-pledge:

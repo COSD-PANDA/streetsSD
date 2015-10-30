@@ -21,16 +21,29 @@ var opsControl = (function() {
             var sqlString = sqlBuilder.getDistanceSQL(subLayerID, {
                 tableAlias: "ic",
                 groupFieldSQL: "to_char(" + sqlBuilder.mapAlias("ic", "work_end") + ", 'MM')",
-                lengthFieldAlias: "adj_length"
+                lengthFieldAlias: "adj_length",
+                order: "ASC"
             }).toString();
 
-            console.log(sqlString);
 
-            /*sql.execute(sqlString).done(function(data) {
-                opsDisplay.typeBreakdown(subLayerID, data);
-            })*/
+            sql.execute(sqlString).done(function(data) {
+                opsDisplay.workByMonth(subLayerID, data);
+            });
+        },
+
+        bigNumbers: function(subLayerID, data) {
+            var sqlString = sqlBuilder.getDistanceSQL(subLayerID, {
+                tableAlias: "ic",
+                groupFieldSQL: "to_char(" + sqlBuilder.mapAlias("ic", "work_end") + ", 'MM-YY')",
+                lengthFieldAlias: "adj_length",
+                order: "ASC"
+            }).toString();
 
 
+            sql.execute(sqlString).done(function(data) {
+                opsDisplay.totalMiles(subLayerID, data);
+                opsDisplay.avgMilesPerMonth(subLayerID, data);
+            });
         }
     };
 })();
