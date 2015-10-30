@@ -8,6 +8,7 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
+    - "bigNumbers"
   description: "All work from July 1, 2013 to <span class='lqEnd'></span>. This information is updated quarterly."
 
 - work-1k-pledge:
@@ -33,6 +34,7 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
+    - "bigNumbers"
   description: "All work from July 1, 2013 to June 31, 2014."
 
 - work-fy-2015:
@@ -45,6 +47,7 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
+    - "bigNumbers"
   description: "All work from July 1, 2014 to June 31, 2015."
 
 
@@ -58,6 +61,7 @@
   ops:
     - "typeBreakdown"
     - "workByMonth"
+    - "bigNumbers"
   description: "All work from July 1, 2015 to <span class='lqEnd'></span>.  This information is updated quarterly."
 
 - future-work:
@@ -69,8 +73,8 @@
   ops:
     - "calcTDistance"
     - "typeBreakdown"
-  title: "Planned Future Work" 
-  description: "Future work includes <span class='tDistance'></span> miles of street planned for repairs after <span class='lqEnd'></span>. Additional miles of repairs will be added as more streets are identified. The exact amount of mileage repaired in future years will depend on annual budgets and funds."
+  title: "Future / Ongoing Work" 
+  description: "Future work includes <span class='tDistance'></span> miles of street that have been planned for or are ongoing repairs. Additional miles of repairs will be added as more streets are identified. The exact amount of mileage repaired in future years will depend on annual budgets and funds."
 
 - oci-2011:
   id: "oci-2011"
