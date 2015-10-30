@@ -4,8 +4,8 @@ var opsDisplay = (function() {
     colors = {
         oci: {
             good: "#0098db",
-            fair: "#ffa02f",
-            poor: "#fcd900",
+            fair: "#fcd900",
+            poor: "#ffa02f",
         },
         activity: {
             overlay: "#0098db",

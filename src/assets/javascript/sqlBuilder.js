@@ -130,10 +130,45 @@ var sqlBuilder = (function() {
         var lastQuarter = getLastQuarter();
         switch (sqlKey) {
             case 'all-work':
-                SQL.where(mapAlias("ic", "moratorium") + " is not null")
+                SQL.where(mapAlias("ic", "work_end") + " is not null")
                    .where(mapAlias("ic", "status") + " = 'Moratorium'")
                    .where(mapAlias("ic", "work_end") + "::date >= '2013-07-01'")
                    .where(mapAlias("ic", "work_end") + "::date <= '" + lastQuarter.end + "'")
+                break;
+
+            case 'work-1k-pledge':
+                SQL.where(mapAlias("ic", "work_end") + " is not null")
+                   .where(mapAlias("ic", "status") + " = 'Moratorium'")
+                   .where(mapAlias("ic", "work_end") + "::date >= '2015-07-01'")
+                   .where(mapAlias("ic", "work_end") + "::date <= '" + lastQuarter.end + "'")
+                break;
+
+            case 'work-fy-2014':
+                SQL.where(mapAlias("ic", "work_end") + " is not null")
+                   .where(mapAlias("ic", "status") + " = 'Moratorium'")
+                   .where(mapAlias("ic", "work_end") + "::date >= '2013-07-01'")
+                   .where(mapAlias("ic", "work_end") + "::date <= '2014-06-30'")
+                break;
+
+            case 'work-fy-2015':
+                SQL.where(mapAlias("ic", "work_end") + " is not null")
+                   .where(mapAlias("ic", "status") + " = 'Moratorium'")
+                   .where(mapAlias("ic", "work_end") + "::date >= '2014-07-01'")
+                   .where(mapAlias("ic", "work_end") + "::date <= '2015-06-30'")
+                break;
+
+            case 'work-fy-2016':
+                SQL.where(mapAlias("ic", "work_end") + " is not null")
+                   .where(mapAlias("ic", "status") + " = 'Moratorium'")
+                   .where(mapAlias("ic", "work_end") + "::date >= '2015-07-01'")
+                   .where(mapAlias("ic", "work_end") + "::date <= '" + lastQuarter.end + "'")
+                break;
+
+            case 'future-work':
+                SQL.where(mapAlias("ic", "work_end") + " is null")
+                   .where(mapAlias("ic", "status") + " = 'Planning' OR " +
+                    mapAlias("ic", "status") + " = 'Awarding' OR " +
+                    mapAlias("ic", "status") + " = 'Construction'")
                 break;
 
             case "oci-2011": 
@@ -181,8 +216,12 @@ var sqlBuilder = (function() {
 
     getOCICalcSQL = function(sqlKey, calc) {
         var SQL = select();
-        if (calc == 'avg') 
-            SQL.field("oci", "avg")
+        if (calc == 'avg')  {
+            var ociField = mapAlias("oci2011", "oci");
+            var lengthField = mapAlias("oci2011", "length");
+
+            SQL.field("SUM(OCI * LENGTH) / SUM(LENGTH)", "avg")
+        }
         
 
         SQL.from(mapAlias("oci2011"), "oci2011");
@@ -217,6 +256,8 @@ var sqlBuilder = (function() {
         getOCICalcSQL: function(sqlKey, calc) {
             var SQL = getOCICalcSQL(sqlKey, calc);
             SQL = getConditionSQL(sqlKey, SQL).toString();
+
+            console.log(SQL);
 
             return SQL;
         }
