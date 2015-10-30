@@ -123,7 +123,7 @@ var opsDisplay = (function() {
                 chartData.push([element.color, element.totalmiles]);
             });
             $("#chart-title-1 h4").text("OCI Breakdown");
-            window.typeBreakdown = c3.generate({
+            window.typeBreakdownChart = c3.generate({
                 bindto: '#chart-container-1',
                 data: {
                   type: 'pie',
