@@ -2,11 +2,11 @@ var sqlBuilder = (function() {
     // Private.
 
     var fields = {
-        "ic": { 
+        "ic": {
             "cartodb_id": "ic.cartodb_id",
             "the_geom": "ic.the_geom",
             "the_geom_webmercator": "ic.the_geom_webmercator",
-            "activity": "ic.asset_type", 
+            "activity": "ic.asset_type",
             "street": "ic.rd20full",
             "from_street": "ic.xstrt1",
             "to_street": "ic.xstrt2",
@@ -30,7 +30,8 @@ var sqlBuilder = (function() {
             "oci_condition": "getSQLString",
             "color": "getSQLString",
             "length": "oci2011.length",
-            "oci": "oci2011.oci"
+            "oci": "oci2011.oci",
+            "oci_display": "ROUND(oci2011.oci)"
         }
     };
 
@@ -76,7 +77,7 @@ var sqlBuilder = (function() {
                     "WHEN oci <= 69.999 THEN 'Fair' " +
                     "ELSE 'Good' " +
                     "END";
-            default: 
+            default:
                 throw new Error("Unfound getSQLString " + stringRef);
         }
     };
@@ -91,7 +92,7 @@ var sqlBuilder = (function() {
             return tables[table_alias];
 
         // If table exists, and no field found, throw error.
-        if (_.isUndefined(fields[table_alias][field_alias])) 
+        if (_.isUndefined(fields[table_alias][field_alias]))
             throw new Error("Unfound Table " + table_alias + " Field " + field_alias)
 
         // HACK - @TODO
@@ -171,7 +172,7 @@ var sqlBuilder = (function() {
                     mapAlias("ic", "status") + " = 'Construction'")
                 break;
 
-            case "oci-2011": 
+            case "oci-2011":
                 SQL.where("oci_date is not null")
                    .where("oci > 0")
                    .where("oci_date::date <= '2012-01-01'");
@@ -191,14 +192,14 @@ var sqlBuilder = (function() {
 
         // Determine Grouping Field.
         // Throw error if no table found will happen in map alias.
-        if (config.groupFieldAlias) 
+        if (config.groupFieldAlias)
             groupField = mapAlias(config.tableAlias, config.groupFieldAlias);
 
         SQL.field(groupField, config.groupFieldAlias)
            .field("SUM(" + mapAlias(config.tableAlias, config.lengthFieldAlias) + ")", "totalMiles")
            .group(groupField);
 
-        if (sqlKey == 'oci-2011') 
+        if (sqlKey == 'oci-2011')
             SQL.from(mapAlias("oci2011"), "oci2011")
 
         // All others
@@ -222,7 +223,7 @@ var sqlBuilder = (function() {
 
             SQL.field("SUM(OCI * LENGTH) / SUM(LENGTH)", "avg")
         }
-        
+
 
         SQL.from(mapAlias("oci2011"), "oci2011");
 
