@@ -1,5 +1,5 @@
 ## About this map
-This map highlights city streets that have been repaired since July 1, 2013 and are currently scheduled for repair over the next several years.  Depending on which layer is showing, streets are colored by type of repair or by their ranking in the 2011 Overall Condition Index (OCI) survey conducted by the City.
+This map highlights city streets that have been repaired since July 1, 2013 and are currently scheduled for repair over the next several years.  Depending on which layer is showing, streets are colored by type of repair or by their score in the 2011 Overall Condition Index (OCI) survey conducted by the City.
 You can use the menu in the upper left to filter street repairs by year, to display each city street’s OCI, show upcoming work, and to track the progress of Mayor Kevin Faulconer’s pledge to complete 1,000 miles of street repairs in five years.
 The data used to develop this map is the latest available from the City’s Transportation & Storm Water Department. Numbers shown here may have been updated from previous reports on street repairs. Streets that do not have an OCI listed are not City-maintained streets and are typically located on a private property or a military base.
 
