@@ -72,8 +72,8 @@ var sqlBuilder = (function() {
             case "oci_condition":
             case "color":
                 return "CASE " +
-                    "WHEN oci <= 33.333 THEN 'Poor' " +
-                    "WHEN oci <= 66.666 THEN 'Fair' " +
+                    "WHEN oci <= 39.999 THEN 'Poor' " +
+                    "WHEN oci <= 69.999 THEN 'Fair' " +
                     "ELSE 'Good' " +
                     "END";
             default: 
