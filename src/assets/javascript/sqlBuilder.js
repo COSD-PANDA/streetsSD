@@ -14,6 +14,7 @@ var sqlBuilder = (function() {
             "length": "(ic.shape_len / 5280)",
             "adj_length": "getSQLString",
             "moratorium": "ic.moratorium",
+            "work_completed": "to_char(ic.moratorium, 'Month YYYY')",
             "work_end": "ic.moratorium"
         },
         "tswb": {
