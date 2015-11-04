@@ -1,6 +1,6 @@
 # Title, decription, tagline and URL for your site
 # Can be used in your theme by calling 'site.title' and so on
-title: SDStreets Explorer
+title: SDStreets
 description:
 tagline: "alpha"
 url: localhost:4000

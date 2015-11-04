@@ -6915,8 +6915,14 @@ div.cartodb-popup-content-wrapper {
   modal-content-border-radius: 0px; }
 
 .modal-body {
-  max-height: 575px;
-  overflow: scroll; }
+  max-height: 450px;
+  overflow: scroll;
+  padding-left: 7%;
+  padding-right: 7%; }
+
+.modal-header {
+  padding-left: 7%;
+  padding-right: 3%; }
 
 .modal-highlighted-section {
   background-color: #f3ec7a; }
@@ -6924,10 +6930,15 @@ div.cartodb-popup-content-wrapper {
 .modal-dialog {
   z-index: 9999; }
 
+img#howto-gif {
+  margin-left: auto;
+  margin-right: auto;
+  width: 55%; }
+
 /* make sidebar nav vertical */
 @media (min-width: 768px) {
   .modal-dialog {
-    width: 80%; } }
+    width: 70%; } }
 
 @media (min-width: 992px) {
   .helper-box-section-row.bignums {
