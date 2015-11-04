@@ -35,11 +35,18 @@ var opsDisplay = (function() {
                 data: {
                     type: 'pie',
                     columns: chartData,
-                    colors: { 
-                        "Slurry": colors.activity.slurry, 
+                    colors: {
+                        "Slurry": colors.activity.slurry,
                         "Overlay": colors.activity.overlay,
-                        "Concrete": colors.activity.concrete 
+                        "Concrete": colors.activity.concrete
                     }
+                },
+                pie: {
+                  label: {
+                    format: function(value, ratio, id) {
+                      return d3.format("%")(ratio);
+                    }
+                  }
                 },
                 tooltip: {
                   format: {
@@ -96,7 +103,7 @@ var opsDisplay = (function() {
           });
         },
 
-        
+
         progress: function(subLayerID, data) {
             var tDistance = _.sum(data.rows, function(row) { return row.totalmiles; }).toFixed(2)
             var chartData = [];
@@ -128,10 +135,17 @@ var opsDisplay = (function() {
                 data: {
                   type: 'pie',
                   columns: chartData,
-                  colors: { 
-                    "Poor": colors.oci.poor, 
+                  colors: {
+                    "Poor": colors.oci.poor,
                     "Fair": colors.oci.fair,
                     "Good": colors.oci.good,
+                  }
+                },
+                pie: {
+                  label: {
+                    format: function(value, ratio, id) {
+                      return d3.format("%")(ratio);
+                    }
                   }
                 },
                 tooltip: {
