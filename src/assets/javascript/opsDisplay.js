@@ -58,13 +58,27 @@ var opsDisplay = (function() {
         },
 
         workByMonth: function(subLayerID, data) {
-            chartData = ['miles'];
-            chartX = ['x']
+            //chartData = ['miles'];
+            //chartX = ['x'];
+            chartX = {};
+            chartData = {};
+
             _.each(data.rows, function(element, index) {
-                chartX.push(element.to_char)
-                chartData.push(d3.round(element.totalmiles, 0));
+                var monPos = parseInt(element.to_char);
+                if (monPos >= 7) {
+                  chartX[monPos - 7] = element.to_char;
+                  chartData[monPos - 7] = d3.round(element.totalmiles, 0);
+                }
+                else {
+                  chartX[monPos + 6] = element.to_char;
+                  chartData[monPos + 6] = d3.round(element.totalmiles, 0);
+                }
             });
-            console.log(chartX);
+
+            chartX = _.values(chartX);
+            chartData = _.values(chartData);
+            chartX.splice(0, 0, 'x');
+            chartData.splice(0, 0, 'miles');
             $("#chart-title-2 h4").text("Work By Month");
             window.workByMonthChart = c3.generate({
             bindto: '#chart-container-2',
