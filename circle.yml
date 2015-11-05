@@ -5,7 +5,7 @@ deployment:
       - gulp publish
       - surge --project ./site --domain sdif-stage.surge.sh
   production:
-    branch: production
+    branch: production-two
     commands:
       - gulp publish
-      - surge --project ./site --domain sdif.surge.sh
+      - gulp deploy
