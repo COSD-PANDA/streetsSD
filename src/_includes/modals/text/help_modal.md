@@ -5,7 +5,7 @@ This map highlights city streets that have been repaired since July 1, 2013 and 
 
 You can use the menu in the upper left to filter street repairs by year, to display each city street’s OCI, show upcoming work, and to track the progress of Mayor Kevin Faulconer’s pledge to complete 1,000 miles of street repairs in five years.  You may also click on an individual street to see additional detailed information.
 
-The data in this map is the latest and most accurate available from the <a href="http://www.sandiego.gov/stormwater" target="_blank" title="San Diego Transportation and Storm Water Department">City's Transportation & Storm Water Department</a>. It will be updated quarterly.
+The data in this map is the latest and most accurate available from the <a href="http://www.sandiego.gov/tsw" target="_blank" title="San Diego Transportation and Storm Water Department">City's Transportation & Storm Water Department</a>. It will be updated quarterly.
 
 
 ## Overview of City Street Network
