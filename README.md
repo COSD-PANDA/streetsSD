@@ -30,6 +30,8 @@ The backend of the application is mainly CartoDB.  As various JS events happen, 
 
 [C3](http://c3js.org/) is used for charting, and [Squel.js](https://hiddentao.github.io/squel/) for constructing queries to send to CartoDB.
 
+Static assets are hosted on S3 as needed.
+
 The hosting for staging is handled by Surge, and production runs on Github Pages.
 
 Analytics are supported by Google Tag Manager, Google Analytics and HotJar.
