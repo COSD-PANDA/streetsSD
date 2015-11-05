@@ -14,7 +14,9 @@ var sqlBuilder = (function() {
             "length": "(ic.shape_len / 5280)",
             "adj_length": "getSQLString",
             "moratorium": "ic.moratorium",
+            "work_start": "ic.start_cons",
             "work_completed": "to_char(ic.moratorium, 'Month YYYY')",
+            "work_scheduled": "getSQLString",
             "work_end": "ic.moratorium"
         },
         "tswb": {
@@ -78,6 +80,15 @@ var sqlBuilder = (function() {
                     "WHEN oci <= 69.999 THEN 'Fair' " +
                     "ELSE 'Good' " +
                     "END";
+
+            case "work_scheduled":
+                var schedField = mapAlias("ic", "work_start");
+                return "CASE " +
+                    "WHEN EXTRACT (MONTH FROM  " + schedField + ") >= 7 " +
+                    "THEN 'FY-' || EXTRACT (YEAR FROM " + schedField + ") + 1 " +
+                    "ELSE 'FY-' || EXTRACT (YEAR FROM " + schedField + ") " +
+                    "END";
+
             default:
                 throw new Error("Unfound getSQLString " + stringRef);
         }
