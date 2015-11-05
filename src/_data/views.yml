@@ -22,7 +22,7 @@
     - "typeBreakdown"
     - "progress"
     - "bigNumbers"
-  description: "Mayor Faulconer has pledged to pave 1,000 miles of streets over the next 5 years. This shows all work from July 1, 2015 to <span class='lqEnd'></span>.  This information is updated quarterly."
+  description: "Mayor Faulconer has pledged to repair 1,000 miles of streets over the next 5 years. This shows all work from July 1, 2015 to <span class='lqEnd'></span>.  This information is updated quarterly."
 
 - work-fy-2014:
   id: "work-fy-2014"

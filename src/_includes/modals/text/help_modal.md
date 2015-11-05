@@ -15,7 +15,7 @@ As of 2015, the City of San Diego’s street network consists of about 2,800 mil
 ## Condition of City streets
 </span>
 
-A 100-point OCI ranking system the City uses classifies streets into one of three categories:
+A 100-point OCI rating system the City uses classifies streets into one of three categories:
 
 <span id="condition-good">
 **Good** - A street in this category has little or no cracking, minor potholes, or other distresses; has excellent drivability; and does not need maintenance. A street in good condition has an OCI rating between 70 and 100.
