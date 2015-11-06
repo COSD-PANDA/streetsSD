@@ -103,9 +103,15 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.title-section {
+  float:left;
+}
 
+.other-section {
+  float:right;
+}
 
-.other-section a, .other-section .address-search {
+.other-section .address-search {
   float: left;
   margin-left:1%;
   margin-right:1%;
