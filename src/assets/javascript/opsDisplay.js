@@ -134,6 +134,11 @@ var opsDisplay = (function() {
                     format: function(value, ratio) { return d3.round(value, 0); },
                     show: true // to turn off the min/max labels.
                   }
+                },
+                tooltip: {
+                  format: {
+                    value: function (value, ratio, id, index) { return d3.round(value, 0) + " Miles"; }
+                  }
                 }
             });
         },
