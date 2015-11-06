@@ -21,6 +21,7 @@ var viewController = {
       vc.initModalLinks();
       vc.initLocationLinks()
       vc.initFirstLayer();
+      vc.initShare();
       // Default
       vc.initIntro();
       // Force intro
@@ -29,6 +30,28 @@ var viewController = {
      })
     .error(function(err) {
       console.log(err);
+    });
+  },
+  initShare: function() {
+    new ShareButton({
+      url: "http://sdstreets.org",          // the url you'd like to share. [Default: `window.location.href`]
+      title: "SDStreets Alpha",        // title to be shared alongside your link [Default: See below in defaults section]
+      description: "San Diego Street Work.", // text to be shared alongside your link, [Default: See below in defaults section]
+      //image:        // image to be shared [Default: See below in defaults section]
+      ui: {
+        flyout:  'middle right',       // change the flyout direction of the shares. chose from `top left`, `top center`, `top right`, `bottom left`, `bottom right`, `bottom center`, `middle left`, or `middle right` [Default: `top center`]
+        //button_font:  // include the Lato font set from the Google Fonts API. [Default: `true`]
+        buttonText: "",  // change the text of the button, [Default: `Share`]
+        //icon_font:    // include the minified Entypo font set. [Default: `true`]
+      },
+      networks: {
+        googlePlus: { enabled: false },
+        pinterest: { enabled: false },
+        reddit: { enabled: false },
+        linkedin: { enabled: false },
+        whatsapp: { enabled: false },
+        email: { enabled: false }
+      }
     });
   },
   initLocationLinks: function() {
