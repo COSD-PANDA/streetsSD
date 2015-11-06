@@ -3,7 +3,6 @@ general:
     only:
       - master
       - production
-      - production-two
 deployment:
   staging:
     branch: master
@@ -11,7 +10,7 @@ deployment:
       - gulp publish
       - surge --project ./site --domain sdif-stage.surge.sh
   production:
-    branch: production-two
+    branch: production
     commands:
       - git config --global user.email "max@maksimize.com"
       - git config --global user.name "Maksim Pecherskiy"
