@@ -25,7 +25,6 @@ var opsDisplay = (function() {
         typeBreakdown: function(subLayerID, data) {
             chartData = [];
             var oc = opsControl;
-            console.log(data);
             _.each(data.rows, function(element, index) {
                 chartData.push([element.activity, element.totalmiles]);
             });

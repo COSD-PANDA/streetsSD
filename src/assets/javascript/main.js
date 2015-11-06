@@ -177,8 +177,8 @@ var viewController = {
     var subLayer = global.layers[1].getSubLayer(subLayerNum);
     if (setSQL == 1) {
       var query = sqlBuilder.getSQL(subLayerID);
-      console.log("Set Map Query For Layer: " + subLayerID + " with Number " + subLayerNum)
-      console.log(query);
+      //console.log("Set Map Query For Layer: " + subLayerID + " with Number " + subLayerNum)
+      //console.log(query);
       subLayer.setSQL(query);
     }
     subLayer.show();

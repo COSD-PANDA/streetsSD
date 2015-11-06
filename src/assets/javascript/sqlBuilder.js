@@ -269,9 +269,6 @@ var sqlBuilder = (function() {
         getOCICalcSQL: function(sqlKey, calc) {
             var SQL = getOCICalcSQL(sqlKey, calc);
             SQL = getConditionSQL(sqlKey, SQL).toString();
-
-            console.log(SQL);
-
             return SQL;
         }
 
