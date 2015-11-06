@@ -121,7 +121,7 @@ gulp.task("deploy", function () {
       // branch and automatically overwrite anything that is in the directory
       branch: "gh-pages",
       cacheDir: ".publish",
-      remoteURL: remoteURL
+      remoteUrl: remoteURL
     }));
 });
 
