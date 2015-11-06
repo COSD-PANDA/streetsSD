@@ -39,7 +39,7 @@ var sqlBuilder = (function() {
     };
 
     var tables = {
-        ic: "imcat_street",
+        ic: "imcat_street_1",
         tswb: "tsw_basemap",
         oci2011: "oci_2011_master",
     };
