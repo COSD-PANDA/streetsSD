@@ -21,7 +21,7 @@ A 100-point OCI rating system the City uses classifies streets into one of three
 **Good** - A street in this category has little or no cracking, minor potholes, or other distresses; has excellent drivability; and does not need maintenance. A street in good condition has an OCI rating between 70 and 100.
 </span>
 
-<span id="condition-fair">**Fair** - A street in this category has moderate cracking and/or some minor potholes; has adequate drivability; and is typically in need of remedial repairs and a slurry seal or a minor asphalt overlay, which may include remedial repairs. A street in fair condition has an OCI rating between 40 and 69.</span>
+<span id="condition-fair">**Fair** - A street in this category has moderate cracking and/or some minor potholes; has adequate drivability; and is typically in need of a slurry seal or a minor asphalt overlay, which may include remedial repairs. A street in fair condition has an OCI rating between 40 and 69.</span>
 
 
 <span id="condition-poor">**Poor** - A street in this category has severe cracking, numerous areas of failed pavement with possible sub base failure, exhibits a rough ride, and qualifies for a comprehensive asphalt overlay or a total reconstruction – meaning that a street may be replaced from the ground up if conditions warrant that effort. A street in poor condition has an OCI rating between 0 and 39.</span>
