@@ -39,7 +39,7 @@ var sqlBuilder = (function() {
     };
 
     var tables = {
-        ic: "imcat_street",
+        ic: "imcat_street_1",
         tswb: "tsw_basemap",
         oci2011: "oci_2011_master",
     };
@@ -269,9 +269,6 @@ var sqlBuilder = (function() {
         getOCICalcSQL: function(sqlKey, calc) {
             var SQL = getOCICalcSQL(sqlKey, calc);
             SQL = getConditionSQL(sqlKey, SQL).toString();
-
-            console.log(SQL);
-
             return SQL;
         }
 

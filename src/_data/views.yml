@@ -22,7 +22,7 @@
     - "typeBreakdown"
     - "progress"
     - "bigNumbers"
-  description: "Mayor Faulconer has pledged to repair 1,000 miles of streets over the next 5 years. This shows all work from July 1, 2015 to <span class='lqEnd'></span>.  This information is updated quarterly."
+  description: "Mayor Faulconer has pledged to repair 1,000 miles of streets over the next 5 years -- through Fiscal Year 2020. This shows all work from July 1, 2015 to <span class='lqEnd'></span>.  This information is updated quarterly."
 
 - work-fy-2014:
   id: "work-fy-2014"
@@ -74,7 +74,7 @@
     - "calcTDistance"
     - "typeBreakdown"
   title: "Future / Ongoing Work"
-  description: "Future work includes <span class='tDistance'></span> miles of street that have been planned for or are ongoing repairs. Additional miles of repairs will be added as more streets are identified. The exact amount of mileage repaired in future years will depend on annual budgets and funds."
+  description: "This shows street repairs currently planned over the next several years and may include streets currently being repaired. Additional miles of repairs will be added as more streets are identified. The exact amount of mileage repaired in future years will depend on annual budgets and funds."
 
 - oci-2011:
   id: "oci-2011"

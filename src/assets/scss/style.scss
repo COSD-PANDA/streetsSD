@@ -80,6 +80,10 @@ h1, h2, h3, h4, h5, h6 {
   @include opensans;
 }
 
+.noshow {
+  display: none !important;
+}
+
 .wrap {
   position: fixed;
   height: 100%;
@@ -103,12 +107,30 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.main-share-button, .main-share-button:hover {
+  background: transparent !important;
+  .sb-social .enabled {
+    padding-top: 4px;
+    padding-bottom:4px;
+  }
+}
 
+.title-section {
+  float:left;
+}
 
-.other-section a, .other-section .address-search {
+.other-section {
+  float:right;
+}
+
+.other-section .address-search {
   float: left;
   margin-left:1%;
   margin-right:1%;
+}
+
+.masthead .container {
+  padding-left: 37px;
 }
 
 .masthead-title small {

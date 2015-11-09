@@ -25,7 +25,6 @@ var opsDisplay = (function() {
         typeBreakdown: function(subLayerID, data) {
             chartData = [];
             var oc = opsControl;
-            console.log(data);
             _.each(data.rows, function(element, index) {
                 chartData.push([element.activity, element.totalmiles]);
             });
@@ -133,6 +132,11 @@ var opsDisplay = (function() {
                   label: {
                     format: function(value, ratio) { return d3.round(value, 0); },
                     show: true // to turn off the min/max labels.
+                  }
+                },
+                tooltip: {
+                  format: {
+                    value: function (value, ratio, id, index) { return d3.round(value, 0) + " Miles"; }
                   }
                 }
             });
