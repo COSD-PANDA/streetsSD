@@ -35,7 +35,7 @@
     - "typeBreakdown"
     - "workByMonth"
     - "bigNumbers"
-  description: "All work from July 1, 2013 to June 31, 2014."
+  description: "All work from July 1, 2013 to June 30, 2014."
 
 - work-fy-2015:
   id: "work-fy-2015"
@@ -48,7 +48,7 @@
     - "typeBreakdown"
     - "workByMonth"
     - "bigNumbers"
-  description: "All work from July 1, 2014 to June 31, 2015."
+  description: "All work from July 1, 2014 to June 30, 2015."
 
 
 - work-fy-2016:
