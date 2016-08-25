@@ -7736,6 +7736,16 @@ img#howto-gif {
   width: 55%; }
 
 /* make sidebar nav vertical */
+@media (max-width: 767px) {
+  .other-section {
+    margin-top: 10px; }
+    .other-section i {
+      font-size: 20px;
+      margin-left: 0px;
+      margin-right: 0px; }
+  .navbar-header {
+    padding-left: 17%; } }
+
 @media (min-width: 768px) {
   .modal-dialog {
     width: 70%; } }

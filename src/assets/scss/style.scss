@@ -400,6 +400,20 @@ img#howto-gif {
 }
 
 /* make sidebar nav vertical */
+@media (max-width: 767px) {
+  .other-section {
+    margin-top: 10px;
+    i {
+      font-size: 20px;
+      margin-left:0px;
+      margin-right:0px;
+    }
+  }
+  .navbar-header {
+    padding-left: 17%;
+  }
+}
+
 @media (min-width: 768px) {
   .modal-dialog {
     width: 70%;
