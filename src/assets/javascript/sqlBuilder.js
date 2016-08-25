@@ -39,7 +39,7 @@ var sqlBuilder = (function() {
     };
 
     var tables = {
-        ic: "imcat_street_1",
+        ic: "imcat_street_august_2016",
         tswb: "tsw_basemap",
         oci2011: "oci_2011",
     };
@@ -174,6 +174,13 @@ var sqlBuilder = (function() {
                 SQL.where(mapAlias("ic", "work_end") + " is not null")
                    .where(mapAlias("ic", "status") + " = 'Moratorium'")
                    .where(mapAlias("ic", "work_end") + "::date >= '2015-07-01'")
+                   .where(mapAlias("ic", "work_end") + "::date <= '" + lastQuarter.end + "'")
+                break;
+
+            case 'work-fy-2017':
+                SQL.where(mapAlias("ic", "work_end") + " is not null")
+                   .where(mapAlias("ic", "status") + " = 'Moratorium'")
+                   .where(mapAlias("ic", "work_end") + "::date >= '2016-04-01'")
                    .where(mapAlias("ic", "work_end") + "::date <= '" + lastQuarter.end + "'")
                 break;
 
