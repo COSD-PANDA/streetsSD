@@ -5,7 +5,7 @@ var global = {
 var viewController = {
   init: function() {
     var vc = this;
-    cartodb.createVis('map', 'https://cityofsandiego.cartodb.com/api/v2/viz/0eb76b2a-50ea-11e5-b297-0e018d66dc29/viz.json', {
+    cartodb.createVis('map', 'https://cityofsandiego.carto.com/u/cityofsandiego-admin/api/v2/viz/88b41ee8-6ae6-11e6-949c-0e05a8b3e3d7/viz.json', {
       tiles_loader: true,
       center_lat: 32.7150,
       center_lon: -117.1625,
@@ -80,7 +80,7 @@ var viewController = {
     });
   },
   initFirstLayer: function() {
-    $('#layer-selector a#all-work').click();
+    $('#layer-selector a#oci-2011').click();
   },
   showModalAndHighlight: function(trigger) {
     var modalShow = $(trigger).data('modal-show');
@@ -144,7 +144,7 @@ var viewController = {
     var num_sublayers = global.layers[1].getSubLayerCount();
     for (var i = 0; i < num_sublayers; i++) {
       global.layers[1].getSubLayer(i).hide();
-      global.layers[1].infowindow.set('visibility', false);
+      //global.layers[1].infowindow.set('visibility', false);
     }
     $('.chart-title h4').text("");
     if (window.typeBreakdownChart)
@@ -179,8 +179,8 @@ var viewController = {
     var subLayer = global.layers[1].getSubLayer(subLayerNum);
     if (setSQL == 1) {
       var query = sqlBuilder.getSQL(subLayerID);
-      //console.log("Set Map Query For Layer: " + subLayerID + " with Number " + subLayerNum)
-      //console.log(query);
+      console.log("Set Map Query For Layer: " + subLayerID + " with Number " + subLayerNum)
+      console.log(query);
       subLayer.setSQL(query);
     }
     subLayer.show();

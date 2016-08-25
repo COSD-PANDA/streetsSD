@@ -28,8 +28,8 @@ var sqlBuilder = (function() {
             "the_geom_webmercator": "oci2011.the_geom_webmercator",
             "oci_date": "oci2011.oci_date",
             "street": "oci2011.street",
-            "from_street": "oci2011.from_street",
-            "to_street": "oci2011.to_street",
+            "from_street": "oci2011.from_st",
+            "to_street": "oci2011.to_st",
             "oci_condition": "getSQLString",
             "color": "getSQLString",
             "length": "oci2011.length",
@@ -41,7 +41,7 @@ var sqlBuilder = (function() {
     var tables = {
         ic: "imcat_street_1",
         tswb: "tsw_basemap",
-        oci2011: "oci_2011_master",
+        oci2011: "oci_2011",
     };
 
     getLastQuarter = function() {

@@ -1,7 +1,7 @@
 var opsControl = (function() {
     // Private.
 
-    sql = new cartodb.SQL({ user: 'cityofsandiego' });
+    sql = new cartodb.SQL({ user: 'cityofsandiego-admin' });
 
     tDistanceStringConfig = {
         tableAlias: "ic",
