@@ -62,7 +62,7 @@
     - "typeBreakdown"
     - "workByMonth"
     - "bigNumbers"
-  description: "All work from July 1, 2015 to <span class='lqEnd'></span>.  This information is updated quarterly."
+  description: "All work from July 1, 2015 to <span class='lqEnd'></span>."
 
 - work-fy-2017:
   id: "work-fy-2017"
