@@ -3,24 +3,24 @@ var sqlBuilder = (function() {
 
     var fields = {
         "ic": {
-            "cartodb_id": "ic.cartodb_id",
-            "the_geom": "ic.the_geom",
-            "the_geom_webmercator": "ic.the_geom_webmercator",
-            "activity": "ic.asset_type",
-            "street": "ic.rd20full",
-            "from_street": "ic.xstrt1",
-            "to_street": "ic.xstrt2",
-            "status": "ic.project_st",
-            "length": "(ic.shape_len / 5280)",
+            "activity": "ic.type",
+            "status": "ic.status",
+            "length": "(ic.length / 5280)",
             "adj_length": "getSQLString",
             "moratorium": "ic.moratorium",
-            "work_start": "ic.start_cons",
+            "work_start": "ic.start",
             "work_completed": "to_char(ic.moratorium, 'Month YYYY')",
             "work_scheduled": "getSQLString",
             "work_end": "ic.moratorium"
         },
         "tswb": {
-            "width": "tswb.width"
+            "width": "tswb.pwidth",
+            "cartodb_id": "tswb.cartodb_id",
+            "the_geom": "tswb.the_geom",
+            "the_geom_webmercator": "tswb.the_geom_webmercator",
+            "street": "tswb.rd20full",
+            "from_street": "tswb.xstrt1",
+            "to_street": "tswb.xstrt2"
         },
         "oci2011": {
             "cartodb_id": "oci2011.cartodb_id",
@@ -39,8 +39,8 @@ var sqlBuilder = (function() {
     };
 
     var tables = {
-        ic: "imcat_street_august_2016",
-        tswb: "tsw_basemap",
+        ic: "imcat_update",
+        tswb: "city_street_alley_walkway",
         oci2011: "oci_2011",
     };
 
@@ -131,7 +131,7 @@ var sqlBuilder = (function() {
                 SQL.field(mapAlias("tswb", index), index)
             });
             SQL.from(tables.ic, "ic")
-               .join(tables.tswb, "tswb", "ic.sapid = tswb.sapid")
+               .join(tables.tswb, "tswb", "ic.segment = tswb.sapid")
 
 
         }
@@ -224,7 +224,7 @@ var sqlBuilder = (function() {
         // All others
         else {
             SQL.from(mapAlias("ic"), "ic")
-               .join(mapAlias("tswb"), "tswb", "ic.sapid = tswb.sapid")
+               .join(mapAlias("tswb"), "tswb", "ic.segment = tswb.sapid")
         }
 
         if (config.order)
