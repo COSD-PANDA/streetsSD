@@ -35,6 +35,13 @@ var sqlBuilder = (function() {
             "length": "oci2011.length",
             "oci": "oci2011.oci",
             "oci_display": "ROUND(oci2011.oci)"
+        },
+        "oci2015": {
+            "oci": "oci2015.oci",
+            "oci_display": "ROUND(oci2015.oci)",
+            "oci_condition": "getSQLString",
+            "color": "getSQLString",
+            "length": "oci2015.length"
         }
     };
 
@@ -42,6 +49,7 @@ var sqlBuilder = (function() {
         ic: "sdif_update",
         tswb: "city_street_alley_walkway",
         oci2011: "oci_2011",
+        oci2015: "oci_2015"
     };
 
     getLastQuarter = function() {
@@ -123,6 +131,16 @@ var sqlBuilder = (function() {
             });
             SQL.from(mapAlias("oci2011"), "oci2011")
         }
+        else if (sqlKey == 'oci-2015') {
+            _.each(fields.oci2015, function(element, index) {
+                SQL.field(mapAlias("oci2015", index), index)
+            });
+            _.each(fields.tswb, function(element, index) {
+                SQL.field(mapAlias("tswb", index), index)
+            });
+            SQL.from(mapAlias("oci2015"), "oci2015")
+               .join(tables.tswb, "tswb", "oci2015.segment = tswb.sapid")
+        }
         else {
             _.each(fields.ic, function(element, index) {
                 SQL.field(mapAlias("ic", index), index)
@@ -196,6 +214,10 @@ var sqlBuilder = (function() {
                    .where("oci > 0")
                    .where("oci_date::date <= '2012-01-01'");
                 break;
+
+            case "oci-2015":
+                SQL.where("oci > 0")
+                break;
         }
 
         return SQL;
@@ -220,6 +242,8 @@ var sqlBuilder = (function() {
 
         if (sqlKey == 'oci-2011')
             SQL.from(mapAlias("oci2011"), "oci2011")
+        if (sqlKey == 'oci-2015')
+            SQL.from(mapAlias("oci2015"), "oci2015")
 
         // All others
         else {
