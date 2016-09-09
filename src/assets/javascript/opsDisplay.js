@@ -179,6 +179,7 @@ var opsDisplay = (function() {
             totalMiles = _.sum(data.rows, function(row) {
                 return row.totalmiles;
             });
+            console.log(totalMiles);
             totalMiles = d3.round(totalMiles, 0);
             targetBox = $('#helper_box #bignum-left');
             $('.data-value', targetBox).text(totalMiles);

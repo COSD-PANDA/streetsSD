@@ -6,6 +6,7 @@ var sqlBuilder = (function() {
             "activity": "ic.type",
             "status": "ic.status",
             "length": "(ic.length / 5280)",
+            "width": "ic.width",
             "adj_length": "getSQLString",
             "moratorium": "ic.moratorium",
             "work_start": "ic.start",
@@ -14,7 +15,6 @@ var sqlBuilder = (function() {
             "work_end": "ic.moratorium"
         },
         "tswb": {
-            "width": "tswb.pwidth",
             "cartodb_id": "tswb.cartodb_id",
             "the_geom": "tswb.the_geom",
             "the_geom_webmercator": "tswb.the_geom_webmercator",
@@ -39,7 +39,7 @@ var sqlBuilder = (function() {
     };
 
     var tables = {
-        ic: "imcat_update",
+        ic: "sdif_update",
         tswb: "city_street_alley_walkway",
         oci2011: "oci_2011",
     };
@@ -66,10 +66,10 @@ var sqlBuilder = (function() {
     getSQLString = function(stringRef) {
         switch (stringRef) {
             case "adj_length":
-                var widthField = mapAlias("tswb", "width");
+                var widthField = mapAlias("ic", "width");
                 var lengthField = mapAlias("ic", "length");
                 return "CASE " +
-                    "WHEN " + widthField + " >= 48 THEN " +
+                    "WHEN " + widthField + " >= 50 THEN " +
                     "(" + lengthField + " * 2) " +
                     "ELSE " + lengthField + " " +
                     "END";

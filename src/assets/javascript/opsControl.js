@@ -11,7 +11,8 @@ var opsControl = (function() {
 
     getTDistance = function(subLayerID, displayOp) {
         var sqlString = sqlBuilder.getDistanceSQL(subLayerID, tDistanceStringConfig);
-        console.log(sqlString);
+        //console.log("HI")
+        //console.log(sqlString);
         sql.execute(sqlString).done(function(data){
             opsDisplay[displayOp](subLayerID, data);
         });
