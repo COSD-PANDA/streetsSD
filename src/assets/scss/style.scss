@@ -153,10 +153,12 @@ h1, h2, h3, h4, h5, h6 {
 .sidebar-toggle {
   top: 55px;
   background: white;
+  z-index: 9999999;
 }
 
 #sidebar.sidebar {
   background: $s_black;
+  z-index: 9999999999;
 }
 
 #sidebar .social-links {

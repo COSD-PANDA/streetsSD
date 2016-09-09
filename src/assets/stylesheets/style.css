@@ -7536,10 +7536,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .sidebar-toggle {
   top: 55px;
-  background: white; }
+  background: white;
+  z-index: 9999999; }
 
 #sidebar.sidebar {
-  background: #1b242a; }
+  background: #1b242a;
+  z-index: 9999999999; }
 
 #sidebar .social-links {
   text-align: center; }
