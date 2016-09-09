@@ -36,7 +36,6 @@ var opsControl = (function() {
         },
 
         ociBreakdown: function(subLayerID) {
-            console.log(subLayerID);
             var sqlString = sqlBuilder.getDistanceSQL(subLayerID, {
                 tableAlias: subLayerID.replace("-", ""),
                 groupFieldAlias: "color",

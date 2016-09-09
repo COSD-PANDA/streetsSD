@@ -96,7 +96,7 @@
   ops:
     - "ociBreakdown"
   title: "OCI as of 2011"
-  description: "The City performed a street condition survey in 2011, assigning an Overall Condition Index (OCI) number to each street. OCI is only one of many factors to determine the order of street repairs. OCI is not available for paved alleys, private or military streets or streets the City was unable to survey due to closures. The City plans to release new OCI data in 2016."
+  description: "The City performed a street condition survey in 2011, assigning an Overall Condition Index (OCI) number to each street. OCI is only one of many factors to determine the order of street repairs. OCI is not available for paved alleys, private or military streets or streets the City was unable to survey due to closures."
 
 - oci-2015:
   id: "oci-2015"
@@ -105,5 +105,5 @@
   ops:
     - "ociBreakdown"
   title: "OCI as of 2015"
-  description: "The City performed a street condition survey in 2011, assigning an Overall Condition Index (OCI) number to each street. OCI is only one of many factors to determine the order of street repairs. OCI is not available for paved alleys, private or military streets or streets the City was unable to survey due to closures. The City plans to release new OCI data in 2016."
+  description: "The City performed a street condition survey in 2015, assigning an Overall Condition Index (OCI) number to each street. OCI is only one of many factors to determine the order of street repairs. OCI is not available for paved alleys, private or military streets or streets the City was unable to survey due to closures."
 

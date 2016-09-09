@@ -242,7 +242,8 @@ var sqlBuilder = (function() {
 
         if (sqlKey == 'oci-2011')
             SQL.from(mapAlias("oci2011"), "oci2011")
-        if (sqlKey == 'oci-2015')
+
+        else if (sqlKey == 'oci-2015')
             SQL.from(mapAlias("oci2015"), "oci2015")
 
         // All others

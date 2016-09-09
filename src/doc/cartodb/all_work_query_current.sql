@@ -52,22 +52,21 @@ AND (oci > 0)
 AND (oci_date::date <= '2012-01-01')
 
 
-SELECT oci_2015.oci,
+SELECT oci2015.oci AS oci, 
+ROUND(oci2015.oci) AS oci_display, 
 CASE WHEN oci <= 39.999 THEN 'Poor' 
 WHEN oci <= 69.999 THEN 'Fair' 
 ELSE 'Good' END AS oci_condition, 
 CASE WHEN oci <= 39.999 THEN 'Poor' 
-WHEN oci <= 69.999 
-THEN 'Fair' 
-ELSE 'Good' 
-END AS color, 
+WHEN oci <= 69.999 THEN 'Fair' ELSE 'Good' END AS color, 
+oci2015.length AS length, 
 tswb.cartodb_id AS cartodb_id, 
 tswb.the_geom AS the_geom, 
 tswb.the_geom_webmercator AS the_geom_webmercator, 
 tswb.rd20full AS street, 
 tswb.xstrt1 AS from_street, 
-tswb.xstrt2 AS to_street 
-FROM oci_2015  
-INNER JOIN "cityofsandiego-admin".city_street_alley_walkway tswb 
-ON (oci_2015.segment = tswb.sapid) 
+tswb.xstrt2 AS to_street FROM oci_2015 oci2015 
+INNER JOIN city_street_alley_walkway tswb 
+ON (oci2015.segment = tswb.sapid) WHERE (oci > 0)
+
 

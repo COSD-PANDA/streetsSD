@@ -34,7 +34,11 @@
     <p>{{oci}}</p>
     <h4>street</h4>
     <p>{{street}}</p>
-    <h4>oci_condition</h4>
+    <h4>from street</h4>
+    <p>{{from_street}}</p>
+    <h4>to street</h4>
+    <p>{{to_street}}</p>
+    <h4>oci condition</h4>
     <p>{{oci_condition}}</p>
   </div>
 </div>
@@ -52,14 +56,20 @@
   <div class="cartodb-tooltip-content">
     <h4>activity</h4>
     <p>{{activity}}</p>
-    <h4>from_street</h4>
-    <p>{{from_street}}</p>
     <h4>street</h4>
     <p>{{street}}</p>
-    <h4>to_street</h4>
+    <h4>from street</h4>
+    <p>{{from_street}}</p>
+    <h4>to street</h4>
     <p>{{to_street}}</p>
-    <h4>work_completed</h4>
+    {{#work_completed}}
+    <h4>work completed</h4>
     <p>{{work_completed}}</p>
+    {{/work_completed}}
+    {{#work_scheduled}}
+    <h4>work scheduled</h4>
+    <p>{{work_scheduled}}</p>
+    {{/work_scheduled}}
   </div>
 </div>
 
