@@ -7670,6 +7670,9 @@ img {
     margin-left: 15px;
     margin-bottom: 5px; }
 
+table.c3-tooltip th {
+  color: black; }
+
 .chart-container {
   height: 218px !important;
   max-height: 218px !important;

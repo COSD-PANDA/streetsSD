@@ -60,37 +60,66 @@ var opsDisplay = (function() {
             //chartData = ['miles'];
             //chartX = ['x'];
             chartX = {};
-            chartData = {};
+            chartData = {
+              overlay: {},
+              slurry: {},
+              concrete: {
+                0:0,
+                1:0,
+                2:0,
+                3:0,
+                4:0,
+                5:0,
+                6:0,
+                7:0,
+                8:0,
+                9:0,
+                10:0,
+                11:0,
+                12:0
+              }
+            };
+            console.log(data);
 
             _.each(data.rows, function(element, index) {
                 var monPos = parseInt(element.to_char);
                 if (monPos >= 7) {
                   chartX[monPos - 7] = element.to_char;
-                  chartData[monPos - 7] = d3.round(element.totalmiles, 0);
+                  chartData[element.type.toLowerCase()][monPos - 7] = d3.round(element.totalmiles, 1);
                 }
                 else {
                   chartX[monPos + 6] = element.to_char;
-                  chartData[monPos + 6] = d3.round(element.totalmiles, 0);
+                  chartData[element.type.toLowerCase()][monPos + 6] = d3.round(element.totalmiles, 1);
                 }
             });
 
             chartX = _.values(chartX);
-            chartData = _.values(chartData);
+            overlay = _.values(chartData.overlay);
+            slurry = _.values(chartData.slurry);
+            concrete = _.values(chartData.concrete);
+            console.log(chartData);
             chartX.splice(0, 0, 'x');
-            chartData.splice(0, 0, 'miles');
+            overlay.splice(0, 0, 'overlay');
+            slurry.splice(0, 0, 'slurry');
+            concrete.splice(0, 0, 'concrete');
+            
             $("#chart-title-2 h4").text("Work By Month");
             window.workByMonthChart = c3.generate({
             bindto: '#chart-container-2',
             data: {
               x: 'x',
               type: 'bar',
-              columns: [chartX, chartData]
+              columns: [chartX, overlay, slurry, concrete],
+              groups: [
+                ['overlay', 'slurry', 'concrete']
+              ],
+              order:null
             },
-            color: { pattern: ['#0098db'] },
+            color: { pattern: ['#0098db', "#ffa02f", "#fcd900"] },
             bar: { width: { ratio: 0.5 } },
             legend: { hide: true },
             tooltip: {
-              grouped: false,
+              grouped: true,
               format: {
                 title: function(x) {
                   var date = chartX[x + 1];

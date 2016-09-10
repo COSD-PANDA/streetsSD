@@ -59,7 +59,7 @@ var opsControl = (function() {
         workByMonth: function(subLayerID) {
             var sqlString = sqlBuilder.getDistanceSQL(subLayerID, {
                 tableAlias: "ic",
-                groupFieldSQL: "to_char(" + sqlBuilder.mapAlias("ic", "work_end") + ", 'MM')",
+                groupFieldSQL: "to_char(" + sqlBuilder.mapAlias("ic", "work_end") + ", 'MM'), type",
                 lengthFieldAlias: "adj_length",
                 order: "ASC"
             });
