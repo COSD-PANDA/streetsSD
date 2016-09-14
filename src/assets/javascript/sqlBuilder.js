@@ -23,18 +23,14 @@ var sqlBuilder = (function() {
             "to_street": "tswb.xstrt2"
         },
         "oci2011": {
-            "cartodb_id": "oci2011.cartodb_id",
-            "the_geom": "oci2011.the_geom",
-            "the_geom_webmercator": "oci2011.the_geom_webmercator",
-            "oci_date": "oci2011.oci_date",
-            "street": "oci2011.street",
-            "from_street": "oci2011.from_st",
-            "to_street": "oci2011.to_st",
+            "oci": "oci2011.oci",
+            "oci_display": "ROUND(oci2011.oci)",
             "oci_condition": "getSQLString",
             "color": "getSQLString",
-            "length": "oci2011.length",
-            "oci": "oci2011.oci",
-            "oci_display": "ROUND(oci2011.oci)"
+            "length": "oci2011.seg_length_ft",
+            "area": "oci2011.area_sq_ft",
+            "width": "oci2011.seg_width_ft",
+            "oci_wt": "oci2011.oci_wt"
         },
         "oci2015": {
             "oci": "oci2015.oci",
@@ -43,14 +39,15 @@ var sqlBuilder = (function() {
             "color": "getSQLString",
             "length": "oci2015.seg_length_ft",
             "area": "oci2015.area_sq_ft",
-            "width": "oci2015.seg_width_ft"
+            "width": "oci2015.seg_width_ft",
+            "oci_wt": "oci2015.oci_wt"
         }
     };
 
     var tables = {
         ic: "sdif_update",
         tswb: "city_street_alley_walkway",
-        oci2011: "oci_2011",
+        oci2011: "oci_2011_datasd",
         oci2015: "oci_2015_datasd"
     };
 
@@ -133,15 +130,16 @@ var sqlBuilder = (function() {
             });
             SQL.from(mapAlias("oci2011"), "oci2011")
         }
-        else if (sqlKey == 'oci-2015') {
+        else if (sqlKey == 'oci-2015' || sqlKey == 'oci-2011') {
+            alias = sqlKey.replace("-", "");
             _.each(fields.oci2015, function(element, index) {
-                SQL.field(mapAlias("oci2015", index), index)
+                SQL.field(mapAlias(alias, index), index)
             });
             _.each(fields.tswb, function(element, index) {
                 SQL.field(mapAlias("tswb", index), index)
             });
-            SQL.from(mapAlias("oci2015"), "oci2015")
-               .join(tables.tswb, "tswb", "oci2015.segment = tswb.sapid")
+            SQL.from(mapAlias(alias), alias)
+               .join(tables.tswb, "tswb", alias + ".segment = tswb.sapid")
         }
         else {
             _.each(fields.ic, function(element, index) {
@@ -211,13 +209,8 @@ var sqlBuilder = (function() {
                     mapAlias("ic", "status") + " = 'Construction'")
                 break;
 
-            case "oci-2011":
-                SQL.where("oci_date is not null")
-                   .where("oci > 0")
-                   .where("oci_date::date <= '2012-01-01'");
-                break;
-
             case "oci-2015":
+            case "oci-2011":
                 SQL.where("oci > 0")
                 break;
         }
@@ -263,15 +256,16 @@ var sqlBuilder = (function() {
 
     getOCICalcSQL = function(sqlKey, calc) {
         var SQL = select();
+        alias = sqlKey.replace("-", "");
         if (calc == 'avg')  {
-            var ociField = mapAlias("oci2011", "oci");
-            var lengthField = mapAlias("oci2011", "length");
+            var ociField = mapAlias(alias, "oci_wt");
+            var lengthField = mapAlias(alias, "area");
 
-            SQL.field("SUM(OCI * LENGTH) / SUM(LENGTH)", "avg")
+            SQL.field("SUM(" + ociField + ") / SUM(" + lengthField + ")", "avg")
         }
 
 
-        SQL.from(mapAlias("oci2011"), "oci2011");
+        SQL.from(mapAlias(alias), alias);
 
         return SQL;
     }
