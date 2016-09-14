@@ -105,5 +105,5 @@
   ops:
     - "ociBreakdown"
   title: "OCI as of 2015"
-  description: "The City performed a street condition survey in 2015, assigning an Overall Condition Index (OCI) number to each street. OCI is only one of many factors to determine the order of street repairs. OCI is not available for paved alleys, private or military streets or streets the City was unable to survey due to closures."
+  description: "The City performed a street condition survey in 2015, assigning an Overall Condition Index (OCI) number to each street. OCI is only one of many factors to determine the order of street repairs. OCI is not available for private or military streets or streets the City was unable to survey due to closures."
 
