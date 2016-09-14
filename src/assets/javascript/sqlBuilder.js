@@ -18,9 +18,9 @@ var sqlBuilder = (function() {
             "cartodb_id": "tswb.cartodb_id",
             "the_geom": "tswb.the_geom",
             "the_geom_webmercator": "tswb.the_geom_webmercator",
-            "street": "tswb.rd20full",
-            "from_street": "tswb.xstrt1",
-            "to_street": "tswb.xstrt2"
+            "street": "tswb.street",
+            "from_street": "tswb.st_from",
+            "to_street": "tswb.st_to"
         },
         "oci2011": {
             "oci": "oci2011.oci",
@@ -45,8 +45,8 @@ var sqlBuilder = (function() {
     };
 
     var tables = {
-        ic: "sdif_update",
-        tswb: "city_street_alley_walkway",
+        ic: "sd_paving_datasd",
+        tswb: "cg_streets_combined",
         oci2011: "oci_2011_datasd",
         oci2015: "oci_2015_datasd"
     };
@@ -124,13 +124,7 @@ var sqlBuilder = (function() {
 
     getTableSQL = function(sqlKey) {
         var SQL = select()
-        if (sqlKey == 'oci-2011') {
-            _.each(fields.oci2011, function(element, index) {
-                SQL.field(mapAlias("oci2011", index), index)
-            });
-            SQL.from(mapAlias("oci2011"), "oci2011")
-        }
-        else if (sqlKey == 'oci-2015' || sqlKey == 'oci-2011') {
+        if (sqlKey == 'oci-2015' || sqlKey == 'oci-2011') {
             alias = sqlKey.replace("-", "");
             _.each(fields.oci2015, function(element, index) {
                 SQL.field(mapAlias(alias, index), index)
@@ -139,7 +133,7 @@ var sqlBuilder = (function() {
                 SQL.field(mapAlias("tswb", index), index)
             });
             SQL.from(mapAlias(alias), alias)
-               .join(tables.tswb, "tswb", alias + ".segment = tswb.sapid")
+               .join(tables.tswb, "tswb", alias + ".seg_id = tswb.seg_id")
         }
         else {
             _.each(fields.ic, function(element, index) {
@@ -149,7 +143,7 @@ var sqlBuilder = (function() {
                 SQL.field(mapAlias("tswb", index), index)
             });
             SQL.from(tables.ic, "ic")
-               .join(tables.tswb, "tswb", "ic.segment = tswb.sapid")
+               .join(tables.tswb, "tswb", "ic.seg_id = tswb.seg_id")
 
 
         }
@@ -244,7 +238,7 @@ var sqlBuilder = (function() {
         // All others
         else {
             SQL.from(mapAlias("ic"), "ic")
-               .join(mapAlias("tswb"), "tswb", "ic.segment = tswb.sapid")
+               .join(mapAlias("tswb"), "tswb", "ic.seg_id = tswb.seg_id")
         }
 
         if (config.order)
