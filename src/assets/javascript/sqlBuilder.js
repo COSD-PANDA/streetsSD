@@ -41,7 +41,9 @@ var sqlBuilder = (function() {
             "oci_display": "ROUND(oci2015.oci)",
             "oci_condition": "getSQLString",
             "color": "getSQLString",
-            "length": "oci2015.length"
+            "length": "oci2015.seg_length_ft",
+            "area": "oci2015.area_sq_ft",
+            "width": "oci2015.seg_width_ft"
         }
     };
 
@@ -49,7 +51,7 @@ var sqlBuilder = (function() {
         ic: "sdif_update",
         tswb: "city_street_alley_walkway",
         oci2011: "oci_2011",
-        oci2015: "oci_2015"
+        oci2015: "oci_2015_datasd"
     };
 
     getLastQuarter = function() {

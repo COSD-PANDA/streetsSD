@@ -80,7 +80,7 @@ var viewController = {
     });
   },
   initFirstLayer: function() {
-    $('#layer-selector a#all-work').click();
+    $('#layer-selector a#oci-2015').click();
   },
   showModalAndHighlight: function(trigger) {
     var modalShow = $(trigger).data('modal-show');

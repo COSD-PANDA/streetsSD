@@ -197,8 +197,8 @@ var opsDisplay = (function() {
                 },
                 tooltip: {
                   format: {
-                    name: function (name, ratio, id, index) {return name},
-                    value: function (value, ratio, id, index) { return d3.round(value, 0) + " Miles"; }
+                    //name: function (name, ratio, id, index) {return name},
+                    //value: function (value, ratio, id, index) { return d3.round(value, 0) + " sq. ft"; }
                   }
                 }
             });

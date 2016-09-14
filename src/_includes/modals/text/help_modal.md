@@ -9,7 +9,7 @@ The data in this map is the latest and most accurate available from the <a href=
 
 
 ## Overview of City Street Network
-As of 2015, the City of San Diego’s street network consists of about 2,800 miles of streets as measured along their center-lines, the majority of which are asphalt streets. The City uses center-line miles to describe the distance of our street network. “Lane-miles” are used to describe repair work and account for both the length and width of our streets. Totals for miles paved are in lane miles.
+As of 2015, the City of San Diego’s street network consists of about 2,800 miles of streets as measured along their center-lines, the majority of which are asphalt streets. The City uses center-line miles to describe the distance of our street network. “Repair-miles” are used to describe repair work and account for both the length and width of our streets. Totals for miles paved are in repair miles.
 
 <span id="condition">
 ## Condition of City streets

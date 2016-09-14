@@ -39,7 +39,7 @@ var opsControl = (function() {
             var sqlString = sqlBuilder.getDistanceSQL(subLayerID, {
                 tableAlias: subLayerID.replace("-", ""),
                 groupFieldAlias: "color",
-                lengthFieldAlias: "length",
+                lengthFieldAlias: "area",
                 order: "ASC"
             });
 
