@@ -28,7 +28,7 @@ var opsDisplay = (function() {
             _.each(data.rows, function(element, index) {
                 chartData.push([element.activity, element.totalmiles]);
             });
-            $("#chart-title-1 h4").text("Work Type Breakdown");
+            $("#chart-title-1 h4").text("Work Type");
             window.typeBreakdownChart = c3.generate({
                 bindto: '#chart-container-1',
                 data: {
