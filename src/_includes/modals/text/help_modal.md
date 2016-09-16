@@ -3,13 +3,13 @@ This map highlights city streets that have been repaired since July 1, 2013 (fir
 
 <img id="howto-gif" src="assets/images/howto.gif" title="How To" alt="How To Use SDStreets"/>
 
-You can use the menu in the upper left to filter street repairs by year, to display each city street’s OCI, show upcoming work, and to track the progress of Mayor Kevin Faulconer’s pledge to complete 1,000 miles of street repairs in five years.  You may also click on an individual street to see additional detailed information.
+You can use the menu in the upper left to filter street repairs by year, to display each city street’s OCI, show upcoming work, and to track the progress of Mayor Kevin L. Faulconer’s pledge to complete 1,000 miles of street repairs in five years.  You may also click on an individual street to see additional detailed information.
 
 The data in this map is the latest and most accurate available from the <a href="http://www.sandiego.gov/tsw" target="_blank" title="San Diego Transportation and Storm Water Department">City's Transportation & Storm Water Department</a>. It will be updated quarterly.
 
 
 ## Overview of City Street Network
-As of 2015, the City of San Diego’s street network consists of about 2,800 miles of streets as measured along their center-lines, the majority of which are asphalt streets. The City uses center-line miles to describe the distance of our street network. “Lane-miles” are used to describe repair work and account for both the length and width of our streets. Totals for miles paved are in lane miles.
+As of 2015, the City of San Diego’s street network consists of about 2,800 miles of streets as measured along their center-lines, the majority of which are asphalt streets. The City uses center-line miles to describe the distance of our street network. “Repair-miles” are used to describe repair work and account for both the length and width of our streets. Totals for miles paved are in repair miles.
 
 <span id="condition">
 ## Condition of City streets

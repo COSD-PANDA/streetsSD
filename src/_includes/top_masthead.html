@@ -1,42 +1,40 @@
-<div class="masthead">
-  <div class="container">
-    <div class="title-section col-md-10">
-      <h3 class="masthead-title">
-        <a href="/" title="Home">{{ site.title }}</a>
-        <small>{{ site.tagline }}</small>
-        <!--<a title="Share SDStreets" id="share-this" href="#">
-          <i class="share-button fa fa-share-alt"></i>
-        </a>-->
-        <share-button class="main-share-button"></share-button>
-      </h3>
-
+<nav id="sd-bar" class="navbar navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="col-md-6 col-md-offset-6 text-right"> 
+            <a href="http://sandiego.gov" target="_blank" title="San Diego Main Site">City of San Diego</a> | 
+            <a href="http://sandiego.gov/mayor" target="_blank" title="San Diego Mayor Kevin L. Faulconer">Mayor Kevin L. Faulconer</a>
+        </div>
     </div>
-    <div class="other-section col-md-2 masthead-title">
-      <a title="Zoom to my current location" id="find-me-link" href="#">
-        <i class="fa fa-2x fa-bullseye"></i>
-        <span class="noshow">Find Me</span>
-      </a>
-      <!--<form id="address-search" class="input-group address-search">
-        <input type="text" class="form-control" placeholder="Search Address">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-        </span>
-      </form>--><!-- /input-group -->
-      <a id="help-link" href="#helpModal" class="modal-link" title="Help">
-        <i class="fa fa-2x fa-question-circle question-help"></i>
-        <span class="noshow">Help</span>
-      </a>
-      <a id="contact-link" class="" href="http://apps.sandiego.gov/streetdiv/"
-        title="Report a Street Issue" target="_blank">
-          <i class="fa fa-2x fa-envelope contact-link"></i>
-          <span class="noshow">Contact</span>
-      </a>
+</nav>
 
-      <!--<a id="contact-link" class="typeform-share link"
-         href="https://maksimpecherskiy.typeform.com/to/y398Mh"
-         data-mode="1" target="_blank">
-          <i class="fa fa-2x fa-envelope contact-link"></i>
-          </a>-->
+
+<nav id="sd-top-nav" class="navbar navbar-default sd-navbar-top navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header col-md-6 col-sm-6 col-xs-11">
+            <a class="navbar-brand" href="/">
+            <span id="title" class="col-md-6 col-sm-6 col-xs-6">
+                Streets
+              </span>
+              <span id="logo" class="col-md-6 col-sm-6 col-xs-6">
+                <img class="logo" src="/assets/images/sdlogo.png" alt="{{ site.title }}">
+              </span>
+            </a>
+        </div>
+        <div class="other-section col-md-6 col-sm-6 col-xs-1 masthead-title text-right">
+            <a title="Zoom to my current location" id="find-me-link" href="#">
+                <i class="fa fa-3x fa-bullseye"></i>
+                <span class="noshow">Find Me</span>
+            </a>
+            <a id="help-link" href="#helpModal" class="modal-link" title="Help">
+                <i class="fa fa-3x fa-question-circle question-help"></i>
+                <span class="noshow">Help</span>
+            </a>
+            <a id="contact-link" class="" href="http://apps.sandiego.gov/streetdiv/"
+            title="Report a Street Issue" target="_blank">
+                <i class="fa fa-3x fa-envelope contact-link"></i>
+                <span class="noshow">Contact</span>
+            </a>
+        </div>
     </div>
-  </div>
-</div>
+    <!-- /.container -->
+</nav>

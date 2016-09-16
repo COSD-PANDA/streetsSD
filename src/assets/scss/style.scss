@@ -1,11 +1,13 @@
 /*
 The main SCSS file for everything, yep
 */
+
 @import "bootstrap";
-@import "syntax";
 @import "poole";
 @import "lanyon";
-
+@import "modernbiz";
+@import "syntax";
+@import "sd";
 
 
 /** Assists **/
@@ -48,7 +50,7 @@ $p_blue: #0098db;
 $p_green: #00c7b2;
 $p_orange: #ffa02f;
 $p_yellow: #fcd900;
-$p_white: #000000;
+$p_white: #ffffff;
 
 $p_dark_gray: #37424a;
 $s_light_gray: #d1d4d3;
@@ -61,7 +63,6 @@ $s_silver: #5d676f;
 $s_cool_gray: #e0e1dd;
 $s_baby_blue: #5eb6e4;
 $s_baby_yellow:#f3ec7a;
-
 
 
 
@@ -121,12 +122,19 @@ h1, h2, h3, h4, h5, h6 {
 
 .other-section {
   float:right;
+  margin-top: 20px;
 }
 
 .other-section .address-search {
   float: left;
   margin-left:1%;
   margin-right:1%;
+}
+
+.other-section i {
+  color: $p_white;
+  margin-right:12px;
+  margin-left:12px;
 }
 
 .masthead .container {
@@ -142,12 +150,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sidebar-toggle {
-  top: 0.5rem;
+  top: 55px;
   background: white;
+  z-index: 9999999;
 }
 
 #sidebar.sidebar {
   background: $s_black;
+  z-index: 9999999999;
 }
 
 #sidebar .social-links {
@@ -163,6 +173,7 @@ h1, h2, h3, h4, h5, h6 {
   background: black;
   width: 100%;
   position: fixed;
+  top:115px;
 }
 
 #map {
@@ -299,6 +310,10 @@ img {
   }
 }
 
+table.c3-tooltip th {
+  color: black;
+}
+
 
 
 .chart-container {
@@ -391,6 +406,20 @@ img#howto-gif {
 }
 
 /* make sidebar nav vertical */
+@media (max-width: 767px) {
+  .other-section {
+    margin-top: 10px;
+    i {
+      font-size: 20px;
+      margin-left:0px;
+      margin-right:0px;
+    }
+  }
+  .navbar-header {
+    padding-left: 17%;
+  }
+}
+
 @media (min-width: 768px) {
   .modal-dialog {
     width: 70%;

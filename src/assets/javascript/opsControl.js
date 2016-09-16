@@ -1,7 +1,7 @@
 var opsControl = (function() {
     // Private.
 
-    sql = new cartodb.SQL({ user: 'cityofsandiego' });
+    sql = new cartodb.SQL({ user: 'cityofsandiego-admin' });
 
     tDistanceStringConfig = {
         tableAlias: "ic",
@@ -11,6 +11,8 @@ var opsControl = (function() {
 
     getTDistance = function(subLayerID, displayOp) {
         var sqlString = sqlBuilder.getDistanceSQL(subLayerID, tDistanceStringConfig);
+        //console.log("HI")
+        //console.log(sqlString);
         sql.execute(sqlString).done(function(data){
             opsDisplay[displayOp](subLayerID, data);
         });
@@ -35,9 +37,9 @@ var opsControl = (function() {
 
         ociBreakdown: function(subLayerID) {
             var sqlString = sqlBuilder.getDistanceSQL(subLayerID, {
-                tableAlias: "oci2011",
+                tableAlias: subLayerID.replace("-", ""),
                 groupFieldAlias: "color",
-                lengthFieldAlias: "length",
+                lengthFieldAlias: "area",
                 order: "ASC"
             });
 
@@ -57,7 +59,7 @@ var opsControl = (function() {
         workByMonth: function(subLayerID) {
             var sqlString = sqlBuilder.getDistanceSQL(subLayerID, {
                 tableAlias: "ic",
-                groupFieldSQL: "to_char(" + sqlBuilder.mapAlias("ic", "work_end") + ", 'MM')",
+                groupFieldSQL: "to_char(" + sqlBuilder.mapAlias("ic", "work_end") + ", 'MM'), type",
                 lengthFieldAlias: "adj_length",
                 order: "ASC"
             });

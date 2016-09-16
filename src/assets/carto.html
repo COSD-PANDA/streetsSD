@@ -1,51 +1,90 @@
-      #oci_3 { line-width: 3; line-opacity: 1; } 
-      #oci_3[oci_condition='Poor'] {line-color: #ffa02f;} 
-      #oci_3[oci_condition='Good'] {line-color: #0098db;} 
-      #oci_3[oci_condition='Fair'] { line-color: #fcd900; }
+
+# OCI CARTO CSS
+
+#sdstreets_query { line-width: 3; line-opacity: 1; } 
+#sdstreets_query[oci_condition='Poor'] 
+{line-color: #ffa02f;} 
+
+#sdstreets_query[oci_condition='Good'] 
+{line-color: #0098db;} 
+
+#sdstreets_query[oci_condition='Fair'] 
+{ line-color: #fcd900; }
+
+# Legend
 <div class='cartodb-legend category'> 
-
-
-<ul>
-    
-  <li>
-<div class="bullet" style="background: #0098db"></div> Good
-  </li>
-    
-<li>
-<div class="bullet" style="background: #fcd900"></div> Fair
-</li>
-    
-  <li>
-<div class="bullet" style="background: #ffa02f"></div> Poor
-  </li>
-
-</ul>
-
-
-
+  <ul>
+    <li>
+      <div class="bullet" style="background: #0098db"></div> Good
+    </li>
+    <li>
+      <div class="bullet" style="background: #fcd900"></div> Fair
+    </li>
+    <li>
+      <div class="bullet" style="background: #ffa02f"></div> Poor
+    </li>
+  </ul>
 </div>
- 
-      #imcat_street_1 { line-width: 3;   line-opacity: 1;} 
-      #imcat_street_1[activity='Overlay'] {line-color: #0098db;} 
-      #imcat_street_1[activity='Concrete'] {line-color: #fcd900;} 
-      #imcat_street_1[activity='Slurry'] {   line-color: #ffa02f;}
 
+# Info Window
 
-      <div class='cartodb-legend category'> 
-
-<ul>
-    <li>
-        <div class="bullet" style="background: #0098db"></div> Overlay
-    </li>
-    
-    <li>
-        <div class="bullet" style="background: #fcd900"></div> Concrete
-    </li>
-    
-    <li>
-        <div class="bullet" style="background: #ffa02f"></div> Slurry
-    </li>
-
-</ul>
-
+<div class="cartodb-tooltip-content-wrapper">
+  <div class="cartodb-tooltip-content">
+    <h4>oci</h4>
+    <p>{{oci}}</p>
+    <h4>street</h4>
+    <p>{{street}}</p>
+    <h4>from street</h4>
+    <p>{{from_street}}</p>
+    <h4>to street</h4>
+    <p>{{to_street}}</p>
+    <h4>oci condition</h4>
+    <p>{{oci_condition}}</p>
+  </div>
 </div>
+
+
+# Carto CSS
+
+      #sdstreets_query { line-width: 3;   line-opacity: 1;} 
+      #sdstreets_query[activity='Overlay'] {line-color: #0098db;} 
+      #sdstreets_query[activity='Concrete'] {line-color: #fcd900;} 
+      #sdstreets_query[activity='Slurry'] {   line-color: #ffa02f;}
+
+# Info Window
+<div class="cartodb-tooltip-content-wrapper">
+  <div class="cartodb-tooltip-content">
+    <h4>activity</h4>
+    <p>{{activity}}</p>
+    <h4>street</h4>
+    <p>{{street}}</p>
+    <h4>from street</h4>
+    <p>{{from_street}}</p>
+    <h4>to street</h4>
+    <p>{{to_street}}</p>
+    {{#work_completed}}
+    <h4>work completed</h4>
+    <p>{{work_completed}}</p>
+    {{/work_completed}}
+    {{#work_scheduled}}
+    <h4>work scheduled</h4>
+    <p>{{work_scheduled}}</p>
+    {{/work_scheduled}}
+  </div>
+</div>
+
+#LEGEND
+<div class='cartodb-legend category'> 
+  <ul>
+      <li>
+          <div class="bullet" style="background: #0098db"></div> Overlay
+      </li>
+      <li>
+          <div class="bullet" style="background: #fcd900"></div> Concrete
+      </li>
+      <li>
+          <div class="bullet" style="background: #ffa02f"></div> Slurry
+      </li>
+  </ul>
+</div>
+
