@@ -32,10 +32,10 @@ A 100-point OCI rating system the City uses classifies streets into one of three
 </span>
 
 <span id="street-rep-asphalt">
-**Asphalt Resurfacing** - Placement of a new layer of asphalt at a thickness of 1 to 3 inches over an old worn-out street surface or by first removing 2 to 3 inches of existing asphalt before a new layer is placed.
+**Asphalt Paving / Overlay / Inlay** - Placement of a new layer of asphalt at a thickness of 1.5 to 3 inches over an old worn-out street surface or by first removing 2 to 3 inches of existing asphalt before a new layer is placed.
 </span>
 
-<span id="street-rep-concrete">**Concrete Street** - Repairs to concrete streets range from patching with asphalt to removal and replacement of isolated concrete panels and complete reconstruction of the entire roadway when warranted.</span>
+<span id="street-rep-concrete">**Concrete** - Repairs to concrete streets range from patching with asphalt to removal and replacement of isolated concrete panels and complete reconstruction of the entire roadway when warranted.</span>
 
 <span id="street-rep-slurry">**Slurry Seal** - Slurry sealing repair uses a mixture of sand and an emulsion of petroleum products to coat a street surface up to 3/8 of an inch think. A slurry seal coating is not a complete resurfacing treatment and is used to preserve and prolong the state of asphalt pavements in ‘fair’ to ‘good’ condition. As part of this process, crack sealing and small surface repairs may be conducted before the sealing effort.</span>
 
