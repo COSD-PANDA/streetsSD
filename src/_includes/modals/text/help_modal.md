@@ -1,5 +1,5 @@
 ## Welcome!
-This map highlights city streets that have been repaired since July 1, 2013 (first full fiscal year comprehensive street repair data is readily available) and those that are currently scheduled for repair over the next several years.
+This map highlights city streets that have been repaired since July 1, 2013 (first full fiscal year comprehensive street repair data is readily available) and those that are currently scheduled for repair over the next several years.  
 Depending on which layer is showing, streets are colored by type of repair (for street work layers) or by their score (in the Overall Condition Index (OCI) surveys conducted by the City).
 
 <img id="howto-gif" src="assets/images/howto.gif" title="How To" alt="How To Use SDStreets"/>
