@@ -7543,6 +7543,9 @@ h1, h2, h3, h4, h5, h6 {
   background: #1b242a;
   z-index: 9999999999; }
 
+#sidebar a:hover {
+  text-decoration: none !important; }
+
 #sidebar .social-links {
   text-align: center; }
 
