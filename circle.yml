@@ -3,6 +3,8 @@ general:
     only:
       - master
       - production
+    ignore:
+      - gh-pages
 deployment:
   staging:
     branch: master
