@@ -8,7 +8,7 @@ deployment:
     branch: master
     commands:
       - gulp publish
-      - surge --project ./site --domain sdif-stage.surge.sh
+      - surge --project ./site --domain streetssd-stage.surge.sh
   production:
     branch: production
     commands:
