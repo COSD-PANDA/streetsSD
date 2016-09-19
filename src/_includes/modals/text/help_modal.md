@@ -1,5 +1,6 @@
 ## Welcome!
-This map highlights city streets that have been repaired since July 1, 2013 (first full fiscal year comprehensive street repair data is readily available) and those that are currently scheduled for repair over the next several years.  Depending on which layer is showing, streets are colored by type of repair or by their score in the 2011 Overall Condition Index (OCI) survey conducted by the City.
+This map highlights city streets that have been repaired since July 1, 2013 (first full fiscal year comprehensive street repair data is readily available) and those that are currently scheduled for repair over the next several years.
+Depending on which layer is showing, streets are colored by type of repair (for street work layers) or by their score (in the Overall Condition Index (OCI) surveys conducted by the City).
 
 <img id="howto-gif" src="assets/images/howto.gif" title="How To" alt="How To Use SDStreets"/>
 
@@ -18,7 +19,7 @@ As of 2015, the City of San Diego’s street network consists of about 2,800 mil
 A 100-point OCI rating system the City uses classifies streets into one of three categories:
 
 <span id="condition-good">
-**Good** - A street in this category has little or no cracking, minor potholes, or other distresses; has excellent drivability; and does not need maintenance. A street in good condition has an OCI rating between 70 and 100.
+**Good** - A street in this category has little or no cracking, minor potholes, or other distresses; has excellent drivability; and needs little maintenance. A street in good condition has an OCI rating between 70 and 100.
 </span>
 
 <span id="condition-fair">**Fair** - A street in this category has moderate cracking and/or some minor potholes; has adequate drivability; and is typically in need of a slurry seal or a minor asphalt overlay, which may include remedial repairs. A street in fair condition has an OCI rating between 40 and 69.</span>

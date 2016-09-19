@@ -159,10 +159,14 @@ h1, h2, h3, h4, h5, h6 {
   background: $s_black;
   z-index: 9999999999;
 }
-
 #sidebar a:hover {
   text-decoration: none !important;
 }
+
+.sidebar-item .social-links {
+  text-align: left;
+}
+
 
 #sidebar .social-links {
   text-align: center;
