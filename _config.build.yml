@@ -2,7 +2,7 @@
 # Overrides these options in _config.yml
 
 # Overrides the default URL, needed for your atom feed and sitemap
-url: http://sdstreets.org
+url: http://streets.sandiego.gov
 
 # Hides your drafts and future posts
 future: false
