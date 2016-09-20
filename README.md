@@ -1,7 +1,7 @@
 # SDStreets
 
 ## About
-SDStreets is a simple front-end visualization tool for displaying work completed.  
+StreetsSD is a simple front-end visualization tool for displaying work completed.
 
 ## Getting Started
 ### Requirements
@@ -24,7 +24,7 @@ The application is supported by several languages.  They are here in no particul
 * HTML
 
 ### Frameworks / Libraries / Tools
-The application is designed to use Jekyll for partials and templating.  It's using Gulp for controlling the build.  For more information about this setup please see the [Jekyllized README](https://github.com/MrMaksimize/generator-jekyllized/blob/master/README.md). 
+The application is designed to use Jekyll for partials and templating.  It's using Gulp for controlling the build.  For more information about this setup please see the [Jekyllized README](https://github.com/MrMaksimize/generator-jekyllized/blob/master/README.md).
 
 The backend of the application is mainly CartoDB.  As various JS events happen, a query is constructed and sent off to CartoDB as an api, and then the response is displayed.
 
