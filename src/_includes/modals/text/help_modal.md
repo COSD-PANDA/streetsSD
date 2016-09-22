@@ -1,5 +1,6 @@
 ## Welcome!
-This map highlights city streets that have been repaired since July 1, 2013 (first full fiscal year comprehensive street repair data is readily available) and those that are currently scheduled for repair over the next several years.  
+This map highlights city streets that have been repaired since July 1, 2013 (first full fiscal year comprehensive street repair data is readily available) and those that are currently scheduled for repair.
+
 Depending on which layer is showing, streets are colored by type of repair (for street work layers) or by their score (in the Overall Condition Index (OCI) surveys conducted by the City).
 
 <img id="howto-gif" src="assets/images/howto.gif" title="How To" alt="How To Use SDStreets"/>
@@ -37,5 +38,5 @@ A 100-point OCI rating system the City uses classifies streets into one of three
 
 <span id="street-rep-concrete">**Concrete** - Repairs to concrete streets range from patching with asphalt to removal and replacement of isolated concrete panels and complete reconstruction of the entire roadway when warranted.</span>
 
-<span id="street-rep-slurry">**Slurry Seal** - Slurry sealing repair uses a mixture of sand and an emulsion of petroleum products to coat a street surface up to 3/8 of an inch think. A slurry seal coating is not a complete resurfacing treatment and is used to preserve and prolong the state of asphalt pavements in ‘fair’ to ‘good’ condition. As part of this process, crack sealing and small surface repairs may be conducted before the sealing effort.</span>
+<span id="street-rep-slurry">**Slurry Seal** - Slurry sealing repair uses a mixture of sand and an emulsion of petroleum products to coat a street surface up to 3/8 of an inch thick. A slurry seal coating is not a complete resurfacing treatment and is used to preserve and prolong the state of asphalt pavements in ‘fair’ to ‘good’ condition. As part of this process, crack sealing and small surface repairs may be conducted before the sealing effort.</span>
 
