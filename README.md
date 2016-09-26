@@ -3,6 +3,9 @@
 ## About
 StreetsSD is a simple front-end visualization tool for displaying work completed.
 
+## Contributing Code / Feature Requests / Bug Reports
+Please review the [contributing guidelines](https://github.com/cityofsandiego/streetsSD/blob/master/README.md)
+
 ## Getting Started
 ### Requirements
 * Ruby (you can use [rvm](https://rvm.io/) to install)
