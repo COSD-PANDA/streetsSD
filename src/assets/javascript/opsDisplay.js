@@ -79,7 +79,6 @@ var opsDisplay = (function() {
                 12:0
               }
             };
-            console.log(data);
 
             _.each(data.rows, function(element, index) {
                 var monPos = parseInt(element.to_char);
@@ -97,7 +96,7 @@ var opsDisplay = (function() {
             overlay = _.values(chartData.overlay);
             slurry = _.values(chartData.slurry);
             concrete = _.values(chartData.concrete);
-            console.log(chartData);
+
             chartX.splice(0, 0, 'x');
             overlay.splice(0, 0, 'overlay');
             slurry.splice(0, 0, 'slurry');

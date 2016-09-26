@@ -4,7 +4,7 @@
 StreetsSD is a simple front-end visualization tool for displaying work completed.
 
 ## Contributing Code / Feature Requests / Bug Reports
-Please review the [contributing guidelines](https://github.com/cityofsandiego/streetsSD/blob/master/README.md)
+Please review the [contributing guidelines](https://github.com/cityofsandiego/streetsSD/blob/master/contributing.md)
 
 ## Getting Started
 ### Requirements
