@@ -50,19 +50,18 @@
     - "bigNumbers"
   description: "All work from July 1, 2014 to June 30, 2015."
 
-
 - work-fy-2016:
   id: "work-fy-2016"
   sublayer: "0"
   sql: "1"
   title: "Work in Fiscal Year 2016"
   start: "2015-07-01"
-  end: "lqEnd"
+  end: "2016-06-31"
   ops:
     - "typeBreakdown"
     - "workByMonth"
     - "bigNumbers"
-  description: "All work from July 1, 2015 to <span class='lqEnd'></span>."
+  description: "All work from July 1, 2015 to June 30, 2016."
 
 #- work-fy-2017:
 #  id: "work-fy-2017"
@@ -106,4 +105,3 @@
     - "ociBreakdown"
   title: "OCI as of 2015"
   description: "The City performed a street condition survey in 2015, assigning an Overall Condition Index (OCI) number to each street. OCI is only one of many factors to determine the order of street repairs. OCI is not available for private or military streets or streets the City was unable to survey due to closures."
-
