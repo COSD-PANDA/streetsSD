@@ -74,7 +74,12 @@ var viewController = {
       $(modalTarget).modal({ backdrop: true });
       $(modalTarget).one('shown.bs.modal', function() {
         vc.showModalAndHighlight(trigger);
-      })
+      });
+      $(modalTarget).one('hidden.bs.modal', function() {
+          setTimeout(function() {
+              $('.sidebar-toggle').click();
+          } ,500);
+      });
 
       return false;
     });
@@ -288,4 +293,3 @@ $(document).ready(function() {
   });
   viewController.init();
 });
-
