@@ -76,7 +76,7 @@ var sqlBuilder = (function() {
                 var widthField = mapAlias("ic", "width");
                 var lengthField = mapAlias("ic", "length");
                 return "CASE " +
-                    "WHEN " + widthField + " >= 50 THEN " +
+                    "WHEN CAST(" + widthField + " as numeric) >= 50 THEN " +
                     "(" + lengthField + " * 2) " +
                     "ELSE " + lengthField + " " +
                     "END";
@@ -156,51 +156,53 @@ var sqlBuilder = (function() {
         switch (sqlKey) {
             case 'all-work':
                 SQL.where(mapAlias("ic", "work_end") + " is not null")
-                   .where(mapAlias("ic", "status") + " = 'Moratorium'")
+                   .where(mapAlias("ic", "status") + " = 'Moratorium' OR " + mapAlias("ic", "status") + " = 'Post Construction'")
                    .where(mapAlias("ic", "work_end") + "::date >= '2013-07-01'")
                    .where(mapAlias("ic", "work_end") + "::date <= '" + lastQuarter.end + "'")
                 break;
 
             case 'work-1k-pledge':
                 SQL.where(mapAlias("ic", "work_end") + " is not null")
-                   .where(mapAlias("ic", "status") + " = 'Moratorium'")
+                   .where(mapAlias("ic", "status") + " = 'Moratorium' OR " +
+                   mapAlias("ic", "status") + " = 'Post Construction'")
                    .where(mapAlias("ic", "work_end") + "::date >= '2015-07-01'")
                    .where(mapAlias("ic", "work_end") + "::date <= '" + lastQuarter.end + "'")
                 break;
 
             case 'work-fy-2014':
                 SQL.where(mapAlias("ic", "work_end") + " is not null")
-                   .where(mapAlias("ic", "status") + " = 'Moratorium'")
+                   .where(mapAlias("ic", "status") + " = 'Moratorium' OR " +
+                   mapAlias("ic", "status") + " = 'Post Construction'")
                    .where(mapAlias("ic", "work_end") + "::date >= '2013-07-01'")
                    .where(mapAlias("ic", "work_end") + "::date <= '2014-06-30'")
                 break;
 
             case 'work-fy-2015':
                 SQL.where(mapAlias("ic", "work_end") + " is not null")
-                   .where(mapAlias("ic", "status") + " = 'Moratorium'")
+                   .where(mapAlias("ic", "status") + " = 'Moratorium' OR " +
+                   mapAlias("ic", "status") + " = 'Post Construction'")
                    .where(mapAlias("ic", "work_end") + "::date >= '2014-07-01'")
                    .where(mapAlias("ic", "work_end") + "::date <= '2015-06-30'")
                 break;
 
             case 'work-fy-2016':
                 SQL.where(mapAlias("ic", "work_end") + " is not null")
-                   .where(mapAlias("ic", "status") + " = 'Moratorium'")
+                   .where(mapAlias("ic", "status") + " = 'Moratorium' OR " +
+                   mapAlias("ic", "status") + " = 'Post Construction'")
                    .where(mapAlias("ic", "work_end") + "::date >= '2015-07-01'")
-                   .where(mapAlias("ic", "work_end") + "::date <= '" + lastQuarter.end + "'")
+                   .where(mapAlias("ic", "work_end") + "::date <= '2016-06-30'")
                 break;
 
             case 'work-fy-2017':
                 SQL.where(mapAlias("ic", "work_end") + " is not null")
-                   .where(mapAlias("ic", "status") + " = 'Moratorium'")
-                   .where(mapAlias("ic", "work_end") + "::date >= '2016-04-01'")
+                   .where(mapAlias("ic", "status") + " = 'Moratorium' OR " +
+                   mapAlias("ic", "status") + " = 'Post Construction'")
+                   .where(mapAlias("ic", "work_end") + "::date >= '2016-07-01'")
                    .where(mapAlias("ic", "work_end") + "::date <= '" + lastQuarter.end + "'")
                 break;
 
             case 'future-work':
-                SQL.where(mapAlias("ic", "work_end") + " is null")
-                   .where(mapAlias("ic", "status") + " = 'Planning' OR " +
-                    mapAlias("ic", "status") + " = 'Awarding' OR " +
-                    mapAlias("ic", "status") + " = 'Construction'")
+                SQL.where(mapAlias("ic", "work_end") + " is null");
                 break;
 
             case "oci-2015":
