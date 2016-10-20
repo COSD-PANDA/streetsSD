@@ -63,18 +63,18 @@
     - "bigNumbers"
   description: "All work from July 1, 2015 to June 30, 2016."
 
-#- work-fy-2017:
-#  id: "work-fy-2017"
-#  sublayer: "0"
-#  sql: "1"
-#  title: "Work in Fiscal Year 2017"
-#  start: "2016-07-01"
-#  end: "lqEnd"
-#  ops:
-#    - "typeBreakdown"
-#    - "workByMonth"
-#    - "bigNumbers"
-#  description: "All work from July 1, 2016 to <span class='lqEnd'></span>.  This information is updated quarterly."
+- work-fy-2017:
+  id: "work-fy-2017"
+  sublayer: "0"
+  sql: "1"
+  title: "Work in Fiscal Year 2017"
+  start: "2016-07-01"
+  end: "lqEnd"
+  ops:
+    - "typeBreakdown"
+    - "workByMonth"
+    - "bigNumbers"
+  description: "All work from July 1, 2016 to <span class='lqEnd'></span>.  This information is updated quarterly."
 
 - future-work:
   id: "future-work"
