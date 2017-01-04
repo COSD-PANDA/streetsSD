@@ -61,8 +61,36 @@ var opsDisplay = (function() {
             //chartX = ['x'];
             chartX = {};
             chartData = {
-              overlay: {},
-              slurry: {},
+              overlay: {
+                0:0,
+                1:0,
+                2:0,
+                3:0,
+                4:0,
+                5:0,
+                6:0,
+                7:0,
+                8:0,
+                9:0,
+                10:0,
+                11:0,
+                12:0
+              },
+              slurry: {
+                0:0,
+                1:0,
+                2:0,
+                3:0,
+                4:0,
+                5:0,
+                6:0,
+                7:0,
+                8:0,
+                9:0,
+                10:0,
+                11:0,
+                12:0
+              },
               concrete: {
                 0:0,
                 1:0,
@@ -87,8 +115,8 @@ var opsDisplay = (function() {
                   chartData[element.type.toLowerCase()][monPos - 7] = d3.round(element.totalmiles, 1);
                 }
                 else {
-                  chartX[monPos + 6] = element.to_char;
-                  chartData[element.type.toLowerCase()][monPos + 6] = d3.round(element.totalmiles, 1);
+                  chartX[monPos + 5] = element.to_char;
+                  chartData[element.type.toLowerCase()][monPos + 5] = d3.round(element.totalmiles, 1);
                 }
             });
 
@@ -101,7 +129,7 @@ var opsDisplay = (function() {
             overlay.splice(0, 0, 'overlay');
             slurry.splice(0, 0, 'slurry');
             concrete.splice(0, 0, 'concrete');
-            
+
             $("#chart-title-2 h4").text("Work By Month");
             window.workByMonthChart = c3.generate({
             bindto: '#chart-container-2',
