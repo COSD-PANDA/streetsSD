@@ -90,7 +90,10 @@ var sqlBuilder = (function() {
 
             case "work_scheduled":
                 var schedField = mapAlias("ic", "work_start");
+                schedField = "to_date(" + schedField + ", 'YYYY-MM-DD HH24:MI:SS')"
                 return "CASE " +
+                    "WHEN " + schedField + "is null " +
+                    "THEN ''" +
                     "WHEN EXTRACT (MONTH FROM  " + schedField + ") >= 7 " +
                     "THEN 'FY-' || EXTRACT (YEAR FROM " + schedField + ") + 1 " +
                     "ELSE 'FY-' || EXTRACT (YEAR FROM " + schedField + ") " +
