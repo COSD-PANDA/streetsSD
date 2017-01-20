@@ -60,11 +60,44 @@ var viewController = {
       vc.detectUserLocation();
       return false;
     });
-    $('form#address-search').submit(function(e) {
+    $('#address-search-input').autocomplete({
+        /*lookup: function (query, done) {
+            _.throttle(console.log(query), 1000)
+            done();
+        }*/
+        serviceUrl: 'https://search.mapzen.com/v1/autocomplete',
+        type: 'GET',
+        dataType: 'json',
+        paramName: 'text',
+        params: {
+            'api_key': 'mapzen-xaPdU9v',
+            'boundary.country': 'US',
+            'boundary.rect.min_lat': 32.52713149992711,
+            'boundary.rect.min_lon': -117.34359741210939,
+            'boundary.rect.max_lat': 32.931470839102154,
+            'boundary.rect.max_lon': -116.76544189453124,
+            'focus.point.lat': 32.7157,
+            'focus.point.lon': -117.1611
+        },
+        deferRequestBy: 1000,
+        transformResult: function(response, originalQuery) {
+            console.log(originalQuery);
+            console.log(response);
+            return {
+                suggestions: $.map(response.features, function(feature) {
+                    return { value: feature.properties.label, data: feature.geometry.coordinates };
+                })
+            }
+        },
+        onSelect: function (suggestion) {
+            console.log(suggestion);
+        }
+    });
+    /*$('form#address-search').submit(function(e) {
       address = $('input', this).val();
       vc.getAddressLocation(address);
       return false;
-    })
+    })*/
   },
   initModalLinks: function() {
     var vc = this;
