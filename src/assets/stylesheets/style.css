@@ -5555,12 +5555,10 @@ button.close {
   -webkit-transition: -webkit-transform .3s ease-out;
   transition: transform .3s ease-out;
   -webkit-transform: translate(0, -25%);
-  -ms-transform: translate(0, -25%);
   transform: translate(0, -25%); }
 
 .modal.in .modal-dialog {
   -webkit-transform: translate(0, 0);
-  -ms-transform: translate(0, 0);
   transform: translate(0, 0); }
 
 .modal-open .modal {
@@ -6912,7 +6910,6 @@ a.sidebar-nav-item:hover, a.sidebar-nav-item:focus {
 
 #sidebar-checkbox:checked ~ .sidebar, #sidebar-checkbox:checked ~ .wrap, #sidebar-checkbox:checked ~ .sidebar-toggle {
   -webkit-transform: translateX(14rem);
-  -ms-transform: translateX(14rem);
   transform: translateX(14rem); }
 
 /*
@@ -7020,7 +7017,6 @@ a.pagination-item:hover {
 
 .layout-reverse #sidebar-checkbox:checked ~ .sidebar, .layout-reverse #sidebar-checkbox:checked ~ .wrap, .layout-reverse #sidebar-checkbox:checked ~ .sidebar-toggle {
   -webkit-transform: translateX(-14rem);
-  -ms-transform: translateX(-14rem);
   transform: translateX(-14rem); }
 
 /*
@@ -7577,7 +7573,6 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   top: 50%;
   -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
   transform: translateY(-50%); }
   .loader img {
     margin: auto; }
