@@ -46,7 +46,7 @@ var sqlBuilder = (function() {
 
     var tables = {
         ic: "sd_paving_datasd_1",
-        tswb: "cg_streets_combined",
+        tswb: "cg_streets_combined_1",
         oci2011: "oci_2011_datasd_1",
         oci2015: "oci_2015_datasd_1"
     };
