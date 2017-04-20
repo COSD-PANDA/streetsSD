@@ -18,8 +18,17 @@ var opsControl = (function() {
         });
     };
 
+    getSegmentPosition = function(seg_id) {
+        var sqlString = sqlBuilder.getSegmentPositionSQL(seg_id);
+        console.log(sqlString);
+        return sql.execute(sqlString)
+    }
+
     // Public API
     return {
+        getSegmentPosition: function(seg_id) {
+            return getSegmentPosition(seg_id);
+        },
         progress: function(subLayerID) {
             return getTDistance(subLayerID, "progress");
         },

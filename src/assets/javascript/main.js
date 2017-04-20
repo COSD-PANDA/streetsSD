@@ -27,6 +27,7 @@ var viewController = {
       // Force intro
       //vc.initIntro(true);
       // Set CSS on Layers:
+      vc.operateZoom();
      })
     .error(function(err) {
       console.log(err);
@@ -54,6 +55,47 @@ var viewController = {
       }
     });
   },
+  trackKeenEvent: function(event_name, data) {
+    window.keenWebAutoCollector.onload(function(){
+      window.keenWebAutoCollector.tracker.recordEvent(event_name, data);
+    })
+  },
+  operateZoom: function() {
+    var hash = this.getHash();
+    var self = this;
+    if (hash != null) {
+        if (hash[0] == '#segment') {
+            console.log('Zoom to ' + hash[1]);
+            opsControl.getSegmentPosition(hash[1]).done(function(data) {
+                if (data.rows && data.rows[0]) {
+                    self.mapToPosition({coords: data.rows[0]}, 15)
+                    self.bottomBarToggle('close')
+		    self.trackKeenEvent('zoom_operation', {
+                            type: 'segment_zoom',
+                            segment: hash[1],
+  			    result: 'success'
+                    });
+		}
+		else {
+		    self.trackKeenEvent('zoom_operation', {
+                            type: 'segment_zoom',
+                            segment: hash[1],
+  			    result: 'fail'
+                    });
+		}
+            });
+        }
+    }
+  },
+  getHash: function() {
+    var hash = window.location.hash;
+    hash = hash.split('/')
+    if (hash[0] == '#segment' && hash.length == '2') {
+        return hash;
+    }
+    return null;
+  },
+
   initLocationLinks: function() {
     var vc = this;
     var geocoder = L.Mapzen.geocoder('mapzen-xaPdU9v', {
@@ -132,6 +174,7 @@ var viewController = {
   },
   initSubLayerWatch: function() {
       viewController.clearState();
+      var self = this;
 
       var $workLayers = $('#layer-selector a.layer-opt');
 
@@ -145,8 +188,6 @@ var viewController = {
 
         viewController.loadMapInfo(target);
         viewController.executeOps(target);
-
-
       });
   },
   initBottomBar: function () {
@@ -155,7 +196,8 @@ var viewController = {
   initIntro: function(force) {
       var force = force || false;
       var cookie = this.getCookie("sdInfraIntro");
-      if (cookie == null || cookie == "" || force == true) {
+      var hash = this.getHash();
+      if ((cookie == null || cookie == "" || force == true) && hash == null) {
         this.setCookie("sdInfraIntro", "1", 90);
         $('a#help-link').click();
       }
@@ -193,7 +235,7 @@ var viewController = {
     if (window.workByMonthChart)
       window.workByMonthChart = window.workByMonthChart.destroy();
   },
-  mapToPosition: function(position) {
+  mapToPosition: function(position, zoom) {
     lon = position.coords.longitude;
     lat = position.coords.latitude;
     if (this.geoLocMarker)
@@ -206,8 +248,7 @@ var viewController = {
       fill: true,
       fillOpacity: 0.8
     });
-    this.geoLocMarker.addTo(global.map);
-    global.map.setView(new L.LatLng(lat,lon), 15);
+    global.map.setView(new L.LatLng(lat,lon), zoom);
 
   },
   loadMapInfo: function(target) {
@@ -216,6 +257,7 @@ var viewController = {
     var subLayerID = target.attr('id');
     this.clearState();
     var subLayer = global.layers[1].getSubLayer(subLayerNum);
+    this.trackKeenEvent('sublayer_view', {subLayer: subLayerID });
     if (setSQL == 1) {
       var query = sqlBuilder.getSQL(subLayerID);
       console.log("Set Map Query For Layer: " + subLayerID + " with Number " + subLayerNum)

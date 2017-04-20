@@ -1,5 +1,17 @@
-general: 
-  branches: 
+machine:
+  node:
+    version: stable
+  environment:
+    PATH: ${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin:${HOME}/.yarn/bin
+dependencies:
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+  override:
+    - yarn cache clean
+    - bundle install
+    - yarn install --force
+general:
+  branches:
     only:
       - master
       - production
@@ -7,14 +19,12 @@ general:
       - gh-pages
 deployment:
   staging:
+    branch: master2
+    commands:
+      - gulp build && gulp publish
+      - netlify deploy --path ./site --site-id streetssd-stage --access-token ${NETLIFY_TOKEN}
+  production:
     branch: master
     commands:
-      - gulp publish
-      - surge --project ./site --domain streetssd-stage.surge.sh
-  production:
-    branch: production
-    commands:
-      - git config --global user.email "max@maksimize.com"
-      - git config --global user.name "Maksim Pecherskiy"
-      - gulp publish
-      - gulp deploy
+      - gulp build && gulp publish
+      - s3_website push

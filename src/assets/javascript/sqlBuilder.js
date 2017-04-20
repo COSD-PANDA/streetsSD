@@ -20,7 +20,8 @@ var sqlBuilder = (function() {
             "the_geom_webmercator": "tswb.the_geom_webmercator",
             "street": "tswb.street",
             "from_street": "tswb.st_from",
-            "to_street": "tswb.st_to"
+            "to_street": "tswb.st_to",
+            "seg_id": "tswb.seg_id"
         },
         "oci2011": {
             "oci": "oci2011.oci",
@@ -45,10 +46,10 @@ var sqlBuilder = (function() {
     };
 
     var tables = {
-        ic: "sd_paving_datasd",
-        tswb: "cg_streets_combined",
-        oci2011: "oci_2011_datasd",
-        oci2015: "oci_2015_datasd"
+        ic: "sd_paving_datasd_1",
+        tswb: "cg_streets_combined_1",
+        oci2011: "oci_2011_datasd_1",
+        oci2015: "oci_2015_datasd_1"
     };
 
     getLastQuarter = function() {
@@ -267,6 +268,18 @@ var sqlBuilder = (function() {
         SQL.from(mapAlias(alias), alias);
 
         return SQL;
+    },
+
+    getSegmentPositionSQL = function(seg_id) {
+        var SQL = select();
+        alias = 'tswb';
+        var geom_field = mapAlias(alias, 'the_geom');
+        var seg_field = mapAlias(alias, 'seg_id');
+        SQL.field("ST_X(ST_CENTROID(" + geom_field + "))", "longitude")
+        SQL.field("ST_Y(ST_CENTROID(" + geom_field + "))", "latitude")
+        SQL.from(mapAlias(alias), alias)
+        SQL.where(mapAlias(alias, 'seg_id') + " = '" + seg_id + "'")
+        return SQL;
     }
 
 
@@ -276,6 +289,9 @@ var sqlBuilder = (function() {
             var SQL = getTableSQL(sqlKey);
             // Apply conditions as Needed.
             return getConditionSQL(sqlKey, SQL).toString();
+        },
+        getSegmentPositionSQL: function(seg_id) {
+            return getSegmentPositionSQL(seg_id).toString();
         },
         getLastQuarter: function(date) {
             return getLastQuarter(date);
