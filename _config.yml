@@ -32,8 +32,6 @@ limit_posts: 10
 # Permalink structure and pagination options
 relative_permalinks: true
 permalink: pretty
-paginate: 10
-paginate_path: 'page:num'
 excerpt_separator: '<!--more-->'
 
 # Markdown library
