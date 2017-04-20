@@ -15,6 +15,7 @@ var merge = require("merge-stream");
 var reload = browserSync.reload;
 // And define a variable that BrowserSync uses in it"s function
 var bs;
+var path = require('path')
 
 // Deletes the directory that is used to serve the site during development
 gulp.task("clean:dev", del.bind(null, ["serve"]));
@@ -73,30 +74,38 @@ gulp.task("fonts", function () {
 
 // Copy xml and txt files to the "site" directory
 gulp.task("copy", function () {
-  return gulp.src(["serve/*.txt", "serve/*.xml", "src/CNAME"])
+  return gulp.src(["serve/*.txt", "serve/*.xml", "src/CNAME", 'serve/*.json'])
     .pipe(gulp.dest("site"))
-    .pipe($.size({ title: "xml & txt" }))
+    .pipe($.size({ title: "xml, txt, json" }))
 });
 
 // Optimizes all the CSS, HTML and concats the JS etc
-gulp.task("html", ["styles"], function () {
-  var assets = $.useref.assets({searchPath: "serve"});
 
-  return gulp.src("serve/**/*.html")
-    .pipe(assets)
-    // Concatenate JavaScript files and preserve important comments
-    .pipe($.if("*.js", $.uglify({preserveComments: "some"})))
-    // Minify CSS
-    .pipe($.if("*.css", $.minifyCss()))
-    // Start cache busting the files
-    .pipe($.revAll({ ignore: [".eot", ".svg", ".ttf", ".woff"] }))
-    .pipe(assets.restore())
-    // Conctenate your files based on what you specified in _layout/header.html
-    .pipe($.useref())
-    // Replace the asset names with their cache busted names
+
+gulp.task("html", ["styles"], function () {
+  var jsFilter = $.filter("**/*.js", { restore: true });
+  var cssFilter = $.filter("**/*.css", { restore: true });
+  var htmlFilter = $.filter(['**/*', '!**/*.html'], { restore: true });
+
+  return gulp.src(["serve/**/*.html", '!serve/assets/bower_components/**/*'])
+    // Concatenate Files
+    .pipe($.useref({searchPath: "serve" }))
+    // Only for JS, Uglify.
+    //.pipe(jsFilter)
+    //.pipe($.uglify({preserveComments: "some"}))
+    //.pipe(jsFilter.restore)
+    // Only for CSS - Minify
+    .pipe(cssFilter)
+    .pipe($.cleanCss())
+    .pipe(cssFilter.restore)
+    // Only for NON-HTML, revision file names
+    .pipe(htmlFilter)
+    .pipe($.revAll({ ignore: [".eot", ".svg", ".ttf", ".woff", ".csv", ".json", ".jpg", ".png"] }))
+    .pipe(htmlFilter.restore)
+    // Sub in new file names
     .pipe($.revReplace())
     // Minify HTML
-    .pipe($.if("*.html", $.htmlmin({
+    /*.pipe($.htmlmin({
       removeComments: true,
       removeCommentsFromCDATA: true,
       removeCDATASectionsFromCDATA: true,
@@ -104,26 +113,12 @@ gulp.task("html", ["styles"], function () {
       collapseBooleanAttributes: true,
       removeAttributeQuotes: true,
       removeRedundantAttributes: true
-    })))
-    // Send the output to the correct folder
+    }))*/
     .pipe(gulp.dest("site"))
     .pipe($.size({title: "optimizations"}));
 });
 
 
-// Task to upload your site to your personal GH Pages repo
-gulp.task("deploy", function () {
-  // Deploys your optimized site, you can change the settings in the html task if you want to
-  var remoteURL = "https://" + process.env.GH_TOKEN + "@" + process.env.GH_REF;
-  return gulp.src("./site/**/*")
-    .pipe($.ghPages({
-      // Currently only personal GitHub Pages are supported so it will upload to the master
-      // branch and automatically overwrite anything that is in the directory
-      branch: "gh-pages",
-      cacheDir: ".publish",
-      remoteUrl: remoteURL
-    }));
-});
 
 // Run JS Lint against your JS
 gulp.task("jslint", function () {
