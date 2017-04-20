@@ -34,5 +34,14 @@
   <!-- Icons -->
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/images/touch/apple-touch-icon-144-precomposed.png">
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  {% if site.neek %}
+   <script type="text/javascript">
+function createKeenWebAutoCollector(){
+    window.keenWebAutoCollector=window.KeenWebAutoCollector.create({
+        projectId:'{{ site.neek.project_id }}',
+        writeKey:'{{ site.neek.write_key }}', onloadCallbacks:window.keenWebAutoCollector.onloadCallbacks}),window.keenWebAutoCollector.loaded()}function initKeenWebAutoCollector(){window.keenWebAutoCollector.domReady()?window.createKeenWebAutoCollector():document.addEventListener("readystatechange",function(){window.keenWebAutoCollector.domReady()&&window.createKeenWebAutoCollector()})}window.keenWebAutoCollector={onloadCallbacks:[],onload:function(a){this.onloadCallbacks.push(a)},domReady:function(){return["ready","complete"].indexOf(document.readyState)>-1}};
+  </script>
+  <script async type="text/javascript" src="https://d26b395fwzu5fz.cloudfront.net/keen-web-autocollector-1.0.8.min.js" onload="initKeenWebAutoCollector()"></script>
 
+  {% endif %}
 </head>
