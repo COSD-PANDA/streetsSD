@@ -20,12 +20,12 @@ general:
       - gh-pages
 deployment:
   staging:
-    branch: master
+    branch: master2
     commands:
       - gulp build && gulp publish
-      - netlify deploy --path ./site --site-id performer-hare-68626 --access-token ${NETLIFY_TOKEN}
+      - netlify deploy --path ./site --site-id streetssd-stage --access-token ${NETLIFY_TOKEN}
   production:
-    branch: production
+    branch: master
     commands:
       - gulp build && gulp publish
       - s3_website push
