@@ -73,14 +73,14 @@ var viewController = {
 		    self.trackKeenEvent('zoom_operation', {
                             type: 'segment_zoom',
                             segment: hash[1],
-			    result: 'success'
+  			    result: 'success'
                     });
 		}
 		else {
 		    self.trackKeenEvent('zoom_operation', {
                             type: 'segment_zoom',
                             segment: hash[1],
-			    result: 'fail'
+  			    result: 'fail'
                     });
 		}
             });
