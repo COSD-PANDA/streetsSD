@@ -55,6 +55,11 @@ var viewController = {
       }
     });
   },
+  trackKeenEvent: function(event_name, data) {
+    window.keenWebAutoCollector.onload(function(){
+      window.keenWebAutoCollector.tracker.recordEvent(event_name, data);
+    })
+  },
   operateZoom: function() {
     var hash = this.getHash();
     var self = this;
@@ -62,11 +67,22 @@ var viewController = {
         if (hash[0] == '#segment') {
             console.log('Zoom to ' + hash[1]);
             opsControl.getSegmentPosition(hash[1]).done(function(data) {
-                console.log(data)
                 if (data.rows && data.rows[0]) {
                     self.mapToPosition({coords: data.rows[0]}, 15)
                     self.bottomBarToggle('close')
-                }
+		    self.trackKeenEvent('zoom_operation', {
+                            type: 'segment_zoom',
+                            segment: hash[1],
+			    result: 'success'
+                    });
+		}
+		else {
+		    self.trackKeenEvent('zoom_operation', {
+                            type: 'segment_zoom',
+                            segment: hash[1],
+			    result: 'fail'
+                    });
+		}
             });
         }
     }
@@ -124,6 +140,7 @@ var viewController = {
   },
   initSubLayerWatch: function() {
       viewController.clearState();
+      var self = this;
 
       var $workLayers = $('#layer-selector a.layer-opt');
 
@@ -137,8 +154,6 @@ var viewController = {
 
         viewController.loadMapInfo(target);
         viewController.executeOps(target);
-
-
       });
   },
   initBottomBar: function () {
@@ -208,6 +223,7 @@ var viewController = {
     var subLayerID = target.attr('id');
     this.clearState();
     var subLayer = global.layers[1].getSubLayer(subLayerNum);
+    this.trackKeenEvent('sublayer_view', {subLayer: subLayerID });
     if (setSQL == 1) {
       var query = sqlBuilder.getSQL(subLayerID);
       console.log("Set Map Query For Layer: " + subLayerID + " with Number " + subLayerNum)
