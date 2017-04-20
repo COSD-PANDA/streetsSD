@@ -119,15 +119,6 @@ gulp.task("html", ["styles"], function () {
 });
 
 
-
-// Run JS Lint against your JS
-gulp.task("jslint", function () {
-  gulp.src("./serve/assets/javascript/*.js")
-    // Checks your JS code quality against your .jshintrc file
-    .pipe($.jshint(".jshintrc"))
-    .pipe($.jshint.reporter());
-});
-
 // Runs "jekyll doctor" on your site to check for errors with your configuration
 // and will check for URL errors a well
 gulp.task("doctor", $.shell.task("bundle exec jekyll doctor"));
@@ -170,7 +161,7 @@ gulp.task("serve:prod", function () {
 gulp.task("default", ["serve:dev", "watch"]);
 
 // Checks your CSS, JS and Jekyll for errors
-gulp.task("check", ["jslint", "doctor"], function () {
+gulp.task("check", ["doctor"], function () {
   // Better hope nothing is wrong.
 });
 
