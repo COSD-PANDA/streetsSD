@@ -172,7 +172,6 @@ var viewController = {
       fill: true,
       fillOpacity: 0.8
     });
-    this.geoLocMarker.addTo(global.map);
     global.map.setView(new L.LatLng(lat,lon), 15);
 
   },

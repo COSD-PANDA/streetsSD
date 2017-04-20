@@ -10,7 +10,6 @@ dependencies:
     - yarn cache clean
     - bundle install
     - yarn install --force
-    - bower install
 general:
   branches:
     only:
