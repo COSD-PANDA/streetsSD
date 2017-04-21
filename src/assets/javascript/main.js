@@ -98,25 +98,6 @@ var viewController = {
 
   initLocationLinks: function() {
     var vc = this;
-    /*var geocoder = L.Mapzen.geocoder('mapzen-xaPdU9v', {
-        'boundary.country': 'US',
-        'boundary.rect.min_lat': 32.52713149992711,
-        'boundary.rect.min_lon': -117.34359741210939,
-        'boundary.rect.max_lat': 32.931470839102154,
-        'boundary.rect.max_lon': -116.76544189453124,
-        'focus.point.lat': 32.7157,
-        'focus.point.lon': -117.1611,
-        'expanded': true,
-        'placeholder': 'Search!'
-    });
-    geocoder.on('select', function (e) {
-        console.log('You’ve selected', e.feature.properties.label);
-    });*/
-    //geocoder.addTo(global.map);
-    /*$('a#find-me-link').click(function(e) {
-      vc.detectUserLocation();
-      return false;
-    });*/
     $('#address-search-input').autocomplete({
         serviceUrl: 'https://search.mapzen.com/v1/autocomplete',
         type: 'GET',
