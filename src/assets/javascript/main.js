@@ -98,21 +98,26 @@ var viewController = {
 
   initLocationLinks: function() {
     var vc = this;
-    var geocoder = L.Mapzen.geocoder('mapzen-xaPdU9v', {
+    /*var geocoder = L.Mapzen.geocoder('mapzen-xaPdU9v', {
         'boundary.country': 'US',
         'boundary.rect.min_lat': 32.52713149992711,
         'boundary.rect.min_lon': -117.34359741210939,
         'boundary.rect.max_lat': 32.931470839102154,
         'boundary.rect.max_lon': -116.76544189453124,
         'focus.point.lat': 32.7157,
-        'focus.point.lon': -117.1611
+        'focus.point.lon': -117.1611,
+        'expanded': true,
+        'placeholder': 'Search!'
     });
-    geocoder.addTo(global.map);
-    $('a#find-me-link').click(function(e) {
+    geocoder.on('select', function (e) {
+        console.log('You’ve selected', e.feature.properties.label);
+    });*/
+    //geocoder.addTo(global.map);
+    /*$('a#find-me-link').click(function(e) {
       vc.detectUserLocation();
       return false;
-    });
-    /*$('#address-search-input').autocomplete({
+    });*/
+    $('#address-search-input').autocomplete({
         serviceUrl: 'https://search.mapzen.com/v1/autocomplete',
         type: 'GET',
         dataType: 'json',
@@ -127,7 +132,7 @@ var viewController = {
             'focus.point.lat': 32.7157,
             'focus.point.lon': -117.1611
         },
-        deferRequestBy: 1000,
+        deferRequestBy: 100,
         transformResult: function(response, originalQuery) {
             console.log(originalQuery);
             console.log(response);
@@ -139,8 +144,20 @@ var viewController = {
         },
         onSelect: function (suggestion) {
             console.log(suggestion);
+            if (suggestion.data) {
+                viewController.mapToPosition({
+                    coords: {
+                        latitude: suggestion.data[1],
+                        longitude: suggestion.data[0]
+                    }
+                }, 15);
+
+                viewController.trackKeenEvent('geocoder_search', {
+                        value: suggestion.value
+                });
+            }
         }
-    });*/
+    });
   },
   initModalLinks: function() {
     var vc = this;
