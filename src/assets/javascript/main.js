@@ -98,15 +98,47 @@ var viewController = {
 
   initLocationLinks: function() {
     var vc = this;
-    $('a#find-me-link').click(function(e) {
-      vc.detectUserLocation();
-      return false;
+    $('#address-search-input').autocomplete({
+        serviceUrl: 'https://search.mapzen.com/v1/autocomplete',
+        type: 'GET',
+        dataType: 'json',
+        paramName: 'text',
+        params: {
+            'api_key': 'mapzen-xaPdU9v',
+            'boundary.country': 'US',
+            'boundary.rect.min_lat': 32.52713149992711,
+            'boundary.rect.min_lon': -117.34359741210939,
+            'boundary.rect.max_lat': 32.931470839102154,
+            'boundary.rect.max_lon': -116.76544189453124,
+            'focus.point.lat': 32.7157,
+            'focus.point.lon': -117.1611
+        },
+        deferRequestBy: 100,
+        transformResult: function(response, originalQuery) {
+            console.log(originalQuery);
+            console.log(response);
+            return {
+                suggestions: $.map(response.features, function(feature) {
+                    return { value: feature.properties.label, data: feature.geometry.coordinates };
+                })
+            }
+        },
+        onSelect: function (suggestion) {
+            console.log(suggestion);
+            if (suggestion.data) {
+                viewController.mapToPosition({
+                    coords: {
+                        latitude: suggestion.data[1],
+                        longitude: suggestion.data[0]
+                    }
+                }, 15);
+
+                viewController.trackKeenEvent('geocoder_search', {
+                        value: suggestion.value
+                });
+            }
+        }
     });
-    $('form#address-search').submit(function(e) {
-      address = $('input', this).val();
-      vc.getAddressLocation(address);
-      return false;
-    })
   },
   initModalLinks: function() {
     var vc = this;

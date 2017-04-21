@@ -99,14 +99,32 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .address-search {
-  width: 200px;
-  .form-control {
-    height:30px;
+  width: 475px;
+  display: block;
+  position: relative;
+  left: 2%;
+  top:2%;
+  input#address-search-input {
+      height: 40px;
+      width: 375px
   }
   .input-group-btn .btn {
-    height:30px;
+    height:40px;
   }
 }
+.autocomplete-suggestion {
+      background: white;
+      padding: 10px;
+      border-bottom: 1px solid black;
+}
+.autocomplete-suggestion:hover {
+    background: #fafafa;
+    cursor: pointer;
+}
+.autocomplete-suggestions {
+}
+
+
 
 .main-share-button, .main-share-button:hover {
   background: transparent !important;
