@@ -16,6 +16,12 @@ var viewController = {
       global.vis = vis;
       global.layers = layers;
       global.map = vis.getNativeMap();
+
+      // local matches are prioritized at map zoom 12 and beyond
+      var searchControl = L.esri.Geocoding.Controls.geosearch({
+        placeholder: 'Search for a place or address'
+      }).addTo(global.map);
+
       vc.initSubLayerWatch();
       vc.initBottomBar();
       vc.initModalLinks();
