@@ -10,6 +10,7 @@ You can use the menu in the upper left to filter street repairs by year, to disp
 The data in this map is the latest and most accurate available from the <a href="http://www.sandiego.gov/tsw" target="_blank" title="San Diego Transportation and Storm Water Department">City's Transportation & Storm Water Department</a>. It will be updated quarterly.
 
 
+
 ## Overview of City Street Network
 As of 2015, the City of San Diego’s street network consists of approximately 3000 miles of streets as measured along their center-lines, the majority of which are asphalt streets. The City uses center-line miles to describe the distance of our street network. “Repair-miles” are used to describe repair work and account for both the length and width of our streets. Totals for miles paved are in repair miles.
 
@@ -40,3 +41,5 @@ A 100-point OCI rating system the City uses classifies streets into one of three
 
 <span id="street-rep-slurry">**Slurry Seal** - Slurry sealing repair uses a mixture of sand and an emulsion of petroleum products to coat a street surface up to 3/8 of an inch thick. A slurry seal coating is not a complete resurfacing treatment and is used to preserve and prolong the state of asphalt pavements in ‘fair’ to ‘good’ condition. As part of this process, crack sealing and small surface repairs may be conducted before the sealing effort.</span>
 
+
+While all street lanes are usually repaired at the same time, some street segments are avoided to ensure there are no conflicts with future projects (such as water and waste water line replacement) that may impact the road.
