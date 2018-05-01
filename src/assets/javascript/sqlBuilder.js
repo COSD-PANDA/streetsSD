@@ -178,7 +178,7 @@ var sqlBuilder = (function() {
       SQL.from(tables.ic, 'ic').join(
         tables.tswb,
         'tswb',
-        'ic.seg_id = tswb.seg_id',
+        'ic.seg_id = tswb.seg_id'
       );
     }
 
@@ -319,7 +319,7 @@ var sqlBuilder = (function() {
       SQL.from(mapAlias('ic'), 'ic').join(
         mapAlias('tswb'),
         'tswb',
-        'ic.seg_id = tswb.seg_id',
+        'ic.seg_id = tswb.seg_id'
       );
     }
 
