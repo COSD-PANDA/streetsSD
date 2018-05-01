@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "description": "StreetsSD",
   "dependencies": {
-    "gulp-clean-css": "^3.0.4"
+    "gulp-clean-css": "^3.0.4",
+    "node-gyp": "^3.6.2"
   },
   "devDependencies": {
     "browser-sync": "^1.5.7",
