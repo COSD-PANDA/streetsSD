@@ -352,25 +352,36 @@ var viewController = {
   }
 }
 
+function getIEVersion() {
+  var sAgent = window.navigator.userAgent;
+  var Idx = sAgent.indexOf("MSIE");
 
+  // If IE, return version number.
+  if (Idx > 0)
+    return parseInt(sAgent.substring(Idx+ 5, sAgent.indexOf(".", Idx)));
+
+  // If IE 11 then look for Updated user agent string.
+  else if (!!navigator.userAgent.match(/Trident\/7\./))
+    return 11;
+
+  else
+    return 0; //It is not IE
+}
 
 
 
 
 
 $(document).ready(function() {
-  console.log(navigator);
-  $.reject({
-      reject: {
-        //all: true
-        msie: 11
-      },
-      imagePath: './assets/images/browsers/',
-      display: ['chrome', 'firefox'],
-      header: 'You Internet Browser is not compatible with SDStreets!',
-      paragraph1: 'Because of this, various things may not work. '+
-                'Please see the list of compatible browsers below. ',
-      paragraph2: 'Just click on the icons to get to the download page!',
-  });
-  viewController.init();
+  console.log(getIEVersion());
+  // This is IE
+  if (getIEVersion() > 0) {
+    var message = "MS Internet Explorer is not supported. Please Use Chrome or Firefox";
+    alert(message);
+    document.write(message);
+  }
+  // Not IE
+  else {
+    viewController.init();
+  }
 });
