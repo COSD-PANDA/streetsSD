@@ -1050,7 +1050,7 @@ th {
 
 html {
   font-size: 10px;
-  -webkit-tap-highlight-color: transparent; }
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -5944,7 +5944,7 @@ button.close {
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0);
   filter: alpha(opacity=50);
   opacity: .5; }
 
@@ -6020,7 +6020,7 @@ button.close {
   text-indent: -999px;
   cursor: pointer;
   background-color: #000 \9;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0);
   border: 1px solid #fff;
   border-radius: 10px; }
 
@@ -6324,10 +6324,14 @@ button.close {
     display: none !important; } }
 /*
  *                        ___
- *                       /\_  *  _____     ___     ___\//\ \      __
- * /\ '__`\  / __`\  / __`\\ \ \   /'__` * \ \ \_\ \/\ \_\ \/\ \_\ \\_\ \_/\  __/
- *  \ \ ,__/\ \____/\ \____//\____\ \____ *   \ \ \/  \/___/  \/___/ \/____/\/____/
- *    \ \_ *     \/_/
+ *                       /\_ \
+ *  _____     ___     ___\//\ \      __
+ * /\ '__`\  / __`\  / __`\\ \ \   /'__`\
+ * \ \ \_\ \/\ \_\ \/\ \_\ \\_\ \_/\  __/
+ *  \ \ ,__/\ \____/\ \____//\____\ \____\
+ *   \ \ \/  \/___/  \/___/ \/____/\/____/
+ *    \ \_\
+ *     \/_/
  *
  * Designed, built, and released under MIT license by @mdo. Learn more at
  * https://github.com/poole/poole.
@@ -6649,8 +6653,12 @@ a.pagination-item:hover {
 
 /*
  *  ___
- * /\_  * \//\ \      __      ___   __  __    ___     ___
- *   \ \ \   /'__`\  /' _ `\/\ \/\ \  / __`\ /' _ ` *    \_\ \_/\ \_\.\_/\ \/\ \ \ \_\ \/\ \_\ \/\ \/\  *    /\____\ \__/.\_\ \_\ \_\/`____ \ \____/\ \_\ \_ *    \/____/\/__/\/_/\/_/\/_/`/___/> \/___/  \/_/\/_/
+ * /\_ \
+ * \//\ \      __      ___   __  __    ___     ___
+ *   \ \ \   /'__`\  /' _ `\/\ \/\ \  / __`\ /' _ `\
+ *    \_\ \_/\ \_\.\_/\ \/\ \ \ \_\ \/\ \_\ \/\ \/\ \
+ *    /\____\ \__/.\_\ \_\ \_\/`____ \ \____/\ \_\ \_\
+ *    \/____/\/__/\/_/\/_/\/_/`/___/> \/___/  \/_/\/_/
  *                               /\___/
  *                               \/__/
  *
@@ -7380,11 +7388,11 @@ img.logo {
 
 /*responsive menu */
 .navbar-default .navbar-toggle {
-  border-color: transparent;
+  border-color: rgba(0, 0, 0, 0);
   top: 18px; }
 
 .navbar-toggle {
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0);
   margin-top: 0;
   margin-bottom: 0;
   border-radius: 0;

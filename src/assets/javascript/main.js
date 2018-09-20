@@ -359,10 +359,11 @@ var viewController = {
 
 
 $(document).ready(function() {
+  console.log(navigator);
   $.reject({
       reject: {
         //all: true
-        msie: 10
+        msie: 11
       },
       imagePath: './assets/images/browsers/',
       display: ['chrome', 'firefox'],
