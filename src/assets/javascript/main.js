@@ -373,7 +373,6 @@ function getIEVersion() {
 
 
 $(document).ready(function() {
-  console.log(getIEVersion());
   // This is IE
   if (getIEVersion() > 0) {
     var message = "MS Internet Explorer is not supported. Please Use Chrome or Firefox";
