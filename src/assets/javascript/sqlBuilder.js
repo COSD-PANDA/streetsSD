@@ -273,10 +273,23 @@ var sqlBuilder = (function() {
               " = 'Post Construction'",
           )
           .where(mapAlias('ic', 'work_end') + "::date >= '2017-07-01'")
+          .where(mapAlias('ic', 'work_end') + "::date <= '2018-06-30'");
+        break;
+
+      case 'work-fy-2019':
+        SQL.where(mapAlias('ic', 'work_end') + ' is not null')
+          .where(
+            mapAlias('ic', 'status') +
+              " = 'Moratorium' OR " +
+              mapAlias('ic', 'status') +
+              " = 'Post Construction'",
+          )
+          .where(mapAlias('ic', 'work_end') + "::date >= '2018-07-01'")
           .where(
             mapAlias('ic', 'work_end') + "::date <= '" + lastQuarter.end + "'",
           );
         break;
+
 
       case 'future-work':
         SQL.where(mapAlias('ic', 'work_end') + ' is null').where(
