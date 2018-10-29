@@ -3,6 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "description": "StreetsSD",
+  "scripts": {
+    "build": "gulp build",
+    "publish": "gulp publish"
+  },
   "dependencies": {
     "gulp-clean-css": "^3.0.4",
     "node-gyp": "^3.6.2"
