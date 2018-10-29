@@ -82,12 +82,27 @@
   sql: "1"
   title: "Work in Fiscal Year 2018"
   start: "2017-07-01"
+  end: "2018-06-30"
+  ops:
+    - "typeBreakdown"
+    - "workByMonth"
+    - "bigNumbers"
+  description: "All work from July 1, 2017 to June 30, 2018.  This information is updated quarterly."
+
+
+- work-fy-2019:
+  id: "work-fy-2019"
+  sublayer: "0"
+  sql: "1"
+  title: "Work in Fiscal Year 2019"
+  start: "2018-07-01"
   end: "lqEnd"
   ops:
     - "typeBreakdown"
     - "workByMonth"
     - "bigNumbers"
-  description: "All work from July 1, 2017 to <span class='lqEnd'></span>.  This information is updated quarterly."
+  description: "All work from July 1, 2018 to <span class='lqEnd'></span>.  This information is updated quarterly."
+
 
 - future-work:
   id: "future-work"
