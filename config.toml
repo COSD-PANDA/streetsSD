@@ -1,3 +1,12 @@
-baseURL = "http://example.org/"
+baseURL = "http://streets.sandiego.gov/"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "StreetsSD"
+relativeURLs = true
+
+[deployment]
+
+[[deployment.targets]]
+name="AWS"
+URL = "
+
+
