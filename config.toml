@@ -6,7 +6,12 @@ relativeURLs = true
 [deployment]
 
 [[deployment.targets]]
-name="AWS"
-URL = "
+name = "AWS"
+URL = "streets.sandiego.gov"
+cloudFrontDistributionID = "EISIICSZBLN6Y"
+
+[[deployment.matchers]]
+pattern = "^.+\\.(html|css)$"
+gzip = true
 
 
