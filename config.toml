@@ -2,12 +2,13 @@ baseURL = "http://streets.sandiego.gov/"
 languageCode = "en-us"
 title = "StreetsSD"
 relativeURLs = true
+disableKinds = ["taxonomy", "taxonomyTerm"]
 
 [deployment]
 
 [[deployment.targets]]
 name = "AWS"
-URL = "streets.sandiego.gov"
+URL = "s3://streets.sandiego.gov?region=us-east-1"
 cloudFrontDistributionID = "EISIICSZBLN6Y"
 
 [[deployment.matchers]]

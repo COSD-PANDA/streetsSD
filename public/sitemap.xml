@@ -3,15 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://streets.sandiego.gov/categories/</loc>
-  </url>
-  
-  <url>
     <loc>http://streets.sandiego.gov/</loc>
-  </url>
-  
-  <url>
-    <loc>http://streets.sandiego.gov/tags/</loc>
   </url>
   
 </urlset>
