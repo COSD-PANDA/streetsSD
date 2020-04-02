@@ -2,6 +2,7 @@ baseURL = "http://streets.sandiego.gov/"
 languageCode = "en-us"
 title = "StreetsSD"
 relativeURLs = true
+disableKinds = ["taxonomy", "taxonomyTerm"]
 
 [deployment]
 
