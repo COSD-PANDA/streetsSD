@@ -1,6 +1,3 @@
 # SDStreets
 
-A web map displaying street repairs completed, planned, or in progress in the City of San Diego.
-
-
-
+Street repair work completed, in progress, and planned in the City of San Diego
