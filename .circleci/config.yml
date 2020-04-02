@@ -1,48 +1,54 @@
+#https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs
+
+# The following stanza defines a map named defaults with a variable that may be inserted using the YAML merge (<<: *) key
+# later in the file to save some typing. See http://yaml.org/type/merge.html for details.
+defaults: &defaults
+  working_directory: ~/sdif
+  docker:
+    - image:  mrmaksimize/seaboard-build:latest
+
 version: 2
 jobs:
   build:
-    docker:
-      - image: cibuilds/hugo:latest
-    working_directory: ~/streetsSD
-    environment:
-      HUGO_BUILD_DIR: ~/streetsSD/public
+    <<: *defaults
     steps:
-
-      # install git
-      - run: apk update && apk add git
-
-      # checkout the repository
       - checkout
+      - run: curl -o- -L https://yarnpkg.com/install.sh | bash
+      - run: yarn cache clean
+      - run: yarn install --force
+      - run: bundle install
+      - run: npm run build
+      - run: npm run publish
+      - persist_to_workspace:
+          root: .
+          paths:
+            - site
+            - node_modules
 
-      # install git submodules for managing third-party dependencies
-      - run: git submodule sync && git submodule update --init
 
-      - run:
-          name: install AWS CLI (first install pip, the Python package manager)
-          command: |
-            apk add --update python python-dev py-pip build-base
-            pip install awscli
+  deploy:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run: ls
+      - run: bundle install
+      - run: s3_website push
 
-      # build with Hugo
-      - run: HUGO_ENV=production hugo -v -d $HUGO_BUILD_DIR
- 
-      - run:
-          name: test our generated HTML files
-          command: |
-            htmlproofer $HUGO_BUILD_DIR --allow-hash-href --check-html \
-            --empty-alt-ignore --disable-external
 
-      # `deploy` step: identical to a `run` step, but uses only one container:
-      # /docs/2.0/configuration-reference/#deploy 
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
       - deploy:
-          name: deploy to AWS
-          command: |
-            if [ "${CIRCLE_BRANCH}" = "master" ]; then
-              aws s3 sync $HUGO_BUILD_DIR \
-              s3://your-bucket-name/your-subfolder --delete
-            else
-              echo "Not master branch, dry run only"
-            fi
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
 
 
 
