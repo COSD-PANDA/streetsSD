@@ -1,0 +1,50 @@
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    {% if page.title == "Home" %}
+      {{ site.title }} &middot; {{ site.tagline }}
+    {% else %}
+      {{ page.title }} &middot; {{ site.title }}
+    {% endif %}
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.css" />
+
+  <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@1.0.2/dist/esri-leaflet-geocoder.css">
+
+  <!-- build:css /assets/stylesheets/vendor.min.css -->
+  <link rel="stylesheet" href="/assets/stylesheets/vendor/c3.min.css">
+  <link rel="stylesheet" href="/assets/stylesheets/vendor/jquery.reject.css">
+  <link rel="stylesheet" href="/assets/stylesheets/vendor/share-button.min.css">
+  <!-- endbuild -->
+  <!-- build:css /assets/stylesheets/style.min.css -->
+  <link rel="stylesheet" href="/assets/stylesheets/style.css">
+  <!-- endbuild -->
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+  <link href='//fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/images/touch/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  {% if site.neek %}
+   <script type="text/javascript">
+function createKeenWebAutoCollector(){
+    window.keenWebAutoCollector=window.KeenWebAutoCollector.create({
+        projectId:'{{ site.neek.project_id }}',
+        writeKey:'{{ site.neek.write_key }}', onloadCallbacks:window.keenWebAutoCollector.onloadCallbacks}),window.keenWebAutoCollector.loaded()}function initKeenWebAutoCollector(){window.keenWebAutoCollector.domReady()?window.createKeenWebAutoCollector():document.addEventListener("readystatechange",function(){window.keenWebAutoCollector.domReady()&&window.createKeenWebAutoCollector()})}window.keenWebAutoCollector={onloadCallbacks:[],onload:function(a){this.onloadCallbacks.push(a)},domReady:function(){return["ready","complete"].indexOf(document.readyState)>-1}};
+  </script>
+  <script async type="text/javascript" src="https://d26b395fwzu5fz.cloudfront.net/keen-web-autocollector-1.0.8.min.js" onload="initKeenWebAutoCollector()"></script>
+
+  {% endif %}
+</head>
