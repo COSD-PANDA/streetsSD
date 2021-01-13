@@ -1,18 +1,7 @@
-baseURL = "http://streets.sandiego.gov/"
+baseURL = "https://streetssd.netlify.app/"
 languageCode = "en-us"
 title = "StreetsSD"
 relativeURLs = true
 disableKinds = ["taxonomy", "taxonomyTerm"]
-
-[deployment]
-
-[[deployment.targets]]
-name = "AWS"
-URL = "s3://streets.sandiego.gov?region=us-east-1"
-cloudFrontDistributionID = "EISIICSZBLN6Y"
-
-[[deployment.matchers]]
-pattern = "^.+\\.(html|css)$"
-gzip = true
 
 
